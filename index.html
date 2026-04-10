@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Turistea</title>
+    <link rel="stylesheet" href="./frontend/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./frontend/css/bootstrap-icons.css" />
+    <link rel="stylesheet" href="./frontend/css/bootstrap-grid.min.css" />
+    <link rel="stylesheet" href="./frontend/css/header.css" />
+  </head>
+
+  <body>
+    <header>
+      <!-- NAVBAR PRINCIPAL -->
+      <nav
+        class="navbar navbar-expand-lg navbar-light bg-body-tertiary shadow-sm py-0"
+      >
+        <div class="container">
+          <!-- LOGO -->
+          <a class="navbar-brand" href="#">
+            <img
+              src="./frontend/assets/img/Turistea_Logo/logo_turistea.png"
+              width="90"
+            />
+          </a>
+
+          <!-- BOTÓN MÓVIL -->
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <!-- MENÚ -->
+          <div
+            class="collapse navbar-collapse justify-content-end"
+            id="navbarNav"
+          >
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="#"
+                  ><i class="bi bi-search fs-3"></i>
+                  <span class="d-inline d-md-none ms-3">Buscar</span>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="#"
+                  ><i class="bi bi-house fs-3"></i>
+                  <span class="d-inline d-md-none ms-3">Menú inicio</span>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="#"
+                  ><i class="bi bi-person-check fs-3"></i>
+                  <span class="d-inline d-md-none ms-3">Acceso a registro</span>
+                </a>
+              </li>
+
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  data-bs-toggle="dropdown"
+                >
+                  <i class="bi bi-airplane fs-3"></i>
+                  <span class="d-inline d-md-none ms-3">Menu extensible</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Perfil</a></li>
+                  <li><a class="dropdown-item" href="#">Reservas</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <!-- BARRA DE HEADER -->
+      <!-- Slider -->
+      <div class="container mt-4">
+        <div
+          id="sliderOfertas"
+          class="carousel slide rounded-slider shadow"
+          data-bs-ride="carousel"
+        >
+          <ol class="carousel-indicators">
+            <li
+              data-bs-target="#sliderOfertas"
+              data-bs-slide-to="0"
+              class="active"
+            ></li>
+            <li data-bs-target="#sliderOfertas" data-bs-slide-to="1"></li>
+            <li data-bs-target="#sliderOfertas" data-bs-slide-to="2"></li>
+          </ol>
+
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div
+                class="slider-placeholder bg-azul-marino d-flex align-items-center justify-content-center"
+              >
+                <div class="text-center text-white p-5">
+                  <h2 class="font-weight-bold">Escapada a Canarias</h2>
+                  <p class="lead">Vuelo + 7 noches de Hotel desde 529&euro;</p>
+                  <a
+                    href="#"
+                    class="btn btn-light btn-lg rounded-pill px-5 font-weight-bold text-primario"
+                  >
+                    Ver oferta
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div
+                class="slider-placeholder bg-cyan d-flex align-items-center justify-content-center"
+              >
+                <div class="text-center text-white p-5">
+                  <h2 class="font-weight-bold">Semana en Mallorca</h2>
+                  <p class="lead">Todo incluido desde 399&euro; por persona</p>
+                  <a
+                    href="#"
+                    class="btn btn-amarillo btn-lg rounded-pill px-5 font-weight-bold"
+                  >
+                    Ver oferta
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div
+                class="slider-placeholder bg-coral d-flex align-items-center justify-content-center"
+              >
+                <div class="text-center text-white p-5">
+                  <h2 class="font-weight-bold">Fin de semana en Roma</h2>
+                  <p class="lead">Vuelos + 3 noches de hotel desde 199&euro;</p>
+                  <a
+                    href="#"
+                    class="btn btn-light btn-lg rounded-pill px-5 font-weight-bold text-primario"
+                  >
+                    Ver oferta
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#sliderOfertas"
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#sliderOfertas"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon"></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- CATEGORÍAS -->
+      <nav class="bg-light border-bottom">
+        <div class="container">
+          <div
+            class="d-flex justify-content-between text-center py-2 flex-wrap"
+          >
+            <div class="categoria">
+              <i class="bi bi-airplane fs-4"></i>
+              <div>Vuelos</div>
+            </div>
+
+            <div class="categoria">
+              <i class="bi bi-suitcase fs-4"></i>
+              <div>Vacaciones</div>
+            </div>
+
+            <div class="categoria">
+              <i class="bi bi-building fs-4"></i>
+              <div>Hoteles</div>
+            </div>
+
+            <div class="categoria">
+              <i class="bi bi-fire fs-4"></i>
+              <div>Última hora</div>
+            </div>
+
+            <div class="categoria">
+              <i class="bi bi-calendar fs-4"></i>
+              <div>Fin de semana</div>
+            </div>
+
+            <div class="categoria">
+              <i class="bi bi-cash fs-4"></i>
+              <div>Chollos</div>
+            </div>
+
+            <div class="categoria">
+              <i class="bi bi-sun fs-4"></i>
+              <div>Verano</div>
+            </div>
+
+            <div class="categoria">
+              <i class="bi bi-compass fs-4"></i>
+              <div>Cruceros</div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container text-center mt-2">
+      <div class="row g-4">
+        <div class="col-12 col-md-6 col-lg-3">
+          <div class="card h-100">
+            <div class="ratio ratio-16x9">
+              <img
+                src="./frontend/assets/img/1.jpg"
+                class="card-img-top object-fit-cover"
+                alt="..."
+              />
+            </div>
+            <div class="card-body">
+              <h5 class="card-title fw-bold">Bullullos del condado</h5>
+              <p class="card-text">Descripción del viaje.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-3">
+          <div class="card h-100">
+            <div class="ratio ratio-16x9">
+              <img
+                src="./frontend/assets/img/2.jpg"
+                class="card-img-top object-fit-cover"
+                alt="..."
+              />
+            </div>
+            <div class="card-body">
+              <h5 class="card-title fw-bold">Sevilla que maravilla</h5>
+              <p class="card-text">Descripción del viaje.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-3">
+          <div class="card h-100">
+            <div class="ratio ratio-16x9">
+              <img
+                src="./frontend/assets/img/3.jpg"
+                class="card-img-top object-fit-cover"
+                alt="..."
+              />
+            </div>
+            <div class="card-body">
+              <h5 class="card-title fw-bold">Matalascañas</h5>
+              <p class="card-text">Descripción del viaje.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-3">
+          <div class="card h-100">
+            <div class="ratio ratio-16x9">
+              <img
+                src="./frontend/assets/img/4.jpg"
+                class="card-img-top object-fit-cover"
+                alt="..."
+              />
+            </div>
+            <div class="card-body">
+              <h5 class="card-title fw-bold">Casa Paco</h5>
+              <p class="card-text">Descripción del viaje.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./frontend/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

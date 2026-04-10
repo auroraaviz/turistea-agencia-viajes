@@ -1,0 +1,59 @@
+body {
+    font-family: 'Raleway', sans-serif;
+}
+
+.bg-turistea {
+    background-color: #0077B6;
+}
+
+.btn-turistea {
+    background-color: #00B4D8;
+    color: #ffffff;
+    border: none;
+}
+
+.btn-turistea:hover {
+    background-color: #0077B6;
+    color:#ffffff
+}
+
+.btn-outline-turistea {
+    background-color: #ffffff;
+    color: #00B4D8;
+    border: 2px solid #00B4D8;
+}
+
+.btn-outline-turistea:hover {
+    background-color: #00B4D8;
+    color: #ffffff;
+}
+
+.panel-izquierdo {
+    min-height: 100vh;
+}
+
+.panel-derecho {
+    min-height: 100vh;
+}
+
+/*foco del input*/
+.form-control:focus {
+    border-color:#00B4D8;
+    box-shadow: 0 0 0 0.2rem rgba(0,180,216,0.25);
+}
+
+.titulo-login {
+    color:  #0077B6;
+}
+
+.opcion-acceso:hover {
+    background-color: #f0f8ff;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #0077B6;
+}
+
+.opcion-acceso {
+    color: #333;
+    text-decoration: none; 
+}

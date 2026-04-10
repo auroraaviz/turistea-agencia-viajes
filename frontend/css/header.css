@@ -1,0 +1,42 @@
+.categoria {
+  cursor: pointer;
+  transition: all 0.5s ease;
+  padding: 10px;
+}
+
+.categoria:hover {
+  color: #fed167;
+  background-color: #01b4d8;
+  border-radius: 15px;
+}
+
+.card img {
+  transition: transform 0.4s ease;
+}
+
+.card:hover img {
+  transform: scale(1.1);
+}
+
+/* Slider */
+.rounded-slider {
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.slider-placeholder {
+  min-height: 380px;
+}
+
+.slider-placeholder.bg-azul-marino {
+  background: linear-gradient(135deg, #003566, #0077b6, #00b4d8);
+}
+
+.slider-placeholder.bg-cyan {
+  background: linear-gradient(135deg, #0077b6, #00b4d8, #90e0ef);
+}
+
+.slider-placeholder.bg-coral {
+  background: linear-gradient(135deg, #ff6b6b, #ee6c4d, #f4845f);
+}
