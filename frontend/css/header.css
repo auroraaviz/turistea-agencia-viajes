@@ -46,3 +46,41 @@
 .slider-placeholder.bg-coral {
   background: linear-gradient(135deg, #ff6b6b, #ee6c4d, #f4845f);
 }
+
+.btn-buscar {
+    background-color: #00B4D8;
+    color: white;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-buscar:hover {
+    background-color: #0077B6;
+    color: white;
+}
+
+.filtro-label {
+    color: #0077B6;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.filtro-input {
+    border: none;
+    border-bottom: 2px solid #D9D9D9;
+    outline: none;
+    width: 100%;
+    padding: 4px 0;
+    font-size: 14px;
+    background: transparent;
+}
+
+.seccion-titulo {
+    color: #0077B6;
+}
+
+.seccion-subtitulo {
+    font-size: 14px;
+}
