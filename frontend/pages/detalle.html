@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detalle del paquete - Turistea</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/bootstrap-icons.css" />
+    <link rel="stylesheet" href="../css/header.css" />
+    <style>
+      .paquete-imagen {
+        width: 100%;
+        max-height: 360px;
+        object-fit: cover;
+        border-radius: 18px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+      }
+
+      .paquete-titulo {
+        color: #0077b6;
+        font-weight: 800;
+        font-size: 2rem;
+      }
+
+      .paquete-precio {
+        font-size: 1.1rem;
+        color: #333;
+      }
+
+      .btn-reservar {
+        background-color: #00b4d8;
+        color: #fff;
+        border: none;
+        border-radius: 50px;
+        padding: 10px 36px;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+      }
+
+      .btn-reservar:hover {
+        background-color: #0096c7;
+        color: #fff;
+      }
+
+      .btn-favorito {
+        background: none;
+        border: none;
+        font-size: 1.8rem;
+        color: #e63946;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+      }
+
+      .btn-favorito:hover {
+        transform: scale(1.2);
+      }
+
+      .descripcion-completa {
+        color: #444;
+        font-size: 0.95rem;
+        line-height: 1.7;
+      }
+
+      .footer-bar {
+        background-color: #0077b6;
+        height: 50px;
+        border-radius: 12px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary shadow-sm py-0">
+      <div class="container">
+        <a class="navbar-brand" href="../../index.html">
+          <img src="../assets/img/Turistea_Logo/logo_turistea.png" width="90" />
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../../index.html"><i class="bi bi-house fs-3"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="container my-5" id="detalle-container">
+      <!-- Spinner de carga -->
+      <div class="text-center py-5" id="loading">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Cargando...</span>
+        </div>
+      </div>
+
+      <!-- Error -->
+      <div class="alert alert-danger d-none" id="error">
+        No se encontr&oacute; el paquete solicitado.
+      </div>
+
+      <!-- Detalle del paquete -->
+      <div class="d-none" id="detalle">
+        <!-- Fila principal: imagen + info -->
+        <div class="row align-items-center g-4 mb-4">
+          <!-- Imagen -->
+          <div class="col-md-5">
+            <img id="paquete-imagen" src="" alt="" class="paquete-imagen" />
+          </div>
+
+          <!-- Info -->
+          <div class="col-md-7">
+            <h2 class="paquete-titulo" id="paquete-titulo"></h2>
+            <p class="mb-1" id="paquete-destino" style="color: #555;">
+              <i class="bi bi-geo-alt"></i> <span></span>
+            </p>
+            <p class="paquete-precio mb-1" id="paquete-info-corta"></p>
+            <p class="fw-bold mb-3" style="color: #0077b6;" id="paquete-precio"></p>
+
+            <div id="paquete-badges" class="mb-3"></div>
+
+            <div class="d-flex align-items-center gap-3">
+              <a href="#" class="btn btn-reservar" id="btn-reservar">
+                Reservar
+              </a>
+              <button class="btn-favorito" id="btn-favorito" title="Favorito">
+                <i class="bi bi-heart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Descripcion completa -->
+        <div class="mb-5">
+          <p class="descripcion-completa" id="paquete-descripcion"></p>
+          <p class="descripcion-completa" id="paquete-detalles-extra"></p>
+        </div>
+
+        <!-- Barra footer decorativa -->
+        <div class="footer-bar"></div>
+      </div>
+    </div>
+
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/paquetes/detalle.js"></script>
+  </body>
+</html>
