@@ -3,7 +3,7 @@
 ini_set('display_errors',1);
 error_reporting(E_ALL);
 
-$servidor = "192.168.1.11";
+$servidor = "127.0.0.1";
 $usuario = "turistea";
 $password = "turistea";
 $bd = "turistea";

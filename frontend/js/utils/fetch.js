@@ -1,16 +1,14 @@
-async function obtener() {
+export async function obtener(url) {
   try {
-    const respuesta = await fetch('../../BD/mock.json');
+    const respuesta = await fetch(url);
 
     if (!respuesta.ok) {
-      throw new Error('Error HTTP: ' + respuesta.status);
+      throw new Error("Error HTTP: " + respuesta.status);
     }
 
-    const data = await respuesta.json();
-    return data; 
-
+    return await respuesta.json();
   } catch (error) {
-    console.log("Error al cargar el JSON", error);
+    console.log("Error al cargar datos", error);
     return null;
   }
 }
