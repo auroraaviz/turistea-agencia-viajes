@@ -5,5 +5,19 @@
 }
 
 .fuente_peq{
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 }
+
+.estrellas{
+    color: rgb(212, 140, 6);
+}
+
+.lista-check {
+  list-style: none; 
+}
+
+.lista-check li::before {
+  content: "✅";
+margin-right: 3px;
+}
+

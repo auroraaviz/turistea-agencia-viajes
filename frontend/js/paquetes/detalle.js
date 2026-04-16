@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const loading = document.getElementById("loading");
   const error = document.getElementById("error");
   const detalle = document.getElementById("detalle");
+  
 
   if (!id) {
     loading.classList.add("d-none");
