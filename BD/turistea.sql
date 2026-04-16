@@ -119,7 +119,8 @@ CREATE TABLE `paquete` (
   `precio` decimal(10,2) DEFAULT NULL,
   `descuento` decimal(5,2) DEFAULT NULL,
   `activo` tinyint(1) DEFAULT 1,
-  `imagen` varchar(255) DEFAULT NULL
+  `imagen` varchar(255) DEFAULT NULL,
+  `categoria` enum('vuelo','vacaciones','fin_de_semana','verano') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
