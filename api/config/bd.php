@@ -4,9 +4,10 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 $servidor = "localhost";
-$usuario = "turistea";
-$password = "turistea";
+$usuario = "root";
+$password = "";
 $bd = "turistea";
+
 
 $conexion = new mysqli($servidor, $usuario, $password, $bd);
 
