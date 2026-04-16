@@ -1,5 +1,7 @@
+
 body {
     font-family: 'Raleway', sans-serif;
+    background-color: #f8f9fa;
 }
 
 .bg-turistea {
@@ -28,8 +30,36 @@ body {
     color: #ffffff;
 }
 
+.btn-volver {
+    background-color: #00B4D8;; 
+    color: #ffffff;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-volver:hover {
+    background-color: #005f87; /* azul más oscuro al pasar el ratón */
+    color: #ffffff;
+}
+
 .panel-izquierdo {
     min-height: 100vh;
+    background-image: url('../assets/img/login.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+
+.panel-izquierdo::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 119, 182, 0);
 }
 
 .panel-derecho {
@@ -47,13 +77,21 @@ body {
 }
 
 .opcion-acceso:hover {
-    background-color: #f0f8ff;
+    transition: all 0.3s ease;
+    background-color: #0077B6;
     border-radius: 8px;
     text-decoration: none;
-    color: #0077B6;
+    color: #ffffff;
 }
 
 .opcion-acceso {
     color: #333;
     text-decoration: none; 
 }
+
+.alert-custom {
+    background-color: #0077B6;
+    color: #ffffff;
+    border: none;
+}
+

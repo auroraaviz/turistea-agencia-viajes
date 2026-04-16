@@ -119,14 +119,14 @@
 
             <div class="carousel-item">
               <div
-                class="slider-placeholder bg-cyan d-flex align-items-center justify-content-center"
+                class="slider-placeholder bg-yellow d-flex align-items-center justify-content-center"
               >
                 <div class="text-center text-white p-5">
                   <h2 class="font-weight-bold">Semana en Mallorca</h2>
                   <p class="lead">Todo incluido desde 399&euro; por persona</p>
-                  <a
+                   <a
                     href="#"
-                    class="btn btn-amarillo btn-lg rounded-pill px-5 font-weight-bold"
+                    class="btn btn-light btn-lg rounded-pill px-5 font-weight-bold text-primario"
                   >
                     Ver oferta
                   </a>
@@ -229,76 +229,46 @@
         >
           <!-- Destino -->
           <div style="min-width: 140px">
-            <label
-              style="
-                color: #0077b6;
-                font-weight: 600;
-                font-size: 12px;
-                letter-spacing: 1px;
-                text-transform: uppercase;
-              "
-            >
-              <i class="bi bi-geo-alt"></i> Destino
+            <label class="filtro-label">
+                <i class="bi bi-geo-alt"></i> Destino
             </label>
-            <input
-              type="text"
-              placeholder="¿A dónde?"
-              style="
-                border: none;
-                border-bottom: 2px solid #d9d9d9;
-                outline: none;
-                width: 100%;
-                padding: 4px 0;
-                font-size: 14px;
-                background: transparent;
-              "
-            />
+             <input type="text" id="filtro-destino" placeholder="¿A dónde?" class="filtro-input"/>
           </div>
 
-          <!-- Fecha -->
+          <!-- Fecha inicio-->
+            <div style="min-width: 140px">
+                <label class="filtro-label">
+                    <i class="bi bi-calendar"></i> Fecha de inicio aproximada
+                </label>
+                <input type="date" id="fecha-inicio" class="filtro-input"/>
+            </div>
+
+          <!-- Fecha fin-->
           <div style="min-width: 140px">
-            <label
-              style="
-                color: #0077b6;
-                font-weight: 600;
-                font-size: 12px;
-                letter-spacing: 1px;
-                text-transform: uppercase;
-              "
-            >
-              <i class="bi bi-calendar"></i> Fecha
-            </label>
-            <input
-              type="date"
-              style="
-                border: none;
-                border-bottom: 2px solid #d9d9d9;
-                outline: none;
-                width: 100%;
-                padding: 4px 0;
-                font-size: 14px;
-                background: transparent;
-              "
-            />
-          </div>
+              <label class="filtro-label">
+                  <i class="bi bi-calendar"></i> Fecha de fin aproximada
+              </label>
+              <input type="date" id="fecha-fin" class="filtro-input"/>
+            </div>
 
           <!-- Botón -->
-          <div>
-            <button class="btn btn-buscar rounded-pill px-4">
-              <i class="bi bi-search"></i> Buscar
-            </button>
-          </div>
+            <div>
+                <button class="btn btn-buscar rounded-pill px-4">
+                    <i class="bi bi-search"></i> Buscar
+                </button>
+            </div>
+
         </div>
-      </div>
-      <hr style="border-color: #d9d9d9; margin-top: 24px" />
     </div>
+    <hr style="border-color: #d9d9d9; margin-top: 24px"/>
+</div>
 
     <!--Paquetes de viajes-->
     <div class="container mt-5 mb-3 text-center">
-      <h4 class="font-weight-bold mb-1" style="color: #0077b6">
-        Nuestros destinos
+      <h4 class="font-weight-bold mb-1 seccion-titulo">
+        Últimos destinos añadidos
       </h4>
-      <p class="text-muted mb-0" style="font-size: 14px">
+      <p class="text-muted mb-0 seccion-subtitulo">
         Descubre nuestros paquetes con todo incluido
       </p>
     </div>
@@ -306,7 +276,10 @@
     <div class="container text-center mt-2">
       <div class="row g-4">
         <div class="col-12 col-md-6 col-lg-3">
-          <div class="card h-100">
+          <div class="card h-100"
+                data-destino="mallorca" 
+                data-fecha-inicio="2026-09-11" 
+                data-fecha-fin="2026-09-13">
             <div class="ratio ratio-16x9">
               <img
                 src="./frontend/assets/img/1.jpg"
@@ -315,14 +288,19 @@
               />
             </div>
             <div class="card-body">
-              <h5 class="card-title fw-bold">Bullullos del condado</h5>
-              <p class="card-text">Descripción del viaje.</p>
+              <h5 class="card-title fw-bold mb-1">Mallorca rural</h5>
+              <p class="card-text text-muted small mb-2">Escapada de fin de semana a Mallorca. Combina naturaleza, cultura y relax en pocos días.</p>
+              <p class="card-fecha small mb-0">
+                <i class="bi bi-calendar3"></i> 11-13 de Septiembre </p>
             </div>
           </div>
         </div>
 
         <div class="col-12 col-md-6 col-lg-3">
-          <div class="card h-100">
+          <div class="card h-100" 
+                data-destino="sevilla"
+                data-fecha-inicio="2026-11-04" 
+                data-fecha-fin="2026-11-08">
             <div class="ratio ratio-16x9">
               <img
                 src="./frontend/assets/img/2.jpg"
@@ -332,13 +310,18 @@
             </div>
             <div class="card-body">
               <h5 class="card-title fw-bold">Sevilla que maravilla</h5>
-              <p class="card-text">Descripción del viaje.</p>
+              <p class="card-text text-muted small mb-2">Recorre Sevilla y sus principales monumentos. Disfruta de su cultura, gastronomía y del clima suave.</p>
+              <p class="card-fecha small mb-0">
+                <i class="bi bi-calendar3"></i> 4-8 de Noviembre </p>
             </div>
           </div>
         </div>
 
         <div class="col-12 col-md-6 col-lg-3">
-          <div class="card h-100">
+           <div class="card h-100" 
+                data-destino="asturias"
+                data-fecha-inicio="2026-08-18" 
+                data-fecha-fin="2026-08-23">
             <div class="ratio ratio-16x9">
               <img
                 src="./frontend/assets/img/3.jpg"
@@ -347,14 +330,19 @@
               />
             </div>
             <div class="card-body">
-              <h5 class="card-title fw-bold">Matalascañas</h5>
-              <p class="card-text">Descripción del viaje.</p>
+              <h5 class="card-title fw-bold">Asturias</h5>
+              <p class="card-text text-muted small mb-2">Viaja a la costa de Asturias, descubre su encanto marinero, sus playas salvajes y su gastronomía tradicional.</p>
+              <p class="card-fecha small mb-0">
+                <i class="bi bi-calendar3"></i> 18-23 de Agosto</p>
             </div>
           </div>
         </div>
 
         <div class="col-12 col-md-6 col-lg-3">
-          <div class="card h-100">
+          <div class="card h-100" 
+                data-destino="caceres"
+                data-fecha-inicio="2026-12-18" 
+                data-fecha-fin="2026-12-20">
             <div class="ratio ratio-16x9">
               <img
                 src="./frontend/assets/img/4.jpg"
@@ -363,8 +351,10 @@
               />
             </div>
             <div class="card-body">
-              <h5 class="card-title fw-bold">Casa Paco</h5>
-              <p class="card-text">Descripción del viaje.</p>
+              <h5 class="card-title fw-bold">Cáceres</h5>
+              <p class="card-text text-muted small mb-2">Cáceres en Diciembre. Disfruta de sus calles empedradas, su gastronomía y el encanto invernal de la ciudad.</p>
+              <p class="card-fecha small mb-0">
+                <i class="bi bi-calendar3"></i> 18-20 de Diciembre</p>
             </div>
           </div>
         </div>
@@ -372,5 +362,7 @@
     </div>
 
     <script src="./frontend/js/bootstrap.bundle.min.js"></script>
+    <script src="./frontend/js/filtros/filtros.js"></script>
+  
   </body>
 </html>
