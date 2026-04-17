@@ -131,8 +131,15 @@ CREATE TABLE `paquete` (
 --
 
 INSERT INTO `paquete` (`id`, `titulo`, `descripcion`, `destino`, `hotel_nombre`, `hotel_estrellas`, `hotel_regimen`, `hotel_imagen`, `fecha_salida`, `fecha_regreso`, `plazas_totales`, `plazas_disponibles`, `precio`, `descuento`, `activo`, `imagen`, `vuelo_incluido`, `salida_desde`, `cerca_playa`) VALUES
-(1, 'Aventura en los Pirineos', 'Descubre los paisajes más impresionantes del Pirineo aragonés. Rutas de senderismo, pueblos medievales y gastronomía local en un viaje inolvidable de 5 días y medio', 'Huesca, Aragón', 'Hotel Monte Perdido', 4, 'Media pensión', '../assets/img/hoteles/hotelmonteperdido.jpeg', '2026-06-15', '2026-06-20', 20, 12, 549.00, 10.00, 1, '../assets/img/huesca.jpeg', 1, 'Barcelona', 0),
-(2, 'Relax en la Costa Brava', 'Disfruta del Mediterráneo con playas de aguas cristalinas, calas escondidas y una oferta cultural única. Incluye excursión en barco y visita a Tossa de Mar.', 'Girona, Cataluña', 'Hotel Mar i Cel', 3, 'Todo incluido', '../assets/img/hoteles/hotelmaricel.jpeg', '2026-07-01', '2026-07-08', 15, 5, 789.50, 0.00, 1, '../assets/img/mallorca.jpg', 0, 'Málaga', 1);
+(1, 'Aventura en los Pirineos', 'Descubre los paisajes más impresionantes del Pirineo aragonés. Rutas de senderismo, pueblos medievales y gastronomía local en un viaje inolvidable de 5 días.', 'Huesca, Aragón', 'Hotel Monte Perdido', 4, 'Media pensión', '../assets/img/hoteles/hotelmonteperdido.jpeg', '2026-06-15', '2026-06-20', 20, 12, 549.00, 10.00, 1, '../assets/img/huesca.jpeg', 1, 'Barcelona', 0),
+(2, 'Relax en la Costa Brava', 'Disfruta del Mediterráneo con playas de aguas cristalinas, calas escondidas y una oferta cultural única. Incluye excursión en barco y visita a Tossa de Mar.', 'Girona, Cataluña', 'Hotel Mar i Cel', 3, 'Todo incluido', '../assets/img/hoteles/hotelmaricel.jpeg', '2026-07-01', '2026-07-08', 15, 5, 789.50, 0.00, 1, '../assets/img/mallorca.jpg', 0, 'Málaga', 1),
+(3, 'Escapada a Canarias', 'Vuelo + 7 noches de hotel en primera línea de playa. Sol, arena y aguas cristalinas todo el año en el paraíso canario.', 'Las Palmas, Gran Canaria', 'Hotel Playa Dorada', 4, 'Media pensión', '../assets/img/5.jpg', '2026-10-05', '2026-10-12', 30, 18, 529.00, 5.00, 1, '../assets/img/canarias.jpg', 1, 'Madrid', 1),
+(4, 'Semana en Mallorca', 'Todo incluido desde 399€ por persona. Una semana en la joya del Mediterráneo con playas, cultura y fiesta.', 'Palma de Mallorca, Baleares', 'Hotel Mar i Cel', 3, 'Todo incluido', '../assets/img/hoteles/hotelmaricel.jpeg', '2026-08-10', '2026-08-17', 25, 10, 399.00, 15.00, 1, '../assets/img/mallorca.jpg', 1, 'Valencia', 1),
+(5, 'Fin de semana en Roma', 'Vuelos + 3 noches de hotel desde 199€. Visita el Coliseo, la Fontana di Trevi y disfruta de la mejor pasta italiana.', 'Roma, Italia', 'Hotel Colosseo', 3, 'Solo alojamiento', '../assets/img/6.jpg', '2026-11-20', '2026-11-23', 20, 8, 199.00, 0.00, 1, '../assets/img/roma.jpg', 1, 'Barcelona', 0),
+(6, 'Mallorca rural', 'Escapada de fin de semana a Mallorca. Combina naturaleza, cultura y relax en pocos días por el interior de la isla.', 'Serra de Tramuntana, Mallorca', 'Agroturismo Tramuntana', 4, 'Alojamiento y desayuno', '../assets/img/1.jpg', '2026-09-11', '2026-09-13', 12, 6, 249.00, 0.00, 1, '../assets/img/1.jpg', 0, 'Palma de Mallorca', 0),
+(7, 'Sevilla que maravilla', 'Recorre Sevilla y sus principales monumentos. Disfruta de su cultura, gastronomía y del clima suave del otoño andaluz.', 'Sevilla, Andalucía', 'Hotel Giralda', 4, 'Alojamiento y desayuno', '../assets/img/2.jpg', '2026-11-04', '2026-11-08', 20, 14, 329.00, 5.00, 1, '../assets/img/2.jpg', 0, 'Madrid', 0),
+(8, 'Asturias', 'Viaja a la costa de Asturias, descubre su encanto marinero, sus playas salvajes y su gastronomía tradicional.', 'Costa de Asturias', 'Hotel Mirador del Cantábrico', 3, 'Media pensión', '../assets/img/3.jpg', '2026-08-18', '2026-08-23', 18, 9, 459.00, 0.00, 1, '../assets/img/3.jpg', 0, 'Madrid', 1),
+(9, 'Cáceres', 'Cáceres en Diciembre. Disfruta de sus calles empedradas, su gastronomía y el encanto invernal de la ciudad medieval.', 'Cáceres, Extremadura', 'Hotel Plaza Mayor', 3, 'Alojamiento y desayuno', '../assets/img/4.jpg', '2026-12-18', '2026-12-20', 16, 11, 179.00, 10.00, 1, '../assets/img/4.jpg', 0, 'Madrid', 0);
 
 -- --------------------------------------------------------
 
@@ -306,7 +313,7 @@ ALTER TABLE `pago`
 -- AUTO_INCREMENT de la tabla `paquete`
 --
 ALTER TABLE `paquete`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `reserva`
