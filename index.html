@@ -154,45 +154,27 @@
       <!-- CATEGORÍAS -->
       <nav class="bg-light border-bottom">
         <div class="container">
-          <div class="d-flex justify-content-between text-center py-2 flex-wrap">
-            <div class="categoria">
+          <div
+            class="d-flex justify-content-center gap-5 text-center py-2 flex-wrap"
+          >
+            <div class="categoria" data-categoria="vuelo">
               <i class="bi bi-airplane fs-4"></i>
               <div>Vuelos</div>
             </div>
 
-            <div class="categoria">
+             <div class="categoria" data-categoria="vacaciones">
               <i class="bi bi-suitcase fs-4"></i>
               <div>Vacaciones</div>
             </div>
 
-            <div class="categoria">
+            <div class="categoria" data-categoria="fin_de_semana">
               <i class="bi bi-building fs-4"></i>
-              <div>Hoteles</div>
-            </div>
-
-            <div class="categoria">
-              <i class="bi bi-fire fs-4"></i>
-              <div>Última hora</div>
-            </div>
-
-            <div class="categoria">
-              <i class="bi bi-calendar fs-4"></i>
               <div>Fin de semana</div>
             </div>
 
-            <div class="categoria">
-              <i class="bi bi-cash fs-4"></i>
-              <div>Chollos</div>
-            </div>
-
-            <div class="categoria">
-              <i class="bi bi-sun fs-4"></i>
+            <div class="categoria" data-categoria="verano">
+              <i class="bi bi-fire fs-4"></i>
               <div>Verano</div>
-            </div>
-
-            <div class="categoria">
-              <i class="bi bi-compass fs-4"></i>
-              <div>Cruceros</div>
             </div>
           </div>
         </div>
@@ -250,19 +232,17 @@
       <p class="text-muted mb-0 seccion-subtitulo">Descubre nuestros paquetes con todo incluido</p>
     </div>
 
-    <!-- TARJETAS -->
+
+    <!--Contenedor dinámico de paquetes-->
 
     <div class="container text-center mt-2">
-      <div class="row g-4" id="contenedor-tarjetas">
-        <div class="col-12">
-          <p>Cargando destinos...</p>
+      <div class="row g-4" id="paquetes-container">
         </div>
-      </div>
     </div>
 
-    <script src="./frontend/js/bootstrap.bundle.min.js"></script>
-    <script src="./frontend/js/paquetes/tarjetas.js"></script>
-    <script src="./frontend/js/filtros/destinos.js"></script>
-    <script src="./frontend/js/filtros/filtros.js"></script>
+   <script src="./frontend/js/bootstrap.bundle.min.js"></script>
+   <script type="module" src="/turistea/turistea/frontend/js/filtros/listado_paquetes.js"></script>
+
+
   </body>
 </html>
