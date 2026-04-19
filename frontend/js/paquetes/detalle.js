@@ -1,6 +1,5 @@
 
 import { obtener } from "../utils/fetch.js";
-import { BASE } from "../config.js";
 console.log("detalle.js cargado");
 document.addEventListener("DOMContentLoaded", async () => {
   const loading = document.getElementById("loading");
@@ -21,7 +20,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     // Consulta al PHP con id
     const paquete = await obtener(
-      `/api/paquetes/get.php?id=${id}`
+      `/turistea/JR_M26_AgenciaViajes/api/paquetes/get.php?id=${id}`
     );
 
     // Si no existe paquete
@@ -34,7 +33,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     // -------- CABECERA --------
     document.title = `${paquete.titulo} - Turistea`;
 
+<<<<<<< HEAD
     document.getElementById("paquete-imagen").src = `${BASE}/frontend/${(paquete.imagen || '').replace(/^\.\.\//, '')}`;
+=======
+    document.getElementById("paquete-imagen").src = paquete.imagen;
+>>>>>>> 4d8e5d7 (Traigo archivos detalles.js, get.php y detalle.html desde juanluis)
     document.getElementById("paquete-imagen").alt = paquete.titulo;
 
     document.getElementById("paquete-titulo").textContent = paquete.titulo;
@@ -102,7 +105,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     <!-- Imagen izquierda -->
     <div class="col-12 col-md-4">
       <img
+<<<<<<< HEAD
         src="${BASE}/frontend/${(paquete.hotel_imagen || '').replace(/^\.\.\//, '')}"
+=======
+        src="${paquete.hotel_imagen}"
+>>>>>>> 4d8e5d7 (Traigo archivos detalles.js, get.php y detalle.html desde juanluis)
         class="img-fluid w-100 h-100 object-fit-cover rounded-start"
         alt="${paquete.hotel_nombre}"
       >
