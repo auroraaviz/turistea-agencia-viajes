@@ -1,5 +1,6 @@
-import { obtener } from "../utils/fetch.js";
 
+import { obtener } from "../utils/fetch.js";
+console.log("detalle.js cargado");
 document.addEventListener("DOMContentLoaded", async () => {
   const loading = document.getElementById("loading");
   const error = document.getElementById("error");
@@ -94,57 +95,148 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
     // Tarjeta hotel
-    document.getElementById("tarjeta-hotel").innerHTML = `
-      
-  <div class="row g-0 bg-light">
-    <div class="col-md-4">
-      <img src="${paquete.hotel_imagen}" class="img-fluid rounded-start" alt="...">
-    </div>
-    <div class="col-md-8">
-      <div class="card-body text-center">
-        <h5 class="card-title">${paquete.hotel_nombre}</h5>
-        <p>${"⭐".repeat(paquete.hotel_estrellas)}</p>
-        <p class="card-text">${paquete.hotel_detalles}</p>
-        <p> ${paquete.noches} noches</p>
-        <strong>Régimen:</strong> ${paquete.hotel_regimen}
-        <p class="m-0 fuente_peq">Precio final paquete completo:</p>
-            <h4>${paquete.precio}€</h4>
+ document.getElementById("tarjeta-hotel").innerHTML = `
+  <div class="row g-0 bg-light rounded shadow-sm align-items-center">
 
-            <p class="mb-0 fuente_peq">Precio por persona</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    <!-- Imagen izquierda -->
+    <div class="col-12 col-md-4">
+      <img
+        src="${paquete.hotel_imagen}"
+        class="img-fluid w-100 h-100 object-fit-cover rounded-start"
+        alt="${paquete.hotel_nombre}"
+      >
+    </div>
+
+    <!-- Información central -->
+    <div class="col-12 col-md-5">
+      <div class="card-body text-center">
+
+        <h4 class="card-title"><strong>${paquete.hotel_nombre}</strong></h4>
+
+        <p>${"⭐".repeat(paquete.hotel_estrellas)}</p>
+
+        <p class="card-text">${paquete.hotel_detalles}</p>
+
+        <p><strong>${paquete.noches}</strong> noches</p>
+
+        <p>
+          <strong>Régimen:</strong>
+          ${paquete.hotel_regimen}
+        </p>
+
       </div>
     </div>
+
+    <!-- Precio derecha -->
+    <div class="col-12 col-md-3 text-center p-3">
+
+      ${
+        paquete.cerca_playa == 1
+          ? `
+            <p class="mb-2">
+              <i class="bi bi-brightness-high-fill text-warning me-1"></i>
+              Cerca de la playa
+            </p>
+          `
+          : ""
+      }
+
+      <p class="m-0 fuente_peq">
+        Precio final paquete completo
+      </p>
+
+      <h4 class="text-primary">
+        ${paquete.precio}€
+      </h4>
+
+      <p class="mb-0 fuente_peq">
+        Precio por persona
+      </p>
+
+    </div>
+
+  </div>
+`;
+
+// -------- INFORMACION ADICIONAL -----------
+document.getElementById("informacion-adicional").innerHTML = `
+  <h4><strong>Información adicional</strong></h4>
+
+  <h5>✅ ¿Qué incluye la oferta?</h5>
+
+  <p class="mt-3">
+    <i class="bi bi-airplane-fill me-2 text-primary"></i>
+    Vuelos incluidos:
+    <b>${paquete.vuelo_incluido == 1 ? "Sí" : "No"}</b>
+    ${
+      paquete.vuelo_incluido == 1
+        ? ` - Salida desde: <b>${paquete.salida_desde}</b>`
+        : ""
+    }
+  </p>
+
+  <p>
+    <i class="bi bi-building me-2 text-primary"></i>
+    Alojamiento en <b>${paquete.hotel_nombre}</b>
+  </p>
+
+  <p>
+    <i class="bi bi-cup-hot me-2 text-primary"></i>
+    Régimen:
+    <b>${paquete.hotel_regimen}</b>
+  </p>
+
+  <p>
+    <i class="bi bi-moon-stars me-2 text-primary"></i>
+    Estancia de <b>${paquete.noches}</b> noches
+  </p>
+
+  <p>
+    <i class="bi bi-headset me-2 text-primary"></i>
+    Atención al cliente antes y durante el viaje
+  </p>
+
+  <hr>
+
+  <h5>❌ ¿Qué no incluye la oferta?</h5>
+
+  <p  class="mt-3">
+    <i class="bi bi-x-circle me-2 text-danger"></i>
+    Extras no especificados en la reserva
+  </p>
+
+  <p>
+    <i class="bi bi-x-circle me-2 text-danger"></i>
+    Seguro opcional de cancelación
+  </p>
+
+  <p>
+    <i class="bi bi-x-circle me-2 text-danger"></i>
+    Gastos personales durante la estancia
+  </p>
+
+`;  
+
+//------------ AVISO -------------
+document.getElementById("aviso").innerHTML = `
+  <div class="fondo mt-3 pequeño">
+    <i class="bi bi-exclamation-diamond-fill fs-3 m-3 align-content-center"></i>Precio y disponibilidad sujetos a cambios según fechas y demanda.
   </div>
 
-      
-      `
-
+`
+ 
+/*
     // -------- CONTENIDO EXTRA --------
     container.innerHTML = `
       <div class="mb-4">
         <h2>A destacar</h2>
 
         <div class="row">
-          <div class="col-12 col-md-6">
-            <i class="bi bi-airplane-fill text-primary me-2"></i>
-            Vuelos incluidos:
-            <b>${paquete.vuelo_incluido == 1 ? "Sí" : "No"}</b>
-
-            ${
-              paquete.vuelo_incluido == 1
-                ? `<br>Salida desde: <b>${paquete.salida_desde}</b>`
-                : ""
-            }
+          
           </div>
 
           <div class="col-12 col-md-6">
-            ${
-              paquete.cerca_playa == 1
-                ? `
-                <i class="bi bi-brightness-high-fill text-warning me-2"></i>
-                Cerca de la playa
-              `
-                : ""
+            
             }
           </div>
         </div>
@@ -233,6 +325,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         alt="${paquete.hotel_nombre}"
       >
     `;
+   */
+
   } catch (e) {
     console.log(e);
 
