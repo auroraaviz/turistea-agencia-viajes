@@ -120,7 +120,7 @@ CREATE TABLE `paquete` (
   `descuento` decimal(5,2) DEFAULT 0.00,
   `activo` tinyint(1) DEFAULT 1,
   `imagen` varchar(255) DEFAULT NULL,
-  `categoria` enum('vuelo','vacaciones','fin_de_semana','verano') DEFAULT NULL,
+  `categoria` varchar(100) DEFAULT NULL,
   `vuelo_incluido` tinyint(1) DEFAULT 0,
   `salida_desde` varchar(100) DEFAULT NULL,
   `cerca_playa` tinyint(1) DEFAULT 0,
@@ -191,7 +191,8 @@ INSERT INTO `usuario` (`id`, `nombre`, `apellidos`, `email`, `password_hash`, `t
 (7, 'Juanillo', 'Luisillo', 'juanluramosillo@gmail.com', '$2y$10$0MPVMlPQdQAJ8w/DuBuGzOWNnW40h7NLZxxcYK6rzK6D7iXcAypQO', '+34 123456123', NULL, 'usuario', 1, '2026-03-29 13:49:58'),
 (8, 'Juan', 'Luis', 'admin@admin.com', '$2y$10$IrOQdsCL49NRj82deJLjm.EBZ847t0F1JypGHNGhQPqE0HDWh7E/y', '+34 628628628', NULL, 'usuario', 1, '2026-04-06 20:34:37'),
 (9, 'Gegrorio', 'Ordoñez', 'gergorio@xn--ordoez-zwa.com', '$2y$10$zirySmnhBSaVmcfyYsvGIumjQdhXFmL8Rj6oxoKKSv75zhVpnXk/m', '+34 628628628', NULL, 'usuario', 1, '2026-04-06 20:35:20'),
-(10, 'Juan', 'Luis', 'felipe@gmail.com', '$2y$10$1knQXA0BAyLkdub3JtkWJuJLYangM.F3ymk5Y.8TIV7IrxYjMd8vW', '+34 628628628', NULL, 'usuario', 1, '2026-04-08 03:37:47');
+(10, 'Juan', 'Luis', 'felipe@gmail.com', '$2y$10$1knQXA0BAyLkdub3JtkWJuJLYangM.F3ymk5Y.8TIV7IrxYjMd8vW', '+34 628628628', NULL, 'usuario', 1, '2026-04-08 03:37:47'),
+(11, 'Lola', 'Lopez Garcia', 'lola@correo.com', '$2y$10$SSPkjloykNlMm9DnDaxcxeTuPjKeR/80ASbKQY/XFvTFkpNmKmvaG', '+34 600600600', NULL, 'usuario', 1, '2026-04-17 09:49:52');
 
 -- --------------------------------------------------------
 
@@ -326,7 +327,7 @@ ALTER TABLE `reserva`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `viajero`
