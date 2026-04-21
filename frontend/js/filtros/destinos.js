@@ -1,3 +1,5 @@
+import { BASE } from "../config.js";
+
 document.addEventListener("DOMContentLoaded", async () => {
 
     const select = document.getElementById("select-destino");
@@ -5,7 +7,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
 
         const respuesta = await fetch(
-            "/turistea/JR_M26_AgenciaViajes/api/destinos/get.php"
+            BASE + "/api/destinos/get.php"
         );
 
         const destinos = await respuesta.json();

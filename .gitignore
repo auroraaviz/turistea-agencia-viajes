@@ -1,1 +1,4 @@
 node_modules/
+
+# Configuración local de rutas (cada dev tiene la suya)
+frontend/js/config.local.js

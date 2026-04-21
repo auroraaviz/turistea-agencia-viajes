@@ -1,8 +1,10 @@
+import { BASE } from "../config.js";
+
 document.addEventListener('DOMContentLoaded', async () => {
   const contenedor = document.getElementById('contenedor-tarjetas');
 
   try {
-    const respuesta = await fetch('/turistea/JR_M26_AgenciaViajes/api/paquetes/get.php');
+    const respuesta = await fetch(BASE + '/api/paquetes/get.php');
     const paquetes = await respuesta.json();
 
     contenedor.innerHTML = '';
@@ -21,7 +23,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             <div class="ratio ratio-16x9">
               <img 
-                src="./frontend/${paquete.imagen}"
+                src="${BASE}/frontend/${paquete.imagen}"
                 class="card-img-top object-fit-cover"
                 alt="${paquete.titulo}"
               >
@@ -51,7 +53,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             <div class="p-3 pt-0">
               <a 
-                href="./frontend/pages/detalle.html?id=${paquete.id}" 
+                href="${BASE}/frontend/pages/detalle.html?id=${paquete.id}" 
                 class="btn btn-primary w-100 rounded-pill"
               >
                 Ver viaje

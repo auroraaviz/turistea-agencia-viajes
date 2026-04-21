@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     const respuesta = await crear(
-      "/turistea/JR_M26_AgenciaViajes/api/paquetes/create.php",
+      "/api/paquetes/create.php",
       datos
     );
 

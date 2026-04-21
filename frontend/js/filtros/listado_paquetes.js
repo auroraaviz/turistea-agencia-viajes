@@ -1,4 +1,5 @@
 import { obtener } from "../utils/fetch.js";
+import { BASE } from "../config.js";
 
 function normalizarTexto(texto) {
     return texto.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
@@ -8,14 +9,14 @@ function resolverImagen(ruta) {
     if (!ruta) return '';
     // Quita el "../" del principio y añade la ruta web correcta
     const limpia = ruta.replace(/^\.\.\//,'');
-    return `/turistea/turistea/frontend/${limpia}`;
+    return `${BASE}/frontend/${limpia}`;
 }
 
 document.addEventListener("DOMContentLoaded", async function () {
 
     const contenedor = document.getElementById("paquetes-container");
 
-    const respuesta = await obtener("/turistea/turistea/api/paquetes/get.php");
+    const respuesta = await obtener("/api/paquetes/get.php");
     if (!respuesta) return;
 
     respuesta.forEach(paquete => {
@@ -24,7 +25,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         col.className = "col-12 col-md-6 col-lg-3";
 
         col.innerHTML = `
-            <a href="/turistea/turistea/frontend/html/detalle.html?id=${paquete.id}" class="text-decoration-none text-dark">
+            <a href="${BASE}/frontend/pages/detalle.html?id=${paquete.id}" class="text-decoration-none text-dark">
             <div class="card h-100"
                 data-destino="${paquete.destino}"
                 data-fecha-inicio="${paquete.fecha_salida}"
