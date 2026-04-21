@@ -1,5 +1,6 @@
 
 import { obtener } from "../utils/fetch.js";
+import { BASE } from "../config.js";
 console.log("detalle.js cargado");
 document.addEventListener("DOMContentLoaded", async () => {
   const loading = document.getElementById("loading");
