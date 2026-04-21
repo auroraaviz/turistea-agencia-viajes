@@ -1,5 +1,6 @@
 
 import { obtener } from "../utils/fetch.js";
+import { BASE } from "../config.js";
 console.log("detalle.js cargado");
 document.addEventListener("DOMContentLoaded", async () => {
   const loading = document.getElementById("loading");
@@ -20,7 +21,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     // Consulta al PHP con id
     const paquete = await obtener(
-      `/turistea/JR_M26_AgenciaViajes/api/paquetes/get.php?id=${id}`
+      `/api/paquetes/get.php?id=${id}`
     );
 
     // Si no existe paquete
@@ -101,7 +102,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     <!-- Imagen izquierda -->
     <div class="col-12 col-md-4">
       <img
-        src="/turistea/JR_M26_AgenciaViajes/frontend/${paquete.hotel_imagen}"
+        src="${BASE}/frontend/${paquete.hotel_imagen}"
         class="img-fluid w-100 h-100 object-fit-cover rounded-start"
         alt="${paquete.hotel_nombre}"
       >
