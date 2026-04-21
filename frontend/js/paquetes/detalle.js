@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     // Consulta al PHP con id
     const paquete = await obtener(
-      `/turistea/JR_M26_AgenciaViajes/api/paquetes/get.php?id=${id}`
+      `/api/paquetes/get.php?id=${id}`
     );
 
     // Si no existe paquete
