@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // -------- CABECERA --------
     document.title = `${paquete.titulo} - Turistea`;
 
-    document.getElementById("paquete-imagen").src = `../${paquete.imagen}`;
+    document.getElementById("paquete-imagen").src = `${BASE}/frontend/${paquete.imagen.replace(/^(\.\.\/)+/, '')}`;
     document.getElementById("paquete-imagen").alt = paquete.titulo;
 
     document.getElementById("paquete-titulo").textContent = paquete.titulo;
@@ -225,7 +225,6 @@ document.getElementById("aviso").innerHTML = `
   </div>
 
 `
- 
 
   } catch (e) {
     console.log(e);
