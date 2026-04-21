@@ -11,14 +11,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password2 = $_POST['password2'] ?? '';
 
     if (!$nombre || !$apellidos || !$email || !$telefono || !$password || !$password2) {
+        http_response_code(400);
         die("Completa todos los campos");
     }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        http_response_code(400);
         die("Email no válido");
     }
 
     if ($password !== $password2) {
+        http_response_code(400);
         die("Las contraseñas no coinciden");
     }
 
@@ -29,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $resultado = $stmt->get_result();
 
     if ($resultado->num_rows > 0) {
+        http_response_code(409);
         die("El email ya está registrado");
     }
 
@@ -42,9 +46,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param("sssss", $nombre, $apellidos, $email, $hash, $telefono);
 
     if ($stmt->execute()) {
-        header("Location: /turistea/turistea/frontend/pages/login.html");
-        exit();
+        echo "OK";
     } else {
+        http_response_code(500);
         die("Error al registrar usuario");
     }
 }
