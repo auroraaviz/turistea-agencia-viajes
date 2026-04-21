@@ -22,8 +22,8 @@ document.addEventListener('DOMContentLoaded', async () => {
           >
 
             <div class="ratio ratio-16x9">
-              <img
-                src="${BASE}/frontend/${(paquete.imagen || '').replace(/^\.\.\//, '')}"
+              <img 
+                src="${BASE}/frontend/${paquete.imagen}"
                 class="card-img-top object-fit-cover"
                 alt="${paquete.titulo}"
               >
