@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detalle del paquete - Turistea</title>
+
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/bootstrap-icons.css" />
+    <link rel="stylesheet" href="../css/detalle.css" />
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary shadow-sm py-0">
+      <div class="container">
+        <a class="navbar-brand" href="../../index.html">
+          <img src="../assets/img/Turistea_Logo/logo_turistea.png" width="90" alt="Turistea" />
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../../index.html">
+                <i class="bi bi-house fs-3"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="container my-5">
+      <!-- Cargando -->
+      <div class="text-center py-5" id="loading">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Cargando...</span>
+        </div>
+      </div>
+
+      <!-- Error -->
+      <div class="alert alert-danger d-none" id="error">No se encontró el paquete solicitado.</div>
+
+      <!-- DETALLE -->
+      <div class="d-none" id="detalle">
+        <!-- Cabecera -->
+        <div class="row align-items-center g-4 mb-4">
+          <div class="col-12 col-md-5">
+            <img
+              id="paquete-imagen"
+              src=""
+              alt=""
+              class="w-100 object-fit-cover rounded-4 shadow"
+              style="max-height: 360px"
+            />
+          </div>
+
+          <div class="col-12 col-md-7">
+            <h2 class="text-primary fw-bold fs-2" id="paquete-titulo"></h2>
+
+            <p class="mb-1 text-secondary" id="paquete-destino">
+              <i class="bi bi-geo-alt"></i>
+              <span></span>
+            </p>
+
+            <p class="fs-6 text-dark mb-1" id="paquete-info-corta"></p>
+
+            <p class="fw-bold text-primary mb-3" id="paquete-precio"></p>
+
+            <div id="paquete-badges" class="mb-3"></div>
+
+            <div class="d-flex align-items-center gap-3">
+              <a
+                href="#"
+                class="btn btn-info text-white rounded-pill px-4 py-2 fw-semibold"
+                id="btn-reservar"
+              >
+                Reservar
+              </a>
+
+              <button
+                class="btn btn-link text-danger fs-3 p-0 border-0"
+                id="btn-favorito"
+                title="Favorito"
+              >
+                <i class="bi bi-heart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Texto principal -->
+        <div class="mb-5">
+          <p class="text-secondary small lh-lg" id="paquete-descripcion"></p>
+
+          <p class="text-secondary small lh-lg" id="paquete-detalles-extra"></p>
+        </div>
+      </div>
+
+      <!-- TARJETA HOTEL-->
+      <div class="container mb-3 fondo" id="tarjeta-hotel"></div>
+    </div>
+
+    <!-- CONTENIDO EXTRA -->
+    <div class="container mt-4" id="destacar"></div>
+
+    <div class="container">
+      <p class="mt-3">🪙 Precio y disponibilidad a fecha de publicación.</p>
+    </div>
+ <hr class="container">
+<!-- INFORMACION ADICIONAL -->
+ <div class="container" id="informacion-adicional"></div>
+
+<!-- AVISO -->
+ <div class="container mt-4" id="aviso"></div> 
+
+
+    <!-- JS -->
+    <script src="../js/bootstrap.bundle.min.js"></script>
+
+    <script type="module" src="../js/paquetes/detalle.js"></script>
+  </body>
+</html>

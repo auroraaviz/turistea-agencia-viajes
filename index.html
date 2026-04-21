@@ -14,16 +14,11 @@
   <body>
     <header>
       <!-- NAVBAR PRINCIPAL -->
-      <nav
-        class="navbar navbar-expand-lg navbar-light bg-body-tertiary shadow-sm py-0"
-      >
+      <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary shadow-sm py-0">
         <div class="container">
           <!-- LOGO -->
           <a class="navbar-brand" href="#">
-            <img
-              src="./frontend/assets/img/Turistea_Logo/logo_turistea.png"
-              width="90"
-            />
+            <img src="./frontend/assets/img/Turistea_Logo/logo_turistea.png" width="90" />
           </a>
 
           <!-- BOTÓN MÓVIL -->
@@ -37,10 +32,7 @@
           </button>
 
           <!-- MENÚ -->
-          <div
-            class="collapse navbar-collapse justify-content-end"
-            id="navbarNav"
-          >
+          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
                 <a class="nav-link" href="#"
@@ -64,11 +56,7 @@
               </li>
 
               <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  data-bs-toggle="dropdown"
-                >
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                   <i class="bi bi-airplane fs-3"></i>
                   <span class="d-inline d-md-none ms-3">Menu extensible</span>
                 </a>
@@ -85,17 +73,9 @@
       <!-- BARRA DE HEADER -->
       <!-- Slider -->
       <div class="container-fluid px-0">
-        <div
-          id="sliderOfertas"
-          class="carousel slide shadow"
-          data-bs-ride="carousel"
-        >
+        <div id="sliderOfertas" class="carousel slide shadow" data-bs-ride="carousel">
           <ol class="carousel-indicators">
-            <li
-              data-bs-target="#sliderOfertas"
-              data-bs-slide-to="0"
-              class="active"
-            ></li>
+            <li data-bs-target="#sliderOfertas" data-bs-slide-to="0" class="active"></li>
             <li data-bs-target="#sliderOfertas" data-bs-slide-to="1"></li>
             <li data-bs-target="#sliderOfertas" data-bs-slide-to="2"></li>
           </ol>
@@ -125,7 +105,7 @@
                 <div class="text-center text-white p-5">
                   <h2 class="font-weight-bold">Semana en Mallorca</h2>
                   <p class="lead">Todo incluido desde 399&euro; por persona</p>
-                   <a
+                  <a
                     href="#"
                     class="btn btn-light btn-lg rounded-pill px-5 font-weight-bold text-primario"
                   >
@@ -175,10 +155,8 @@
       <!-- CATEGORÍAS -->
       <nav class="bg-light border-bottom">
         <div class="container">
-          <div
-            class="d-flex justify-content-center gap-5 text-center py-2 flex-wrap"
-          >
-            <div class="categoria" data-categoria="vuelo">
+          <div class="d-flex justify-content-between text-center py-2 flex-wrap">
+            <div class="categoria">
               <i class="bi bi-airplane fs-4"></i>
               <div>Vuelos</div>
             </div>
@@ -202,69 +180,69 @@
       </nav>
     </header>
 
-    <!-- SECCIÓN FILTROS -->
-    <div class="container my-5">
-      <div class="d-flex justify-content-center">
-        <div
-          class="d-flex align-items-end gap-4 flex-wrap justify-content-center"
-        >
-          <!-- Destino -->
-          <div style="min-width: 140px">
-            <label class="filtro-label">
-                <i class="bi bi-geo-alt"></i> Destino
-            </label>
-             <input type="text" id="filtro-destino" placeholder="¿A dónde?" class="filtro-input"/>
-          </div>
+   <!-- SECCIÓN FILTROS -->
+<div class="container my-5">
+  <div class="d-flex justify-content-center">
+    <div class="d-flex align-items-end gap-4 flex-wrap justify-content-center">
 
-          <!-- Fecha inicio-->
-            <div style="min-width: 140px">
-                <label class="filtro-label">
-                    <i class="bi bi-calendar"></i> Fecha de inicio aproximada
-                </label>
-                <input type="date" id="fecha-inicio" class="filtro-input"/>
-            </div>
+      <!-- Destino -->
+      <div style="min-width: 140px">
+        <label class="filtro-label">
+          <i class="bi bi-geo-alt"></i> Destino
+        </label>
 
-          <!-- Fecha fin-->
-          <div style="min-width: 140px">
-              <label class="filtro-label">
-                  <i class="bi bi-calendar"></i> Fecha de fin aproximada
-              </label>
-              <input type="date" id="fecha-fin" class="filtro-input"/>
-            </div>
+        <select id="select-destino" class="filtro-input">
+          <option value="">Todos los destinos</option>
+        </select>
+      </div>
 
-          <!-- Botón -->
-            <div>
-                <button class="btn btn-buscar rounded-pill px-4">
-                    <i class="bi bi-search"></i> Buscar
-                </button>
-            </div>
+      <!-- Fecha inicio -->
+      <div style="min-width: 140px">
+        <label class="filtro-label">
+          <i class="bi bi-calendar"></i> Fecha de inicio aproximada
+        </label>
+        <input type="date" id="fecha-inicio" class="filtro-input">
+      </div>
 
-        </div>
+      <!-- Fecha fin -->
+      <div style="min-width: 140px">
+        <label class="filtro-label">
+          <i class="bi bi-calendar"></i> Fecha de fin aproximada
+        </label>
+        <input type="date" id="fecha-fin" class="filtro-input">
+      </div>
+
+      <!-- Botón -->
+      <div>
+        <button class="btn btn-buscar rounded-pill px-4">
+          <i class="bi bi-search"></i> Buscar
+        </button>
+      </div>
+
     </div>
-    <hr style="border-color: #d9d9d9; margin-top: 24px"/>
+  </div>
 </div>
+
+     
 
     <!--Paquetes de viajes-->
     <div class="container mt-5 mb-3 text-center">
-      <h4 class="font-weight-bold mb-1 seccion-titulo">
-        Últimos destinos añadidos
-      </h4>
-      <p class="text-muted mb-0 seccion-subtitulo">
-        Descubre nuestros paquetes con todo incluido
-      </p>
+      <h4 class="font-weight-bold mb-1 seccion-titulo">Últimos destinos añadidos</h4>
+      <p class="text-muted mb-0 seccion-subtitulo">Descubre nuestros paquetes con todo incluido</p>
     </div>
 
-
-    <!--Contenedor dinámico de paquetes-->
+    <!-- TARJETAS -->
 
     <div class="container text-center mt-2">
-      <div class="row g-4" id="paquetes-container">
+      <div class="row g-4" id="contenedor-tarjetas">
+        <div class="col-12">
+          <p>Cargando destinos...</p>
         </div>
     </div>
 
-   <script src="./frontend/js/bootstrap.bundle.min.js"></script>
-   <script type="module" src="/turistea/turistea/frontend/js/filtros/listado_paquetes.js"></script>
-
-
+    <script src="./frontend/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="./frontend/js/paquetes/tarjetas.js"></script>
+    <script type="module" src="./frontend/js/filtros/destinos.js"></script>
+    <script src="./frontend/js/filtros/filtros.js"></script>
   </body>
 </html>

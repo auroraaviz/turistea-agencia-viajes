@@ -1,0 +1,25 @@
+.fondo{
+    background-color: #ffe8d9;
+    padding:  40px;
+    color: rgb(102,77,3);
+    font-weight: 400;
+    
+}
+
+.fuente_peq{
+    font-size: 0.8rem;
+}
+
+.estrellas{
+    color: rgb(212, 140, 6);
+}
+
+.lista-check {
+  list-style: none; 
+}
+
+.lista-check li::before {
+  content: "✅";
+margin-right: 3px;
+}
+

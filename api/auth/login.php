@@ -8,6 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'] ?? '';
 
     if (!$email || !$password) {
+        http_response_code(400);
         die("Faltan datos");
     }
 
@@ -24,11 +25,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['nombre'] = $usuario['nombre'];
         $_SESSION['rol'] = $usuario['rol'];
 
-        // redirección directa
-        header("Location: /turistea/turistea/index.html");
-        exit();
+        echo "OK";
 
     } else {
-        echo "❌ Usuario o contraseña incorrectos";
+        http_response_code(401);
+        echo "Usuario o contraseña incorrectos";
     }
 }
