@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Turistea</title>
+    <link rel="stylesheet" href="../../../frontend/css/bootstrap.min.css" />    
+    <link rel="stylesheet" href="../../../frontend/css/bootstrap-icons.css" />
+    <link rel="stylesheet" href="../../../frontend/css/bootstrap-grid.min.css" />
+    <link rel="stylesheet" href="../../../frontend/css/header.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/sidebars.css">
+</head>
+
+  <body>
+    <header>
+      <!-- NAVBAR PRINCIPAL -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary shadow-sm py-0">
+        <div class="container">
+          <!-- LOGO -->
+          <a class="navbar-brand" href="#">
+            <img src="../../../frontend/assets/img/Turistea_Logo/logo_turistea.png" width="90" />
+          </a>
+
+          <!-- BOTÓN MÓVIL -->
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <!-- MENÚ -->
+          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="#"
+                  ><i class="bi bi-search fs-3"></i>
+                  <span class="d-inline d-md-none ms-3">Buscar</span>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="#"
+                  ><i class="bi bi-house fs-3"></i>
+                  <span class="d-inline d-md-none ms-3">Menú inicio</span>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="#"
+                  ><i class="bi bi-person-check fs-3"></i>
+                  <span class="d-inline d-md-none ms-3">Acceso a registro</span>
+                </a>
+              </li>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                  <i class="bi bi-airplane fs-3"></i>
+                  <span class="d-inline d-md-none ms-3">Menu extensible</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Perfil</a></li>
+                  <li><a class="dropdown-item" href="#">Reservas</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+<hr class="m-0">
+<div class="d-flex">
+
+<!-- SIDEBAR TURISTEA PRO -->
+<div class="sidebar flex-shrink-0 p-3 bg-white shadow-sm border-end vh-100" style="width: 240px; overflow-y:auto;">
+
+
+  <!-- PERFIL -->
+  <div class="text-center mb-4">
+    <i class="bi bi-person-circle fs-1 text-secondary"></i>
+    <p class="mb-0 fw-bold">Administrador</p>
+    <small class="text-muted">Panel de control</small>
+  </div>
+
+  <br >
+
+  <ul class="list-unstyled ps-0">
+
+    <!-- DASHBOARD -->
+    <li class="mb-1">
+      <button class="btn btn-toggle w-100 text-start fw-semibold collapsed"
+        data-bs-toggle="collapse"
+        data-bs-target="#dashboard-collapse">
+        <i class="bi bi-speedometer2 me-2"></i>Dashboard
+      </button>
+
+      <div class="collapse show" id="dashboard-collapse">
+        <ul class="btn-toggle-nav list-unstyled small ps-4">
+          <li><a href="#" class="link-dark d-block py-1">Resumen general</a></li>
+          <li><a href="#" class="link-dark d-block py-1">Estadísticas</a></li>
+          <li><a href="#" class="link-dark d-block py-1">Alertas</a></li>
+        </ul>
+      </div>
+    </li>
+
+    <!-- USUARIOS -->
+    <li class="mb-1">
+      <button class="btn btn-toggle w-100 text-start fw-semibold collapsed"
+        data-bs-toggle="collapse"
+        data-bs-target="#usuarios-collapse">
+        <i class="bi bi-people-fill me-2"></i>Usuarios
+      </button>
+
+      <div class="collapse" id="usuarios-collapse">
+        <ul class="btn-toggle-nav list-unstyled small ps-4">
+          <li><a href="#" class="link-dark d-block py-1">Clientes</a></li>
+          <li><a href="#" class="link-dark d-block py-1">Gestores</a></li>
+          <li><a href="#" class="link-dark d-block py-1">Administradores</a></li>
+          <li><a href="#" class="link-dark d-block py-1">Bloqueados</a></li>
+        </ul>
+      </div>
+    </li>
+
+    <!-- VIAJES -->
+    <li class="mb-1">
+      <button class="btn btn-toggle w-100 text-start fw-semibold collapsed"
+        data-bs-toggle="collapse"
+        data-bs-target="#viajes-collapse">
+        <i class="bi bi-airplane-fill me-2"></i>Viajes
+      </button>
+
+      <div class="collapse" id="viajes-collapse">
+        <ul class="btn-toggle-nav list-unstyled small ps-4">
+          <li><a href="#" class="link-dark d-block py-1" id="btnTodosPaquetes">Todos los paquetes</a></li>
+          <li><a href="#" class="link-dark d-block py-1">Crear paquete</a></li>
+          <li><a href="#" class="link-dark d-block py-1">Editar paquetes</a></li>
+          <li><a href="#" class="link-dark d-block py-1">Ofertas activas</a></li>
+        </ul>
+      </div>
+    </li>
+
+    <!-- DESTINOS -->
+    <li class="mb-1">
+      <button class="btn btn-toggle w-100 text-start fw-semibold collapsed"
+        data-bs-toggle="collapse"
+        data-bs-target="#destinos-collapse">
+        <i class="bi bi-geo-alt-fill me-2"></i>Destinos
+      </button>
+
+      <div class="collapse" id="destinos-collapse">
+        <ul class="btn-toggle-nav list-unstyled small ps-4">
+          <li><a href="#" class="link-dark d-block py-1">España</a></li>
+          <li><a href="#" class="link-dark d-block py-1">Europa</a></li>
+          <li><a href="#" class="link-dark d-block py-1">Caribe</a></li>
+          <li><a href="#" class="link-dark d-block py-1">Asia</a></li>
+        </ul>
+      </div>
+    </li>
+
+    <!-- RESERVAS -->
+    <li class="mb-1">
+      <button class="btn btn-toggle w-100 text-start fw-semibold collapsed"
+        data-bs-toggle="collapse"
+        data-bs-target="#reservas-collapse">
+        <i class="bi bi-journal-check me-2"></i>Reservas
+      </button>
+
+      <div class="collapse" id="reservas-collapse">
+        <ul class="btn-toggle-nav list-unstyled small ps-4">
+          <li><a href="#" class="link-dark d-block py-1">Pendientes</a></li>
+          <li><a href="#" class="link-dark d-block py-1">Confirmadas</a></li>
+          <li><a href="#" class="link-dark d-block py-1">Canceladas</a></li>
+          <li><a href="#" class="link-dark d-block py-1">Finalizadas</a></li>
+        </ul>
+      </div>
+    </li>
+
+    <!-- FINANZAS -->
+    <li class="mb-1">
+      <button class="btn btn-toggle w-100 text-start fw-semibold collapsed"
+        data-bs-toggle="collapse"
+        data-bs-target="#finanzas-collapse">
+        <i class="bi bi-cash-stack me-2"></i>Finanzas
+      </button>
+
+      <div class="collapse" id="finanzas-collapse">
+        <ul class="btn-toggle-nav list-unstyled small ps-4">
+          <li><a href="#" class="link-dark d-block py-1">Ingresos</a></li>
+          <li><a href="#" class="link-dark d-block py-1">Pagos</a></li>
+          <li><a href="#" class="link-dark d-block py-1">Facturas</a></li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="border-top my-3"></li>
+
+    <!-- CUENTA -->
+    <li class="mb-1">
+      <button class="btn btn-toggle w-100 text-start fw-semibold collapsed"
+        data-bs-toggle="collapse"
+        data-bs-target="#cuenta-collapse">
+        <i class="bi bi-gear-fill me-2"></i>Cuenta
+      </button>
+
+      <div class="collapse" id="cuenta-collapse">
+        <ul class="btn-toggle-nav list-unstyled small ps-4">
+          <li><a href="#" class="link-dark d-block py-1">Perfil</a></li>
+          <li><a href="#" class="link-dark d-block py-1">Configuración</a></li>
+          <li><a href="#" class="link-danger d-block py-1">Cerrar sesión</a></li>
+        </ul>
+      </div>
+    </li>
+
+  </ul>
+</div>
+
+
+<!-- CONTENEDOR PARTE DERECHA-->
+<div class="container-fluid p-4">
+   <div id="contenido">
+    
+   </div>
+</div>
+
+
+
+</div>
+<script type="module" src="../../js/admin/viajes.js"></script>
+<script src="../../js/bootstrap.bundle.min.js"></script>
+<script src="../../js/admin/sidebars.js"></script>
+ </body>
+</html>
