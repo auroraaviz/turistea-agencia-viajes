@@ -1,6 +1,11 @@
 import { BASE } from "../config.js";
 
-document.addEventListener('DOMContentLoaded', async () => {
+// Limpia rutas relativas que vengan de la BD (ej: ../assets/img/foto.jpg)
+function resolverImagen(ruta) {
+  return (ruta || '').replace(/^(\.\.\/)+/, '');
+}
+
+export async function cargarPaquetes() {
   const contenedor = document.getElementById('contenedor-tarjetas');
 
   try {
@@ -11,16 +16,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     paquetes.forEach((paquete) => {
       contenedor.innerHTML += `
-
         <div class="col-12 col-md-6 col-lg-3">
-
           <div 
             class="card h-100 shadow-sm"
             data-destino="${paquete.destino}"
             data-fecha-inicio="${paquete.fecha_salida}"
             data-fecha-fin="${paquete.fecha_regreso}"
+            data-categoria="${paquete.categoria ?? ''}"
           >
-
             <div class="ratio ratio-16x9">
               <img
                 src="${BASE}/frontend/${(paquete.imagen || '').replace(/^\.\.\//, '')}"
@@ -28,52 +31,36 @@ document.addEventListener('DOMContentLoaded', async () => {
                 alt="${paquete.titulo}"
               >
             </div>
-
             <div class="card-body">
-
-              <h5 class="card-title fw-bold mb-1">
-                ${paquete.titulo}
-              </h5>
-
-              <p class="card-text text-muted small mb-2">
-                ${paquete.descripcion}
-              </p>
-
+              <h5 class="card-title fw-bold mb-1">${paquete.titulo}</h5>
+              <p class="card-text text-muted small mb-2">${paquete.descripcion}</p>
               <p class="small mb-2">
-                <i class="bi bi-geo-alt"></i>
-                ${paquete.destino}
+                <i class="bi bi-geo-alt"></i> ${paquete.destino}
               </p>
-
               <p class="card-fecha small mb-0">
                 <i class="bi bi-calendar3"></i>
                 ${paquete.fecha_salida} - ${paquete.fecha_regreso}
               </p>
-
             </div>
-
             <div class="p-3 pt-0">
               <a 
                 href="${BASE}/frontend/pages/detalle.html?id=${paquete.id}" 
-                class="btn btn-primary w-100 rounded-pill"
+                class="btn btn-ver-viaje w-100 rounded-pill"
               >
                 Ver viaje
               </a>
             </div>
-
           </div>
-
         </div>
-
       `;
     });
 
   } catch (error) {
     contenedor.innerHTML = `
-      <div class="col-12 text-danger">
-        Error cargando paquetes
-      </div>
+      <div class="col-12 text-danger">Error cargando paquetes</div>
     `;
-
     console.error(error);
   }
-});
+}
+
+document.addEventListener('DOMContentLoaded', cargarPaquetes);
