@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // -------- CABECERA --------
     document.title = `${paquete.titulo} - Turistea`;
 
-    document.getElementById("paquete-imagen").src = `${BASE}/frontend/${paquete.imagen.replace(/^(\.\.\/)+/, '')}`;
+    document.getElementById("paquete-imagen").src = `${BASE}/frontend/${(paquete.imagen || '').replace(/^\.\.\//, '')}`;
     document.getElementById("paquete-imagen").alt = paquete.titulo;
 
     document.getElementById("paquete-titulo").textContent = paquete.titulo;
@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     <!-- Imagen izquierda -->
     <div class="col-12 col-md-4">
       <img
-        src="${BASE}/frontend/${paquete.hotel_imagen}"
+        src="${BASE}/frontend/${(paquete.hotel_imagen || '').replace(/^\.\.\//, '')}"
         class="img-fluid w-100 h-100 object-fit-cover rounded-start"
         alt="${paquete.hotel_nombre}"
       >

@@ -25,8 +25,8 @@ export async function cargarPaquetes() {
             data-categoria="${paquete.categoria ?? ''}"
           >
             <div class="ratio ratio-16x9">
-              <img 
-                src="${BASE}/frontend/${resolverImagen(paquete.imagen)}"
+              <img
+                src="${BASE}/frontend/${(paquete.imagen || '').replace(/^\.\.\//, '')}"
                 class="card-img-top object-fit-cover"
                 alt="${paquete.titulo}"
               >
