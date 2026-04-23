@@ -21,36 +21,144 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const respuesta = await obtener("/api/paquetes/get.php");
-      if (!respuesta) throw new Error("No se pudieron obtener los paquetes");
+
+      if (!respuesta) {
+        throw new Error("No se pudieron cargar datos");
+      }
 
       const paquetes = respuesta.data || respuesta;
+
       const porPagina = 7;
       let paginaActual = 1;
 
-      function renderizarTabla() {
-        const totalPaginas = Math.ceil(paquetes.length / porPagina);
+      function renderizarTabla(lista = paquetes) {
+        const totalPaginas = Math.ceil(lista.length / porPagina) || 1;
+
+        if (paginaActual > totalPaginas) {
+          paginaActual = 1;
+        }
+
         const inicio = (paginaActual - 1) * porPagina;
         const fin = inicio + porPagina;
-        const visibles = paquetes.slice(inicio, fin);
+        const visibles = lista.slice(inicio, fin);
 
         let html = `
-          <div class="d-flex justify-content-between align-items-center mb-4">
+          <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+
             <div>
               <h2 class="fw-bold mb-0">Todos los paquetes</h2>
               <small class="text-muted">
-                Total: ${paquetes.length} viajes disponibles
+                Total: ${lista.length} viajes disponibles
               </small>
             </div>
 
-            <button class="btn btn-primary">
-              <i class="bi bi-plus-circle me-2"></i>
-              Nuevo viaje
+            <button
+              class="btn btn-outline-primary"
+              id="btnToggleFiltros"
+            >
+              <i class="bi bi-funnel-fill me-2"></i>
+              Mostrar filtros
             </button>
+
           </div>
 
+          <!-- PANEL FILTROS -->
+          <div
+            id="panelFiltros"
+            class="shadow-sm border-0 mb-4 d-none"
+          >
+
+            <div class="card-body">
+
+              <div class="row g-3 align-items-center">
+
+                <div class="col-12 col-md-3">
+                  <label class="form-label fw-semibold">
+                    Precio desde
+                  </label>
+
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="filtroPrecioMin"
+                    placeholder="0 €"
+                  >
+                </div>
+
+                <div class="col-12 col-md-3">
+                  <label class="form-label fw-semibold">
+                    Precio hasta
+                  </label>
+
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="filtroPrecioMax"
+                    placeholder="9999 €"
+                  >
+                </div>
+
+                <div class="col-12 col-md-3">
+                  <label class="form-label fw-semibold">
+                    Estado
+                  </label>
+
+                  <select class="form-select" id="filtroEstado">
+                    <option value="">Todos</option>
+                    <option value="1">Activo</option>
+                    <option value="0">Inactivo</option>
+                  </select>
+                </div>
+
+                <div class="col-12 col-md-3">
+                  <label class="form-label fw-semibold">
+                    Destino
+                  </label>
+
+                  <select class="form-select" id="filtroDestino">
+                    <option value="">Todos</option>
+                    <option value="Canarias">Canarias</option>
+                    <option value="Mallorca">Mallorca</option>
+                    <option value="París">París</option>
+                    <option value="Roma">Roma</option>
+                    <option value="Londres">Londres</option>
+                    <option value="Caribe">Caribe</option>
+                  </select>
+                </div>
+
+                <div class="col-12 d-flex gap-2 flex-wrap">
+
+                  <button
+                    class="btn btn-primary"
+                    id="btnAplicarFiltros"
+                  >
+                    <i class="bi bi-check-circle me-2"></i>
+                    Aplicar filtros
+                  </button>
+
+                  <button
+                    class="btn btn-outline-secondary"
+                    id="btnLimpiarFiltros"
+                  >
+                    <i class="bi bi-arrow-clockwise me-2"></i>
+                    Limpiar
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- TABLA -->
           <div class="table-responsive shadow-sm rounded bg-white">
+
             <table class="table table-hover align-middle mb-0">
+
               <thead class="table-light">
+
                 <tr>
                   <th>ID</th>
                   <th>Imagen</th>
@@ -62,7 +170,9 @@ document.addEventListener("DOMContentLoaded", () => {
                   <th>Estado</th>
                   <th>Acciones</th>
                 </tr>
+
               </thead>
+
               <tbody>
         `;
 
@@ -73,7 +183,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
           html += `
             <tr>
-              <td class="fw-bold text-muted">${p.id}</td>
+
+              <td class="fw-bold text-muted">
+                ${p.id}
+              </td>
 
               <td>
                 <img
@@ -83,7 +196,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 >
               </td>
 
-              <td class="fw-semibold">${p.titulo}</td>
+              <td class="fw-semibold">
+                ${p.titulo}
+              </td>
 
               <td>
                 <i class="bi bi-geo-alt-fill text-danger me-1"></i>
@@ -92,7 +207,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
               <td>${p.noches}</td>
 
-              <td class="fw-bold text-primary">${p.precio}€</td>
+              <td class="fw-bold text-primary">
+                ${p.precio}€
+              </td>
 
               <td>${p.plazas_disponibles ?? "-"}</td>
 
@@ -103,6 +220,7 @@ document.addEventListener("DOMContentLoaded", () => {
               </td>
 
               <td>
+
                 <button class="btn btn-sm btn-outline-primary me-1">
                   <i class="bi bi-pencil"></i>
                 </button>
@@ -110,24 +228,31 @@ document.addEventListener("DOMContentLoaded", () => {
                 <button class="btn btn-sm btn-outline-danger">
                   <i class="bi bi-trash"></i>
                 </button>
+
               </td>
+
             </tr>
           `;
         });
 
         html += `
               </tbody>
+
             </table>
+
           </div>
         `;
 
+        /* PAGINACIÓN */
         if (totalPaginas > 1) {
           html += `
-            <nav class="mt-4" aria-label="Paginación de paquetes">
+            <nav class="mt-4">
+
               <ul class="pagination justify-content-center">
+
                 <li class="page-item ${paginaActual === 1 ? "disabled" : ""}">
-                  <a class="page-link" href="#" id="paginaAnterior" aria-label="Anterior">
-                    <span aria-hidden="true">&laquo;</span>
+                  <a href="#" class="page-link" id="paginaAnterior">
+                    &laquo;
                   </a>
                 </li>
           `;
@@ -135,56 +260,155 @@ document.addEventListener("DOMContentLoaded", () => {
           for (let i = 1; i <= totalPaginas; i++) {
             html += `
               <li class="page-item ${i === paginaActual ? "active" : ""}">
-                <a class="page-link pagina-numero" href="#" data-pagina="${i}">${i}</a>
+                <a
+                  href="#"
+                  class="page-link pagina-numero"
+                  data-pagina="${i}"
+                >
+                  ${i}
+                </a>
               </li>
             `;
           }
 
           html += `
                 <li class="page-item ${paginaActual === totalPaginas ? "disabled" : ""}">
-                  <a class="page-link" href="#" id="paginaSiguiente" aria-label="Siguiente">
-                    <span aria-hidden="true">&raquo;</span>
+                  <a href="#" class="page-link" id="paginaSiguiente">
+                    &raquo;
                   </a>
                 </li>
+
               </ul>
+
             </nav>
           `;
         }
 
         contenido.innerHTML = html;
-        activarEventosPaginacion(totalPaginas);
+
+        activarToggleFiltros();
+        activarFiltros();
+        activarPaginacion(lista);
       }
 
-      function activarEventosPaginacion(totalPaginas) {
-        const btnAnterior = document.getElementById("paginaAnterior");
-        const btnSiguiente = document.getElementById("paginaSiguiente");
-        const botonesPagina = document.querySelectorAll(".pagina-numero");
+      function activarToggleFiltros() {
+        const btnToggle = document.getElementById("btnToggleFiltros");
+        const panel = document.getElementById("panelFiltros");
 
-        if (btnAnterior) {
-          btnAnterior.addEventListener("click", (e) => {
+        if (!btnToggle || !panel) return;
+
+        btnToggle.addEventListener("click", () => {
+          panel.classList.toggle("d-none");
+
+          if (panel.classList.contains("d-none")) {
+            btnToggle.innerHTML = `
+              <i class="bi bi-funnel-fill me-2"></i>
+              Mostrar filtros
+            `;
+          } else {
+            btnToggle.innerHTML = `
+              <i class="bi bi-x-circle me-2"></i>
+              Ocultar filtros
+            `;
+          }
+        });
+      }
+
+      function activarFiltros() {
+        const btnFiltrar = document.getElementById("btnAplicarFiltros");
+        const btnLimpiar = document.getElementById("btnLimpiarFiltros");
+
+        if (btnFiltrar) {
+          btnFiltrar.addEventListener("click", () => {
+            const min =
+              parseFloat(document.getElementById("filtroPrecioMin").value) || 0;
+
+            const max =
+              parseFloat(document.getElementById("filtroPrecioMax").value) ||
+              999999;
+
+            const estado =
+              document.getElementById("filtroEstado").value;
+
+            const destino =
+              document.getElementById("filtroDestino").value;
+
+            const filtrados = paquetes.filter((p) => {
+              const precio = parseFloat(p.precio);
+
+              const cumplePrecio =
+                precio >= min && precio <= max;
+
+              const cumpleEstado =
+                estado === "" || String(p.activo) === estado;
+
+              const cumpleDestino =
+                destino === "" || p.destino === destino;
+
+              return (
+                cumplePrecio &&
+                cumpleEstado &&
+                cumpleDestino
+              );
+            });
+
+            paginaActual = 1;
+            renderizarTabla(filtrados);
+          });
+        }
+
+        if (btnLimpiar) {
+          btnLimpiar.addEventListener("click", () => {
+            paginaActual = 1;
+            renderizarTabla(paquetes);
+          });
+        }
+      }
+
+      function activarPaginacion(lista) {
+        const totalPaginas =
+          Math.ceil(lista.length / porPagina) || 1;
+
+        const anterior =
+          document.getElementById("paginaAnterior");
+
+        const siguiente =
+          document.getElementById("paginaSiguiente");
+
+        const paginas =
+          document.querySelectorAll(".pagina-numero");
+
+        if (anterior) {
+          anterior.addEventListener("click", (e) => {
             e.preventDefault();
+
             if (paginaActual > 1) {
               paginaActual--;
-              renderizarTabla();
+              renderizarTabla(lista);
             }
           });
         }
 
-        if (btnSiguiente) {
-          btnSiguiente.addEventListener("click", (e) => {
+        if (siguiente) {
+          siguiente.addEventListener("click", (e) => {
             e.preventDefault();
+
             if (paginaActual < totalPaginas) {
               paginaActual++;
-              renderizarTabla();
+              renderizarTabla(lista);
             }
           });
         }
 
-        botonesPagina.forEach((boton) => {
-          boton.addEventListener("click", (e) => {
+        paginas.forEach((btnPagina) => {
+          btnPagina.addEventListener("click", (e) => {
             e.preventDefault();
-            paginaActual = parseInt(boton.dataset.pagina);
-            renderizarTabla();
+
+            paginaActual = parseInt(
+              btnPagina.dataset.pagina
+            );
+
+            renderizarTabla(lista);
           });
         });
       }
