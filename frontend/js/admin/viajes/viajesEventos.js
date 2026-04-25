@@ -1,22 +1,39 @@
+import { crearModal } from "./modal.js";
+import { state } from "./viajesState.js";
+
 export function activarEventosTabla() {
+
   const botonesEditar =
     document.querySelectorAll(".btnEditar");
 
   const botonesEliminar =
     document.querySelectorAll(".btnEliminar");
 
+  const filas =
+    document.querySelectorAll(".fila-paquete");
+
+
   botonesEditar.forEach((btn) => {
-    btn.addEventListener("click", () => {
+
+    btn.onclick = (e) => {
+
+      e.stopPropagation();
+
       const id = btn.dataset.id;
 
       console.log("Editar paquete:", id);
 
-      // luego abriremos modal editar
-    });
+    };
+
   });
 
+
   botonesEliminar.forEach((btn) => {
-    btn.addEventListener("click", () => {
+
+    btn.onclick = (e) => {
+
+      e.stopPropagation();
+
       const id = btn.dataset.id;
 
       const confirmar = confirm(
@@ -27,7 +44,27 @@ export function activarEventosTabla() {
 
       console.log("Eliminar paquete:", id);
 
-      // luego llamada API delete.php
-    });
+    };
+
   });
+
+
+  filas.forEach((fila) => {
+
+    fila.onclick = () => {
+
+      const id =
+        fila.dataset.id;
+
+      const paquete =
+        state.paquetes.find(
+          p => p.id == id
+        );
+
+      crearModal(paquete);
+
+    };
+
+  });
+
 }

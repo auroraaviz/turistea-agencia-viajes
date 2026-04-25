@@ -3,5 +3,5 @@ export const state = {
     destinos: [],
     listaActual: [],
     paginaActual: 1,
-    porPagina: 7
+    porPagina: 8
 };

@@ -56,7 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
       state.paginaActual = 1;
 
       refrescar();
-      activarEventosTabla();
 
     } catch (error) {
       console.log(error);

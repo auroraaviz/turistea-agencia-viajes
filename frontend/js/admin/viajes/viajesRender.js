@@ -15,7 +15,7 @@ export function renderTabla(lista, paginaActual, porPagina, destinos) {
 
       <div>
         <h2 class="fw-bold mb-0">
-          Gestión de viajes
+          Gestión de paquetes
         </h2>
 
         <small class="text-muted">
@@ -137,7 +137,7 @@ export function renderTabla(lista, paginaActual, porPagina, destinos) {
 
     <div class="table-responsive shadow-sm rounded bg-white">
 
-      <table class="table table-hover align-middle mb-0">
+      <table class="table table-hover align-middle mb-0 text-center">
 
         <thead class="table-light">
           <tr>
@@ -145,11 +145,12 @@ export function renderTabla(lista, paginaActual, porPagina, destinos) {
             <th>Imagen</th>
             <th>Título</th>
             <th>Destino</th>
+            <th>Fecha de salida</th>
             <th>Noches</th>
             <th>Precio</th>
-            <th>Plazas</th>
-            <th>Estado</th>
-            <th>Acciones</th>
+            <th>Plazas disponibles</th>
+            <th>Plazas totales</th>
+            <th>Estado</th>            
           </tr>
         </thead>
 
@@ -158,7 +159,7 @@ export function renderTabla(lista, paginaActual, porPagina, destinos) {
 
   visibles.forEach((p) => {
     html += `
-      <tr>
+      <tr class="fila-paquete" data-id="${p.id}" style="cursor:pointer;">
 
         <td class="fw-bold text-muted">
           ${p.id}
@@ -168,7 +169,7 @@ export function renderTabla(lista, paginaActual, porPagina, destinos) {
           <img
             src="${obtenerImagen(p)}"
             alt="${p.titulo}"
-            style="width:100px;height:70px;object-fit:cover;border-radius:10px;"
+            style="width:100px;height:60px;object-fit:cover;border-radius:10px;"
           >
         </td>
 
@@ -180,11 +181,15 @@ export function renderTabla(lista, paginaActual, porPagina, destinos) {
           ${p.destino}
         </td>
 
+         <td>
+          ${p.fecha_salida}
+        </td>
+
         <td>
           ${p.noches}
         </td>
 
-        <td class="fw-bold text-primary">
+        <td class="fw-bold ">
           ${p.precio}€
         </td>
 
@@ -192,30 +197,15 @@ export function renderTabla(lista, paginaActual, porPagina, destinos) {
           ${p.plazas_disponibles ?? '-'}
         </td>
 
+         <td>
+          ${p.plazas_totales ?? '-'}
+        </td>
+
         <td>
           <span class="badge ${badgeEstado(p.activo)}">
             ${textoEstado(p.activo)}
           </span>
         </td>
-
-        <td>
-
-          <button
-            class="btn btn-sm btn-outline-primary btnEditar me-1"
-            data-id="${p.id}"
-          >
-            ✏️
-          </button>
-
-          <button
-            class="btn btn-sm btn-outline-danger btnEliminar"
-            data-id="${p.id}"
-          >
-            🗑️
-          </button>
-
-        </td>
-
       </tr>
     `;
   });
