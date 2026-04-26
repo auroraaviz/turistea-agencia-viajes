@@ -10,7 +10,9 @@ import {
   mostrarDestino,
   mostrarHotel,
   mostrarFechas,
-  mostrarPrecio
+  mostrarPrecio,
+  mostrarCategoria,
+  mostrarOpcionales
 } from "./modalRender.js";
 
 
@@ -53,6 +55,14 @@ export function activarPestanas(
 
       if (seccion === "precio") {
         mostrarPrecio(paquete);
+      }
+
+      if (seccion === "categoria") {
+        mostrarCategoria(paquete);
+      }
+
+      if (seccion === "opcionales") {
+        mostrarOpcionales(paquete);
       }
 
     };

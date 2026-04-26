@@ -80,13 +80,15 @@ export function crearModal(paquete) {
 
             <a
               href="#"
-              class="btn btn-primary">
+              class="btn btn-primary"
+              data-seccion="categoria">
               Categoría
             </a>
 
             <a
               href="#"
-              class="btn btn-primary">
+              class="btn btn-primary"
+              data-seccion="opcionales">
               Opcionales
             </a>
 

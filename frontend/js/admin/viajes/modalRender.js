@@ -3,6 +3,8 @@ mostrarDestino()
 mostrarHotel()
 mostrarFechas()
 mostrarPrecio()
+mostrarCategoria()
+mostrarOpcionales()
 */
 
 import {
@@ -247,6 +249,45 @@ export function mostrarPrecio(paquete) {
       </div>
 
     </div>
+
+  `;
+
+}
+
+
+// Muestra Categoria
+export function mostrarCategoria(paquete) {
+
+  const cont =
+    document.getElementById(
+      "contenidoModal"
+    );
+
+
+  cont.innerHTML = `
+
+<div>
+    <h1 class="text-bg-secondary text-center">Mostrando categoria</h1>
+</div>
+
+  `;
+}
+
+
+// Muestra Opcionales
+export function mostrarOpcionales(paquete) {
+
+  const cont =
+    document.getElementById(
+      "contenidoModal"
+    );
+
+
+  cont.innerHTML = `
+
+<div>
+    <h1 class="text-bg-secondary text-center">Mostrando opcionales</h1>
+</div>
 
   `;
 }
