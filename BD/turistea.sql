@@ -119,6 +119,7 @@ CREATE TABLE `paquete` (
   `precio` decimal(10,2) DEFAULT NULL,
   `descuento` decimal(5,2) DEFAULT 0.00,
   `activo` tinyint(1) DEFAULT 1,
+<<<<<<< HEAD
   `imagen` varchar(255) DEFAULT NULL,
 <<<<<<< HEAD
   `categoria` enum('vuelo','vacaciones','fin_de_semana','verano') DEFAULT NULL
@@ -127,6 +128,10 @@ CREATE TABLE `paquete` (
   `salida_desde` varchar(100) DEFAULT NULL,
   `cerca_playa` tinyint(1) DEFAULT 0
 >>>>>>> 74a2eec (conectado a la bd)
+=======
+  `imagen` varchar(255) DEFAULT NULL
+  `categoria` enum('vuelo','vacaciones','fin_de_semana','verano') DEFAULT NULL
+>>>>>>> 4d5b648 (Login y registro funcionando sin errores)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
