@@ -42,7 +42,10 @@ export async function crear(url, datos) {
       throw new Error("Error HTTP: " + respuesta.status);
     }
 
-    return await respuesta.json();
+    const texto = await respuesta.text();
+console.log("RESPUESTA PHP:");
+console.log(texto);
+return texto;
   } catch (error) {
     console.log("Error al enviar datos", error);
     return null;

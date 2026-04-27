@@ -14,6 +14,7 @@ Módulo controlador del modal
 
 import { crear } from "../../utils/fetch.js";
 
+
 import {
   mostrarDestino,
   mostrarHotel,
@@ -101,6 +102,9 @@ export function activarEditar(paquete) {
     }
 
     await guardarCambios(paquete, seccion);
+document
+.getElementById("btnTodosPaquetes")
+.click();
 
     editando = false;
 
@@ -242,6 +246,7 @@ async function guardarCambios(paquete, seccion) {
       paquete
     );
 
+
   console.log(
     "Respuesta servidor:",
     respuesta
@@ -371,11 +376,26 @@ function guardarPrecio(paquete) {
 function guardarCategoria(paquete) {
 
   const categoria =
-    document.getElementById("editCategoria");
+    document.getElementById(
+      "editCategoria"
+    );
 
   if (categoria) {
-    paquete.categoria = categoria.value;
+
+    console.log(
+      "VALOR SELECT:",
+      categoria.value
+    );
+
+    paquete.categoria =
+      categoria.value.trim();
+
+    console.log(
+      "ENVIANDO:",
+      paquete.categoria
+    );
   }
+
 }
 
 

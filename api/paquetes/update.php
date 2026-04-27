@@ -23,24 +23,41 @@ header("Access-Control-Allow-Headers: Content-Type");
 
 require_once("../config/bd.php");
 
+
+// =========================================
+// PETICIÓN OPTIONS (CORS)
+// =========================================
 if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
     exit;
 }
 
-// Lee cuerpo JSON enviado por fetch
+
+// =========================================
+// LEER JSON ENVIADO DESDE FETCH
+// =========================================
 $data = json_decode(
     file_get_contents("php://input"),
     true
 );
 
+
+// =========================================
+// VALIDAR ID
+// =========================================
 if (!$data || !isset($data["id"])) {
+
     echo json_encode([
         "ok" => false,
         "mensaje" => "Falta el id del paquete"
     ]);
+
     exit;
 }
 
+
+// =========================================
+// VARIABLES
+// =========================================
 $id = (int) $data["id"];
 
 $titulo = $data["titulo"] ?? "";
@@ -65,12 +82,28 @@ $plazas_disponibles = (int) ($data["plazas_disponibles"] ?? 0);
 
 $activo = (int) ($data["activo"] ?? 0);
 $vuelo_incluido = (int) ($data["vuelo_incluido"] ?? 0);
-$salida_desde = $data["salida_desde"] ?? "";
-$cerca_playa = (int) ($data["cerca_playa"] ?? 0);
-$categoria = $data["categoria"] ?? "";
 
-// Consulta preparada para actualizar
-// datos del paquete seleccionado
+$salida_desde = $data["salida_desde"] ?? "";
+
+$cerca_playa = (int) ($data["cerca_playa"] ?? 0);
+
+$categoria = $data["categoria"] ?? "vacaciones";
+
+$validas = [
+    "vuelo",
+    "vacaciones",
+    "fin_de_semana",
+    "verano"
+];
+
+if (!in_array($categoria, $validas)) {
+    $categoria = "vacaciones";
+}
+
+
+// =========================================
+// PREPARE UPDATE
+// =========================================
 $stmt = $conexion->prepare("
     UPDATE paquete
     SET
@@ -78,50 +111,91 @@ $stmt = $conexion->prepare("
         destino = ?,
         descripcion = ?,
         imagen = ?,
+
         hotel_nombre = ?,
         hotel_estrellas = ?,
         hotel_regimen = ?,
         hotel_detalles = ?,
         hotel_imagen = ?,
+
         fecha_salida = ?,
         fecha_regreso = ?,
+
         precio = ?,
         descuento = ?,
+
         plazas_totales = ?,
         plazas_disponibles = ?,
+
         activo = ?,
         vuelo_incluido = ?,
+
         salida_desde = ?,
+
         cerca_playa = ?,
         categoria = ?
+
     WHERE id = ?
 ");
 
+
+// =========================================
+// COMPROBAR PREPARE
+// =========================================
+if (!$stmt) {
+
+    echo json_encode([
+        "ok" => false,
+        "mensaje" => "Error en prepare",
+        "error" => $conexion->error
+    ]);
+
+    exit;
+}
+
+
+// =========================================
+// BIND PARAM
+// 21 VARIABLES = 21 TIPOS
+// =========================================
 $stmt->bind_param(
-    "sssssissss sddiiiisisi",
+    "sssssisssssddiiiisisi",
+
     $titulo,
     $destino,
     $descripcion,
     $imagen,
+
     $hotel_nombre,
     $hotel_estrellas,
     $hotel_regimen,
     $hotel_detalles,
     $hotel_imagen,
+
     $fecha_salida,
     $fecha_regreso,
+
     $precio,
     $descuento,
+
     $plazas_totales,
     $plazas_disponibles,
+
     $activo,
     $vuelo_incluido,
+
     $salida_desde,
+
     $cerca_playa,
     $categoria,
+
     $id
 );
 
+
+// =========================================
+// EJECUTAR
+// =========================================
 if ($stmt->execute()) {
 
     echo json_encode([
@@ -134,9 +208,16 @@ if ($stmt->execute()) {
     echo json_encode([
         "ok" => false,
         "mensaje" => "Error al actualizar",
-        "error" => $conexion->error
+        "error" => $stmt->error
     ]);
 
 }
+
+
+// =========================================
+// CERRAR
+// =========================================
+$stmt->close();
+$conexion->close();
 
 ?>

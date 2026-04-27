@@ -118,8 +118,6 @@ export function mostrarFormularioDestino(paquete) {
 // ===========================
 // FORMULARIO HOTEL
 // ===========================
-// Formulario editable:
-// datos principales del hotel
 export function mostrarFormularioHotel(paquete) {
 
   const cont = document.getElementById("contenidoModal");
@@ -200,7 +198,6 @@ export function mostrarFormularioHotel(paquete) {
 // ===========================
 // FORMULARIO FECHAS
 // ===========================
-
 export function mostrarFormularioFechas(paquete) {
 
   const cont = document.getElementById("contenidoModal");
@@ -341,13 +338,37 @@ export function mostrarFormularioCategoria(paquete) {
         </h3>
 
         <div class="mb-3">
-          <label class="form-label fw-semibold">Categoría</label>
-          <input
-            type="text"
+          <label class="form-label fw-semibold">
+            Categoría
+          </label>
+
+          <select
             id="editCategoria"
-            class="form-control"
-            value="${paquete.categoria || ""}"
+            class="form-select"
           >
+
+            <option value="vuelo"
+              ${paquete.categoria === "vuelo" ? "selected" : ""}>
+              Vuelo
+            </option>
+
+            <option value="vacaciones"
+              ${paquete.categoria === "vacaciones" ? "selected" : ""}>
+              Vacaciones
+            </option>
+
+            <option value="fin_de_semana"
+              ${paquete.categoria === "fin_de_semana" ? "selected" : ""}>
+              Fin de semana
+            </option>
+
+            <option value="verano"
+              ${paquete.categoria === "verano" ? "selected" : ""}>
+              Verano
+            </option>
+
+          </select>
+
         </div>
 
       </div>
