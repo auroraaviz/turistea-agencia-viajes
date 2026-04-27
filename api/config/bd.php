@@ -8,7 +8,6 @@ $usuario = "root";
 $password = "";
 $bd = "turistea";
 
-
 $conexion = new mysqli($servidor, $usuario, $password, $bd);
 
 //verifica conexión

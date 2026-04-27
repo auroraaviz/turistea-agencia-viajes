@@ -35,10 +35,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.title = `${paquete.titulo} - Turistea`;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     document.getElementById("paquete-imagen").src = `${BASE}/frontend/${(paquete.imagen || '').replace(/^\.\.\//, '')}`;
 =======
     document.getElementById("paquete-imagen").src = paquete.imagen;
 >>>>>>> 4d8e5d7 (Traigo archivos detalles.js, get.php y detalle.html desde juanluis)
+=======
+    document.getElementById("paquete-imagen").src = `${BASE}/frontend/${paquete.imagen.replace(/^(\.\.\/)+/, '')}`;
+>>>>>>> f4b18e8 (fix: arreglar conexión BD y filtros)
     document.getElementById("paquete-imagen").alt = paquete.titulo;
 
     document.getElementById("paquete-titulo").textContent = paquete.titulo;
@@ -233,6 +237,7 @@ document.getElementById("aviso").innerHTML = `
   </div>
 
 `
+<<<<<<< HEAD
  
 /*
     // -------- CONTENIDO EXTRA --------
@@ -335,6 +340,8 @@ document.getElementById("aviso").innerHTML = `
       >
     `;
    */
+=======
+>>>>>>> f4b18e8 (fix: arreglar conexión BD y filtros)
 
   } catch (e) {
     console.log(e);
