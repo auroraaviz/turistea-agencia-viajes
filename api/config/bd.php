@@ -3,9 +3,9 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-$servidor = "localhost";
-$usuario = "root";
-$password = "";
+$servidor = "127.0.0.1";
+$usuario = "turistea";
+$password = "turistea";
 $bd = "turistea";
 
 $conexion = new mysqli($servidor, $usuario, $password, $bd);

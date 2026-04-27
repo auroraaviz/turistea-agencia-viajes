@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-04-2026 a las 12:38:48
--- Versión del servidor: 10.4.32-MariaDB
+-- Tiempo de generación: 19-04-2026 a las 22:08:45
+-- Versión del servidor: 10.11.14-MariaDB-0ubuntu0.24.04.1
 -- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -121,6 +121,7 @@ CREATE TABLE `paquete` (
   `activo` tinyint(1) DEFAULT 1,
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   `imagen` varchar(255) DEFAULT NULL,
 <<<<<<< HEAD
   `categoria` enum('vuelo','vacaciones','fin_de_semana','verano') DEFAULT NULL
@@ -139,12 +140,19 @@ CREATE TABLE `paquete` (
   `hotel_detalles` varchar(255) DEFAULT NULL
 >>>>>>> 0adc275 (bd)
 =======
+=======
+>>>>>>> 92541fb5da7ed589069433772702d5a9285510c4
   `imagen` varchar(255) DEFAULT NULL,
   `categoria` varchar(100) DEFAULT NULL,
   `vuelo_incluido` tinyint(1) DEFAULT 0,
   `salida_desde` varchar(100) DEFAULT NULL,
+<<<<<<< HEAD
   `cerca_playa` tinyint(1) DEFAULT 0
 >>>>>>> 29e4bfb (Filtros página principal: destino, fechas y categorías múltiples)
+=======
+  `cerca_playa` tinyint(1) DEFAULT 0,
+  `hotel_detalles` varchar(255) DEFAULT NULL
+>>>>>>> 92541fb5da7ed589069433772702d5a9285510c4
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -152,6 +160,9 @@ CREATE TABLE `paquete` (
 --
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 92541fb5da7ed589069433772702d5a9285510c4
 INSERT INTO `paquete` (`id`, `titulo`, `descripcion`, `destino`, `hotel_nombre`, `hotel_estrellas`, `hotel_regimen`, `hotel_imagen`, `fecha_salida`, `fecha_regreso`, `plazas_totales`, `plazas_disponibles`, `precio`, `descuento`, `activo`, `imagen`, `categoria`, `vuelo_incluido`, `salida_desde`, `cerca_playa`, `hotel_detalles`) VALUES
 (1, 'Aventura en los Pirineos', 'Descubre los paisajes más impresionantes del Pirineo aragonés. Rutas de senderismo, pueblos medievales y gastronomía local en un viaje inolvidable de 5 días.', 'Huesca, Aragón', 'Hotel Monte Perdido', 4, 'Media pensión', 'assets/img/hoteles/hotelmonteperdido.jpeg', '2026-06-15', '2026-06-20', 20, 12, 549.00, 10.00, 1, 'assets/img/huesca.jpeg', NULL, 1, 'Barcelona', 0, 'WiFi gratis, piscina exterior, desayuno buffet y parking privado.'),
 (2, 'Relax en la Costa Brava', 'Disfruta del Mediterráneo con playas de aguas cristalinas, calas escondidas y una oferta cultural única. Incluye excursión en barco y visita a Tossa de Mar.', 'Girona, Cataluña', 'Hotel Mar i Cel', 3, 'Todo incluido', 'assets/img/hoteles/hotelmaricel.jpeg', '2026-07-01', '2026-07-08', 15, 5, 789.50, 0.00, 1, 'assets/img/mallorca.jpg', NULL, 0, 'Málaga', 1, 'Ubicación céntrica, habitaciones modernas y desayuno incluido.'),
@@ -162,6 +173,7 @@ INSERT INTO `paquete` (`id`, `titulo`, `descripcion`, `destino`, `hotel_nombre`,
 (7, 'Sevilla que maravilla', 'Recorre Sevilla y sus principales monumentos. Disfruta de su cultura, gastronomía y del clima suave del otoño andaluz.', 'Sevilla, Andalucía', 'Hotel Giralda', 4, 'Alojamiento y desayuno', 'assets/img/hoteles/2.jpeg', '2026-11-04', '2026-11-08', 20, 14, 329.00, 5.00, 1, 'assets/img/2.jpg', NULL, 0, 'Madrid', 0, 'Ideal para familias, zona infantil y piscina climatizada.'),
 (8, 'Asturias', 'Viaja a la costa de Asturias, descubre su encanto marinero, sus playas salvajes y su gastronomía tradicional.', 'Costa de Asturias', 'Hotel Mirador del Cantábrico', 3, 'Media pensión', 'assets/img/hoteles/3.jpeg', '2026-08-18', '2026-08-23', 18, 9, 459.00, 0.00, 1, 'assets/img/3.jpg', NULL, 0, 'Madrid', 1, 'Solo adultos, ambiente tranquilo y vistas al mar.'),
 (9, 'Cáceres', 'Cáceres en Diciembre. Disfruta de sus calles empedradas, su gastronomía y el encanto invernal de la ciudad medieval.', 'Cáceres, Extremadura', 'Hotel Plaza Mayor', 3, 'Alojamiento y desayuno', 'assets/img/hoteles/4.jpeg', '2026-12-18', '2026-12-20', 16, 11, 179.00, 10.00, 1, 'assets/img/4.jpg', NULL, 0, 'Madrid', 0, 'Hotel boutique, decoración exclusiva y excelente valoración.');
+<<<<<<< HEAD
 =======
 INSERT INTO `paquete` (`id`, `titulo`, `descripcion`, `destino`, `hotel_nombre`, `hotel_estrellas`, `hotel_regimen`, `hotel_imagen`, `fecha_salida`, `fecha_regreso`, `plazas_totales`, `plazas_disponibles`, `precio`, `descuento`, `activo`, `imagen`, `categoria`, `vuelo_incluido`, `salida_desde`, `cerca_playa`) VALUES
 (1, 'Aventura en los Pirineos', 'Descubre los paisajes más impresionantes del Pirineo aragonés. Rutas de senderismo, pueblos medievales y gastronomía local en un viaje inolvidable de 5 días.', 'Huesca, Aragón', 'Hotel Monte Perdido', 4, 'Media pensión', '../assets/img/hoteles/hotelmonteperdido.jpeg', '2026-06-15', '2026-06-20', 20, 12, 549.00, 10.00, 1, '../assets/img/huesca.jpeg', 'vuelo|verano|vacaciones', 1, 'Barcelona', 0),
@@ -174,6 +186,8 @@ INSERT INTO `paquete` (`id`, `titulo`, `descripcion`, `destino`, `hotel_nombre`,
 (8, 'Asturias', 'Viaja a la costa de Asturias, descubre su encanto marinero, sus playas salvajes y su gastronomía tradicional.', 'Costa de Asturias', 'Hotel Mirador del Cantábrico', 3, 'Media pensión', '../assets/img/3.jpg', '2026-08-18', '2026-08-23', 18, 9, 459.00, 0.00, 1, '../assets/img/3.jpg', 'verano|vacaciones', 0, 'Madrid', 1),
 (9, 'Cáceres', 'Cáceres en Diciembre. Disfruta de sus calles empedradas, su gastronomía y el encanto invernal de la ciudad medieval.', 'Cáceres, Extremadura', 'Hotel Plaza Mayor', 3, 'Alojamiento y desayuno', '../assets/img/4.jpg', '2026-12-18', '2026-12-20', 16, 11, 179.00, 10.00, 1, '../assets/img/4.jpg', 'fin_de_semana', 0, 'Madrid', 0);
 >>>>>>> 29e4bfb (Filtros página principal: destino, fechas y categorías múltiples)
+=======
+>>>>>>> 92541fb5da7ed589069433772702d5a9285510c4
 
 -- --------------------------------------------------------
 
@@ -225,11 +239,16 @@ INSERT INTO `usuario` (`id`, `nombre`, `apellidos`, `email`, `password_hash`, `t
 (8, 'Juan', 'Luis', 'admin@admin.com', '$2y$10$IrOQdsCL49NRj82deJLjm.EBZ847t0F1JypGHNGhQPqE0HDWh7E/y', '+34 628628628', NULL, 'usuario', 1, '2026-04-06 20:34:37'),
 (9, 'Gegrorio', 'Ordoñez', 'gergorio@xn--ordoez-zwa.com', '$2y$10$zirySmnhBSaVmcfyYsvGIumjQdhXFmL8Rj6oxoKKSv75zhVpnXk/m', '+34 628628628', NULL, 'usuario', 1, '2026-04-06 20:35:20'),
 <<<<<<< HEAD
+<<<<<<< HEAD
 (10, 'Juan', 'Luis', 'felipe@gmail.com', '$2y$10$1knQXA0BAyLkdub3JtkWJuJLYangM.F3ymk5Y.8TIV7IrxYjMd8vW', '+34 628628628', NULL, 'usuario', 1, '2026-04-08 03:37:47');
 =======
 (10, 'Juan', 'Luis', 'felipe@gmail.com', '$2y$10$1knQXA0BAyLkdub3JtkWJuJLYangM.F3ymk5Y.8TIV7IrxYjMd8vW', '+34 628628628', NULL, 'usuario', 1, '2026-04-08 03:37:47'),
 (11, 'Lola', 'Lopez Garcia', 'lola@correo.com', '$2y$10$SSPkjloykNlMm9DnDaxcxeTuPjKeR/80ASbKQY/XFvTFkpNmKmvaG', '+34 600600600', NULL, 'usuario', 1, '2026-04-17 09:49:52');
 >>>>>>> 29e4bfb (Filtros página principal: destino, fechas y categorías múltiples)
+=======
+(10, 'Juan', 'Luis', 'felipe@gmail.com', '$2y$10$1knQXA0BAyLkdub3JtkWJuJLYangM.F3ymk5Y.8TIV7IrxYjMd8vW', '+34 628628628', NULL, 'usuario', 1, '2026-04-08 03:37:47'),
+(11, 'Lola', 'Lopez Garcia', 'lola@correo.com', '$2y$10$SSPkjloykNlMm9DnDaxcxeTuPjKeR/80ASbKQY/XFvTFkpNmKmvaG', '+34 600600600', NULL, 'usuario', 1, '2026-04-17 09:49:52');
+>>>>>>> 92541fb5da7ed589069433772702d5a9285510c4
 
 -- --------------------------------------------------------
 
@@ -365,10 +384,14 @@ ALTER TABLE `reserva`
 --
 ALTER TABLE `usuario`
 <<<<<<< HEAD
+<<<<<<< HEAD
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 =======
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 >>>>>>> 29e4bfb (Filtros página principal: destino, fechas y categorías múltiples)
+=======
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+>>>>>>> 92541fb5da7ed589069433772702d5a9285510c4
 
 --
 -- AUTO_INCREMENT de la tabla `viajero`

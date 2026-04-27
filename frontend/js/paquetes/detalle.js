@@ -36,6 +36,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     document.getElementById("paquete-imagen").src = `${BASE}/frontend/${(paquete.imagen || '').replace(/^\.\.\//, '')}`;
 =======
     document.getElementById("paquete-imagen").src = paquete.imagen;
@@ -43,6 +44,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 =======
     document.getElementById("paquete-imagen").src = `${BASE}/frontend/${paquete.imagen.replace(/^(\.\.\/)+/, '')}`;
 >>>>>>> f4b18e8 (fix: arreglar conexión BD y filtros)
+=======
+    document.getElementById("paquete-imagen").src = `${BASE}/frontend/${(paquete.imagen || '').replace(/^\.\.\//, '')}`;
+>>>>>>> 92541fb5da7ed589069433772702d5a9285510c4
     document.getElementById("paquete-imagen").alt = paquete.titulo;
 
     document.getElementById("paquete-titulo").textContent = paquete.titulo;
@@ -111,10 +115,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     <div class="col-12 col-md-4">
       <img
 <<<<<<< HEAD
+<<<<<<< HEAD
         src="${BASE}/frontend/${(paquete.hotel_imagen || '').replace(/^\.\.\//, '')}"
 =======
         src="${paquete.hotel_imagen}"
 >>>>>>> 4d8e5d7 (Traigo archivos detalles.js, get.php y detalle.html desde juanluis)
+=======
+        src="${BASE}/frontend/${(paquete.hotel_imagen || '').replace(/^\.\.\//, '')}"
+>>>>>>> 92541fb5da7ed589069433772702d5a9285510c4
         class="img-fluid w-100 h-100 object-fit-cover rounded-start"
         alt="${paquete.hotel_nombre}"
       >
@@ -238,6 +246,7 @@ document.getElementById("aviso").innerHTML = `
 
 `
 <<<<<<< HEAD
+<<<<<<< HEAD
  
 /*
     // -------- CONTENIDO EXTRA --------
@@ -342,6 +351,8 @@ document.getElementById("aviso").innerHTML = `
    */
 =======
 >>>>>>> f4b18e8 (fix: arreglar conexión BD y filtros)
+=======
+>>>>>>> 92541fb5da7ed589069433772702d5a9285510c4
 
   } catch (e) {
     console.log(e);

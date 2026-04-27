@@ -1,11 +1,11 @@
 import { cargarPaquetes } from "../paquetes/tarjetas.js";
 
 function normalizarTexto(texto) {
-    return texto
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .trim();
+  return texto
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim();
 }
 
 document.addEventListener("DOMContentLoaded", async function () {
