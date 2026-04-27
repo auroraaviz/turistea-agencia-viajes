@@ -227,6 +227,8 @@ loading.classList.add("d-none");
 detalle.classList.remove("d-none");
 
 
+
+
   } catch (e) {
     console.error("Error cargando el paquete:", e);
 

@@ -1,0 +1,29 @@
+ html,
+      body {
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+      }
+
+      .layout-admin {
+        height: calc(100vh - 73px);
+      }
+
+      .sidebar {
+        width: 240px;
+        height: 100%;
+        overflow-y: auto;
+        flex-shrink: 0;
+      }
+
+      .contenido-admin {
+        height: 100%;
+        overflow-y: auto;
+      }
+
+.table-hover > tbody > tr:hover > *{
+    background-color: #0d6efd !important;
+    color: white;
+}
+
+
