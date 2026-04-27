@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crear paquete</title>
+    <link rel="stylesheet" href="../css/bootstrap-grid.min.css" />
+     <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/bootstrap-icons.css" />
+    
+    
+  </head>
+  <body class="bg-light">
+    <div class="container py-5">
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-8">
+          <div class="card shadow">
+            <div class="card-body">
+              <h1 class="mb-4">Crear paquete</h1>
+
+              <form id="formPaquete">
+                <div class="mb-3">
+                  <label for="titulo" class="form-label">Título</label>
+                  <input type="text" class="form-control" id="titulo" required />
+                </div>
+
+                <div class="mb-3">
+                  <label for="destino" class="form-label">Destino</label>
+                  <input type="text" class="form-control" id="destino" required />
+                </div>
+
+                <div class="mb-3">
+                  <label for="descripcion" class="form-label">Descripción</label>
+                  <textarea class="form-control" id="descripcion" rows="4" required></textarea>
+                </div>
+
+                <div class="mb-3">
+                  <label for="imagen" class="form-label">Imagen</label>
+                  <input type="text" class="form-control" id="imagen"  />
+                </div>
+
+                <div class="mb-3">
+                  <label for="hotel_nombre" class="form-label">Nombre del hotel</label>
+                  <input type="text" class="form-control" id="hotel_nombre" required />
+                </div>
+
+                <div class="mb-3">
+                  <label for="hotel_estrellas" class="form-label">Estrellas</label>
+                  <input type="number" class="form-control" id="hotel_estrellas" min="1" max="5" required />
+                </div>
+
+                <div class="mb-3">
+                  <label for="hotel_regimen" class="form-label">Régimen</label>
+                  <input type="text" class="form-control" id="hotel_regimen" required />
+                </div>
+
+                <div class="mb-3">
+                  <label for="hotel_imagen" class="form-label">Imagen del hotel</label>
+                  <input type="text" class="form-control" id="hotel_imagen" />
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="fecha_salida" class="form-label">Fecha de salida</label>
+                    <input type="date" class="form-control" id="fecha_salida" required />
+                  </div>
+
+                  <div class="col-md-6 mb-3">
+                    <label for="fecha_regreso" class="form-label">Fecha de regreso</label>
+                    <input type="date" class="form-control" id="fecha_regreso" required />
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="plazas_disponibles" class="form-label">Plazas disponibles</label>
+                    <input type="number" class="form-control" id="plazas_disponibles" min="0"  />
+                  </div>
+
+                  <div class="col-md-6 mb-3">
+                    <label for="plazas_totales" class="form-label">Plazas totales</label>
+                    <input type="number" class="form-control" id="plazas_totales" min="1" />
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="precio" class="form-label">Precio</label>
+                    <input type="number" class="form-control" id="precio" step="0.01" min="0" required />
+                  </div>
+
+                  <div class="col-md-6 mb-3">
+                    <label for="descuento" class="form-label">Descuento</label>
+                    <input type="number" class="form-control" id="descuento" min="0" value="0" required />
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="salida_desde" class="form-label">Salida desde</label>
+                  <input type="text" class="form-control" id="salida_desde" required />
+                </div>
+
+                <div class="form-check mb-2">
+                  <input class="form-check-input" type="checkbox" id="activo" checked />
+                  <label class="form-check-label" for="activo">Activo</label>
+                </div>
+
+                <div class="form-check mb-2">
+                  <input class="form-check-input" type="checkbox" id="vuelo_incluido" />
+                  <label class="form-check-label" for="vuelo_incluido">Vuelo incluido</label>
+                </div>
+
+                <div class="form-check mb-4">
+                  <input class="form-check-input" type="checkbox" id="cerca_playa" />
+                  <label class="form-check-label" for="cerca_playa">Cerca de la playa</label>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Crear paquete</button>
+              </form>
+
+              <div id="mensaje" class="mt-4"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="../js/paquetes/create.js"></script>
+  </body>
+</html>
