@@ -1,25 +1,141 @@
-.fondo{
-    background-color: #ffe8d9;
-    padding:  40px;
-    color: rgb(102,77,3);
-    font-weight: 400;
-    
+body {
+  font-family: 'Raleway', sans-serif;
+  font-size: 17px;
+  background-color: #ffffff;
 }
-
-.fuente_peq{
-    font-size: 0.8rem;
+ 
+/* ── HERO ── */
+#hero-detalle {
+  position: relative;
+  height: 520px;
+  overflow: hidden;
 }
-
-.estrellas{
-    color: rgb(212, 140, 6);
+ 
+#hero-detalle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
 }
-
-.lista-check {
-  list-style: none; 
+ 
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,20,50,.1) 0%, rgba(0,20,50,.6) 55%, rgba(0,20,50,.92) 100%);
 }
-
-.lista-check li::before {
-  content: "✅";
-margin-right: 3px;
+ 
+#paquete-badges {
+  position: absolute;
+  top: 1.2rem;
+  left: 1.5rem;
+  z-index: 10;
 }
-
+ 
+#hero-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem 2rem 2rem;
+  z-index: 10;
+  color: #fff;
+}
+ 
+#paquete-titulo {
+  font-size: clamp(1.6rem, 4vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1.1;
+  text-shadow: 0 2px 12px rgba(0,0,0,.4);
+}
+ 
+/* ── PRECIO BAR (flota sobre el hero) ── */
+.precio-bar {
+  margin-top: -2.5rem;
+  position: relative;
+  z-index: 20;
+  border-left: 5px solid #00B4D8;
+}
+ 
+#paquete-precio {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #0077B6;
+  line-height: 1;
+}
+ 
+/* ── GRID 2 COLUMNAS ── */
+.detalle-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 2rem;
+  margin-top: 2rem;
+  align-items: start;
+}
+ 
+@media (max-width: 960px) {
+  .detalle-grid { grid-template-columns: 1fr; }
+}
+ 
+/* ── SIDEBAR STICKY ── */
+.sidebar { position: sticky; top: 1.5rem; }
+ 
+/* ── COLORES DE MARCA ── */
+.text-marca   { color: #0077B6 !important; }
+.bg-sidebar   { background: linear-gradient(140deg, #005a8e, #0077B6, #00B4D8); }
+.bg-precio-col { background: linear-gradient(160deg, #f0faff, #e4f4fb); }
+ 
+/* ── BOTÓN FAVORITO ── */
+#btn-favorito {
+  border: 2px solid #FF6B6B;
+  color: #FF6B6B;
+  background: transparent;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  transition: background .2s, color .2s;
+}
+#btn-favorito:hover { background: #FF6B6B; color: #fff; }
+ 
+/* ── BOTÓN VOLVER ── */
+.btn-volver {
+  background-color: #00B4D8;
+  color: #fff;
+  border: none;
+  font-weight: 700;
+  transition: background-color .25s;
+}
+.btn-volver:hover { background-color: #005f87; color: #fff; }
+ 
+/* ── BOTÓN RESERVAR ── */
+.btn-reservar {
+  background: linear-gradient(90deg, #0077B6, #00B4D8);
+  color: #fff;
+  border: none;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  box-shadow: 0 4px 16px rgba(0,180,216,.35);
+  transition: opacity .2s, transform .15s;
+}
+.btn-reservar:hover { opacity: .9; transform: translateY(-2px); color: #fff; }
+ 
+/* ── INPUTS UNDERLINE ── */
+.input-underline {
+  border: none;
+  border-bottom: 2px solid #ffffff;
+  border-radius: 0;
+  background: transparent;
+  font-family: 'Raleway', sans-serif;
+  padding-left: 0;
+}
+.input-underline:focus {
+  border-color: #00B4D8;
+  box-shadow: none;
+  background: transparent;
+}
+ 
+/* ── RESPONSIVE HERO ── */
+@media (max-width: 768px) {
+  #hero-detalle { height: 360px; }
+  #paquete-titulo { font-size: 1.5rem; }
+  .precio-bar { margin-top: 0; border-radius: 0 !important; }
+}

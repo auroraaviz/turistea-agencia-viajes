@@ -1,12 +1,13 @@
 
 import { obtener } from "../utils/fetch.js";
 import { BASE } from "../config.js";
+
 console.log("detalle.js cargado");
+
 document.addEventListener("DOMContentLoaded", async () => {
   const loading = document.getElementById("loading");
   const error = document.getElementById("error");
   const detalle = document.getElementById("detalle");
-  const container = document.getElementById("container");
 
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
@@ -58,9 +59,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       `Plazas disponibles: ${paquete.plazas_disponibles} / ${paquete.plazas_totales}`;
 
     // -------- BADGES --------
-    const badges = document.getElementById("paquete-badges");
-
-    badges.innerHTML = `
+    document.getElementById("paquete-badges").innerHTML = `
       ${
         paquete.vuelo_incluido == 1
           ? `<span class="badge bg-primary me-2">Vuelo incluido</span>`
@@ -80,21 +79,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     `;
 
-    // -------- BOTÓN FAVORITO --------
-    document
-      .getElementById("btn-favorito")
-      .addEventListener("click", () => {
-        const icon = document.querySelector("#btn-favorito i");
-
-        icon.classList.toggle("bi-heart");
-        icon.classList.toggle("bi-heart-fill");
-      });
-
-    // Mostrar detalle principal
-    loading.classList.add("d-none");
-    detalle.classList.remove("d-none");
-
-
     // Tarjeta hotel
  document.getElementById("tarjeta-hotel").innerHTML = `
   <div class="row g-0 bg-light rounded shadow-sm align-items-center">
@@ -108,7 +92,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       >
     </div>
 
-    <!-- Información central -->
+    
     <div class="col-12 col-md-5">
       <div class="card-body text-center">
 
@@ -128,7 +112,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       </div>
     </div>
 
-    <!-- Precio derecha -->
+    
     <div class="col-12 col-md-3 text-center p-3">
 
       ${
@@ -220,14 +204,31 @@ document.getElementById("informacion-adicional").innerHTML = `
 
 //------------ AVISO -------------
 document.getElementById("aviso").innerHTML = `
-  <div class="fondo mt-3 pequeño">
-    <i class="bi bi-exclamation-diamond-fill fs-3 m-3 align-content-center"></i>Precio y disponibilidad sujetos a cambios según fechas y demanda.
+  <div class="fondo mt-3">
+    <i class="bi bi-exclamation-diamond-fill"></i>Precio y disponibilidad sujetos a cambios según fechas y demanda.
   </div>
 
-`
+`;
+//-------SINCRONIZAR PRECIO EN SIDEBAR-----------
+ const srcPrecio = document.getElementById("paquete-precio");
+    const dstPrecio = document.getElementById("sidebar-precio");
+    if (srcPrecio && dstPrecio) {
+      dstPrecio.textContent = srcPrecio.textContent.trim();
+    }
+
+//eventos despues de que el dom esté cargado
+document.getElementById("btn-favorito").addEventListener("click", () => {
+  const icon = document.querySelector("#btn-favorito i");
+  icon.classList.toggle("bi-heart");
+  icon.classList.toggle("bi-heart-fill");
+});
+
+loading.classList.add("d-none");
+detalle.classList.remove("d-none");
+
 
   } catch (e) {
-    console.log(e);
+    console.error("Error cargando el paquete:", e);
 
     loading.classList.add("d-none");
     error.classList.remove("d-none");
