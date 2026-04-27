@@ -12,6 +12,14 @@ document.addEventListener("DOMContentLoaded", function () {
         telefono: document.getElementById("telefono").value,
       };
 
+      const password = document.getElementById("password").value;
+      const password2 = document.getElementById("password2").value;
+
+      if (password !== password2) {
+          alert("❌ Las contraseñas no coinciden");
+      return;
+      }
+
       const BASE_URL = "/turistea";
       ajax(
         BASE_URL + "/api/auth/register.php",
@@ -22,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (respuesta.success) {
               alert("✅ Usuario registrado");
             } else {
-              alert("❌ " + respuesta.message);
+              alert("❌ " + respuesta.error);
             }
           } else {
             alert("Error en la petición");
