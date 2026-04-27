@@ -35,19 +35,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // -------- CABECERA --------
     document.title = `${paquete.titulo} - Turistea`;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
     document.getElementById("paquete-imagen").src = `${BASE}/frontend/${(paquete.imagen || '').replace(/^\.\.\//, '')}`;
-=======
-    document.getElementById("paquete-imagen").src = paquete.imagen;
->>>>>>> 4d8e5d7 (Traigo archivos detalles.js, get.php y detalle.html desde juanluis)
-=======
-    document.getElementById("paquete-imagen").src = `${BASE}/frontend/${paquete.imagen.replace(/^(\.\.\/)+/, '')}`;
->>>>>>> f4b18e8 (fix: arreglar conexión BD y filtros)
-=======
-    document.getElementById("paquete-imagen").src = `${BASE}/frontend/${(paquete.imagen || '').replace(/^\.\.\//, '')}`;
->>>>>>> 92541fb5da7ed589069433772702d5a9285510c4
     document.getElementById("paquete-imagen").alt = paquete.titulo;
 
     document.getElementById("paquete-titulo").textContent = paquete.titulo;
@@ -115,15 +103,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     <!-- Imagen izquierda -->
     <div class="col-12 col-md-4">
       <img
-<<<<<<< HEAD
-<<<<<<< HEAD
         src="${BASE}/frontend/${(paquete.hotel_imagen || '').replace(/^\.\.\//, '')}"
-=======
-        src="${paquete.hotel_imagen}"
->>>>>>> 4d8e5d7 (Traigo archivos detalles.js, get.php y detalle.html desde juanluis)
-=======
-        src="${BASE}/frontend/${(paquete.hotel_imagen || '').replace(/^\.\.\//, '')}"
->>>>>>> 92541fb5da7ed589069433772702d5a9285510c4
         class="img-fluid w-100 h-100 object-fit-cover rounded-start"
         alt="${paquete.hotel_nombre}"
       >
@@ -246,114 +226,8 @@ document.getElementById("aviso").innerHTML = `
   </div>
 
 `
-<<<<<<< HEAD
-<<<<<<< HEAD
- 
-/*
-    // -------- CONTENIDO EXTRA --------
-    container.innerHTML = `
-      <div class="mb-4">
-        <h2>A destacar</h2>
 
-        <div class="row">
-          
-          </div>
 
-          <div class="col-12 col-md-6">
-            
-            }
-          </div>
-        </div>
-      </div>
-
-      <hr>
-
-      <h2>Detalles de la oferta</h2>
-
-      <p>
-        <i class="bi bi-exclamation-triangle-fill text-warning me-2"></i>
-        Turistea no se hace responsable de retrasos y cancelaciones en vuelos
-      </p>
-
-      <div class="container fondo p-4">
-
-        <div class="row-cols-3 bg-light d-flex rounded-2">
-
-          <div class="p-0">
-            <img
-              src="${paquete.hotel_imagen}"
-              class="img-fluid w-100 rounded"
-              alt="${paquete.hotel_nombre}"
-            >
-          </div>
-
-          <div class="p-2">
-            <h4 class="text-center estrellas mt-2">
-              ${paquete.hotel_nombre}
-            </h4>
-
-            <p class="text-center estrellas">
-              ${"★".repeat(paquete.hotel_estrellas || 0)}
-            </p>
-
-            <ul class="fuente_peq lista-check">
-              <li>Equipaje de mano incluido</li>
-              <li>Añade traslado al aeropuerto más tarde</li>
-            </ul>
-
-            <p class="fuente_peq text-center">
-              <strong>Régimen:</strong> ${paquete.hotel_regimen}
-            </p>
-          </div>
-
-          <div class="align-content-center p-2">
-
-            <div class="row row-cols-2 fuente_peq">
-              <div><strong>Salida:</strong> ${paquete.fecha_salida}</div>
-              <div><strong>Regreso:</strong> ${paquete.fecha_regreso}</div>
-            </div>
-
-            
-
-            <p class="fuente_peq">
-              <strong>Descuento:</strong> ${paquete.descuento}%
-            </p>
-
-            <p class="fuente_peq">
-              <strong>Plazas:</strong>
-              ${paquete.plazas_disponibles} / ${paquete.plazas_totales}
-            </p>
-
-          </div>
-
-        </div>
-
-      </div>
-
-      <p class="mt-3">
-        🪙 Precio y disponibilidad a fecha de publicación.
-      </p>
-
-      <hr>
-
-      <h3>🏨 ¿Dónde te alojarás?</h3>
-
-      <p>
-        En esta ocasión hemos escogido
-        <strong>${paquete.hotel_nombre}</strong>
-      </p>
-
-      <img
-        src="${paquete.hotel_imagen}"
-        class="img-fluid rounded"
-        alt="${paquete.hotel_nombre}"
-      >
-    `;
-   */
-=======
->>>>>>> f4b18e8 (fix: arreglar conexión BD y filtros)
-=======
->>>>>>> 92541fb5da7ed589069433772702d5a9285510c4
 
   } catch (e) {
     console.log(e);
