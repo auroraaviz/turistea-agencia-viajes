@@ -1,0 +1,100 @@
+/* ---- Fondo degradado ---- */
+.footer-body {
+  background: linear-gradient(160deg, #003566 0%, #005a8e 35%, #0077b6 65%, #00a8cc 100%);
+  color: #fff;
+  font-family: 'Raleway', sans-serif;
+}
+ 
+/* ---- Logo ---- */
+.footer-logo {
+  width: 110px;
+  filter: brightness(0) invert(1);
+}
+ 
+/* ---- Descripción ---- */
+.footer-desc {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.7;
+}
+ 
+/* ---- Headings de sección ---- */
+.footer-heading {
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin-top: 0;
+  margin-bottom: 1.1rem;
+}
+ 
+/* ---- Listas ---- */
+.footer-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.footer-list li {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.85);
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  line-height: 1.4;
+}
+.footer-icon {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.5);
+  flex-shrink: 0;
+}
+.footer-list a {
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  transition: color 0.18s;
+}
+.footer-list a:hover {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+ 
+/* ---- Separador horizontal ---- */
+.footer-hr {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+ 
+/* ---- Redes sociales ---- */
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: background 0.22s, transform 0.18s;
+}
+.social-icon:hover {
+  background: rgba(255,255,255,0.28);
+  color: #fff;
+  transform: translateY(-3px);
+}
+ 
+/* ---- Copyright ---- */
+.footer-copy {
+  text-align: center;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.45);
+  font-family: 'Raleway', sans-serif;
+}
