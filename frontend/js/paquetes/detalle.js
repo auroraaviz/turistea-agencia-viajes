@@ -1,3 +1,16 @@
+/*
+=========================================
+DETALLE PÚBLICO DE PAQUETE
+-----------------------------------------
+Responsabilidad:
+- Leer id desde URL
+- Solicitar paquete a API
+- Mostrar detalle completo
+- Pintar hotel, precio y extras
+
+Vista pública del producto.
+=========================================
+*/
 
 import { obtener } from "../utils/fetch.js";
 import { BASE } from "../config.js";

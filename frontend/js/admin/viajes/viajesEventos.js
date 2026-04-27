@@ -1,3 +1,17 @@
+/*
+=========================================
+EVENTOS TABLA VIAJES
+-----------------------------------------
+Responsabilidad:
+- Escuchar botones editar / borrar
+- Abrir modal detalle
+- Detectar clicks en filas
+- Conectar acciones usuario con UI
+
+Archivo centrado en interacción.
+=========================================
+*/
+
 import { crearModal } from "./modal.js";
 import { state } from "./viajesState.js";
 

@@ -1,3 +1,18 @@
+/*
+=========================================
+CAPA DE COMUNICACIÓN API
+-----------------------------------------
+Responsabilidad:
+- Centralizar llamadas fetch
+- Añadir BASE automáticamente
+- Controlar errores HTTP
+- Parsear respuestas JSON
+
+Evita repetir fetch por proyecto.
+=========================================
+*/
+
+
 import { BASE } from "../config.js";
 
 export async function obtener(url) {

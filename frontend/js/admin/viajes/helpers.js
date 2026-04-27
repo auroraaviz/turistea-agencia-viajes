@@ -1,24 +1,71 @@
-import { BASE } from '../../config.js';
+/*
+=========================================
+FUNCIONES AUXILIARES
+-----------------------------------------
+Responsabilidad:
+- Construir rutas correctas de imágenes
+- Devolver clases visuales Bootstrap
+- Formatear textos reutilizables
 
-// Devuelve la ruta correcta de la imagen del paquete
+Utilidades puras reutilizadas
+en varios módulos.
+=========================================
+*/
+
+import { BASE } from "../../config.js";
+
+
+// ===========================
+// IMAGEN PAQUETE
+// ===========================
 export function obtenerImagen(paquete) {
-  return paquete.imagen
-    ? `${BASE}/frontend/${paquete.imagen.replace(/^\.\.\//, '')}`
-    : `${BASE}/frontend/assets/img/default.jpg`;
+
+  if (!paquete.imagen) {
+    return `${BASE}/frontend/assets/img/default.jpg`;
+  }
+
+  let ruta = paquete.imagen;
+
+  ruta = ruta.replace(/^\.\.\//, "");
+  ruta = ruta.replace(/^frontend\//, "");
+
+  return `${BASE}/frontend/${ruta}`;
 }
 
-//Devuelve la ruta correcta para la imagen del hotel
+
+// ===========================
+// IMAGEN HOTEL
+// ===========================
 export function obtenerImagenHotel(paquete) {
-  return paquete.hotel_imagen
-    ? `${BASE}/frontend/${paquete.hotel_imagen.replace(/^\.\.\//, '')}`
-    : `${BASE}/frontend/assets/img/default.jpg`;
+
+  if (!paquete.hotel_imagen) {
+    return `${BASE}/frontend/assets/img/default.jpg`;
+  }
+
+  let ruta = paquete.hotel_imagen;
+
+  ruta = ruta.replace(/^\.\.\//, "");
+  ruta = ruta.replace(/^frontend\//, "");
+
+  return `${BASE}/frontend/${ruta}`;
 }
 
-//Devuelve una clase Bootstrap según su estado
+
+// ===========================
+// BADGE ESTADO
+// ===========================
 export function badgeEstado(activo) {
-  return activo == 1 ? 'bg-success' : 'bg-secondary';
+  return activo == 1
+    ? "bg-success"
+    : "bg-secondary";
 }
-//Devuelte el texto que se mostrará
+
+
+// ===========================
+// TEXTO ESTADO
+// ===========================
 export function textoEstado(activo) {
-  return activo == 1 ? 'Activo' : 'Inactivo';
+  return activo == 1
+    ? "Activo"
+    : "Inactivo";
 }

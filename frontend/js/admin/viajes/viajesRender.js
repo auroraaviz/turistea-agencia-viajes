@@ -1,3 +1,19 @@
+/*
+=========================================
+RENDER TABLA ADMIN VIAJES
+-----------------------------------------
+Responsabilidad:
+- Pintar tabla HTML de paquetes
+- Aplicar paginación visual
+- Mostrar filtros y resultados
+- Preparar botones de acciones
+
+Solo renderiza interfaz.
+No consulta API directamente.
+=========================================
+*/
+
+
 import { obtenerImagen, badgeEstado, textoEstado } from './helpers.js';
 
 

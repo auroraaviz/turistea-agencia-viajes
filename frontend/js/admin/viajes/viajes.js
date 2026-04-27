@@ -1,3 +1,20 @@
+/*
+=========================================
+MÓDULO PRINCIPAL GESTIÓN DE VIAJES
+-----------------------------------------
+Responsabilidad:
+- Punto de entrada del panel admin
+- Cargar paquetes desde API
+- Obtener destinos para filtros
+- Mantener estado general
+- Lanzar renderizado inicial
+- Coordinar paginación y eventos
+
+Este archivo orquesta el módulo,
+no contiene lógica visual compleja.
+=========================================
+*/
+
 import { obtener } from "../../utils/fetch.js";
 
 import { state } from "./viajesState.js";
@@ -27,6 +44,7 @@ import {
 
 console.log("módulo viajes cargado");
 
+// Espera a que el DOM esté disponible
 document.addEventListener("DOMContentLoaded", () => {
   const btn =
     document.getElementById("btnTodosPaquetes");
@@ -64,7 +82,8 @@ document.addEventListener("DOMContentLoaded", () => {
         alerta("Error al cargar paquetes.");
     }
   });
-
+  
+// Refresca tabla según filtros actuales
   function refrescar() {
     contenido.innerHTML =
       renderTabla(

@@ -1,3 +1,19 @@
+/*
+=========================================
+LÓGICA DE FILTRADO
+-----------------------------------------
+Responsabilidad:
+- Leer filtros introducidos por usuario
+- Filtrar paquetes por:
+    precio
+    estado
+    destino
+- Devolver nueva colección filtrada
+
+No modifica datos originales.
+=========================================
+*/
+
 export function leerFiltros() {
   return {
     min:

@@ -1,4 +1,17 @@
 <?php
+/*
+=========================================
+API CONSULTA PAQUETES
+-----------------------------------------
+Responsabilidad:
+- Si recibe id => devuelve 1 paquete
+- Si no recibe id => devuelve listado
+- Añade cálculo de noches
+
+Salida JSON para frontend.
+=========================================
+*/
+
 
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");

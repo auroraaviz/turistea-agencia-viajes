@@ -1,10 +1,14 @@
 /*
-mostrarDestino()
-mostrarHotel()
-mostrarFechas()
-mostrarPrecio()
-mostrarCategoria()
-mostrarOpcionales()
+=========================================
+VISTAS DE SOLO LECTURA DEL MODAL
+-----------------------------------------
+Responsabilidad:
+- Mostrar datos del paquete
+- Renderizar contenido visual
+- No modifica datos
+
+Modo visual del modal
+=========================================
 */
 
 import {
