@@ -8,16 +8,17 @@
     <link rel="stylesheet" href="./frontend/css/bootstrap-icons.css" />
     <link rel="stylesheet" href="./frontend/css/bootstrap-grid.min.css" />
     <link rel="stylesheet" href="./frontend/css/header.css" />
+      <link rel="stylesheet" href="./frontend/css/footer.css" />
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
   </head>
 
   <body>
     <header>
       <!-- NAVBAR PRINCIPAL -->
-      <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary shadow-sm py-0">
+      <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-0">
         <div class="container">
           <!-- LOGO -->
-          <a class="navbar-brand" href="#">
+          <a class="navbar-brand" href="../../index.html">
             <img src="./frontend/assets/img/Turistea_Logo/logo_turistea.png" width="90" />
           </a>
 
@@ -156,7 +157,7 @@
       <nav class="bg-light border-bottom">
         <div class="container">
           <div class="d-flex justify-content-center text-center py-2 flex-wrap gap-4">
-            
+
             <div class="categoria" data-categoria="vuelo">
               <i class="bi bi-airplane fs-4"></i>
               <div>Vuelos</div>
@@ -373,12 +374,101 @@
   </div>
 </div>
 
-
+ <!--FOOTER-->
+<footer class="mt-5">
+  <div class="footer-body">
+    <div class="container py-5">
+ 
+      <!-- WRAPPER CENTRADO -->
+      <div class="row">
+        <div class="col-12 col-md-10 offset-md-1">
+ 
+          <!-- FILA: TURISTEA | CONTACTO | LEGAL -->
+          <div class="row g-4 mb-5">
+ 
+            <!-- COL 1: LOGO + DESC -->
+            <div class="col-12 col-md-4 text-center text-md-start">
+              <img
+                src="./frontend/assets/img/Turistea_Logo/logo_sinfondo.png"
+                alt="Turistea"
+                class="footer-logo d-block mx-auto mx-md-0 mb-2"
+              />
+              <p class="footer-desc mb-0">
+                Elige destino y disfruta.<br>
+                Nosotros nos encargamos del resto.
+              </p>
+            </div>
+ 
+            <!-- COL 2: CONTACTO -->
+            <div class="col-12 col-md-4 text-center text-md-start">
+              <p class="footer-heading">Datos de Contacto</p>
+              <ul class="footer-list">
+                <li>
+                  <i class="bi bi-geo-alt-fill footer-icon"></i>
+                  Calle Viajeros s/n, 28001 Madrid
+                </li>
+                <li>
+                  <i class="bi bi-telephone-fill footer-icon"></i>
+                  <a href="tel:+34900000000">+34 900 000 000</a>
+                </li>
+                <li>
+                  <i class="bi bi-envelope-fill footer-icon"></i>
+                  <a href="mailto:turistea@test.com">turistea@test.com</a>
+                </li>
+                <li>
+                  <i class="bi bi-clock-fill footer-icon"></i>
+                  Lun – Vie: 09:00 – 20:00
+                </li>
+              </ul>
+            </div>
+ 
+            <!-- COL 3: LEGAL -->
+            <div class="col-12 col-md-4 text-center text-md-start">
+              <p class="footer-heading">Información Legal</p>
+              <ul class="footer-list">
+                <li><a href="./frontend/pages/aviso-legal.html">Aviso legal</a></li>
+                <li><a href="./frontend/pages/politica.html">Política de privacidad</a></li>
+                <li><a href="./frontend/pages/condiciones.html">Términos y condiciones</a></li>
+              </ul>
+            </div>
+ 
+          </div>
+ 
+          <!-- SEPARADOR -->
+          <hr class="footer-hr mb-4"/>
+ 
+          <!-- REDES SOCIALES -->
+          <div class="d-flex justify-content-center gap-3 mb-4">
+            <a href="https://www.instagram.com/_turistea_/" class="social-icon" aria-label="Instagram">
+              <i class="bi bi-instagram"></i>
+            </a>
+            <a href="https://x.com/turistea_" class="social-icon" aria-label="X">
+              <i class="bi bi-twitter-x"></i>
+            </a>
+          </div>
+ 
+          <!-- COPYRIGHT -->
+          <p class="footer-copy mb-0">
+            &copy; <span id="footer-year"></span> Turistea · Todos los derechos reservados
+            &nbsp;·&nbsp;
+            Hecho con <i class="bi bi-heart-fill" style="color:#FF6B6B"></i> para viajeros
+          </p>
+ 
+        </div>
+      </div>
+ 
+    </div>
+  </div>
+</footer>
 
     <script src="./frontend/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="./frontend/js/filtros/destinos.js"></script>
     <script src="./frontend/js/filtros/filtros.js"></script>
-<script type="module" src="./frontend/js/contacto/gestion.js"></script>
+    <script type="module" src="./frontend/js/contacto/gestion.js"></script>
     <script type="module" src="./frontend/js/filtros/filtros.js"></script>
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+    </script>
+
   </body>
 </html>
