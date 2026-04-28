@@ -1,171 +1,232 @@
 <?php
-// Mostrar errores solo en desarrollo
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
 
-// Cabeceras
-header("Content-Type: application/json; charset=UTF-8");
+/*
+=========================================
+API CREATE PAQUETES
+-----------------------------------------
+Responsabilidad:
+- Recibir datos JSON desde frontend
+- Insertar nuevo paquete en BD
+- Devolver respuesta JSON
+
+Ruta:
+/api/paquetes/create.php
+=========================================
+*/
+
+
+header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+header("Access-Control-Allow-Headers: Content-Type");
 
-// Respuesta rápida al preflight
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    http_response_code(200);
-    exit();
-}
-
-// Solo permitir POST
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
-    echo json_encode([
-        "success" => false,
-        "message" => "Método no permitido"
-    ]);
-    exit();
-}
-
-// Conexión
 require_once("../config/bd.php");
 
-// Leer JSON recibido
-$datos = json_decode(file_get_contents("php://input"), true);
 
-
-// Comprobar que llegan datos
-if (!$datos) {
-    http_response_code(400);
-    echo json_encode([
-        "success" => false,
-        "message" => "No se recibieron datos válidos en JSON"
-    ]);
-    exit();
+// =========================================
+// PETICIÓN OPTIONS
+// =========================================
+if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
+    exit;
 }
 
-// Validar campos obligatorios
-$camposObligatorios = [
-    "titulo",
-    "destino",
-    "descripcion",
-    "imagen",
-    "hotel_nombre",
-    "hotel_estrellas",
-    "hotel_regimen",
-    "hotel_imagen",
-    "fecha_salida",
-    "fecha_regreso",
-    "plazas_disponibles",
-    "plazas_totales",
-    "precio",
-    "descuento",
-    "activo",
-    "vuelo_incluido",
-    "salida_desde",
-    "cerca_playa"
+
+// =========================================
+// LEER JSON
+// =========================================
+$data = json_decode(
+    file_get_contents("php://input"),
+    true
+);
+
+
+// =========================================
+// VALIDAR DATOS
+// =========================================
+if (!$data) {
+
+    echo json_encode([
+        "ok" => false,
+        "mensaje" => "No se recibieron datos"
+    ]);
+
+    exit;
+}
+
+
+// =========================================
+// VARIABLES
+// =========================================
+$titulo = $data["titulo"] ?? "";
+$destino = $data["destino"] ?? "";
+$descripcion = $data["descripcion"] ?? "";
+$imagen = $data["imagen"] ?? "assets/img/default.jpg";
+
+$hotel_nombre = $data["hotel_nombre"] ?? "";
+$hotel_estrellas = (int) ($data["hotel_estrellas"] ?? 3);
+$hotel_regimen = $data["hotel_regimen"] ?? "";
+$hotel_detalles = $data["hotel_detalles"] ?? "";
+$hotel_imagen = $data["hotel_imagen"] ?? "assets/img/hoteles/default.jpg";
+
+$fecha_salida = $data["fecha_salida"] ?? null;
+$fecha_regreso = $data["fecha_regreso"] ?? null;
+
+$precio = (float) ($data["precio"] ?? 0);
+$descuento = (float) ($data["descuento"] ?? 0);
+
+$plazas_totales = (int) ($data["plazas_totales"] ?? 0);
+$plazas_disponibles = (int) ($data["plazas_disponibles"] ?? 0);
+
+$activo = (int) ($data["activo"] ?? 1);
+$vuelo_incluido = (int) ($data["vuelo_incluido"] ?? 0);
+
+$salida_desde = $data["salida_desde"] ?? "";
+
+$cerca_playa = (int) ($data["cerca_playa"] ?? 0);
+
+$categoria = $data["categoria"] ?? "vacaciones";
+
+
+// =========================================
+// VALIDAR CATEGORÍA
+// =========================================
+$validas = [
+    "vuelo",
+    "vacaciones",
+    "fin_de_semana",
+    "verano"
 ];
 
-foreach ($camposObligatorios as $campo) {
-    if (!isset($datos[$campo]) || $datos[$campo] === "") {
-        http_response_code(400);
-        echo json_encode([
-            "success" => false,
-            "message" => "Falta el campo obligatorio: " . $campo
-        ]);
-        exit();
-    }
+if (!in_array($categoria, $validas)) {
+    $categoria = "vacaciones";
 }
 
-// Preparar datos
-$titulo = trim($datos["titulo"]);
-$destino = trim($datos["destino"]);
-$descripcion = trim($datos["descripcion"]);
-$imagen = trim($datos["imagen"]);
-$hotel_nombre = trim($datos["hotel_nombre"]);
-$hotel_estrellas = (int)$datos["hotel_estrellas"];
-$hotel_regimen = trim($datos["hotel_regimen"]);
-$hotel_imagen = trim($datos["hotel_imagen"]);
-$fecha_salida = $datos["fecha_salida"];
-$fecha_regreso = $datos["fecha_regreso"];
-$plazas_disponibles = (int)$datos["plazas_disponibles"];
-$plazas_totales = (int)$datos["plazas_totales"];
-$precio = (float)$datos["precio"];
-$descuento = (float)$datos["descuento"];
-$activo = (int)$datos["activo"];
-$vuelo_incluido = (int)$datos["vuelo_incluido"];
-$salida_desde = trim($datos["salida_desde"]);
-$cerca_playa = (int)$datos["cerca_playa"];
 
-// SQL
-$sql = "INSERT INTO paquete (
-    titulo,
-    destino,
-    descripcion,
-    imagen,
-    hotel_nombre,
-    hotel_estrellas,
-    hotel_regimen,
-    hotel_imagen,
-    fecha_salida,
-    fecha_regreso,
-    plazas_disponibles,
-    plazas_totales,
-    precio,
-    descuento,
-    activo,
-    vuelo_incluido,
-    salida_desde,
-    cerca_playa
-) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+// =========================================
+// PREPARE INSERT
+// =========================================
+$stmt = $conexion->prepare("
+    INSERT INTO paquete (
 
-$stmt = $conexion->prepare($sql);
+        titulo,
+        destino,
+        descripcion,
+        imagen,
 
+        hotel_nombre,
+        hotel_estrellas,
+        hotel_regimen,
+        hotel_detalles,
+        hotel_imagen,
+
+        fecha_salida,
+        fecha_regreso,
+
+        precio,
+        descuento,
+
+        plazas_totales,
+        plazas_disponibles,
+
+        activo,
+        vuelo_incluido,
+
+        salida_desde,
+
+        cerca_playa,
+        categoria
+
+    ) VALUES (
+
+        ?, ?, ?, ?,
+        ?, ?, ?, ?, ?,
+        ?, ?,
+        ?, ?,
+        ?, ?,
+        ?, ?,
+        ?,
+        ?, ?
+
+    )
+");
+
+
+// =========================================
+// ERROR PREPARE
+// =========================================
 if (!$stmt) {
-    http_response_code(500);
+
     echo json_encode([
-        "success" => false,
-        "message" => "Error al preparar la consulta: " . $conexion->error
+        "ok" => false,
+        "mensaje" => "Error prepare",
+        "error" => $conexion->error
     ]);
-    exit();
+
+    exit;
 }
 
+
+// =========================================
+// BIND PARAM
+// =========================================
 $stmt->bind_param(
-    "sssssissssiiddiisi",
+    "sssssisssssddiiiisis",
+
     $titulo,
     $destino,
     $descripcion,
     $imagen,
+
     $hotel_nombre,
     $hotel_estrellas,
     $hotel_regimen,
+    $hotel_detalles,
     $hotel_imagen,
+
     $fecha_salida,
     $fecha_regreso,
-    $plazas_disponibles,
-    $plazas_totales,
+
     $precio,
     $descuento,
+
+    $plazas_totales,
+    $plazas_disponibles,
+
     $activo,
     $vuelo_incluido,
+
     $salida_desde,
-    $cerca_playa
+
+    $cerca_playa,
+    $categoria
 );
 
-// Ejecutar
+
+// =========================================
+// EJECUTAR
+// =========================================
 if ($stmt->execute()) {
-    http_response_code(201);
+
     echo json_encode([
-        "success" => true,
-        "message" => "Paquete creado correctamente",
+        "ok" => true,
+        "mensaje" => "Paquete creado correctamente",
         "id" => $stmt->insert_id
     ]);
+
 } else {
-    http_response_code(500);
+
     echo json_encode([
-        "success" => false,
-        "message" => "Error al crear el paquete: " . $stmt->error
+        "ok" => false,
+        "mensaje" => "Error al crear paquete",
+        "error" => $stmt->error
     ]);
 }
 
+
+// =========================================
+// CERRAR
+// =========================================
 $stmt->close();
 $conexion->close();
+
 ?>
