@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Estadisticas - Turistea Admin</title>
+
+    <link rel="stylesheet" href="../../../frontend/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../../frontend/css/bootstrap-icons.css" />
+    <link rel="stylesheet" href="../../../frontend/css/header.css" />
+    <link rel="stylesheet" href="../../css/admin/dashboard.css" />
+    <link rel="stylesheet" href="../../css/sidebars.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      html, body { height: 100%; margin: 0; overflow: hidden; }
+      .layout-admin { height: calc(100vh - 73px); }
+      .sidebar { width: 240px; height: 100%; overflow-y: auto; flex-shrink: 0; }
+      .contenido-admin { height: 100%; overflow-y: auto; }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary shadow-sm py-0">
+        <div class="container">
+          <a class="navbar-brand" href="#">
+            <img src="../../../frontend/assets/img/Turistea_Logo/logo_turistea.png" width="90" alt="Turistea" />
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i class="bi bi-search fs-3"></i><span class="d-inline d-md-none ms-3">Buscar</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../../../index.html"><i class="bi bi-house fs-3"></i><span class="d-inline d-md-none ms-3">Menu inicio</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i class="bi bi-person-check fs-3"></i><span class="d-inline d-md-none ms-3">Acceso a registro</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <hr class="m-0" />
+
+    <div class="d-flex layout-admin">
+      <!-- SIDEBAR -->
+      <aside class="sidebar bg-white shadow-sm border-end p-3">
+        <div class="text-center mb-4">
+          <i class="bi bi-person-circle fs-1 text-secondary"></i>
+          <p class="mb-0 fw-bold">Administrador</p>
+          <small class="text-muted">Panel de control</small>
+        </div>
+
+        <ul class="list-unstyled ps-0">
+          <li class="mb-1">
+            <button class="btn btn-toggle w-100 text-start fw-semibold" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse">
+              <i class="bi bi-speedometer2 me-2"></i> Dashboard
+            </button>
+            <div class="collapse show" id="dashboard-collapse">
+              <ul class="list-unstyled small ps-4">
+                <li><a href="admin.html" class="link-dark d-block py-1">Resumen general</a></li>
+                <li><a href="estadisticas.html" class="link-dark d-block py-1 fw-bold text-primary">Estadisticas</a></li>
+                <li><a href="alertas.html" class="link-dark d-block py-1">Alertas</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="mb-1">
+            <button class="btn btn-toggle w-100 text-start fw-semibold collapsed" data-bs-toggle="collapse" data-bs-target="#usuarios-collapse">
+              <i class="bi bi-people-fill me-2"></i>Usuarios
+            </button>
+            <div class="collapse" id="usuarios-collapse">
+              <ul class="btn-toggle-nav list-unstyled small ps-4">
+                <li><a href="#" class="link-dark d-block py-1">Clientes</a></li>
+                <li><a href="#" class="link-dark d-block py-1">Gestores</a></li>
+                <li><a href="#" class="link-dark d-block py-1">Administradores</a></li>
+                <li><a href="#" class="link-dark d-block py-1">Bloqueados</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="mb-1">
+            <button class="btn btn-toggle w-100 text-start fw-semibold collapsed" data-bs-toggle="collapse" data-bs-target="#viajes-collapse">
+              <i class="bi bi-airplane-fill me-2"></i> Paquetes
+            </button>
+            <div class="collapse" id="viajes-collapse">
+              <ul class="list-unstyled small ps-4">
+                <li><a href="admin.html" class="link-dark d-block py-1">Todos los paquetes</a></li>
+                <li><a href="#" class="link-dark d-block py-1">Crear paquete</a></li>
+                <li><a href="#" class="link-dark d-block py-1">Activos</a></li>
+                <li><a href="#" class="link-dark d-block py-1">Inactivos</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="mb-1">
+            <button class="btn btn-toggle w-100 text-start fw-semibold collapsed" data-bs-toggle="collapse" data-bs-target="#destinos-collapse">
+              <i class="bi bi-geo-alt-fill me-2"></i>Destinos
+            </button>
+            <div class="collapse" id="destinos-collapse">
+              <ul class="btn-toggle-nav list-unstyled small ps-4">
+                <li><a href="#" class="link-dark d-block py-1">España</a></li>
+                <li><a href="#" class="link-dark d-block py-1">Europa</a></li>
+                <li><a href="#" class="link-dark d-block py-1">Caribe</a></li>
+                <li><a href="#" class="link-dark d-block py-1">Asia</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="mb-1">
+            <button class="btn btn-toggle w-100 text-start fw-semibold collapsed" data-bs-toggle="collapse" data-bs-target="#reservas-collapse">
+              <i class="bi bi-journal-check me-2"></i>Reservas
+            </button>
+            <div class="collapse" id="reservas-collapse">
+              <ul class="btn-toggle-nav list-unstyled small ps-4">
+                <li><a href="#" class="link-dark d-block py-1">Pendientes</a></li>
+                <li><a href="#" class="link-dark d-block py-1">Confirmadas</a></li>
+                <li><a href="#" class="link-dark d-block py-1">Canceladas</a></li>
+                <li><a href="#" class="link-dark d-block py-1">Finalizadas</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="mb-1">
+            <button class="btn btn-toggle w-100 text-start fw-semibold collapsed" data-bs-toggle="collapse" data-bs-target="#finanzas-collapse">
+              <i class="bi bi-cash-stack me-2"></i>Finanzas
+            </button>
+            <div class="collapse" id="finanzas-collapse">
+              <ul class="btn-toggle-nav list-unstyled small ps-4">
+                <li><a href="#" class="link-dark d-block py-1">Ingresos</a></li>
+                <li><a href="#" class="link-dark d-block py-1">Pagos</a></li>
+                <li><a href="#" class="link-dark d-block py-1">Facturas</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="border-top mt-3 pt-3">
+            <a href="#" class="link-danger text-decoration-none">
+              <i class="bi bi-box-arrow-right me-2"></i> Cerrar sesion
+            </a>
+          </li>
+        </ul>
+      </aside>
+
+      <!-- CONTENIDO -->
+      <main class="contenido-admin flex-grow-1 p-4">
+        <div id="contenido">
+          <div class="text-center py-5">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Cargando...</span>
+            </div>
+            <p class="text-muted mt-2">Cargando estadisticas...</p>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="../../js/bootstrap.bundle.min.js"></script>
+    <script src="../../js/admin/sidebars.js"></script>
+    <script type="module">
+      import { obtener } from "../../js/utils/fetch.js";
+
+      document.addEventListener("DOMContentLoaded", async () => {
+        const contenido = document.getElementById("contenido");
+
+        try {
+          const data = await obtener("/api/dashboard/stats.php");
+
+          if (!data) {
+            contenido.innerHTML = `<div class="alert alert-danger text-center mt-4">Error al cargar las estadisticas.</div>`;
+            return;
+          }
+
+          const plazasTotales = data.plazas_totales || 1;
+          const plazasOcupadas = plazasTotales - data.plazas_disponibles;
+          const porcentajeOcupacion = Math.round((plazasOcupadas / plazasTotales) * 100);
+
+          contenido.innerHTML = `
+
+            <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+              <div>
+                <h2 class="fw-bold mb-0">Estadisticas</h2>
+                <small class="text-muted">Datos y metricas de tu agencia</small>
+              </div>
+            </div>
+
+            <!-- KPIs -->
+            <div class="row g-3 mb-4">
+              <div class="col-6 col-md-3">
+                <div class="card border-0 shadow-sm text-center p-3">
+                  <i class="bi bi-airplane-fill fs-2 text-primary mb-2"></i>
+                  <h3 class="fw-bold mb-0">${data.paquetes.total}</h3>
+                  <small class="text-muted">Paquetes totales</small>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="card border-0 shadow-sm text-center p-3">
+                  <i class="bi bi-people-fill fs-2 text-success mb-2"></i>
+                  <h3 class="fw-bold mb-0">${data.usuarios.total}</h3>
+                  <small class="text-muted">Usuarios</small>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="card border-0 shadow-sm text-center p-3">
+                  <i class="bi bi-journal-check fs-2 text-warning mb-2"></i>
+                  <h3 class="fw-bold mb-0">${data.reservas.total}</h3>
+                  <small class="text-muted">Reservas</small>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="card border-0 shadow-sm text-center p-3">
+                  <i class="bi bi-cash-stack fs-2 text-info mb-2"></i>
+                  <h3 class="fw-bold mb-0">${data.ingresos.toFixed(2)}&euro;</h3>
+                  <small class="text-muted">Ingresos</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- RESERVAS + OCUPACION -->
+            <div class="row g-3 mb-4">
+
+              <div class="col-12 col-lg-6">
+                <div class="card border-0 shadow-sm h-100">
+                  <div class="card-header bg-white border-0 pt-3">
+                    <h6 class="fw-bold mb-0"><i class="bi bi-bar-chart-fill me-2 text-primary"></i>Reservas por estado</h6>
+                  </div>
+                  <div class="card-body">
+                    <div class="mb-3">
+                      <div class="d-flex justify-content-between mb-1">
+                        <span class="small fw-semibold">Pendientes</span>
+                        <span class="small text-muted">${data.reservas.pendientes}</span>
+                      </div>
+                      <div class="progress" style="height:12px">
+                        <div class="progress-bar bg-warning" style="width:${data.reservas.total ? (data.reservas.pendientes / data.reservas.total * 100) : 0}%"></div>
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <div class="d-flex justify-content-between mb-1">
+                        <span class="small fw-semibold">Confirmadas</span>
+                        <span class="small text-muted">${data.reservas.confirmadas}</span>
+                      </div>
+                      <div class="progress" style="height:12px">
+                        <div class="progress-bar bg-success" style="width:${data.reservas.total ? (data.reservas.confirmadas / data.reservas.total * 100) : 0}%"></div>
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <div class="d-flex justify-content-between mb-1">
+                        <span class="small fw-semibold">Canceladas</span>
+                        <span class="small text-muted">${data.reservas.canceladas}</span>
+                      </div>
+                      <div class="progress" style="height:12px">
+                        <div class="progress-bar bg-danger" style="width:${data.reservas.total ? (data.reservas.canceladas / data.reservas.total * 100) : 0}%"></div>
+                      </div>
+                    </div>
+                    <div class="text-center mt-4 pt-2 border-top">
+                      <span class="small text-muted">Total: <strong>${data.reservas.total}</strong> reservas</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 col-lg-6">
+                <div class="card border-0 shadow-sm h-100">
+                  <div class="card-header bg-white border-0 pt-3">
+                    <h6 class="fw-bold mb-0"><i class="bi bi-pie-chart-fill me-2 text-primary"></i>Ocupacion general</h6>
+                  </div>
+                  <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                    <div class="dash-donut mb-3" style="--porcentaje:${porcentajeOcupacion}">
+                      <span class="dash-donut-value">${porcentajeOcupacion}%</span>
+                    </div>
+                    <div class="row text-center w-100">
+                      <div class="col-4">
+                        <h5 class="fw-bold text-primary mb-0">${plazasTotales}</h5>
+                        <small class="text-muted">Totales</small>
+                      </div>
+                      <div class="col-4">
+                        <h5 class="fw-bold text-success mb-0">${plazasOcupadas}</h5>
+                        <small class="text-muted">Ocupadas</small>
+                      </div>
+                      <div class="col-4">
+                        <h5 class="fw-bold text-warning mb-0">${data.plazas_disponibles}</h5>
+                        <small class="text-muted">Libres</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- PAQUETES ACTIVOS/INACTIVOS + TOP DESTINOS -->
+            <div class="row g-3 mb-4">
+
+              <div class="col-12 col-lg-6">
+                <div class="card border-0 shadow-sm h-100">
+                  <div class="card-header bg-white border-0 pt-3">
+                    <h6 class="fw-bold mb-0"><i class="bi bi-toggle-on me-2 text-primary"></i>Paquetes: activos vs inactivos</h6>
+                  </div>
+                  <div class="card-body">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                      <div class="flex-grow-1">
+                        <div class="progress" style="height:28px;border-radius:8px">
+                          <div class="progress-bar bg-success" style="width:${data.paquetes.total ? (data.paquetes.activos / data.paquetes.total * 100) : 0}%;font-size:.85rem">Activos: ${data.paquetes.activos}</div>
+                          <div class="progress-bar bg-secondary" style="width:${data.paquetes.total ? (data.paquetes.inactivos / data.paquetes.total * 100) : 0}%;font-size:.85rem">Inactivos: ${data.paquetes.inactivos}</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row text-center">
+                      <div class="col-4"><h5 class="fw-bold mb-0">${data.paquetes.total}</h5><small class="text-muted">Total</small></div>
+                      <div class="col-4"><h5 class="fw-bold text-success mb-0">${data.paquetes.activos}</h5><small class="text-muted">Activos</small></div>
+                      <div class="col-4"><h5 class="fw-bold text-secondary mb-0">${data.paquetes.inactivos}</h5><small class="text-muted">Inactivos</small></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 col-lg-6">
+                <div class="card border-0 shadow-sm h-100">
+                  <div class="card-header bg-white border-0 pt-3">
+                    <h6 class="fw-bold mb-0"><i class="bi bi-geo-alt-fill me-2 text-primary"></i>Top destinos</h6>
+                  </div>
+                  <div class="card-body">
+                    ${data.destinos_populares.length > 0
+                      ? data.destinos_populares.map((d, i) => `
+                        <div class="d-flex justify-content-between align-items-center ${i < data.destinos_populares.length - 1 ? 'mb-3 pb-3 border-bottom' : ''}">
+                          <div class="d-flex align-items-center gap-2">
+                            <span class="badge bg-primary rounded-circle dash-rank">${i + 1}</span>
+                            <span class="fw-semibold">${d.destino}</span>
+                          </div>
+                          <span class="badge bg-primary bg-opacity-10 text-primary">${d.total} paquetes</span>
+                        </div>
+                      `).join("")
+                      : '<p class="text-muted text-center mb-0">Sin datos</p>'
+                    }
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- ULTIMOS USUARIOS -->
+            <div class="row g-3">
+              <div class="col-12">
+                <div class="card border-0 shadow-sm">
+                  <div class="card-header bg-white border-0 pt-3">
+                    <h6 class="fw-bold mb-0"><i class="bi bi-person-plus-fill me-2 text-success"></i>Ultimos usuarios registrados</h6>
+                  </div>
+                  <div class="card-body p-0">
+                    <div class="table-responsive">
+                      <table class="table table-hover align-middle mb-0 text-center">
+                        <thead class="table-light">
+                          <tr><th>ID</th><th>Nombre</th><th>Email</th><th>Fecha de registro</th></tr>
+                        </thead>
+                        <tbody>
+                          ${data.ultimos_usuarios.map(u => `
+                            <tr>
+                              <td class="text-muted">${u.id}</td>
+                              <td class="fw-semibold">${u.nombre} ${u.apellidos}</td>
+                              <td class="text-muted">${u.email}</td>
+                              <td><small>${u.created_at}</small></td>
+                            </tr>
+                          `).join("")}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          `;
+
+        } catch (error) {
+          console.log(error);
+          contenido.innerHTML = '<div class="alert alert-danger text-center mt-4">Error al cargar las estadisticas.</div>';
+        }
+      });
+    </script>
+  </body>
+</html>
