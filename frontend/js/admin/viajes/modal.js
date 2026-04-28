@@ -23,7 +23,8 @@ import { mostrarDestino } from "./modalRender.js";
 
 import {
   activarPestanas,
-  activarEditar
+  activarEditar,
+  activarBorrar
 } from "./modalEventos.js";
 
 // Genera una nueva instancia del modal
@@ -65,6 +66,12 @@ export function crearModal(paquete) {
             </button>
 
             <button
+  class="btn btn-outline-danger btn-sm"
+  id="btnBorrarModal">
+  Borrar
+</button>
+
+            <button
               type="button"
               class="btn-close"
               data-bs-dismiss="modal">
@@ -91,6 +98,7 @@ export function crearModal(paquete) {
 
   activarPestanas(botones, paquete);
   activarEditar(paquete);
+  activarBorrar(paquete);
 
   mostrarDestino(paquete);
 
