@@ -413,3 +413,56 @@ function guardarOpcionales(paquete) {
   if (vuelo) paquete.vuelo_incluido = vuelo.value;
   if (playa) paquete.cerca_playa = playa.value;
 }
+
+// ===========================
+// ACTIVAR BOTÓN BORRAR
+// ===========================
+export function activarBorrar(paquete) {
+
+  const btn =
+    document.getElementById(
+      "btnBorrarModal"
+    );
+
+  if (!btn) return;
+
+  btn.onclick = async () => {
+
+    const ok =
+      confirm(
+        "¿Seguro que deseas borrar este paquete?"
+      );
+
+    if (!ok) return;
+
+    try {
+
+      await crear(
+        "/api/paquetes/delete.php",
+        { id: paquete.id }
+      );
+
+      // cerrar modal
+      document
+        .querySelector(
+          "#miModal .btn-close"
+        )
+        .click();
+
+      // recargar tabla
+      document
+        .getElementById(
+          "btnTodosPaquetes"
+        )
+        .click();
+
+    } catch (error) {
+
+      console.log(error);
+      alert("Error al borrar");
+
+    }
+
+  };
+
+}

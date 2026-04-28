@@ -14,6 +14,7 @@ Archivo centrado en interacción.
 
 import { crearModal } from "./modal.js";
 import { state } from "./viajesState.js";
+import { crear } from "../../utils/fetch.js"
 
 export function activarEventosTabla() {
 
@@ -80,5 +81,46 @@ export function activarEventosTabla() {
     };
 
   });
+
+}
+
+export function activarBorrar(paquete) {
+
+  const btn =
+    document.getElementById(
+      "btnBorrarModal"
+    );
+
+  if (!btn) return;
+
+  btn.onclick = async () => {
+
+    const ok = confirm(
+      "¿Seguro que deseas borrar este paquete?"
+    );
+
+    if (!ok) return;
+
+    const respuesta =
+      await crear(
+        "/api/paquetes/delete.php",
+        { id: paquete.id }
+      );
+
+    console.log(respuesta);
+
+    document
+      .querySelector(
+        "#miModal .btn-close"
+      )
+      .click();
+
+    document
+      .getElementById(
+        "btnTodosPaquetes"
+      )
+      .click();
+
+  };
 
 }
