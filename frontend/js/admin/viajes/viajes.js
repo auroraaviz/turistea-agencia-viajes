@@ -49,14 +49,40 @@ document.addEventListener("DOMContentLoaded", () => {
   const btn =
     document.getElementById("btnTodosPaquetes");
 
+  const btnActivos =
+    document.getElementById("btnPaquetesActivos");
+
+  const btnInactivos =
+    document.getElementById("btnPaquetesInactivos");
+
   const contenido =
     document.getElementById("contenido");
 
   if (!btn || !contenido) return;
 
-  btn.addEventListener("click", async (e) => {
+  btn.addEventListener("click", (e) => {
     e.preventDefault();
 
+    cargarPaquetes();
+  });
+
+  if (btnActivos) {
+    btnActivos.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      cargarPaquetes("1");
+    });
+  }
+
+  if (btnInactivos) {
+    btnInactivos.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      cargarPaquetes("0");
+    });
+  }
+
+  async function cargarPaquetes(estado = "") {
     contenido.innerHTML = spinner();
 
     try {
@@ -66,8 +92,17 @@ document.addEventListener("DOMContentLoaded", () => {
       state.paquetes =
         respuesta.data || respuesta;
 
+      state.estadoFijo =
+        estado;
+
+      state.vistaCompacta =
+        estado !== "";
+
+      state.porPagina =
+        state.vistaCompacta ? 12 : 8;
+
       state.listaActual =
-        state.paquetes;
+        obtenerBaseActual();
      
       state.destinos = await obtenerDestinos();  
 
@@ -81,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
       contenido.innerHTML =
         alerta("Error al cargar paquetes.");
     }
-  });
+  }
   
 // Refresca tabla según filtros actuales
   function refrescar() {
@@ -90,7 +125,20 @@ document.addEventListener("DOMContentLoaded", () => {
         state.listaActual,
         state.paginaActual,
         state.porPagina,
-        state.destinos
+        state.destinos,
+        {
+          ocultarEstado:
+            state.vistaCompacta,
+
+          ocultarFiltroEstado:
+            state.vistaCompacta,
+
+          ocultarImagen:
+            state.vistaCompacta,
+
+          titulo:
+            obtenerTituloListado()
+        }
       );
 
     activarToggleFiltros();
@@ -119,7 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         state.listaActual =
           aplicarFiltros(
-            state.paquetes,
+            obtenerBaseActual(),
             filtros
           );
 
@@ -133,12 +181,35 @@ document.addEventListener("DOMContentLoaded", () => {
       btnLimpiar.addEventListener("click", () => {
 
         state.listaActual =
-          state.paquetes;
+          obtenerBaseActual();
 
         state.paginaActual = 1;
 
         refrescar();
       });
     }
+  }
+
+  function obtenerBaseActual() {
+    if (state.estadoFijo === "") {
+      return state.paquetes;
+    }
+
+    return state.paquetes.filter(
+      (paquete) =>
+        String(paquete.activo) === state.estadoFijo
+    );
+  }
+
+  function obtenerTituloListado() {
+    if (state.estadoFijo === "1") {
+      return "Paquetes activos";
+    }
+
+    if (state.estadoFijo === "0") {
+      return "Paquetes inactivos";
+    }
+
+    return "Gestión de paquetes";
   }
 });

@@ -270,9 +270,22 @@ export function mostrarCategoria(paquete) {
 
   cont.innerHTML = `
 
-<div>
-    <h1 class="text-bg-secondary text-center">Mostrando categoria</h1>
-</div>
+    <div class="row g-4">
+
+      <div class="col-md-12">
+
+        <h3 class="fw-bold mb-4">
+          Categoría
+        </h3>
+
+        <p>
+          <strong>Categoría:</strong>
+          ${paquete.categoria || "Sin categoría"}
+        </p>
+
+      </div>
+
+    </div>
 
   `;
 }
@@ -289,9 +302,43 @@ export function mostrarOpcionales(paquete) {
 
   cont.innerHTML = `
 
-<div>
-    <h1 class="text-bg-secondary text-center">Mostrando opcionales</h1>
-</div>
+    <div class="row g-4">
+
+      <div class="col-md-12">
+
+        <h3 class="fw-bold mb-4">
+          Opcionales
+        </h3>
+
+        <p>
+          <strong>Avión:</strong>
+          ${paquete.vuelo_incluido == 1 ? "Sí" : "No"}
+        </p>
+
+        ${
+          paquete.vuelo_incluido == 1
+          ? `
+            <p>
+              <strong>Salida desde:</strong>
+              ${paquete.salida_desde || "Sin indicar"}
+            </p>
+          `
+          : ""
+        }
+
+        <p>
+          <strong>Cerca de la playa:</strong>
+          ${paquete.cerca_playa == 1 ? "Sí" : "No"}
+        </p>
+
+        <p>
+          <strong>Categoría:</strong>
+          ${paquete.categoria || "Sin categoría"}
+        </p>
+
+      </div>
+
+    </div>
 
   `;
 }

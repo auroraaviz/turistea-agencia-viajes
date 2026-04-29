@@ -19,5 +19,7 @@ export const state = {
     destinos: [],
     listaActual: [],
     paginaActual: 1,
-    porPagina: 8
+    porPagina: 8,
+    estadoFijo: "",
+    vistaCompacta: false
 };

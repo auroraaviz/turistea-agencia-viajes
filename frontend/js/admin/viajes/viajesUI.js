@@ -27,17 +27,25 @@ export function activarToggleFiltros() {
   if (!btn || !panel) return;
 
   btn.addEventListener("click", () => {
-    panel.classList.toggle("d-none");
+    panel.classList.toggle("panel-filtros-abierto");
+
+    const abierto =
+      panel.classList.contains("panel-filtros-abierto");
+
+    panel.setAttribute(
+      "aria-hidden",
+      abierto ? "false" : "true"
+    );
 
     btn.innerHTML =
-      panel.classList.contains("d-none")
+      abierto
         ? `
-          <i class="bi bi-funnel-fill me-2"></i>
-          Mostrar filtros
-        `
-        : `
           <i class="bi bi-x-circle me-2"></i>
           Ocultar filtros
+        `
+        : `
+          <i class="bi bi-funnel-fill me-2"></i>
+          Mostrar filtros
         `;
   });
 }

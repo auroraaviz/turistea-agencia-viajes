@@ -66,47 +66,111 @@ function abrirModalCrear() {
 
       <div class="modal-content">
 
-        <div class="modal-header">
+        <div class="modal-header justify-content-between flex-wrap gap-2">
 
-          <h5 class="modal-title">
-            Nuevo paquete
-          </h5>
+          <div class="btn-group flex-wrap">
+            <a href="#" class="btn btn-primary active" data-seccion="destino">Destino</a>
+            <a href="#" class="btn btn-primary" data-seccion="hotel">Hotel</a>
+            <a href="#" class="btn btn-primary" data-seccion="fechas">Fechas</a>
+            <a href="#" class="btn btn-primary" data-seccion="precio">Precio</a>
+            <a href="#" class="btn btn-primary" data-seccion="categoria">Categoría</a>
+            <a href="#" class="btn btn-primary" data-seccion="opcionales">Opcionales</a>
+          </div>
 
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal">
-          </button>
+          <div class="d-flex align-items-center gap-2 ms-auto">
+            <span class="fw-semibold text-primary">
+              Nuevo paquete
+            </span>
+
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal">
+            </button>
+          </div>
 
         </div>
 
 
-        <div class="modal-body">
+        <div
+          class="modal-body overflow-auto"
+          style="min-height:200px;">
 
-          <div class="row g-3">
+          <div class="crear-seccion" data-seccion="destino">
 
-            <div class="col-12 col-md-6">
-              <label class="form-label">
-                Título
-              </label>
+            <div class="row g-4">
 
-              <input
-                type="text"
-                class="form-control"
-                id="crearTitulo">
+              <div class="col-md-5">
+                <div
+                  class="bg-light rounded shadow-sm d-flex align-items-center justify-content-center mb-3"
+                  style="height:220px;">
+                  <i class="bi bi-image fs-1 text-primary"></i>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label fw-semibold">
+                    Imagen paquete
+                  </label>
+
+                  <input
+                    type="file"
+                    class="form-control"
+                    id="crearImagen"
+                    accept="image/*">
+                </div>
+              </div>
+
+              <div class="col-md-7">
+
+                <div class="mb-3">
+                  <label class="form-label fw-semibold">
+                    Título
+                  </label>
+
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="crearTitulo">
+                </div>
+
+
+                <div class="mb-3">
+                  <label class="form-label fw-semibold">
+                    Destino
+                  </label>
+
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="crearDestino">
+                </div>
+
+
+                <div class="mb-3">
+                  <label class="form-label fw-semibold">
+                    Descripción
+                  </label>
+
+                  <textarea
+                    class="form-control"
+                    id="crearDescripcion"
+                    rows="5"></textarea>
+                </div>
+
+              </div>
+
             </div>
 
+          </div>
 
-            <div class="col-12 col-md-6">
-              <label class="form-label">
-                Destino
-              </label>
 
-              <input
-                type="text"
-                class="form-control"
-                id="crearDestino">
-            </div>
+          <div class="crear-seccion d-none" data-seccion="precio">
+
+            <h3 class="fw-bold mb-4">
+              Precio y plazas
+            </h3>
+
+            <div class="row g-3">
 
 
             <div class="col-12 col-md-6">
@@ -116,6 +180,7 @@ function abrirModalCrear() {
 
               <input
                 type="number"
+                step="0.01"
                 class="form-control"
                 id="crearPrecio">
             </div>
@@ -123,31 +188,54 @@ function abrirModalCrear() {
 
             <div class="col-12 col-md-6">
               <label class="form-label">
-                Categoría
+                Descuento
               </label>
 
-              <select
-                class="form-select"
-                id="crearCategoria">
-
-                <option value="vacaciones">
-                  Vacaciones
-                </option>
-
-                <option value="vuelo">
-                  Vuelo
-                </option>
-
-                <option value="fin_de_semana">
-                  Fin de semana
-                </option>
-
-                <option value="verano">
-                  Verano
-                </option>
-
-              </select>
+              <input
+                type="number"
+                step="0.01"
+                class="form-control"
+                id="crearDescuento"
+                value="0">
             </div>
+
+            <div class="col-12 col-md-6">
+              <label class="form-label">
+                Plazas totales
+              </label>
+
+              <input
+                type="number"
+                class="form-control"
+                id="crearTotales"
+                value="10">
+            </div>
+
+
+            <div class="col-12 col-md-6">
+              <label class="form-label">
+                Plazas disponibles
+              </label>
+
+              <input
+                type="number"
+                class="form-control"
+                id="crearDisponibles"
+                value="10">
+            </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="crear-seccion d-none" data-seccion="fechas">
+
+            <h3 class="fw-bold mb-4">
+              Fechas y salida
+            </h3>
+
+            <div class="row g-3">
 
 
             <div class="col-12 col-md-6">
@@ -176,51 +264,210 @@ function abrirModalCrear() {
 
             <div class="col-12 col-md-6">
               <label class="form-label">
-                Plazas totales
+                Vuelo incluido
               </label>
 
-              <input
-                type="number"
-                class="form-control"
-                id="crearTotales"
-                value="10">
+              <select
+                class="form-select"
+                id="crearVueloIncluido">
+
+                <option value="0">
+                  No
+                </option>
+
+                <option value="1">
+                  Sí
+                </option>
+
+              </select>
             </div>
 
 
             <div class="col-12 col-md-6">
               <label class="form-label">
-                Plazas disponibles
+                Salida desde
               </label>
 
               <input
-                type="number"
+                type="text"
                 class="form-control"
-                id="crearDisponibles"
-                value="10">
+                id="crearSalidaDesde">
             </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="crear-seccion d-none" data-seccion="opcionales">
+
+            <h3 class="fw-bold mb-4">
+              Opcionales
+            </h3>
+
+            <div class="row g-3">
 
 
             <div class="col-12 col-md-6">
               <label class="form-label">
-                Imagen paquete
+                Cerca de playa
               </label>
 
-              <input
-                type="file"
-                class="form-control"
-                id="crearImagen">
-            </div>
+              <select
+                class="form-select"
+                id="crearCercaPlaya">
 
+                <option value="0">
+                  No
+                </option>
+
+                <option value="1">
+                  Sí
+                </option>
+
+              </select>
+            </div>
 
             <div class="col-12 col-md-6">
               <label class="form-label">
-                Imagen hotel
+                Activo
               </label>
 
-              <input
-                type="file"
-                class="form-control"
-                id="crearHotelImagen">
+              <select
+                class="form-select"
+                id="crearActivo">
+
+                <option value="1">
+                  Sí
+                </option>
+
+                <option value="0">
+                  No
+                </option>
+
+              </select>
+            </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="crear-seccion d-none" data-seccion="hotel">
+
+            <div class="row g-4">
+
+              <div class="col-md-5">
+                <div
+                  class="bg-light rounded shadow-sm d-flex align-items-center justify-content-center mb-3"
+                  style="height:220px;">
+                  <i class="bi bi-building fs-1 text-primary"></i>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label fw-semibold">
+                    Imagen hotel
+                  </label>
+
+                  <input
+                    type="file"
+                    class="form-control"
+                    id="crearHotelImagen"
+                    accept="image/*">
+                </div>
+              </div>
+
+              <div class="col-md-7">
+
+                <div class="mb-3">
+                  <label class="form-label fw-semibold">
+                    Nombre hotel
+                  </label>
+
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="crearHotelNombre">
+                </div>
+
+
+                <div class="mb-3">
+                  <label class="form-label fw-semibold">
+                    Estrellas hotel
+                  </label>
+
+                  <input
+                    type="number"
+                    min="1"
+                    max="5"
+                    class="form-control"
+                    id="crearHotelEstrellas"
+                    value="3">
+                </div>
+
+
+                <div class="mb-3">
+                  <label class="form-label fw-semibold">
+                    Régimen hotel
+                  </label>
+
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="crearHotelRegimen">
+                </div>
+
+
+                <div class="mb-3">
+                  <label class="form-label fw-semibold">
+                    Detalles hotel
+                  </label>
+
+                  <textarea
+                    class="form-control"
+                    id="crearHotelDetalles"
+                    rows="4"></textarea>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="crear-seccion d-none" data-seccion="categoria">
+
+            <h3 class="fw-bold mb-4">
+              Categoría
+            </h3>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">
+                Categoría
+              </label>
+
+              <select
+                class="form-select"
+                id="crearCategoria">
+
+                <option value="vacaciones">
+                  Vacaciones
+                </option>
+
+                <option value="vuelo">
+                  Vuelo
+                </option>
+
+                <option value="fin_de_semana">
+                  Fin de semana
+                </option>
+
+                <option value="verano">
+                  Verano
+                </option>
+
+              </select>
             </div>
 
           </div>
@@ -259,6 +506,9 @@ function abrirModalCrear() {
     html
   );
 
+// Activa pestañas del modal crear
+  activarPestanasCrear();
+
 // Inicializa Bootstrap modal
   const modal =
     new bootstrap.Modal(
@@ -272,6 +522,52 @@ function abrirModalCrear() {
 
 // Activa botón guardar
   activarGuardar(modal);
+
+}
+
+// =========================================
+// PESTAÑAS MODAL CREAR
+// =========================================
+// Muestra cada bloque del formulario
+function activarPestanasCrear() {
+
+  const botones =
+    document.querySelectorAll(
+      "#modalCrearPaquete .btn-group .btn"
+    );
+
+  const secciones =
+    document.querySelectorAll(
+      "#modalCrearPaquete .crear-seccion"
+    );
+
+  botones.forEach((boton) => {
+
+    boton.onclick = (e) => {
+
+      e.preventDefault();
+
+      const seccion =
+        boton.dataset.seccion;
+
+      botones.forEach((b) =>
+        b.classList.remove("active")
+      );
+
+      boton.classList.add("active");
+
+      secciones.forEach((bloque) => {
+
+        bloque.classList.toggle(
+          "d-none",
+          bloque.dataset.seccion !== seccion
+        );
+
+      });
+
+    };
+
+  });
 
 }
 
@@ -300,7 +596,10 @@ function activarGuardar(modal) {
           "crearDestino"
         ).value,
 
-      descripcion: "",
+      descripcion:
+        document.getElementById(
+          "crearDescripcion"
+        ).value,
 
       imagen:
         obtenerRutaImagen(
@@ -309,13 +608,25 @@ function activarGuardar(modal) {
           "assets/img/"
         ),
 
-      hotel_nombre: "",
+      hotel_nombre:
+        document.getElementById(
+          "crearHotelNombre"
+        ).value,
 
-      hotel_estrellas: 3,
+      hotel_estrellas:
+        document.getElementById(
+          "crearHotelEstrellas"
+        ).value,
 
-      hotel_regimen: "",
+      hotel_regimen:
+        document.getElementById(
+          "crearHotelRegimen"
+        ).value,
 
-      hotel_detalles: "",
+      hotel_detalles:
+        document.getElementById(
+          "crearHotelDetalles"
+        ).value,
 
       hotel_imagen:
         obtenerRutaImagen(
@@ -339,7 +650,10 @@ function activarGuardar(modal) {
           "crearPrecio"
         ).value,
 
-      descuento: 0,
+      descuento:
+        document.getElementById(
+          "crearDescuento"
+        ).value,
 
       plazas_totales:
         document.getElementById(
@@ -351,13 +665,25 @@ function activarGuardar(modal) {
           "crearDisponibles"
         ).value,
 
-      activo: 1,
+      activo:
+        document.getElementById(
+          "crearActivo"
+        ).value,
 
-      vuelo_incluido: 0,
+      vuelo_incluido:
+        document.getElementById(
+          "crearVueloIncluido"
+        ).value,
 
-      salida_desde: "",
+      salida_desde:
+        document.getElementById(
+          "crearSalidaDesde"
+        ).value,
 
-      cerca_playa: 0,
+      cerca_playa:
+        document.getElementById(
+          "crearCercaPlaya"
+        ).value,
 
       categoria:
         document.getElementById(

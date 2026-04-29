@@ -422,6 +422,36 @@ export function mostrarFormularioOpcionales(paquete) {
           </select>
         </div>
 
+        <div class="mb-3">
+          <label class="form-label fw-semibold">
+            Categoría
+          </label>
+
+          <select id="editOpcionalCategoria" class="form-select">
+
+            <option value="vuelo"
+              ${paquete.categoria === "vuelo" ? "selected" : ""}>
+              Vuelo
+            </option>
+
+            <option value="vacaciones"
+              ${paquete.categoria === "vacaciones" ? "selected" : ""}>
+              Vacaciones
+            </option>
+
+            <option value="fin_de_semana"
+              ${paquete.categoria === "fin_de_semana" ? "selected" : ""}>
+              Fin de semana
+            </option>
+
+            <option value="verano"
+              ${paquete.categoria === "verano" ? "selected" : ""}>
+              Verano
+            </option>
+
+          </select>
+        </div>
+
       </div>
     </div>
   `;

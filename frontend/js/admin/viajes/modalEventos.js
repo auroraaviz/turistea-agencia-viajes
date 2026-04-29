@@ -410,8 +410,12 @@ function guardarOpcionales(paquete) {
   const playa =
     document.getElementById("editOpcionalPlaya");
 
+  const categoria =
+    document.getElementById("editOpcionalCategoria");
+
   if (vuelo) paquete.vuelo_incluido = vuelo.value;
   if (playa) paquete.cerca_playa = playa.value;
+  if (categoria) paquete.categoria = categoria.value;
 }
 
 // ===========================

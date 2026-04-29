@@ -17,7 +17,19 @@ No consulta API directamente.
 import { obtenerImagen, badgeEstado, textoEstado } from './helpers.js';
 
 
-export function renderTabla(lista, paginaActual, porPagina, destinos) {
+export function renderTabla(lista, paginaActual, porPagina, destinos, opciones = {}) {
+  const mostrarEstado =
+    !opciones.ocultarEstado;
+
+  const mostrarFiltroEstado =
+    !opciones.ocultarFiltroEstado;
+
+  const mostrarImagen =
+    !opciones.ocultarImagen;
+
+  const titulo =
+    opciones.titulo || "Gestión de paquetes";
+
   const totalPaginas = Math.ceil(lista.length / porPagina) || 1;
 
   const inicio = (paginaActual - 1) * porPagina;
@@ -31,7 +43,7 @@ export function renderTabla(lista, paginaActual, porPagina, destinos) {
 
       <div>
         <h2 class="fw-bold mb-0">
-          Gestión de paquetes
+          ${titulo}
         </h2>
 
         <small class="text-muted">
@@ -51,7 +63,8 @@ export function renderTabla(lista, paginaActual, porPagina, destinos) {
 
     <div
       id="panelFiltros"
-      class="shadow-sm border-0 mb-4 d-none"
+      class="panel-filtros shadow-sm border-0 mb-4"
+      aria-hidden="true"
     >
 
       <div class="card-body">
@@ -84,26 +97,32 @@ export function renderTabla(lista, paginaActual, porPagina, destinos) {
             >
           </div>
 
-          <div class="col-12 col-md-3">
-            <label class="form-label fw-semibold">
-              Estado
-            </label>
+          ${
+            mostrarFiltroEstado
+            ? `
+              <div class="col-12 col-md-3">
+                <label class="form-label fw-semibold">
+                  Estado
+                </label>
 
-            <select
-              class="form-select"
-              id="filtroEstado"
-            >
-              <option value="">
-                Todos
-              </option>
-              <option value="1">
-                Activo
-              </option>
-              <option value="0">
-                Inactivo
-              </option>
-            </select>
-          </div>
+                <select
+                  class="form-select"
+                  id="filtroEstado"
+                >
+                  <option value="">
+                    Todos
+                  </option>
+                  <option value="1">
+                    Activo
+                  </option>
+                  <option value="0">
+                    Inactivo
+                  </option>
+                </select>
+              </div>
+            `
+            : ""
+          }
 
           <div class="col-12 col-md-3">
             <label class="form-label fw-semibold">
@@ -159,7 +178,7 @@ export function renderTabla(lista, paginaActual, porPagina, destinos) {
         <thead class="table-light">
           <tr>
             <th>ID</th>
-            <th>Imagen</th>
+            ${mostrarImagen ? "<th>Imagen</th>" : ""}
             <th>Título</th>
             <th>Destino</th>
             <th>Fecha de salida</th>
@@ -167,7 +186,7 @@ export function renderTabla(lista, paginaActual, porPagina, destinos) {
             <th>Precio</th>
             <th>Plazas disponibles</th>
             <th>Plazas totales</th>
-            <th>Estado</th>
+            ${mostrarEstado ? "<th>Estado</th>" : ""}
           </tr>
         </thead>
 
@@ -182,13 +201,19 @@ export function renderTabla(lista, paginaActual, porPagina, destinos) {
           ${p.id}
         </td>
 
-        <td>
-          <img
-            src="${obtenerImagen(p)}"
-            alt="${p.titulo}"
-            style="max-width:100px;height:60px;object-fit:cover;border-radius:10px;"
-          >
-        </td>
+        ${
+          mostrarImagen
+          ? `
+            <td>
+              <img
+                src="${obtenerImagen(p)}"
+                alt="${p.titulo}"
+                style="max-width:100px;height:60px;object-fit:cover;border-radius:10px;"
+              >
+            </td>
+          `
+          : ""
+        }
 
         <td class="fw-semibold">
           ${p.titulo}
@@ -218,11 +243,17 @@ export function renderTabla(lista, paginaActual, porPagina, destinos) {
           ${p.plazas_totales ?? '-'}
         </td>
 
-        <td>
-          <span class="badge ${badgeEstado(p.activo)}">
-            ${textoEstado(p.activo)}
-          </span>
-        </td>
+        ${
+          mostrarEstado
+          ? `
+            <td>
+              <span class="badge ${badgeEstado(p.activo)}">
+                ${textoEstado(p.activo)}
+              </span>
+            </td>
+          `
+          : ""
+        }
       </tr>
     `;
   });
@@ -245,15 +276,29 @@ export function renderTabla(lista, paginaActual, porPagina, destinos) {
         <div class="card shadow-sm fila-paquete" data-id="${p.id}" style="cursor:pointer;">
           <div class="card-body p-3">
             <div class="d-flex gap-3 align-items-center">
-              <img
-                src="${obtenerImagen(p)}"
-                alt="${p.titulo}"
-                style="width:70px;height:50px;object-fit:cover;border-radius:8px;flex-shrink:0;"
-              >
+              ${
+                mostrarImagen
+                ? `
+                  <img
+                    src="${obtenerImagen(p)}"
+                    alt="${p.titulo}"
+                    style="width:70px;height:50px;object-fit:cover;border-radius:8px;flex-shrink:0;"
+                  >
+                `
+                : ""
+              }
               <div class="flex-grow-1 min-width-0">
                 <div class="d-flex justify-content-between align-items-start">
                   <h6 class="fw-semibold mb-1 text-truncate">${p.titulo}</h6>
-                  <span class="badge ${badgeEstado(p.activo)} ms-2 flex-shrink-0">${textoEstado(p.activo)}</span>
+                  ${
+                    mostrarEstado
+                    ? `
+                      <span class="badge ${badgeEstado(p.activo)} ms-2 flex-shrink-0">
+                        ${textoEstado(p.activo)}
+                      </span>
+                    `
+                    : ""
+                  }
                 </div>
                 <small class="text-muted d-block">${p.destino} · ${p.fecha_salida}</small>
                 <div class="d-flex justify-content-between align-items-center mt-1">
