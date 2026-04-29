@@ -4,13 +4,12 @@ html {
 }
 
 .contenido-admin {
+  display: block !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow-x: visible !important;
+  overflow-y: visible !important;
   scrollbar-gutter: stable;
-}
-
-@media (min-width: 992px) {
-  .contenido-admin {
-    overflow-y: scroll !important;
-  }
 }
 
 .table-hover > tbody > tr:hover > * {

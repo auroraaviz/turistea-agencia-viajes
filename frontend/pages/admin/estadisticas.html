@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../../../frontend/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../../../frontend/css/bootstrap-icons.css" />
     <link rel="stylesheet" href="../../../frontend/css/header.css" />
+    <link rel="stylesheet" href="../../css/footer.css" />
     <link rel="stylesheet" href="../../css/admin/dashboard.css" />
     <link rel="stylesheet" href="../../css/sidebars.css" />
 
@@ -18,11 +19,17 @@
 
     <style>
       html, body { height: 100%; margin: 0; }
-      .layout-admin { height: calc(100vh - 74px); }
+      .layout-admin { min-height: 0; }
       .sidebar-admin { width: 270px; flex-shrink: 0; overflow-y: auto; }
-      .contenido-admin { height: 100%; overflow-y: auto; min-width: 0; }
+      .contenido-admin {
+        display: block !important;
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+        min-width: 0;
+      }
       #contenido { width: 70%; }
-      @media (min-width: 992px) { body { overflow: hidden; } }
+      @media (min-width: 992px) { body { overflow: auto; } }
       @media (max-width: 991.98px) {
         #contenido { width: 100%; }
         body { overflow: auto; }
@@ -179,9 +186,85 @@
       </main>
     </div>
 
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-body">
+        <div class="container py-5">
+          <div class="row">
+            <div class="col-12 col-md-10 offset-md-1">
+              <div class="row g-4 mb-5">
+                <div class="col-12 col-md-4 text-center text-md-start">
+                  <img
+                    src="../../assets/img/Turistea_Logo/logo_sinfondo.png"
+                    alt="Turistea"
+                    class="footer-logo d-block mx-auto mx-md-0 mb-2"
+                  />
+                  <p class="footer-desc mb-0">
+                    Elige destino y disfruta.<br>
+                    Nosotros nos encargamos del resto.
+                  </p>
+                </div>
+
+                <div class="col-12 col-md-4 text-center text-md-start">
+                  <p class="footer-heading">Datos de Contacto</p>
+                  <ul class="footer-list">
+                    <li>
+                      <i class="bi bi-geo-alt-fill footer-icon"></i>
+                      Calle Viajeros s/n, 28001 Madrid
+                    </li>
+                    <li>
+                      <i class="bi bi-telephone-fill footer-icon"></i>
+                      <a href="tel:+34900000000">+34 900 000 000</a>
+                    </li>
+                    <li>
+                      <i class="bi bi-envelope-fill footer-icon"></i>
+                      <a href="mailto:turistea@test.com">turistea@test.com</a>
+                    </li>
+                    <li>
+                      <i class="bi bi-clock-fill footer-icon"></i>
+                      Lun – Vie: 09:00 – 20:00
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="col-12 col-md-4 text-center text-md-start">
+                  <p class="footer-heading">Información Legal</p>
+                  <ul class="footer-list">
+                    <li><a href="../aviso-legal.html">Aviso legal</a></li>
+                    <li><a href="../politica.html">Política de privacidad</a></li>
+                    <li><a href="../condiciones.html">Términos y condiciones</a></li>
+                  </ul>
+                </div>
+              </div>
+
+              <hr class="footer-hr mb-4"/>
+
+              <div class="d-flex justify-content-center gap-3 mb-4">
+                <a href="https://www.instagram.com/_turistea_/" class="social-icon" aria-label="Instagram">
+                  <i class="bi bi-instagram"></i>
+                </a>
+                <a href="https://x.com/turistea_" class="social-icon" aria-label="X">
+                  <i class="bi bi-twitter-x"></i>
+                </a>
+              </div>
+
+              <p class="footer-copy mb-0">
+                &copy; <span id="footer-year"></span> Turistea · Todos los derechos reservados
+                &nbsp;·&nbsp;
+                Hecho con <i class="bi bi-heart-fill" style="color:#FF6B6B"></i> para viajeros
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
     <script src="../../js/bootstrap.bundle.min.js"></script>
     <script src="../../js/admin/sidebars.js"></script>
     <script type="module" src="../../js/admin/guardAdmin.js"></script>
+    <script>
+      document.getElementById("footer-year").textContent = new Date().getFullYear();
+    </script>
     <script type="module">
       import { obtener } from "../../js/utils/fetch.js";
 
