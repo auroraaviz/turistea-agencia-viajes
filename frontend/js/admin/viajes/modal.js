@@ -44,12 +44,12 @@ export function crearModal(paquete) {
 // del modal con pestañas y botón editar
   let html = `
   <div class="modal fade" id="miModal" tabindex="-1">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
 
-        <div class="modal-header justify-content-between">
+        <div class="modal-header justify-content-between flex-wrap gap-2">
 
-          <div class="btn-group">
+          <div class="btn-group flex-wrap">
             <a href="#" class="btn btn-primary active" data-seccion="destino">Destino</a>
             <a href="#" class="btn btn-primary" data-seccion="hotel">Hotel</a>
             <a href="#" class="btn btn-primary" data-seccion="fechas">Fechas</a>
@@ -83,7 +83,7 @@ export function crearModal(paquete) {
         <div
           class="modal-body overflow-auto"
           id="contenidoModal"
-          style="height:400px;">
+          style="min-height:200px;">
         </div>
 
       </div>

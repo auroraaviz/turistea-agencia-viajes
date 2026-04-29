@@ -151,7 +151,8 @@ export function renderTabla(lista, paginaActual, porPagina, destinos) {
 
     </div>
 
-    <div class="table-responsive shadow-sm rounded bg-white">
+    <!-- VISTA TABLA (desktop) -->
+    <div class="d-none d-md-block table-responsive shadow-sm rounded bg-white">
 
       <table class="table table-hover align-middle mb-0 text-center">
 
@@ -166,7 +167,7 @@ export function renderTabla(lista, paginaActual, porPagina, destinos) {
             <th>Precio</th>
             <th>Plazas disponibles</th>
             <th>Plazas totales</th>
-            <th>Estado</th>            
+            <th>Estado</th>
           </tr>
         </thead>
 
@@ -185,7 +186,7 @@ export function renderTabla(lista, paginaActual, porPagina, destinos) {
           <img
             src="${obtenerImagen(p)}"
             alt="${p.titulo}"
-            style="width:100px;height:60px;object-fit:cover;border-radius:10px;"
+            style="max-width:100px;height:60px;object-fit:cover;border-radius:10px;"
           >
         </td>
 
@@ -231,6 +232,44 @@ export function renderTabla(lista, paginaActual, porPagina, destinos) {
 
       </table>
 
+    </div>
+
+    <!-- VISTA CARDS (móvil) -->
+    <div class="d-md-none">
+      <div class="row g-2">
+  `;
+
+  visibles.forEach((p) => {
+    html += `
+      <div class="col-12">
+        <div class="card shadow-sm fila-paquete" data-id="${p.id}" style="cursor:pointer;">
+          <div class="card-body p-3">
+            <div class="d-flex gap-3 align-items-center">
+              <img
+                src="${obtenerImagen(p)}"
+                alt="${p.titulo}"
+                style="width:70px;height:50px;object-fit:cover;border-radius:8px;flex-shrink:0;"
+              >
+              <div class="flex-grow-1 min-width-0">
+                <div class="d-flex justify-content-between align-items-start">
+                  <h6 class="fw-semibold mb-1 text-truncate">${p.titulo}</h6>
+                  <span class="badge ${badgeEstado(p.activo)} ms-2 flex-shrink-0">${textoEstado(p.activo)}</span>
+                </div>
+                <small class="text-muted d-block">${p.destino} · ${p.fecha_salida}</small>
+                <div class="d-flex justify-content-between align-items-center mt-1">
+                  <span class="fw-bold text-primary">${p.precio}€</span>
+                  <small class="text-muted">${p.plazas_disponibles ?? '-'}/${p.plazas_totales ?? '-'} plazas</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
+  html += `
+      </div>
     </div>
   `;
 

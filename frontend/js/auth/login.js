@@ -10,6 +10,7 @@ document.getElementById("formLogin").addEventListener("submit", async (e) => {
     const respuesta = await fetch(BASE + "/api/auth/login.php", {
       method: "POST",
       body: datos,
+      credentials: "include",
     });
 
     const texto = await respuesta.text();

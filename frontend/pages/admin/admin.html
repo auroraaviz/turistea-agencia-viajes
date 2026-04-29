@@ -22,23 +22,44 @@
       body {
         height: 100%;
         margin: 0;
-        overflow: hidden;
       }
 
       .layout-admin {
-        height: calc(100vh - 73px);
+        height: calc(100vh - 74px);
       }
 
-      .sidebar {
-        width: 240px;
-        height: 100%;
-        overflow-y: auto;
+      .sidebar-admin {
+        width: 270px;
         flex-shrink: 0;
+        overflow-y: auto;
       }
 
       .contenido-admin {
         height: 100%;
         overflow-y: auto;
+        min-width: 0;
+      }
+
+      #contenido {
+        width: 70%;
+      }
+
+      @media (max-width: 991.98px) {
+        #contenido { width: 100%; }
+      }
+
+      /* Desktop: lock scroll to content area */
+      @media (min-width: 992px) {
+        body { overflow: hidden; }
+      }
+
+      /* Mobile: normal page scroll */
+      @media (max-width: 991.98px) {
+        body { overflow: auto; }
+        .layout-admin {
+          height: auto;
+          min-height: calc(100vh - 74px);
+        }
       }
     </style>
   </head>
@@ -46,8 +67,8 @@
   <body>
     <header>
       <!-- NAVBAR -->
-      <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary shadow-sm py-0">
-        <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-0">
+        <div class="container-fluid px-3 px-lg-5">
           <!-- LOGO -->
           <a class="navbar-brand" href="#">
             <img
@@ -57,38 +78,28 @@
             />
           </a>
 
-          <!-- BOTÓN MÓVIL -->
+          <!-- BOTÓN SIDEBAR MÓVIL -->
           <button
-            class="navbar-toggler"
+            class="btn d-lg-none border-0 me-2 order-first"
             type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#sidebarAdmin"
+            aria-label="Abrir menú"
           >
-            <span class="navbar-toggler-icon"></span>
+            <i class="bi bi-list fs-3"></i>
           </button>
 
           <!-- MENÚ -->
-          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav">
+          <div class="d-flex align-items-center ms-auto">
+            <ul class="navbar-nav flex-row gap-2">
               <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <i class="bi bi-search fs-3"></i>
-                  <span class="d-inline d-md-none ms-3"> Buscar </span>
-                </a>
+                <a class="nav-link" href="#"><i class="bi bi-search fs-3"></i></a>
               </li>
-
               <li class="nav-item">
-                <a class="nav-link" href="../../../index.html">
-                  <i class="bi bi-house fs-3"></i>
-                  <span class="d-inline d-md-none ms-3"> Menú inicio </span>
-                </a>
+                <a class="nav-link" href="../../../index.html"><i class="bi bi-house fs-3"></i></a>
               </li>
-
               <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <i class="bi bi-person-check fs-3"></i>
-                  <span class="d-inline d-md-none ms-3"> Acceso a registro </span>
-                </a>
+                <a class="nav-link" href="#"><i class="bi bi-person-check fs-3"></i></a>
               </li>
             </ul>
           </div>
@@ -100,8 +111,13 @@
 
     <!-- LAYOUT -->
     <div class="d-flex layout-admin">
-      <!-- SIDEBAR -->
-      <aside class="sidebar bg-white shadow-sm border-end p-3">
+      <!-- SIDEBAR (offcanvas en móvil, inline en desktop) -->
+      <aside class="offcanvas-lg offcanvas-start sidebar-admin bg-white shadow-sm border-end" id="sidebarAdmin" tabindex="-1">
+        <div class="offcanvas-header d-lg-none border-bottom">
+          <h5 class="offcanvas-title fw-bold">Panel de control</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarAdmin"></button>
+        </div>
+        <div class="offcanvas-body d-block p-3 overflow-auto">
         <!-- PERFIL -->
         <div class="text-center mb-4">
           <i class="bi bi-person-circle fs-1 text-secondary"></i>
@@ -182,10 +198,11 @@
             </a>
           </li>
         </ul>
+        </div><!-- /offcanvas-body -->
       </aside>
 
       <!-- CONTENIDO -->
-      <main class="contenido-admin flex-grow-1 p-4">
+      <main class="contenido-admin flex-grow-1 p-2 p-sm-3 p-lg-3 p-xxl-4">
         <div id="contenido">
           <!-- Aquí carga JS -->
           <div class="text-center text-muted mt-5">
@@ -203,6 +220,7 @@
 
     <script src="../../js/bootstrap.bundle.min.js"></script>
     <script src="../../js/admin/sidebars.js"></script>
+    <script type="module" src="../../js/admin/guardAdmin.js"></script>
     <script type="module" src="../../js/admin/viajes/viajes.js"></script>
     <script type="module" src="../../js/admin/dashboard/dashboard.js"></script>
     <script type="module" src="../../js/admin/viajes/crearPaquete.js"></script>

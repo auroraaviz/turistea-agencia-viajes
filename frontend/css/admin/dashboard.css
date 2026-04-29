@@ -26,6 +26,7 @@
   align-items: center;
   gap: 16px;
   min-height: 110px;
+  width: 100%;
 }
 
 .dash-card-icon {
@@ -124,4 +125,123 @@
   font-size: 1.5rem;
   font-weight: 700;
   color: #0077b6;
+}
+
+/* ========== RESPONSIVE ========== */
+
+/* Tablets y pantallas medianas */
+@media (max-width: 767.98px) {
+  .dash-banner {
+    padding: 20px 18px;
+    border-radius: 12px;
+  }
+
+  .dash-card {
+    padding: 14px 12px;
+    min-height: auto;
+    gap: 10px;
+  }
+
+  .dash-card-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  .dash-card-value {
+    font-size: 1.15rem;
+  }
+
+  .dash-card-label {
+    font-size: 0.7rem;
+  }
+
+  .dash-card-body small {
+    font-size: 0.68rem;
+  }
+
+  .dash-bar-group {
+    min-width: 55px;
+  }
+
+  .dash-bar {
+    width: 32px;
+  }
+}
+
+/* Móviles pequeños */
+@media (max-width: 575.98px) {
+  .dash-banner > .d-flex {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .dash-banner .text-end {
+    text-align: center !important;
+  }
+
+  .dash-banner h3 {
+    font-size: 1.2rem;
+  }
+
+  .dash-banner p {
+    font-size: 0.85rem;
+  }
+
+  .dash-card {
+    padding: 12px 10px;
+    gap: 8px;
+    border-radius: 10px;
+  }
+
+  .dash-card-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
+    border-radius: 8px;
+  }
+
+  .dash-card-value {
+    font-size: 1.05rem;
+  }
+
+  .dash-bar-group {
+    min-width: 45px;
+  }
+
+  .dash-bar {
+    width: 26px;
+  }
+
+  .dash-rank {
+    width: 22px;
+    height: 22px;
+    font-size: 0.65rem;
+  }
+}
+
+/* Desktop amplio */
+@media (min-width: 1400px) {
+  .dash-card {
+    padding: 26px 24px;
+    gap: 20px;
+  }
+
+  .dash-card-icon {
+    width: 56px;
+    height: 56px;
+    font-size: 1.5rem;
+  }
+
+  .dash-card-value {
+    font-size: 1.75rem;
+  }
+
+  .dash-bar {
+    width: 52px;
+  }
+
+  .dash-bar-group {
+    min-width: 90px;
+  }
 }

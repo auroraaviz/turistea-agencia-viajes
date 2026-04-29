@@ -17,7 +17,9 @@ import { BASE } from "../config.js";
 
 export async function obtener(url) {
   try {
-    const respuesta = await fetch(BASE + url);
+    const respuesta = await fetch(BASE + url, {
+      credentials: "include",
+    });
 
     if (!respuesta.ok) {
       throw new Error("Error HTTP: " + respuesta.status);
@@ -36,6 +38,7 @@ export async function crear(url, datos) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(datos),
+      credentials: "include",
     });
 
     if (!respuesta.ok) {
@@ -43,9 +46,7 @@ export async function crear(url, datos) {
     }
 
     const texto = await respuesta.text();
-console.log("RESPUESTA PHP:");
-console.log(texto);
-return texto;
+    return texto;
   } catch (error) {
     console.log("Error al enviar datos", error);
     return null;

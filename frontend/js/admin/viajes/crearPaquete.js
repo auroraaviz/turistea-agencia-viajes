@@ -62,7 +62,7 @@ function abrirModalCrear() {
     id="modalCrearPaquete"
     tabindex="-1">
 
-    <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
 
       <div class="modal-content">
 
@@ -85,7 +85,7 @@ function abrirModalCrear() {
 
           <div class="row g-3">
 
-            <div class="col-md-6">
+            <div class="col-12 col-md-6">
               <label class="form-label">
                 Título
               </label>
@@ -97,7 +97,7 @@ function abrirModalCrear() {
             </div>
 
 
-            <div class="col-md-6">
+            <div class="col-12 col-md-6">
               <label class="form-label">
                 Destino
               </label>
@@ -109,7 +109,7 @@ function abrirModalCrear() {
             </div>
 
 
-            <div class="col-md-6">
+            <div class="col-12 col-md-6">
               <label class="form-label">
                 Precio
               </label>
@@ -121,7 +121,7 @@ function abrirModalCrear() {
             </div>
 
 
-            <div class="col-md-6">
+            <div class="col-12 col-md-6">
               <label class="form-label">
                 Categoría
               </label>
@@ -150,7 +150,7 @@ function abrirModalCrear() {
             </div>
 
 
-            <div class="col-md-6">
+            <div class="col-12 col-md-6">
               <label class="form-label">
                 Fecha salida
               </label>
@@ -162,7 +162,7 @@ function abrirModalCrear() {
             </div>
 
 
-            <div class="col-md-6">
+            <div class="col-12 col-md-6">
               <label class="form-label">
                 Fecha regreso
               </label>
@@ -174,7 +174,7 @@ function abrirModalCrear() {
             </div>
 
 
-            <div class="col-md-6">
+            <div class="col-12 col-md-6">
               <label class="form-label">
                 Plazas totales
               </label>
@@ -187,7 +187,7 @@ function abrirModalCrear() {
             </div>
 
 
-            <div class="col-md-6">
+            <div class="col-12 col-md-6">
               <label class="form-label">
                 Plazas disponibles
               </label>
@@ -200,7 +200,7 @@ function abrirModalCrear() {
             </div>
 
 
-            <div class="col-md-6">
+            <div class="col-12 col-md-6">
               <label class="form-label">
                 Imagen paquete
               </label>
@@ -212,7 +212,7 @@ function abrirModalCrear() {
             </div>
 
 
-            <div class="col-md-6">
+            <div class="col-12 col-md-6">
               <label class="form-label">
                 Imagen hotel
               </label>

@@ -28,7 +28,7 @@ export function renderDashboard(data) {
     <!-- FILA 1: 3 TARJETAS KPI -->
     <div class="row g-3 mb-3">
 
-      <div class="col-12 col-md-4">
+      <div class="col-12 col-sm-6 col-md-4">
         <div class="dash-card shadow-sm">
           <div class="dash-card-icon dash-icon-primary">
             <i class="bi bi-airplane-fill"></i>
@@ -41,7 +41,7 @@ export function renderDashboard(data) {
         </div>
       </div>
 
-      <div class="col-12 col-md-4">
+      <div class="col-12 col-sm-6 col-md-4">
         <div class="dash-card shadow-sm">
           <div class="dash-card-icon dash-icon-success">
             <i class="bi bi-people-fill"></i>
@@ -54,7 +54,7 @@ export function renderDashboard(data) {
         </div>
       </div>
 
-      <div class="col-12 col-md-4">
+      <div class="col-12 col-sm-6 col-md-4">
         <div class="dash-card shadow-sm">
           <div class="dash-card-icon dash-icon-warning">
             <i class="bi bi-journal-check"></i>
@@ -72,7 +72,7 @@ export function renderDashboard(data) {
     <!-- FILA 2: 3 TARJETAS KPI -->
     <div class="row g-3 mb-4">
 
-      <div class="col-12 col-md-4">
+      <div class="col-12 col-sm-6 col-md-4">
         <div class="dash-card shadow-sm">
           <div class="dash-card-icon dash-icon-info">
             <i class="bi bi-cash-stack"></i>
@@ -85,7 +85,7 @@ export function renderDashboard(data) {
         </div>
       </div>
 
-      <div class="col-12 col-md-4">
+      <div class="col-12 col-sm-6 col-md-4">
         <div class="dash-card shadow-sm">
           <div class="dash-card-icon dash-icon-danger">
             <i class="bi bi-exclamation-triangle-fill"></i>
@@ -98,7 +98,7 @@ export function renderDashboard(data) {
         </div>
       </div>
 
-      <div class="col-12 col-md-4">
+      <div class="col-12 col-sm-6 col-md-4">
         <div class="dash-card shadow-sm">
           <div class="dash-card-icon dash-icon-purple">
             <i class="bi bi-pie-chart-fill"></i>
@@ -117,7 +117,7 @@ export function renderDashboard(data) {
     <div class="row g-3 mb-4">
 
       <!-- GRAFICO OVERVIEW -->
-      <div class="col-12 col-lg-7">
+      <div class="col-12 col-lg-8">
         <div class="card border-0 shadow-sm h-100">
           <div class="card-header bg-white border-0 pt-3 pb-0">
             <h6 class="fw-bold mb-0">
@@ -132,7 +132,7 @@ export function renderDashboard(data) {
       </div>
 
       <!-- TOP DESTINOS -->
-      <div class="col-12 col-lg-5">
+      <div class="col-12 col-lg-4">
         <div class="card border-0 shadow-sm h-100">
           <div class="card-header bg-white border-0 pt-3 pb-0">
             <h6 class="fw-bold mb-0">
