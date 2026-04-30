@@ -82,6 +82,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  activarRutaInicial();
+
   async function cargarPaquetes(estado = "") {
     contenido.innerHTML = spinner();
 
@@ -211,5 +213,36 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     return "Gestión de paquetes";
+  }
+
+  function activarRutaInicial() {
+    const params =
+      new URLSearchParams(window.location.search);
+
+    const paquetes =
+      params.get("paquetes");
+
+    if (!paquetes) return;
+
+    if (paquetes === "activos") {
+      cargarPaquetes("1");
+      return;
+    }
+
+    if (paquetes === "inactivos") {
+      cargarPaquetes("0");
+      return;
+    }
+
+    if (paquetes === "crear") {
+      setTimeout(() => {
+        document
+          .getElementById("btnCrearPaquete")
+          ?.click();
+      }, 0);
+      return;
+    }
+
+    cargarPaquetes();
   }
 });

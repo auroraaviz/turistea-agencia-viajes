@@ -85,6 +85,16 @@ main {
   margin-left: 1.25rem;
   text-decoration: none;
 }
+
+.sidebar-admin a {
+  text-decoration: none;
+}
+
+.sidebar-admin a:hover,
+.sidebar-admin a:focus {
+  text-decoration: none;
+}
+
 .btn-toggle-nav a:hover,
 .btn-toggle-nav a:focus {
   background-color: #d2f4ea;
@@ -96,4 +106,3 @@ main {
 
 .fw-semibold { font-weight: 600; }
 .lh-tight { line-height: 1.25; }
-

@@ -12,6 +12,15 @@ html {
   scrollbar-gutter: stable;
 }
 
+body.modal-open {
+  overflow: auto !important;
+  padding-right: 0 !important;
+}
+
+.modal {
+  padding-right: 0 !important;
+}
+
 .table-hover > tbody > tr:hover > * {
     background-color: #0d6efd !important;
     color: white;
