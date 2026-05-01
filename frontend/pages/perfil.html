@@ -5,135 +5,113 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mi Perfil · Turistea</title>
 
-  <!-- Google Fonts: Raleway -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap" rel="stylesheet" />
 
-  <!-- Bootstrap 5 (local, igual que index.html) -->
+  <!-- Bootstrap 5 local -->
   <link rel="stylesheet" href="../css/bootstrap.min.css" />
   <link rel="stylesheet" href="../css/bootstrap-icons.css" />
   <link rel="stylesheet" href="../css/bootstrap-grid.min.css" />
 
-  <!-- CSS externos del proyecto -->
+  <!-- CSS del proyecto -->
   <link rel="stylesheet" href="../css/header.css" />
   <link rel="stylesheet" href="../css/footer.css" />
   <link rel="stylesheet" href="../css/usuario/perfil.css" />
 </head>
 <body>
 
-  <!-- ===== NAVBAR PRINCIPAL (igual que index.html) ===== -->
+  <!-- ===== NAVBAR ===== -->
   <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-0">
     <div class="container">
-      <!-- LOGO -->
       <a class="navbar-brand" href="../../index.html">
         <img src="../assets/img/Turistea_Logo/logo_turistea.png" width="90" />
       </a>
 
-      <!-- BOTÓN MÓVIL -->
       <button
         class="navbar-toggler"
         type="button"
         data-bs-toggle="collapse"
         data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
       >
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- MENÚ -->
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="bi bi-search fs-3"></i>
-              <span class="d-inline d-md-none ms-3">Buscar</span>
-            </a>
-          </li>
 
           <li class="nav-item">
             <a class="nav-link" href="../../index.html">
               <i class="bi bi-house fs-3"></i>
-              <span class="d-inline d-md-none ms-3">Menú inicio</span>
+              <span class="d-inline d-md-none ms-3">Inicio</span>
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="perfil.html">
               <i class="bi bi-person-check fs-3"></i>
-              <span class="d-inline d-md-none ms-3">Acceso a registro</span>
+              <span class="d-inline d-md-none ms-3">Mi perfil</span>
             </a>
           </li>
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
               <i class="bi bi-airplane fs-3"></i>
-              <span class="d-inline d-md-none ms-3">Menu extensible</span>
+              <span class="d-inline d-md-none ms-3">Menú</span>
             </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="perfil.html">Perfil</a></li>
-              <li><a class="dropdown-item" href="../../index.html">Reservas</a></li>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="perfil.html"><i class="bi bi-person me-2"></i>Perfil</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <a class="dropdown-item text-danger" href="#" id="btn-logout">
+                  <i class="bi bi-box-arrow-right me-2"></i>Cerrar sesión
+                </a>
+              </li>
             </ul>
           </li>
+
         </ul>
       </div>
     </div>
   </nav>
-  <!-- ===== FIN NAVBAR ===== -->
 
-
-  <!-- ===== HERO SECTION ===== -->
+  <!-- ===== HERO ===== -->
   <div class="perfil-hero">
     <div class="container perfil-hero-inner">
-      <!-- Left: name -->
       <div class="perfil-hero-info">
-        <h2>¡Hola, Usuario! 👋</h2>
-        <span><i class="bi bi-geo-alt-fill me-1"></i>Ciudad, País, Tiempo de membresía </span>
+        <h2 id="hero-saludo">¡Hola! 👋</h2>
+        <span id="hero-meta"><i class="bi bi-envelope me-1"></i><span id="hero-email">—</span></span>
       </div>
-      <!-- Right: avatar -->
+      <!-- Avatar: sin botón de cámara, generado dinámicamente por JS -->
       <div class="perfil-avatar-wrap">
-        <img
-          src="https://ui-avatars.com/api/?name=Usuario&background=FF6B6B&color=fff&size=128&font-size=0.4&bold=true"
-          alt="Avatar de Usuario"
-          class="perfil-avatar"
-        />
-        <div class="avatar-badge" title="Cambiar foto">
-          <i class="bi bi-camera-fill"></i>
-        </div>
+        <img id="perfil-avatar" src="" alt="Avatar" class="perfil-avatar" />
       </div>
     </div>
   </div>
 
-  <!-- ===== MAIN CONTENT ===== -->
+  <!-- ===== CONTENIDO PRINCIPAL ===== -->
   <main class="perfil-main">
     <div class="container">
       <div class="row g-4">
 
-        <!-- ====== SIDEBAR (col-md-4) ====== -->
+        <!-- ====== SIDEBAR ====== -->
         <div class="col-md-4">
           <div class="sidebar-card">
-            <div class="user-name">Usuario</div>
-            <div class="user-email">usuario@email.com</div>
+
+            <div id="sidebar-nombre" class="user-name">—</div>
+            <div id="sidebar-email" class="user-email">—</div>
 
             <!-- Stats -->
             <div class="row g-2 mb-3">
-              <div class="col-4">
+              <div class="col-6">
                 <div class="stat-box">
-                  <div class="stat-num">12</div>
-                  <div class="stat-label">Viajes</div>
+                  <div class="stat-num" id="stat-reservas">—</div>
+                  <div class="stat-label">Reservas</div>
                 </div>
               </div>
-              <div class="col-4">
+              <div class="col-6">
                 <div class="stat-box">
-                  <div class="stat-num">8</div>
-                  <div class="stat-label">Países</div>
-                </div>
-              </div>
-              <div class="col-4">
-                <div class="stat-box">
-                  <div class="stat-num">24</div>
+                  <div class="stat-num" id="stat-favoritos">—</div>
                   <div class="stat-label">Favoritos</div>
                 </div>
               </div>
@@ -141,378 +119,171 @@
 
             <hr class="sidebar-divider" />
 
-            <!-- User info -->
-            <div class="sidebar-info-item">
+            <!-- Datos del usuario -->
+            <div class="sidebar-info-item" id="info-telefono-wrap">
               <i class="bi bi-telephone-fill"></i>
-              <span>+34 654 321 000</span>
-            </div>
-            <div class="sidebar-info-item">
-              <i class="bi bi-translate"></i>
-              <span>Español, Inglés</span>
+              <span id="info-telefono">—</span>
             </div>
             <div class="sidebar-info-item">
               <i class="bi bi-calendar3"></i>
-              <span>Nacimiento: 14 mar 1990</span>
-            </div>
-            <div class="sidebar-info-item">
-              <i class="bi bi-passport-fill"></i>
-              <span>Pasaporte válido hasta 2030</span>
-            </div>
-            <div class="sidebar-info-item">
-              <i class="bi bi-star-fill" style="color:#FFD166;"></i>
-              <span>Nivel: Viajera Experta ✨</span>
+              <span id="info-miembro">—</span>
             </div>
 
             <hr class="sidebar-divider" />
 
-            <button class="btn btn-editar">
+            <!-- Botón editar perfil → abre modal -->
+            <button
+              class="btn btn-editar"
+              data-bs-toggle="modal"
+              data-bs-target="#modalEditarPerfil"
+            >
               <i class="bi bi-pencil-fill"></i> Editar perfil
             </button>
 
-            <a href="#" class="d-flex align-items-center justify-content-center mt-3 text-danger text-decoration-none" style="font-size:.85rem; font-weight:700;">
+            <a
+              href="#"
+              id="sidebar-logout"
+              class="d-flex align-items-center justify-content-center mt-3 text-danger text-decoration-none"
+              style="font-size:.85rem; font-weight:700;"
+            >
               <i class="bi bi-box-arrow-right me-2"></i> Cerrar sesión
             </a>
+
           </div>
         </div>
 
-        <!-- ====== PANEL (col-md-8) ====== -->
+        <!-- ====== PANEL DERECHO ====== -->
         <div class="col-md-8">
           <div class="panel-card">
-            <!-- Tabs — Bootstrap 5: data-bs-toggle="tab", data-bs-target -->
+
+            <!-- Tabs: solo Reservas y Favoritos -->
             <ul class="nav panel-tabs" id="perfilTabs" role="tablist">
               <li class="nav-item" role="presentation">
-                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-reservas" type="button" role="tab">
+                <button
+                  class="nav-link active"
+                  data-bs-toggle="tab"
+                  data-bs-target="#tab-reservas"
+                  type="button" role="tab"
+                >
                   <i class="bi bi-ticket-detailed me-1"></i>Mis Reservas
                 </button>
               </li>
               <li class="nav-item" role="presentation">
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-favoritos" type="button" role="tab">
+                <button
+                  class="nav-link"
+                  data-bs-toggle="tab"
+                  data-bs-target="#tab-favoritos"
+                  type="button" role="tab"
+                >
                   <i class="bi bi-heart me-1"></i>Favoritos
-                </button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-notificaciones" type="button" role="tab">
-                  <i class="bi bi-bell me-1"></i>Notificaciones
-                  <span class="badge rounded-pill ms-1" style="background:#FF6B6B; font-size:.65rem;">3</span>
-                </button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-seguridad" type="button" role="tab">
-                  <i class="bi bi-shield-lock me-1"></i>Seguridad
                 </button>
               </li>
             </ul>
 
-            <!-- Tab content -->
             <div class="tab-content panel-body" id="perfilTabsContent">
 
-              <!-- TAB: Mis Reservas -->
+              <!-- TAB: Reservas -->
               <div class="tab-pane fade show active" id="tab-reservas" role="tabpanel">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                   <h6 class="fw-bold mb-0" style="color:#1a2d45;">Próximas y recientes</h6>
-                  <select class="form-select form-select-sm" style="width:auto; border-radius:20px; font-size:.8rem;">
-                    <option>Todas</option>
-                    <option>Confirmadas</option>
-                    <option>Pendientes</option>
+                  <select id="filtro-reservas" class="form-select form-select-sm" style="width:auto; border-radius:20px; font-size:.8rem;">
+                    <option value="">Todas</option>
+                    <option value="CONFIRMADA">Confirmadas</option>
+                    <option value="PENDIENTE">Pendientes</option>
+                    <option value="CANCELADA">Canceladas</option>
                   </select>
                 </div>
-
-                <!-- Reserva 1 -->
-                <div class="reserva-card">
-                  <div class="row g-0">
-                    <div class="col-4 col-md-3">
-                      <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=400&q=80" alt="París" style="border-radius:0; min-height:130px;" />
-                    </div>
-                    <div class="col-8 col-md-9 p-3">
-                      <div class="d-flex align-items-start justify-content-between flex-wrap gap-1 mb-1">
-                        <span class="reserva-titulo">Tour por París & Versalles</span>
-                        <span class="reserva-badge badge-confirmada"><i class="bi bi-check-circle-fill"></i> Confirmada</span>
-                      </div>
-                      <div class="reserva-fecha mb-2"><i class="bi bi-calendar3"></i> 15 – 22 Jun 2025</div>
-                      <div class="d-flex flex-wrap gap-2 align-items-center">
-                        <span style="font-size:.8rem; color:#777;"><i class="bi bi-people-fill me-1"></i>2 personas</span>
-                        <span style="font-size:.8rem; color:#777;"><i class="bi bi-star-fill me-1" style="color:#FFD166;"></i>4.9</span>
-                        <a href="#" class="btn-ver-reserva ms-auto">Ver detalles</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Reserva 2 -->
-                <div class="reserva-card">
-                  <div class="row g-0">
-                    <div class="col-4 col-md-3">
-                      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80" alt="Tokio" style="border-radius:0; min-height:130px;" />
-                    </div>
-                    <div class="col-8 col-md-9 p-3">
-                      <div class="d-flex align-items-start justify-content-between flex-wrap gap-1 mb-1">
-                        <span class="reserva-titulo">Japón: Tokio & Kioto</span>
-                        <span class="reserva-badge badge-pendiente"><i class="bi bi-clock-fill"></i> Pendiente</span>
-                      </div>
-                      <div class="reserva-fecha mb-2"><i class="bi bi-calendar3"></i> 10 – 25 Oct 2025</div>
-                      <div class="d-flex flex-wrap gap-2 align-items-center">
-                        <span style="font-size:.8rem; color:#777;"><i class="bi bi-people-fill me-1"></i>1 persona</span>
-                        <span style="font-size:.8rem; color:#777;"><i class="bi bi-currency-euro me-1"></i>2.450</span>
-                        <a href="#" class="btn-ver-reserva ms-auto">Ver detalles</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Reserva 3 -->
-                <div class="reserva-card">
-                  <div class="row g-0">
-                    <div class="col-4 col-md-3">
-                      <img src="https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?w=400&q=80" alt="Marruecos" style="border-radius:0; min-height:130px;" />
-                    </div>
-                    <div class="col-8 col-md-9 p-3">
-                      <div class="d-flex align-items-start justify-content-between flex-wrap gap-1 mb-1">
-                        <span class="reserva-titulo">Marruecos Mágico</span>
-                        <span class="reserva-badge badge-cancelada"><i class="bi bi-x-circle-fill"></i> Cancelada</span>
-                      </div>
-                      <div class="reserva-fecha mb-2"><i class="bi bi-calendar3"></i> 3 – 10 Mar 2025</div>
-                      <div class="d-flex flex-wrap gap-2 align-items-center">
-                        <span style="font-size:.8rem; color:#777;"><i class="bi bi-people-fill me-1"></i>3 personas</span>
-                        <a href="#" class="btn-ver-reserva ms-auto">Ver detalles</a>
-                      </div>
-                    </div>
-                  </div>
+                <!-- Las tarjetas se insertan dinámicamente por JS -->
+                <div id="contenedor-reservas">
+                  <p class="text-muted text-center py-4">Cargando reservas…</p>
                 </div>
               </div>
 
               <!-- TAB: Favoritos -->
               <div class="tab-pane fade" id="tab-favoritos" role="tabpanel">
                 <h6 class="fw-bold mb-3" style="color:#1a2d45;">Destinos guardados</h6>
-                <div class="row g-3">
-                  <div class="col-6 col-md-4">
-                    <div class="fav-card">
-                      <img src="https://images.unsplash.com/photo-1548704806-0c7f7b9e7a9f?w=400&q=80" alt="Sevilla" />
-                      <div class="fav-overlay">
-                        <div class="fav-title">Sevilla</div>
-                        <div class="fav-country">España</div>
-                      </div>
-                      <button class="btn-quitar-fav"><i class="bi bi-heart-fill"></i></button>
-                    </div>
-                  </div>
-                  <div class="col-6 col-md-4">
-                    <div class="fav-card">
-                      <img src="https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80" alt="Santorini" />
-                      <div class="fav-overlay">
-                        <div class="fav-title">Santorini</div>
-                        <div class="fav-country">Grecia</div>
-                      </div>
-                      <button class="btn-quitar-fav"><i class="bi bi-heart-fill"></i></button>
-                    </div>
-                  </div>
-                  <div class="col-6 col-md-4">
-                    <div class="fav-card">
-                      <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=400&q=80" alt="Bali" />
-                      <div class="fav-overlay">
-                        <div class="fav-title">Bali</div>
-                        <div class="fav-country">Indonesia</div>
-                      </div>
-                      <button class="btn-quitar-fav"><i class="bi bi-heart-fill"></i></button>
-                    </div>
-                  </div>
-                  <div class="col-6 col-md-4">
-                    <div class="fav-card">
-                      <img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=400&q=80" alt="Praga" />
-                      <div class="fav-overlay">
-                        <div class="fav-title">Praga</div>
-                        <div class="fav-country">República Checa</div>
-                      </div>
-                      <button class="btn-quitar-fav"><i class="bi bi-heart-fill"></i></button>
-                    </div>
-                  </div>
-                  <div class="col-6 col-md-4">
-                    <div class="fav-card">
-                      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=80" alt="Noruega" />
-                      <div class="fav-overlay">
-                        <div class="fav-title">Fiordos de Noruega</div>
-                        <div class="fav-country">Noruega</div>
-                      </div>
-                      <button class="btn-quitar-fav"><i class="bi bi-heart-fill"></i></button>
-                    </div>
-                  </div>
-                  <div class="col-6 col-md-4">
-                    <div class="fav-card">
-                      <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=400&q=80" alt="Costa Amalfi" />
-                      <div class="fav-overlay">
-                        <div class="fav-title">Costa Amalfitana</div>
-                        <div class="fav-country">Italia</div>
-                      </div>
-                      <button class="btn-quitar-fav"><i class="bi bi-heart-fill"></i></button>
-                    </div>
-                  </div>
+                <!-- Las tarjetas se insertan dinámicamente por JS -->
+                <div class="row g-3" id="contenedor-favoritos">
+                  <p class="text-muted text-center py-4">Cargando favoritos…</p>
                 </div>
               </div>
 
-              <!-- TAB: Notificaciones -->
-              <div class="tab-pane fade" id="tab-notificaciones" role="tabpanel">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h6 class="fw-bold mb-0" style="color:#1a2d45;">Centro de notificaciones</h6>
-                  <a href="#" style="font-size:.8rem; color:#0077B6; font-weight:700; text-decoration:none;">Marcar todo como leído</a>
-                </div>
+            </div>
+          </div>
+        </div>
 
-                <div class="notif-item">
-                  <div class="notif-icon-wrap ni-azul"><i class="bi bi-ticket-detailed-fill"></i></div>
-                  <div class="notif-text flex-grow-1">
-                    <p><strong>Reserva confirmada:</strong> Tu viaje a <strong>París</strong> del 15 al 22 de junio está listo. ¡Ya puedes descargar tus documentos!</p>
-                    <span><i class="bi bi-clock me-1"></i>Hace 2 horas</span>
-                  </div>
-                  <div class="notif-dot"></div>
-                </div>
-
-                <div class="notif-item">
-                  <div class="notif-icon-wrap ni-coral"><i class="bi bi-fire"></i></div>
-                  <div class="notif-text flex-grow-1">
-                    <p><strong>¡Oferta especial!</strong> Vuelos a <strong>Tokio</strong> desde 399€. Solo quedan 3 plazas disponibles.</p>
-                    <span><i class="bi bi-clock me-1"></i>Hace 5 horas</span>
-                  </div>
-                  <div class="notif-dot"></div>
-                </div>
-
-                <div class="notif-item">
-                  <div class="notif-icon-wrap ni-verde"><i class="bi bi-star-fill"></i></div>
-                  <div class="notif-text flex-grow-1">
-                    <p>¡Has alcanzado el nivel <strong>"Viajera Experta"</strong>! Disfruta de descuentos exclusivos en tus próximas reservas.</p>
-                    <span><i class="bi bi-clock me-1"></i>Ayer, 14:30</span>
-                  </div>
-                  <div class="notif-dot"></div>
-                </div>
-
-                <div class="notif-item">
-                  <div class="notif-icon-wrap ni-amarillo"><i class="bi bi-exclamation-triangle-fill"></i></div>
-                  <div class="notif-text flex-grow-1">
-                    <p>Recuerda que tu reserva de <strong>Marruecos</strong> fue cancelada. El reembolso se procesará en 5–7 días hábiles.</p>
-                    <span><i class="bi bi-clock me-1"></i>Hace 3 días</span>
-                  </div>
-                </div>
-
-                <div class="notif-item">
-                  <div class="notif-icon-wrap ni-azul"><i class="bi bi-chat-dots-fill"></i></div>
-                  <div class="notif-text flex-grow-1">
-                    <p>Tienes una nueva respuesta de soporte sobre tu consulta del <strong>seguro de viaje</strong>.</p>
-                    <span><i class="bi bi-clock me-1"></i>Hace 5 días</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- TAB: Seguridad -->
-              <div class="tab-pane fade" id="tab-seguridad" role="tabpanel">
-                <h6 class="fw-bold mb-3" style="color:#1a2d45;">Seguridad de la cuenta</h6>
-
-                <div class="seg-item">
-                  <div class="seg-item-left">
-                    <div class="seg-icon"><i class="bi bi-lock-fill"></i></div>
-                    <div>
-                      <div class="seg-label">Contraseña</div>
-                      <div class="seg-desc">Última actualización: hace 3 meses</div>
-                    </div>
-                  </div>
-                  <button class="btn-seg">Cambiar</button>
-                </div>
-
-                <div class="seg-item">
-                  <div class="seg-item-left">
-                    <div class="seg-icon"><i class="bi bi-phone-fill"></i></div>
-                    <div>
-                      <div class="seg-label">Verificación en dos pasos</div>
-                      <div class="seg-desc">SMS a +34 *** *** 000</div>
-                    </div>
-                  </div>
-                  <button class="btn-seg" style="background:#e0f3ff; color:#0077B6; border-color:#0077B6;">Activado</button>
-                </div>
-
-                <div class="seg-item">
-                  <div class="seg-item-left">
-                    <div class="seg-icon"><i class="bi bi-envelope-fill"></i></div>
-                    <div>
-                      <div class="seg-label">Correo electrónico</div>
-                      <div class="seg-desc">usuario@email.com · Verificado</div>
-                    </div>
-                  </div>
-                  <button class="btn-seg">Cambiar</button>
-                </div>
-
-                <div class="seg-item">
-                  <div class="seg-item-left">
-                    <div class="seg-icon" style="background:#fde8e8; color:#FF6B6B;"><i class="bi bi-shield-exclamation"></i></div>
-                    <div>
-                      <div class="seg-label">Sesiones activas</div>
-                      <div class="seg-desc">2 dispositivos conectados</div>
-                    </div>
-                  </div>
-                  <button class="btn-seg btn-seg-danger">Cerrar todas</button>
-                </div>
-
-                <div class="seg-item">
-                  <div class="seg-item-left">
-                    <div class="seg-icon" style="background:#fde8e8; color:#FF6B6B;"><i class="bi bi-trash3-fill"></i></div>
-                    <div>
-                      <div class="seg-label">Eliminar cuenta</div>
-                      <div class="seg-desc">Esta acción es permanente e irreversible</div>
-                    </div>
-                  </div>
-                  <button class="btn-seg btn-seg-danger">Eliminar</button>
-                </div>
-              </div>
-
-            </div><!-- /tab-content -->
-          </div><!-- /panel-card -->
-        </div><!-- /col-md-8 -->
-
-      </div><!-- /row -->
-    </div><!-- /container -->
+      </div>
+    </div>
   </main>
 
-  <!-- ===== FOOTER (igual que index.html) ===== -->
+
+  <!-- ===== MODAL EDITAR PERFIL ===== -->
+  <div class="modal fade" id="modalEditarPerfil" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow">
+
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title"><i class="bi bi-pencil-fill me-2"></i>Editar perfil</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body p-4">
+          <div id="editar-feedback" class="mb-3 d-none"></div>
+
+          <div class="row g-3">
+            <div class="col-6">
+              <label class="form-label fw-bold">Nombre</label>
+              <input type="text" id="edit-nombre" class="form-control" placeholder="Tu nombre" />
+            </div>
+            <div class="col-6">
+              <label class="form-label fw-bold">Apellidos</label>
+              <input type="text" id="edit-apellidos" class="form-control" placeholder="Tus apellidos" />
+            </div>
+            <div class="col-12">
+              <label class="form-label fw-bold">Teléfono</label>
+              <input type="tel" id="edit-telefono" class="form-control" placeholder="+34 600 000 000" />
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer border-0">
+          <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary rounded-pill px-4" id="btn-guardar-perfil">
+            <i class="bi bi-check-lg me-1"></i>Guardar cambios
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===== FOOTER ===== -->
   <footer class="mt-5">
     <div class="footer-body">
       <div class="container py-5">
-
         <div class="row">
           <div class="col-12 col-md-10 offset-md-1">
-
             <div class="row g-4 mb-5">
 
-              <!-- COL 1: LOGO + DESC -->
               <div class="col-12 col-md-4 text-center text-md-start">
-                <img
-                  src="../assets/img/Turistea_Logo/logo_sinfondo.png"
-                  alt="Turistea"
-                  class="footer-logo d-block mx-auto mx-md-0 mb-2"
-                />
+                <img src="../assets/img/Turistea_Logo/logo_sinfondo.png" alt="Turistea"
+                  class="footer-logo d-block mx-auto mx-md-0 mb-2" />
                 <p class="footer-desc mb-0">
-                  Elige destino y disfruta.<br>
-                  Nosotros nos encargamos del resto.
+                  Elige destino y disfruta.<br>Nosotros nos encargamos del resto.
                 </p>
               </div>
 
-              <!-- COL 2: CONTACTO -->
               <div class="col-12 col-md-4 text-center text-md-start">
                 <p class="footer-heading">Datos de Contacto</p>
                 <ul class="footer-list">
-                  <li>
-                    <i class="bi bi-geo-alt-fill footer-icon"></i>
-                    Calle Viajeros s/n, 28001 Madrid
-                  </li>
-                  <li>
-                    <i class="bi bi-telephone-fill footer-icon"></i>
-                    <a href="tel:+34900000000">+34 900 000 000</a>
-                  </li>
-                  <li>
-                    <i class="bi bi-envelope-fill footer-icon"></i>
-                    <a href="mailto:turistea@test.com">turistea@test.com</a>
-                  </li>
-                  <li>
-                    <i class="bi bi-clock-fill footer-icon"></i>
-                    Lun – Vie: 09:00 – 20:00
-                  </li>
+                  <li><i class="bi bi-geo-alt-fill footer-icon"></i> Calle Viajeros s/n, 28001 Madrid</li>
+                  <li><i class="bi bi-telephone-fill footer-icon"></i><a href="tel:+34900000000">+34 900 000 000</a></li>
+                  <li><i class="bi bi-envelope-fill footer-icon"></i><a href="mailto:turistea@test.com">turistea@test.com</a></li>
+                  <li><i class="bi bi-clock-fill footer-icon"></i> Lun – Vie: 09:00 – 20:00</li>
                 </ul>
               </div>
 
-              <!-- COL 3: LEGAL -->
               <div class="col-12 col-md-4 text-center text-md-start">
                 <p class="footer-heading">Información Legal</p>
                 <ul class="footer-list">
@@ -524,10 +295,8 @@
 
             </div>
 
-            <!-- SEPARADOR -->
-            <hr class="footer-hr mb-4"/>
+            <hr class="footer-hr mb-4" />
 
-            <!-- REDES SOCIALES -->
             <div class="d-flex justify-content-center gap-3 mb-4">
               <a href="https://www.instagram.com/_turistea_/" class="social-icon" aria-label="Instagram">
                 <i class="bi bi-instagram"></i>
@@ -537,39 +306,24 @@
               </a>
             </div>
 
-            <!-- COPYRIGHT -->
             <p class="footer-copy mb-0">
               &copy; <span id="footer-year"></span> Turistea · Todos los derechos reservados
               &nbsp;·&nbsp;
               Hecho con <i class="bi bi-heart-fill" style="color:#FF6B6B"></i> para viajeros
             </p>
-
           </div>
         </div>
-
       </div>
     </div>
   </footer>
-  <!-- ===== FIN FOOTER ===== -->
 
-  <!-- Bootstrap 5 JS local (igual que index.html) — sin jQuery -->
+  <!-- Bootstrap 5 JS local -->
   <script src="../js/bootstrap.bundle.min.js"></script>
+  <!-- Lógica del perfil -->
+  <script type="module" src="../js/usuario/perfil.js"></script>
 
   <script>
-    // Footer year
     document.getElementById('footer-year').textContent = new Date().getFullYear();
-
-    // Quitar favorito (demo)
-    document.querySelectorAll('.btn-quitar-fav').forEach(btn => {
-      btn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        const card = this.closest('.col-6, .col-md-4');
-        card.style.transition = 'opacity .3s, transform .3s';
-        card.style.opacity = '0';
-        card.style.transform = 'scale(.85)';
-        setTimeout(() => card.remove(), 320);
-      });
-    });
   </script>
 
 </body>

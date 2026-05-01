@@ -22,6 +22,7 @@ header("Content-Type: application/json");
 if (esModoDev()) {
     echo json_encode([
         "ok" => true,
+        "id" => 999,
         "email" => "dev@turistea.com",
         "nombre" => "Dev Admin",
         "rol" => "admin"
@@ -29,9 +30,10 @@ if (esModoDev()) {
     exit;
 }
 
-if (isset($_SESSION['email']) && isset($_SESSION['rol'])) {
+if (isset($_SESSION['usuario_id']) && isset($_SESSION['email']) && isset($_SESSION['rol'])) {
     echo json_encode([
         "ok" => true,
+        "id" => $_SESSION['usuario_id'],
         "email" => $_SESSION['email'],
         "nombre" => $_SESSION['nombre'],
         "rol" => $_SESSION['rol']
