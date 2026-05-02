@@ -26,7 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['nombre'] = $usuario['nombre'];
         $_SESSION['rol'] = $usuario['rol'];
 
-        echo "OK";
+        echo json_encode([
+            "ok" => true,
+            "rol" => $usuario['rol']
+        ]);
 
     } else {
         http_response_code(401);
