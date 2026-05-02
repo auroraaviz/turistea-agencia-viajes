@@ -47,7 +47,9 @@ body {
   padding: 1.5rem 2rem 2rem;
   z-index: 10;
   color: #fff;
+  padding-bottom: 3.5rem;
 }
+
  
 #paquete-titulo {
   font-size: clamp(1.6rem, 4vw, 2.8rem);
@@ -165,3 +167,17 @@ body {
   #paquete-titulo { font-size: 1.5rem; }
   .precio-bar { margin-top: 0; border-radius: 0 !important; }
 }
+
+/* ── HERO INFO mejorado ── */
+#paquete-destino {
+  font-size: 1.15rem;
+  text-shadow: 0 1px 6px rgba(0,0,0,.4);
+}
+ 
+#paquete-info-corta {
+  font-size: .95rem;
+  margin-top: .4rem;
+  text-shadow: 0 1px 4px rgba(0,0,0,.4);
+  letter-spacing: .01em;
+}
+ 

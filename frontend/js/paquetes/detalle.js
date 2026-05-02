@@ -19,13 +19,12 @@ console.log("detalle.js cargado");
 
 document.addEventListener("DOMContentLoaded", async () => {
   const loading = document.getElementById("loading");
-  const error = document.getElementById("error");
+  const error   = document.getElementById("error");
   const detalle = document.getElementById("detalle");
 
   const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
+  const id     = params.get("id");
 
-  // Si no viene id
   if (!id) {
     loading.classList.add("d-none");
     error.classList.remove("d-none");
@@ -33,19 +32,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   try {
-    // Consulta al PHP con id
-    const paquete = await obtener(
-      `/api/paquetes/get.php?id=${id}`
-    );
+    const paquete = await obtener(`/api/paquetes/get.php?id=${id}`);
 
-    // Si no existe paquete
     if (!paquete || !paquete.id) {
       loading.classList.add("d-none");
       error.classList.remove("d-none");
       return;
     }
 
-    // -------- CABECERA --------
+    // ── CABECERA ──────────────────────────────────────────────
     document.title = `${paquete.titulo} - Turistea`;
 
     document.getElementById("paquete-imagen").src = `${BASE}/frontend/${(paquete.imagen || '').replace(/^\.\.\//, '')}`;
@@ -53,198 +48,185 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     document.getElementById("paquete-titulo").textContent = paquete.titulo;
 
-    document
-      .getElementById("paquete-destino")
+    document.getElementById("paquete-destino")
       .querySelector("span").textContent = paquete.destino;
 
-    document.getElementById("paquete-info-corta").textContent =
-      `${paquete.fecha_salida} - ${paquete.fecha_regreso} · ` +
-      `${paquete.plazas_disponibles} plazas disponibles`;
+    // Fechas formateadas
+    const fmt = (f) => f
+      ? new Date(f).toLocaleDateString('es-ES', { day:'2-digit', month:'short', year:'numeric' })
+      : '-';
 
-    document.getElementById(
-      "paquete-precio"
-    ).textContent = `${paquete.precio}€`;
+    document.getElementById("paquete-info-corta").innerHTML =
+      `<i class="bi bi-calendar3 me-1 opacity-75"></i>${fmt(paquete.fecha_salida)} &nbsp;→&nbsp; ${fmt(paquete.fecha_regreso)}
+       &nbsp;<span class="opacity-50">·</span>&nbsp;
+       <i class="bi bi-people me-1 opacity-75"></i>${paquete.plazas_disponibles} plazas disponibles`;
 
-    document.getElementById("paquete-descripcion").textContent =
-      paquete.descripcion;
+    document.getElementById("paquete-precio").textContent = `${paquete.precio}€`;
+
+    document.getElementById("paquete-descripcion").textContent = paquete.descripcion;
 
     document.getElementById("paquete-detalles-extra").textContent =
       `Plazas disponibles: ${paquete.plazas_disponibles} / ${paquete.plazas_totales}`;
 
-    // -------- BADGES --------
+    // ── BADGES ───────────────────────────────────────────────
     document.getElementById("paquete-badges").innerHTML = `
-      ${
-        paquete.vuelo_incluido == 1
-          ? `<span class="badge bg-primary me-2">Vuelo incluido</span>`
-          : ""
-      }
-
-      ${
-        paquete.cerca_playa == 1
-          ? `<span class="badge bg-warning text-dark me-2">Cerca de la playa</span>`
-          : ""
-      }
-
-      ${
-        paquete.salida_desde
-          ? `<span class="badge bg-secondary">Salida: ${paquete.salida_desde}</span>`
-          : ""
-      }
+      ${paquete.vuelo_incluido == 1
+        ? `<span class="badge bg-primary">Vuelo incluido</span>`
+        : ''}
+      ${paquete.cerca_playa == 1
+        ? `<span class="badge bg-warning text-dark">Cerca de la playa</span>`
+        : ''}
+      ${paquete.salida_desde
+        ? `<span class="badge bg-secondary">Salida: ${paquete.salida_desde}</span>`
+        : ''}
     `;
 
-    // Tarjeta hotel
- document.getElementById("tarjeta-hotel").innerHTML = `
-  <div class="row g-0 bg-light rounded shadow-sm align-items-center">
+    // ── TARJETA HOTEL ─────────────────────────────────────────
+    const estrellas = parseInt(paquete.hotel_estrellas) || 0;
+    const estrellasHtml = estrellas > 0
+      ? `<span class="text-warning">${'<i class="bi bi-star-fill"></i>'.repeat(estrellas)}</span>`
+      : '';
 
-    <!-- Imagen izquierda -->
-    <div class="col-12 col-md-4">
-      <img
-        src="${BASE}/frontend/${(paquete.hotel_imagen || '').replace(/^\.\.\//, '')}"
-        class="img-fluid w-100 h-100 object-fit-cover rounded-start"
-        alt="${paquete.hotel_nombre}"
-      >
-    </div>
+    document.getElementById("tarjeta-hotel").innerHTML = `
+      <div class="row g-0 bg-white align-items-stretch">
 
-    
-    <div class="col-12 col-md-5">
-      <div class="card-body text-center">
+        <!-- Imagen -->
+        <div class="col-12 col-md-4" style="min-height:200px;">
+          <img
+            src="${BASE}/frontend/${(paquete.hotel_imagen || '').replace(/^\.\.\//, '')}"
+            class="w-100 h-100"
+            style="object-fit:cover;min-height:200px;"
+            alt="${paquete.hotel_nombre}"
+          >
+        </div>
 
-        <h4 class="card-title"><strong>${paquete.hotel_nombre}</strong></h4>
+        <!-- Info principal -->
+        <div class="col-12 col-md-5 p-4 d-flex flex-column justify-content-center">
+          <div class="mb-1">${estrellasHtml}</div>
+          <h4 class="fw-bold mb-1" style="color:#0077B6">${paquete.hotel_nombre}</h4>
+          <p class="text-muted small mb-3">${paquete.destino}</p>
 
-        <p>${"⭐".repeat(paquete.hotel_estrellas)}</p>
+          <div class="d-flex flex-wrap gap-3">
+            <div class="d-flex align-items-center gap-2">
+              <i class="bi bi-moon-stars-fill text-info"></i>
+              <span class="fw-semibold">${paquete.noches} noches</span>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <i class="bi bi-cup-hot-fill text-info"></i>
+              <span class="fw-semibold">${paquete.hotel_regimen}</span>
+            </div>
+            ${paquete.cerca_playa == 1 ? `
+            <div class="d-flex align-items-center gap-2">
+              <i class="bi bi-water text-info"></i>
+              <span class="fw-semibold">Cerca de la playa</span>
+            </div>` : ''}
+          </div>
+        </div>
 
-        <p class="card-text">${paquete.hotel_detalles}</p>
-
-        <p><strong>${paquete.noches}</strong> noches</p>
-
-        <p>
-          <strong>Régimen:</strong>
-          ${paquete.hotel_regimen}
-        </p>
+        <!-- Precio -->
+        <div class="col-12 col-md-3 d-flex flex-column align-items-center justify-content-center p-4 text-center"
+          style="background:linear-gradient(160deg,#f0faff,#e4f4fb);border-left:3px solid #00B4D8;">
+          <div class="text-uppercase text-secondary fw-bold mb-1" style="font-size:.7rem;letter-spacing:.1em">
+            Precio total
+          </div>
+          <div class="fw-bold lh-1 mb-1" style="font-size:2rem;color:#0077B6">${paquete.precio}€</div>
+          <div class="text-muted small">por persona</div>
+        </div>
 
       </div>
-    </div>
+    `;
 
-    
-    <div class="col-12 col-md-3 text-center p-3">
+    // ── INFORMACIÓN ADICIONAL ─────────────────────────────────
+    document.getElementById("informacion-adicional").innerHTML = `
+      <div class="row g-4">
 
-      ${
-        paquete.cerca_playa == 1
-          ? `
-            <p class="mb-2">
-              <i class="bi bi-brightness-high-fill text-warning me-1"></i>
-              Cerca de la playa
-            </p>
-          `
-          : ""
-      }
+        <!-- Incluye -->
+        <div class="col-12 col-md-6">
+          <p class="text-uppercase fw-bold text-success mb-3" style="font-size:.78rem;letter-spacing:.14em">
+            <i class="bi bi-check-circle-fill me-1"></i>Qué incluye
+          </p>
+          <ul class="list-unstyled d-flex flex-column gap-2 mb-0">
+            ${paquete.vuelo_incluido == 1 ? `
+            <li class="d-flex align-items-start gap-2">
+              <i class="bi bi-airplane-fill text-info mt-1"></i>
+              <span>Vuelo incluido · Salida desde <strong>${paquete.salida_desde}</strong></span>
+            </li>` : ''}
+            <li class="d-flex align-items-start gap-2">
+              <i class="bi bi-building text-info mt-1"></i>
+              <span>Alojamiento en <strong>${paquete.hotel_nombre}</strong></span>
+            </li>
+            <li class="d-flex align-items-start gap-2">
+              <i class="bi bi-cup-hot text-info mt-1"></i>
+              <span>Régimen: <strong>${paquete.hotel_regimen}</strong></span>
+            </li>
+            <li class="d-flex align-items-start gap-2">
+              <i class="bi bi-moon-stars text-info mt-1"></i>
+              <span>Estancia de <strong>${paquete.noches} noches</strong></span>
+            </li>
+            <li class="d-flex align-items-start gap-2">
+              <i class="bi bi-headset text-info mt-1"></i>
+              <span>Atención al cliente antes y durante el viaje</span>
+            </li>
+          </ul>
+        </div>
 
-      <p class="m-0 fuente_peq">
-        Precio final paquete completo
-      </p>
+        <!-- No incluye -->
+        <div class="col-12 col-md-6">
+          <p class="text-uppercase fw-bold text-danger mb-3" style="font-size:.78rem;letter-spacing:.14em">
+            <i class="bi bi-x-circle-fill me-1"></i>Qué no incluye
+          </p>
+          <ul class="list-unstyled d-flex flex-column gap-2 mb-0">
+            <li class="d-flex align-items-start gap-2">
+              <i class="bi bi-x-circle text-danger mt-1"></i>
+              <span>Extras no especificados en la reserva</span>
+            </li>
+            <li class="d-flex align-items-start gap-2">
+              <i class="bi bi-x-circle text-danger mt-1"></i>
+              <span>Seguro opcional de cancelación</span>
+            </li>
+            <li class="d-flex align-items-start gap-2">
+              <i class="bi bi-x-circle text-danger mt-1"></i>
+              <span>Gastos personales durante la estancia</span>
+            </li>
+            ${paquete.vuelo_incluido != 1 ? `
+            <li class="d-flex align-items-start gap-2">
+              <i class="bi bi-airplane text-danger mt-1"></i>
+              <span>Vuelo no incluido</span>
+            </li>` : ''}
+          </ul>
+        </div>
 
-      <h4 class="text-primary">
-        ${paquete.precio}€
-      </h4>
+      </div>
+    `;
 
-      <p class="mb-0 fuente_peq">
-        Precio por persona
-      </p>
+    // ── AVISO ─────────────────────────────────────────────────
+    document.getElementById("aviso").innerHTML = `
+      <div class="fondo mt-3">
+        <i class="bi bi-exclamation-diamond-fill"></i>
+        Precio y disponibilidad sujetos a cambios según fechas y demanda.
+      </div>
+    `;
 
-    </div>
-
-  </div>
-`;
-
-// -------- INFORMACION ADICIONAL -----------
-document.getElementById("informacion-adicional").innerHTML = `
-  <h4><strong>Información adicional</strong></h4>
-
-  <h5>✅ ¿Qué incluye la oferta?</h5>
-
-  <p class="mt-3">
-    <i class="bi bi-airplane-fill me-2 text-primary"></i>
-    Vuelos incluidos:
-    <b>${paquete.vuelo_incluido == 1 ? "Sí" : "No"}</b>
-    ${
-      paquete.vuelo_incluido == 1
-        ? ` - Salida desde: <b>${paquete.salida_desde}</b>`
-        : ""
-    }
-  </p>
-
-  <p>
-    <i class="bi bi-building me-2 text-primary"></i>
-    Alojamiento en <b>${paquete.hotel_nombre}</b>
-  </p>
-
-  <p>
-    <i class="bi bi-cup-hot me-2 text-primary"></i>
-    Régimen:
-    <b>${paquete.hotel_regimen}</b>
-  </p>
-
-  <p>
-    <i class="bi bi-moon-stars me-2 text-primary"></i>
-    Estancia de <b>${paquete.noches}</b> noches
-  </p>
-
-  <p>
-    <i class="bi bi-headset me-2 text-primary"></i>
-    Atención al cliente antes y durante el viaje
-  </p>
-
-  <hr>
-
-  <h5>❌ ¿Qué no incluye la oferta?</h5>
-
-  <p  class="mt-3">
-    <i class="bi bi-x-circle me-2 text-danger"></i>
-    Extras no especificados en la reserva
-  </p>
-
-  <p>
-    <i class="bi bi-x-circle me-2 text-danger"></i>
-    Seguro opcional de cancelación
-  </p>
-
-  <p>
-    <i class="bi bi-x-circle me-2 text-danger"></i>
-    Gastos personales durante la estancia
-  </p>
-
-`;  
-
-//------------ AVISO -------------
-document.getElementById("aviso").innerHTML = `
-  <div class="fondo mt-3">
-    <i class="bi bi-exclamation-diamond-fill"></i>Precio y disponibilidad sujetos a cambios según fechas y demanda.
-  </div>
-
-`;
-//-------SINCRONIZAR PRECIO EN SIDEBAR-----------
- const srcPrecio = document.getElementById("paquete-precio");
+    // ── SINCRONIZAR PRECIO SIDEBAR ────────────────────────────
+    const srcPrecio = document.getElementById("paquete-precio");
     const dstPrecio = document.getElementById("sidebar-precio");
     if (srcPrecio && dstPrecio) {
       dstPrecio.textContent = srcPrecio.textContent.trim();
     }
 
-//eventos despues de que el dom esté cargado
-document.getElementById("btn-favorito").addEventListener("click", () => {
-  const icon = document.querySelector("#btn-favorito i");
-  icon.classList.toggle("bi-heart");
-  icon.classList.toggle("bi-heart-fill");
-});
+    // ── EVENTOS ───────────────────────────────────────────────
+    document.getElementById("btn-favorito").addEventListener("click", () => {
+      const icon = document.querySelector("#btn-favorito i");
+      icon.classList.toggle("bi-heart");
+      icon.classList.toggle("bi-heart-fill");
+    });
 
-loading.classList.add("d-none");
-detalle.classList.remove("d-none");
-
-
-
+    // ── MOSTRAR ───────────────────────────────────────────────
+    loading.classList.add("d-none");
+    detalle.classList.remove("d-none");
 
   } catch (e) {
     console.error("Error cargando el paquete:", e);
-
     loading.classList.add("d-none");
     error.classList.remove("d-none");
   }
