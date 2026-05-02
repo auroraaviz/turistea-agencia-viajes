@@ -12,7 +12,7 @@ Vista pública del producto.
 =========================================
 */
 
-import { obtener } from "../utils/fetch.js";
+import { obtener, crear } from "../utils/fetch.js";
 import { BASE } from "../config.js";
 
 console.log("detalle.js cargado");
@@ -230,11 +230,75 @@ document.getElementById("aviso").innerHTML = `
     }
 
 //eventos despues de que el dom esté cargado
-document.getElementById("btn-favorito").addEventListener("click", () => {
-  const icon = document.querySelector("#btn-favorito i");
-  icon.classList.toggle("bi-heart");
-  icon.classList.toggle("bi-heart-fill");
+
+// Comprobar si ya es favorito al cargar la página
+const esFavoritoRes = await obtener(`/api/favoritos/estado.php?paquete_id=${id}`);
+const btnFav  = document.getElementById("btn-favorito");
+const iconFav = btnFav.querySelector("i");
+
+if (esFavoritoRes && esFavoritoRes.es_favorito) {
+  iconFav.classList.replace("bi-heart", "bi-heart-fill");
+  btnFav.querySelector("i").nextSibling
+    ? null
+    : btnFav.lastChild.textContent = " Guardado en favoritos";
+  btnFav.innerHTML = `<i class="bi bi-heart-fill me-1"></i> Guardado en favoritos`;
+}
+
+btnFav.addEventListener("click", async () => {
+  const yaEsFav = iconFav.classList.contains("bi-heart-fill");
+
+  // Cambio visual inmediato (no espera respuesta del servidor)
+  iconFav.classList.toggle("bi-heart");
+  iconFav.classList.toggle("bi-heart-fill");
+  btnFav.innerHTML = yaEsFav
+    ? `<i class="bi bi-heart me-1"></i> Guardar en favoritos`
+    : `<i class="bi bi-heart-fill me-1"></i> Guardado en favoritos`;
+
+  // Llamada a la API
+  const endpoint = yaEsFav
+    ? "/api/favoritos/eliminar.php"
+    : "/api/favoritos/agregar.php";
+
+  const texto     = await crear(endpoint, { paquete_id: id });
+  const respuesta = texto ? (() => { try { return JSON.parse(texto); } catch { return null; } })() : null;
+
+  // Si el servidor falla revertimos el cambio visual
+  if (!respuesta || !respuesta.ok) {
+    iconFav.classList.toggle("bi-heart");
+    iconFav.classList.toggle("bi-heart-fill");
+    btnFav.innerHTML = yaEsFav
+      ? `<i class="bi bi-heart-fill me-1"></i> Guardado en favoritos`
+      : `<i class="bi bi-heart me-1"></i> Guardar en favoritos`;
+  }
 });
+
+// -------- BOTÓN RESERVAR --------
+const btnReservar = document.getElementById("btn-reservar");
+if (btnReservar) {
+  btnReservar.addEventListener("click", async () => {
+    const numViajeros = parseInt(document.getElementById("sb-personas")?.value || "1");
+
+    btnReservar.disabled = true;
+    btnReservar.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span>Procesando...`;
+
+    const texto     = await crear("/api/reservas/crear.php", {
+      paquete_id:   parseInt(id),
+      num_viajeros: numViajeros
+    });
+    const respuesta = texto ? (() => { try { return JSON.parse(texto); } catch { return null; } })() : null;
+
+    if (respuesta && respuesta.ok) {
+      btnReservar.innerHTML = `<i class="bi bi-check-circle-fill me-2"></i>¡Reserva solicitada!`;
+      btnReservar.style.background = "#28a745";
+      btnReservar.disabled = true;
+    } else {
+      const msg = respuesta?.error || "Error al crear la reserva";
+      btnReservar.disabled = false;
+      btnReservar.innerHTML = `<i class="bi bi-send-fill me-2"></i>Solicitar reserva`;
+      alert(msg);
+    }
+  });
+}
 
 loading.classList.add("d-none");
 detalle.classList.remove("d-none");

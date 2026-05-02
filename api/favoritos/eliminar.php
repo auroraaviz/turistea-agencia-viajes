@@ -1,11 +1,8 @@
 <?php
 /**
- * /api/perfil/favorito-eliminar.php
- * POST → Elimina un paquete de los favoritos del usuario logueado.
+ * /api/favoritos/eliminar.php
+ * POST → Elimina un paquete de favoritos del usuario logueado.
  * Body JSON: { "paquete_id": 5 }
- *
- * NOTAS:
- *  - NO llamar session_start() → ya lo hace auth.php
  */
 
 header("Content-Type: application/json; charset=UTF-8");
@@ -24,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 }
 
 if (esModoDev()) {
-    echo json_encode(["ok" => true, "mensaje" => "Favorito eliminado (modo dev)"]);
+    echo json_encode(["ok" => true]);
     exit;
 }
 
@@ -44,14 +41,15 @@ if ($paqueteId <= 0) {
 }
 
 $usuarioId = (int) $_SESSION["usuario_id"];
-$stmt      = $conexion->prepare(
+
+$stmt = $conexion->prepare(
     "DELETE FROM favorito WHERE usuario_id = ? AND paquete_id = ?"
 );
 $stmt->bind_param("ii", $usuarioId, $paqueteId);
 
 if ($stmt->execute()) {
-    echo json_encode(["ok" => true, "mensaje" => "Favorito eliminado"]);
+    echo json_encode(["ok" => true]);
 } else {
     http_response_code(500);
-    echo json_encode(["error" => "Error al eliminar el favorito"]);
+    echo json_encode(["error" => "Error al eliminar favorito"]);
 }

@@ -1,17 +1,24 @@
 <?php
 /**
  * /api/perfil/reservas.php
- * GET → Devuelve las reservas del usuario logueado,
- *       con datos del paquete asociado (nombre, imagen, destino).
+ * GET → Devuelve las reservas del usuario logueado.
+ *
+ * NOTAS:
+ *  - NO llamar session_start() → ya lo hace auth.php
+ *  - En modo dev devuelve array vacío (sin datos mock)
  */
 
 header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Credentials: true");
 
 require_once __DIR__ . "/../config/bd.php";
+require_once __DIR__ . "/../config/auth.php";
 
-session_start();
+// Modo dev: devolver array vacío para no simular datos falsos
+if (esModoDev()) {
+    echo json_encode([]);
+    exit;
+}
+
 if (empty($_SESSION["usuario_id"])) {
     http_response_code(401);
     echo json_encode(["error" => "No autenticado"]);
@@ -20,21 +27,21 @@ if (empty($_SESSION["usuario_id"])) {
 
 $id = (int) $_SESSION["usuario_id"];
 
-$sql = "SELECT
-            r.id,
-            r.num_viajeros,
-            r.precio_total,
-            r.estado,
-            r.fecha_reserva,
-            p.nombre  AS nombre_paquete,
-            p.imagen,
-            p.destino
-        FROM reserva r
-        JOIN paquete p ON p.id = r.paquete_id
-        WHERE r.usuario_id = ?
-        ORDER BY r.fecha_reserva DESC";
-
-$stmt = $conexion->prepare($sql);
+$stmt = $conexion->prepare(
+    "SELECT
+        r.id,
+        r.num_viajeros,
+        r.precio_total,
+        r.estado,
+        r.fecha_reserva,
+        p.titulo  AS nombre_paquete,
+        p.imagen,
+        p.destino
+     FROM reserva r
+     JOIN paquete p ON p.id = r.paquete_id
+     WHERE r.usuario_id = ?
+     ORDER BY r.fecha_reserva DESC"
+);
 $stmt->bind_param("i", $id);
 $stmt->execute();
 $resultado = $stmt->get_result();
