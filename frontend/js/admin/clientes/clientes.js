@@ -4,6 +4,7 @@ import {renderTabla} from './clientesRender.js';
 import {leerFiltros, aplicarFiltros} from './filtros.js';
 import {activarPaginacion} from './clientesPaginacion.js';
 import {activarEventosTabla} from './clientesEventos.js';
+import {obtener} from '../../utils/fetch.js';
 
 console.log('modulo clientes cargado');
 
@@ -16,10 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
     btnClientes.addEventListener('click', async (e) => {
         e.preventDefault();
         contenido.innerHTML = spinner();
-    
-        try { 
-            const res = await fetch('/turistea/turistea/api/usuarios/get.php');
-            state.usuarios = await res.json();
+
+        try {
+            state.usuarios = await obtener('/api/usuarios/get.php');
             state.listaActual = [...state.usuarios];
             state.paginaActual = 1;
 
@@ -35,8 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     contenido.innerHTML = spinner();
     try {
-        const res = await fetch('/turistea/turistea/api/usuarios/get.php');
-        state.usuarios = await res.json();
+        state.usuarios = await obtener('/api/usuarios/get.php');
         state.listaActual = state.usuarios.filter(u => u.activo == 0);
         state.paginaActual = 1;
         refrescar();
@@ -50,8 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     contenido.innerHTML = spinner();
     try {
-        const res = await fetch('/turistea/turistea/api/usuarios/get.php');
-        state.usuarios = await res.json();
+        state.usuarios = await obtener('/api/usuarios/get.php');
         state.listaActual = state.usuarios.filter(u => (u.rol ?? 'usuario') === 'usuario');
         state.paginaActual = 1;
         refrescar();
@@ -65,8 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     contenido.innerHTML = spinner();
     try {
-        const res = await fetch('/turistea/turistea/api/usuarios/get.php');
-        state.usuarios = await res.json();
+        state.usuarios = await obtener('/api/usuarios/get.php');
         state.listaActual = state.usuarios.filter(u => u.rol === 'admin');
         state.paginaActual = 1;
         refrescar();
