@@ -65,19 +65,13 @@
 
   <body>
     <header>
-      <!-- NAVBAR -->
       <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-0">
-        <div class="container-fluid px-3 px-lg-5">
-          <!-- LOGO -->
+        <div class="container">
           <a class="navbar-brand" href="../../../index.html">
-            <img
-              src="../../../frontend/assets/img/Turistea_Logo/logo_turistea.png"
-              width="90"
-              alt="Turistea"
-            />
+            <img src="../../../frontend/assets/img/Turistea_Logo/logo_turistea.png" width="90" alt="Turistea" />
           </a>
 
-          <!-- BOTÓN SIDEBAR MÓVIL -->
+          <!-- Botón sidebar móvil (abre el menú lateral en móvil) -->
           <button
             class="btn d-lg-none border-0 me-2 order-first"
             type="button"
@@ -88,20 +82,32 @@
             <i class="bi bi-list fs-3"></i>
           </button>
 
-          <!-- MENÚ -->
-          <div class="d-flex align-items-center ms-auto">
-            <ul class="navbar-nav flex-row gap-2">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarAdminNav">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse justify-content-end" id="navbarAdminNav">
+            <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link" href="#"><i class="bi bi-search fs-3"></i></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="../../../index.html"><i class="bi bi-house fs-3"></i></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="../register.html">
-                  <i class="bi bi-person-check fs-3"></i>
-                  <span class="d-inline d-md-none ms-3"> Acceso a registro </span>
+                <a class="nav-link" href="../../../index.html">
+                  <i class="bi bi-house fs-3"></i>
+                  <span class="d-inline d-md-none ms-3">Inicio</span>
                 </a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                  <i class="bi bi-airplane fs-3"></i>
+                  <span class="d-inline d-md-none ms-3">Menú</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li><a class="dropdown-item" href="../perfil.html"><i class="bi bi-person me-2"></i>Mi perfil</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li>
+                    <a class="dropdown-item text-danger" href="#" id="btn-logout-nav">
+                      <i class="bi bi-box-arrow-right me-2"></i>Cerrar sesión
+                    </a>
+                  </li>
+                </ul>
               </li>
             </ul>
           </div>
@@ -110,6 +116,19 @@
     </header>
 
     <hr class="m-0" />
+
+    <!-- HERO -->
+    <div class="panel-hero">
+      <div class="container panel-hero-inner">
+        <div class="panel-hero-info">
+          <h2>Panel de Administración</h2>
+          <span><i class="bi bi-shield-check me-1"></i>Gestión de Turistea</span>
+        </div>
+        <div class="panel-hero-avatar">
+          <i class="bi bi-person-fill"></i>
+        </div>
+      </div>
+    </div>
 
     <!-- LAYOUT -->
     <div class="d-flex layout-admin">

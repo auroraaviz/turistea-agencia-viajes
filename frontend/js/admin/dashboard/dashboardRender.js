@@ -6,25 +6,6 @@ export function renderDashboard(data) {
 
   return `
 
-    <!-- BANNER BIENVENIDA -->
-    <div class="dash-banner mb-4">
-      <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
-        <div>
-          <h3 class="fw-bold text-white mb-1">Hola de nuevo, Admin</h3>
-          <p class="text-white-50 mb-0">Aqui estan las ultimas actualizaciones de tu agencia</p>
-        </div>
-        <div class="d-flex align-items-center gap-3">
-          <div class="text-end text-white">
-            <p class="fw-semibold mb-0">Administrador</p>
-            <small class="text-white-50">admin@turistea.com</small>
-          </div>
-          <div class="dash-avatar">
-            <i class="bi bi-person-fill fs-3"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- FILA 1: 3 TARJETAS KPI -->
     <div class="row g-3 mb-3">
 
