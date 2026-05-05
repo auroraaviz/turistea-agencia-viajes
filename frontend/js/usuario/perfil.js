@@ -148,8 +148,8 @@ function renderizarReservas(lista, contenedor) {
   contenedor.innerHTML = lista.map(r => {
     const badge  = badgeEstado(r.estado);
     const imagen = r.imagen
-      ? `${BASE}/${r.imagen}`
-      : "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&q=80";
+    ? `${BASE}/frontend/${r.imagen}`
+    : "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&q=80";
     const fecha  = new Date(r.fecha_reserva).toLocaleDateString("es-ES",
       { day: "2-digit", month: "short", year: "numeric" });
 
@@ -212,8 +212,8 @@ async function cargarFavoritos() {
 function renderizarFavoritos(lista, contenedor) {
   contenedor.innerHTML = lista.map(f => {
     const imagen = f.imagen
-      ? `${BASE}/${f.imagen}`
-      : "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&q=80";
+    ? `${BASE}/frontend/${f.imagen}`
+    : "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&q=80";
 
     return `
       <div class="col-6 col-md-4" data-paquete-id="${f.paquete_id}">
