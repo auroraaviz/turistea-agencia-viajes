@@ -36,53 +36,16 @@
 
   <body>
     <header>
-      <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-0">
-        <div class="container">
-          <a class="navbar-brand" href="../../../index.html">
-            <img src="../../../frontend/assets/img/Turistea_Logo/logo_turistea.png" width="90" alt="Turistea" />
-          </a>
-
-          <button
-            class="btn d-lg-none border-0 me-2 order-first"
-            type="button"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#sidebarAdmin"
-            aria-label="Abrir menú"
-          >
-            <i class="bi bi-list fs-3"></i>
-          </button>
-
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarAdminNav">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <div class="collapse navbar-collapse justify-content-end" id="navbarAdminNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="../../../index.html">
-                  <i class="bi bi-house fs-3"></i>
-                  <span class="d-inline d-md-none ms-3">Inicio</span>
-                </a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                  <i class="bi bi-airplane fs-3"></i>
-                  <span class="d-inline d-md-none ms-3">Menú</span>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end">
-                  <li><a class="dropdown-item" href="../perfil.html"><i class="bi bi-person me-2"></i>Mi perfil</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li>
-                    <a class="dropdown-item text-danger" href="#" id="btn-logout-nav">
-                      <i class="bi bi-box-arrow-right me-2"></i>Cerrar sesión
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-0">
+  <div class="container">
+    <a class="navbar-brand" href="../../../index.html">
+      <img src="../../assets/img/Turistea_Logo/logo_turistea.png" width="90" />
+    </a>
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item" id="nav-usuario"></li>
+    </ul>
+  </div>
+</nav>
     </header>
 
     <hr class="m-0" />
@@ -121,9 +84,9 @@
             </button>
             <div class="collapse show" id="dashboard-collapse">
               <ul class="list-unstyled small ps-4">
-                <li><a href="admin.html" class="link-dark d-block py-1">Resumen general</a></li>
-                <li><a href="estadisticas.html" class="link-dark d-block py-1 fw-bold text-primary">Estadisticas</a></li>
-                <li><a href="alertas.html" class="link-dark d-block py-1">Alertas</a></li>
+              <li><a href="admin.html" class="link-dark d-block py-1">Resumen general</a></li>
+              <li><a href="estadisticas.html" class="link-dark d-block py-1 fw-bold text-primary">Estadísticas</a></li>
+              <li><a href="alertas.html" class="link-dark d-block py-1">Alertas</a></li>
               </ul>
             </div>
           </li>
@@ -134,10 +97,9 @@
             </button>
             <div class="collapse" id="usuarios-collapse">
               <ul class="btn-toggle-nav list-unstyled small ps-4">
-                <li><a href="#" class="link-dark d-block py-1">Clientes</a></li>
-                <li><a href="#" class="link-dark d-block py-1">Gestores</a></li>
-                <li><a href="#" class="link-dark d-block py-1">Administradores</a></li>
-                <li><a href="#" class="link-dark d-block py-1">Bloqueados</a></li>
+                <li><a href="admin.html?panel=clientes" class="link-dark d-block py-1">Clientes</a></li>
+                <li><a href="admin.html?panel=administradores" class="link-dark d-block py-1">Administradores</a></li>
+                <li><a href="admin.html?panel=bloqueados" class="link-dark d-block py-1">Bloqueados</a></li>
               </ul>
             </div>
           </li>
@@ -198,7 +160,7 @@
           </li>
 
           <li class="border-top mt-3 pt-3">
-            <a href="#" class="link-danger text-decoration-none">
+            <a href="../../pages/login.html" class="link-danger text-decoration-none">
               <i class="bi bi-box-arrow-right me-2"></i> Cerrar sesion
             </a>
           </li>
@@ -295,6 +257,8 @@
     <script src="../../js/bootstrap.bundle.min.js"></script>
     <script src="../../js/admin/sidebars.js"></script>
     <script type="module" src="../../js/admin/guardAdmin.js"></script>
+    <script>window.BASE_PATH = '../../../';</script>
+<script src="../../js/auth/navbarUsuario.js"></script>
     <script>
       document.getElementById("footer-year").textContent = new Date().getFullYear();
     </script>

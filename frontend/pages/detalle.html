@@ -16,57 +16,16 @@
 
   <!-- NAVBAR PRINCIPAL -->
   <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-0">
-      <div class="container">
-        <!-- LOGO -->
-        <a class="navbar-brand" href="../../index.html">
-          <img src="../assets/img/Turistea_Logo/logo_turistea.png" width="90" />
-        </a>
-
-        <!-- BOTÓN MÓVIL -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <!-- MENÚ -->
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <i class="bi bi-search fs-3"></i>
-                <span class="d-inline d-md-none ms-3">Buscar</span>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <i class="bi bi-house fs-3"></i>
-                <span class="d-inline d-md-none ms-3">Menú inicio</span>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <i class="bi bi-person-check fs-3"></i>
-                <span class="d-inline d-md-none ms-3">Acceso a registro</span>
-              </a>
-            </li>
-
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                <i class="bi bi-airplane fs-3"></i>
-                <span class="d-inline d-md-none ms-3">Menu extensible</span>
-              </a>
-
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Perfil</a></li>
-                <li><a class="dropdown-item" href="#">Reservas</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+   <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-0">
+  <div class="container">
+    <a class="navbar-brand" href="../../index.html">
+      <img src="../assets/img/Turistea_Logo/logo_turistea.png" width="90" />
+    </a>
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item" id="nav-usuario"></li>
+    </ul>
+  </div>
+</nav>
   </header>
   
 
@@ -308,6 +267,8 @@
   <script>
     document.getElementById('footer-year').textContent = new Date().getFullYear();
   </script>
+  <script>window.BASE_PATH = '../../';</script>
+<script src="../js/auth/navbarUsuario.js"></script>
 
 </body>
 </html>

@@ -18,7 +18,7 @@
       <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-0">
         <div class="container">
           <!-- LOGO -->
-          <a class="navbar-brand" href="../../index.html">
+          <a class="navbar-brand" href=#>
             <img src="./frontend/assets/img/Turistea_Logo/logo_turistea.png" width="90" />
           </a>
 
@@ -32,44 +32,12 @@
             <span class="navbar-toggler-icon"></span>
           </button>
 
-          <!-- MENÚ -->
-          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="#"
-                  ><i class="bi bi-search fs-3"></i>
-                  <span class="d-inline d-md-none ms-3">Buscar</span>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link" href="#"
-                  ><i class="bi bi-house fs-3"></i>
-                  <span class="d-inline d-md-none ms-3">Menú inicio</span>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link" href="./frontend/pages/admin/admin.html"
-                  ><i class="bi bi-person-check fs-3"></i>
-                  <span class="d-inline d-md-none ms-3">Acceso a registro</span>
-                </a>
-              </li>
-
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                  <i class="bi bi-airplane fs-3"></i>
-                  <span class="d-inline d-md-none ms-3">Menu extensible</span>
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="perfil.html"><i class="bi bi-person me-2"></i>Perfil</a></li>
-                  <li><a class="dropdown-item" href="reservas.html"><i class="bi bi-calendar me-2"></i>Reservas</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+         <!-- MENÚ -->
+<ul class="navbar-nav ms-auto">
+  <li class="nav-item" id="nav-usuario"></li>
+</ul>
+  </div>
+</nav>
 
       <!-- BARRA DE HEADER -->
       <!-- Slider -->
@@ -469,6 +437,9 @@
     <script>
         document.getElementById('footer-year').textContent = new Date().getFullYear();
     </script>
+    <!-- Al final del body -->
+<script>window.BASE_PATH = '';</script>
+<script src="frontend/js/auth/navbarUsuario.js"></script>
 
   </body>
 </html>
