@@ -136,14 +136,14 @@ async function cargarReservas() {
 
   reservasPerfil = reservas;
   document.getElementById("stat-reservas").textContent = reservas.length;
-  renderizarReservas(reservasPerfil, contenedor, { mostrarConfirmar: true, mostrarCancelar: true, mostrarEliminar: true });
+  renderizarReservas(reservasPerfil, contenedor, { mostrarConfirmar: true, mostrarEliminar: true });
   renderizarConfirmados();
 
   // Filtro por estado (sin nueva petición al servidor)
   document.getElementById("filtro-reservas").addEventListener("change", (e) => {
     const val      = e.target.value;
     const filtradas = val ? reservasPerfil.filter(r => r.estado === val) : reservasPerfil;
-    renderizarReservas(filtradas, contenedor, { mostrarConfirmar: true, mostrarCancelar: true, mostrarEliminar: true });
+    renderizarReservas(filtradas, contenedor, { mostrarConfirmar: true, mostrarEliminar: true });
   });
 }
 
@@ -233,7 +233,7 @@ function renderizarConfirmados() {
     return;
   }
 
-  renderizarReservas(confirmadas, contenedor);
+  renderizarReservas(confirmadas, contenedor, { mostrarCancelar: true });
 }
 
 async function confirmarReserva(e) {
@@ -259,7 +259,7 @@ async function confirmarReserva(e) {
   const filtro = document.getElementById("filtro-reservas")?.value || "";
   const lista = filtro ? reservasPerfil.filter(r => r.estado === filtro) : reservasPerfil;
 
-  renderizarReservas(lista, document.getElementById("contenedor-reservas"), { mostrarConfirmar: true, mostrarCancelar: true, mostrarEliminar: true });
+  renderizarReservas(lista, document.getElementById("contenedor-reservas"), { mostrarConfirmar: true, mostrarEliminar: true });
   renderizarConfirmados();
 }
 
@@ -286,7 +286,7 @@ async function cancelarReserva(e) {
   const filtro = document.getElementById("filtro-reservas")?.value || "";
   const lista = filtro ? reservasPerfil.filter(r => r.estado === filtro) : reservasPerfil;
 
-  renderizarReservas(lista, document.getElementById("contenedor-reservas"), { mostrarConfirmar: true, mostrarCancelar: true, mostrarEliminar: true });
+  renderizarReservas(lista, document.getElementById("contenedor-reservas"), { mostrarConfirmar: true, mostrarEliminar: true });
   renderizarConfirmados();
 }
 
@@ -317,7 +317,7 @@ async function eliminarReserva(e) {
   if (reservasPerfil.length === 0) {
     contenedor.innerHTML = mensajeVacio("bi-ticket-detailed", "Aún no tienes reservas.");
   } else {
-    renderizarReservas(lista, contenedor, { mostrarConfirmar: true, mostrarCancelar: true, mostrarEliminar: true });
+    renderizarReservas(lista, contenedor, { mostrarConfirmar: true, mostrarEliminar: true });
   }
 
   renderizarConfirmados();
