@@ -74,6 +74,24 @@ body {
     color: white;
 }
 
+.banner-color {
+  color: #01b4d8 !important;
+}
+
+.btn-banner {
+  background-color: #01b4d8;
+  border-color: #01b4d8;
+  color: white;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-banner:hover,
+.btn-banner:focus {
+  background-color: #01b4d8;
+  border-color: #01b4d8;
+  color: white;
+}
+
 .filtro-label {
     color: #0077B6;
     font-weight: 600;
