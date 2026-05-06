@@ -1,4 +1,4 @@
-// Cerrar sesión vía POST y redirigir al login
+// Cerrar sesión vía POST y redirigir al inicio
 document.addEventListener("DOMContentLoaded", () => {
   const btn = document.getElementById("btnCerrarSesion");
   if (!btn) return;
@@ -17,6 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
       // Si falla el fetch, redirigimos igualmente
     }
 
-    window.location.href = base + "frontend/pages/login.html";
+    window.location.href = base + "index.html";
   });
 });

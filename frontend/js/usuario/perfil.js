@@ -11,6 +11,8 @@
 import { obtener, crear } from "../utils/fetch.js";
 import { BASE } from "../config.js";
 
+let reservasPerfil = [];
+
 /* ─────────────────────────────────────────
    INICIALIZACIÓN
 ───────────────────────────────────────── */
@@ -120,26 +122,32 @@ function actualizarAvatar(nombre) {
 ───────────────────────────────────────── */
 async function cargarReservas() {
   const contenedor = document.getElementById("contenedor-reservas");
+  const contenedorConfirmados = document.getElementById("contenedor-confirmados");
   const reservas   = await obtener("/api/perfil/reservas.php");
 
   if (!reservas || reservas.error || reservas.length === 0) {
     contenedor.innerHTML = mensajeVacio("bi-ticket-detailed", "Aún no tienes reservas.");
+    if (contenedorConfirmados) {
+      contenedorConfirmados.innerHTML = mensajeVacio("bi-check-circle", "Aún no tienes paquetes confirmados.");
+    }
     document.getElementById("stat-reservas").textContent = 0;
     return;
   }
 
+  reservasPerfil = reservas;
   document.getElementById("stat-reservas").textContent = reservas.length;
-  renderizarReservas(reservas, contenedor);
+  renderizarReservas(reservasPerfil, contenedor, { mostrarConfirmar: true, mostrarCancelar: true, mostrarEliminar: true });
+  renderizarConfirmados();
 
   // Filtro por estado (sin nueva petición al servidor)
   document.getElementById("filtro-reservas").addEventListener("change", (e) => {
     const val      = e.target.value;
-    const filtradas = val ? reservas.filter(r => r.estado === val) : reservas;
-    renderizarReservas(filtradas, contenedor);
+    const filtradas = val ? reservasPerfil.filter(r => r.estado === val) : reservasPerfil;
+    renderizarReservas(filtradas, contenedor, { mostrarConfirmar: true, mostrarCancelar: true, mostrarEliminar: true });
   });
 }
 
-function renderizarReservas(lista, contenedor) {
+function renderizarReservas(lista, contenedor, opciones = {}) {
   if (lista.length === 0) {
     contenedor.innerHTML = `<p class="text-muted text-center py-3">No hay reservas con ese filtro.</p>`;
     return;
@@ -152,9 +160,12 @@ function renderizarReservas(lista, contenedor) {
     : "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&q=80";
     const fecha  = new Date(r.fecha_reserva).toLocaleDateString("es-ES",
       { day: "2-digit", month: "short", year: "numeric" });
+    const puedeConfirmar = opciones.mostrarConfirmar && r.estado === "PENDIENTE";
+    const puedeCancelar = opciones.mostrarCancelar && r.estado !== "CANCELADA";
+    const puedeEliminar = opciones.mostrarEliminar;
 
     return `
-      <div class="reserva-card">
+      <div class="reserva-card" data-reserva-id="${r.id}">
         <div class="row g-0">
           <div class="col-4 col-md-3">
             <img src="${imagen}" alt="${r.nombre_paquete || 'Destino'}"
@@ -177,11 +188,139 @@ function renderizarReservas(lista, contenedor) {
               <span style="font-size:.8rem;color:#777;">
                 <i class="bi bi-currency-euro me-1"></i>${Number(r.precio_total).toLocaleString("es-ES")}
               </span>
+              ${puedeConfirmar ? `
+                <button type="button" class="btn-confirmar-reserva" data-id="${r.id}">
+                  <i class="bi bi-check-lg me-1"></i>Confirmar
+                </button>
+              ` : ""}
+              ${puedeCancelar ? `
+                <button type="button" class="btn-cancelar-reserva" data-id="${r.id}">
+                  <i class="bi bi-x-lg me-1"></i>Cancelar
+                </button>
+              ` : ""}
+              ${puedeEliminar ? `
+                <button type="button" class="btn-eliminar-reserva" data-id="${r.id}">
+                  <i class="bi bi-trash me-1"></i>Eliminar
+                </button>
+              ` : ""}
             </div>
           </div>
         </div>
       </div>`;
   }).join("");
+
+  contenedor.querySelectorAll(".btn-confirmar-reserva").forEach(btn => {
+    btn.addEventListener("click", confirmarReserva);
+  });
+
+  contenedor.querySelectorAll(".btn-cancelar-reserva").forEach(btn => {
+    btn.addEventListener("click", cancelarReserva);
+  });
+
+  contenedor.querySelectorAll(".btn-eliminar-reserva").forEach(btn => {
+    btn.addEventListener("click", eliminarReserva);
+  });
+}
+
+function renderizarConfirmados() {
+  const contenedor = document.getElementById("contenedor-confirmados");
+  if (!contenedor) return;
+
+  const confirmadas = reservasPerfil.filter(r => r.estado === "CONFIRMADA");
+
+  if (confirmadas.length === 0) {
+    contenedor.innerHTML = mensajeVacio("bi-check-circle", "Aún no tienes paquetes confirmados.");
+    return;
+  }
+
+  renderizarReservas(confirmadas, contenedor);
+}
+
+async function confirmarReserva(e) {
+  const btn = e.currentTarget;
+  const reservaId = btn.dataset.id;
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span>Confirmando';
+
+  const texto = await crear("/api/perfil/reserva-confirmar.php", { reserva_id: reservaId });
+  const respuesta = parsearTexto(texto);
+
+  if (!respuesta || !respuesta.ok) {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="bi bi-check-lg me-1"></i>Confirmar';
+    alert(respuesta?.error || respuesta?.mensaje || "No se pudo confirmar la reserva.");
+    return;
+  }
+
+  const reserva = reservasPerfil.find(r => String(r.id) === String(reservaId));
+  if (reserva) reserva.estado = "CONFIRMADA";
+
+  const filtro = document.getElementById("filtro-reservas")?.value || "";
+  const lista = filtro ? reservasPerfil.filter(r => r.estado === filtro) : reservasPerfil;
+
+  renderizarReservas(lista, document.getElementById("contenedor-reservas"), { mostrarConfirmar: true, mostrarCancelar: true, mostrarEliminar: true });
+  renderizarConfirmados();
+}
+
+async function cancelarReserva(e) {
+  const btn = e.currentTarget;
+  const reservaId = btn.dataset.id;
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span>Cancelando';
+
+  const texto = await crear("/api/perfil/reserva-cancelar.php", { reserva_id: reservaId });
+  const respuesta = parsearTexto(texto);
+
+  if (!respuesta || !respuesta.ok) {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="bi bi-x-lg me-1"></i>Cancelar';
+    alert(respuesta?.error || respuesta?.mensaje || "No se pudo cancelar la reserva.");
+    return;
+  }
+
+  const reserva = reservasPerfil.find(r => String(r.id) === String(reservaId));
+  if (reserva) reserva.estado = "CANCELADA";
+
+  const filtro = document.getElementById("filtro-reservas")?.value || "";
+  const lista = filtro ? reservasPerfil.filter(r => r.estado === filtro) : reservasPerfil;
+
+  renderizarReservas(lista, document.getElementById("contenedor-reservas"), { mostrarConfirmar: true, mostrarCancelar: true, mostrarEliminar: true });
+  renderizarConfirmados();
+}
+
+async function eliminarReserva(e) {
+  const btn = e.currentTarget;
+  const reservaId = btn.dataset.id;
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span>Eliminando';
+
+  const texto = await crear("/api/perfil/reserva-eliminar.php", { reserva_id: reservaId });
+  const respuesta = parsearTexto(texto);
+
+  if (!respuesta || !respuesta.ok) {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="bi bi-trash me-1"></i>Eliminar';
+    alert(respuesta?.error || respuesta?.mensaje || "No se pudo eliminar la reserva.");
+    return;
+  }
+
+  reservasPerfil = reservasPerfil.filter(r => String(r.id) !== String(reservaId));
+  document.getElementById("stat-reservas").textContent = reservasPerfil.length;
+
+  const filtro = document.getElementById("filtro-reservas")?.value || "";
+  const lista = filtro ? reservasPerfil.filter(r => r.estado === filtro) : reservasPerfil;
+  const contenedor = document.getElementById("contenedor-reservas");
+
+  if (reservasPerfil.length === 0) {
+    contenedor.innerHTML = mensajeVacio("bi-ticket-detailed", "Aún no tienes reservas.");
+  } else {
+    renderizarReservas(lista, contenedor, { mostrarConfirmar: true, mostrarCancelar: true, mostrarEliminar: true });
+  }
+
+  renderizarConfirmados();
 }
 
 function badgeEstado(estado) {
@@ -232,6 +371,15 @@ function renderizarFavoritos(lista, contenedor) {
 
   contenedor.querySelectorAll(".btn-quitar-fav").forEach(btn => {
     btn.addEventListener("click", eliminarFavorito);
+  });
+
+  contenedor.querySelectorAll("[data-paquete-id] .fav-card").forEach(card => {
+    card.addEventListener("click", () => {
+      const paqueteId = card.closest("[data-paquete-id]")?.dataset.paqueteId;
+      if (paqueteId) {
+        window.location.href = `${BASE}/frontend/pages/detalle.html?id=${paqueteId}`;
+      }
+    });
   });
 }
 
@@ -326,7 +474,7 @@ async function guardarPerfil() {
 async function cerrarSesion(e) {
   if (e) e.preventDefault();
   await crear("/api/auth/logout.php", {});
-  window.location.href = `${BASE}/frontend/pages/login.html`;
+  window.location.href = `${BASE}/index.html`;
 }
 
 /* ─────────────────────────────────────────

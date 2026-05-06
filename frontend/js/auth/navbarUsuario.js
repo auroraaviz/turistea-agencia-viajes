@@ -1,5 +1,20 @@
 const BASE = window.BASE_PATH ?? '';
 
+async function cerrarSesion(e) {
+  e.preventDefault();
+
+  try {
+    await fetch(`${BASE}api/auth/logout.php`, {
+      method: 'POST',
+      credentials: 'include'
+    });
+  } catch (_) {
+    // Aunque falle la petición, devolvemos al inicio.
+  }
+
+  window.location.href = `${BASE}index.html`;
+}
+
 async function iniciarNavbar() {
   const contenedor = document.getElementById('nav-usuario');
   if (!contenedor) return;
@@ -40,8 +55,10 @@ async function iniciarNavbar() {
           <li><a class="dropdown-item" href="${BASE}frontend/pages/perfil.html">Mi perfil</a></li>
           <li><a class="dropdown-item" href="${BASE}frontend/pages/perfil.html#reservas">Mis reservas</a></li>
           <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item text-danger" href="${BASE}api/auth/logout.php">Cerrar sesión</a></li>
+          <li><a class="dropdown-item text-danger" href="#" data-logout>Cerrar sesión</a></li>
         </ul>`;
+
+      contenedor.querySelector('[data-logout]')?.addEventListener('click', cerrarSesion);
     }
 
   } catch (e) {
