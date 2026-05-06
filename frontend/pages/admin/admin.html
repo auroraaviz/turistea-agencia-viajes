@@ -67,6 +67,15 @@
     <header>
       <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-0">
         <div class="container">
+      <button
+        class="btn btn-hamburger d-lg-none me-2"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#sidebarAdmin"
+        aria-controls="sidebarAdmin"
+        aria-label="Abrir menú">
+        <i class="bi bi-list"></i>
+      </button>
       <a class="navbar-brand" href="../../../index.html">
       <img src="../../assets/img/Turistea_Logo/logo_turistea.png" width="90" />
     </a>
@@ -171,10 +180,10 @@
             </div>
           </li>
 <!-- DESTINOS --> <li class="mb-1"> <button class="btn btn-toggle w-100 text-start fw-semibold collapsed" data-bs-toggle="collapse" data-bs-target="#destinos-collapse"> <i class="bi bi-geo-alt-fill me-2"></i>Destinos </button> <div class="collapse" id="destinos-collapse"> <ul class="btn-toggle-nav list-unstyled small ps-4"> <li><a href="#" class="link-dark d-block py-1">España</a></li> <li><a href="#" class="link-dark d-block py-1">Europa</a></li> <li><a href="#" class="link-dark d-block py-1">Caribe</a></li> <li><a href="#" class="link-dark d-block py-1">Asia</a></li> </ul> </div> </li>
-<!-- RESERVAS --> <li class="mb-1"> <button class="btn btn-toggle w-100 text-start fw-semibold collapsed" data-bs-toggle="collapse" data-bs-target="#reservas-collapse"> <i class="bi bi-journal-check me-2"></i>Reservas </button> <div class="collapse" id="reservas-collapse"> <ul class="btn-toggle-nav list-unstyled small ps-4"> <li><a href="#" class="link-dark d-block py-1">Pendientes</a></li> <li><a href="#" class="link-dark d-block py-1">Confirmadas</a></li> <li><a href="#" class="link-dark d-block py-1">Canceladas</a></li> <li><a href="#" class="link-dark d-block py-1">Finalizadas</a></li> </ul> </div> </li> <!-- FINANZAS --> <li class="mb-1"> <button class="btn btn-toggle w-100 text-start fw-semibold collapsed" data-bs-toggle="collapse" data-bs-target="#finanzas-collapse"> <i class="bi bi-cash-stack me-2"></i>Finanzas </button> <div class="collapse" id="finanzas-collapse"> <ul class="btn-toggle-nav list-unstyled small ps-4"> <li><a href="#" class="link-dark d-block py-1">Ingresos</a></li> <li><a href="#" class="link-dark d-block py-1">Pagos</a></li> <li><a href="#" class="link-dark d-block py-1">Facturas</a></li> </ul> </div> </li>         
+<!-- RESERVAS --> <li class="mb-1"> <button class="btn btn-toggle w-100 text-start fw-semibold collapsed" data-bs-toggle="collapse" data-bs-target="#reservas-collapse"> <i class="bi bi-journal-check me-2"></i>Reservas </button> <div class="collapse" id="reservas-collapse"> <ul class="btn-toggle-nav list-unstyled small ps-4"> <li><a href="#" class="link-dark d-block py-1" id="btnReservasTodas">Todas</a></li> <li><a href="#" class="link-dark d-block py-1" id="btnReservasPendientes">Pendientes</a></li> <li><a href="#" class="link-dark d-block py-1" id="btnReservasConfirmadas">Confirmadas</a></li> <li><a href="#" class="link-dark d-block py-1" id="btnReservasCanceladas">Canceladas</a></li> </ul> </div> </li> <!-- FINANZAS --> <li class="mb-1"> <button class="btn btn-toggle w-100 text-start fw-semibold collapsed" data-bs-toggle="collapse" data-bs-target="#finanzas-collapse"> <i class="bi bi-cash-stack me-2"></i>Finanzas </button> <div class="collapse" id="finanzas-collapse"> <ul class="btn-toggle-nav list-unstyled small ps-4"> <li><a href="#" class="link-dark d-block py-1">Ingresos</a></li> <li><a href="#" class="link-dark d-block py-1">Pagos</a></li> <li><a href="#" class="link-dark d-block py-1">Facturas</a></li> </ul> </div> </li>         
 <!-- CUENTA -->
           <li class="border-top mt-3 pt-3">
-            <a href="../../pages/login.html" class="link-danger text-decoration-none">
+            <a href="#" class="link-danger text-decoration-none" id="btnCerrarSesion">
                 <i class="bi bi-box-arrow-right me-2"></i>
                 Cerrar sesión
             </a>
@@ -284,8 +293,10 @@
       document.getElementById("footer-year").textContent = new Date().getFullYear();
     </script>
     <script type="module" src="../../js/admin/clientes/clientes.js"></script>
+    <script type="module" src="../../js/admin/reservas/reservas.js"></script>
     <script>window.BASE_PATH = '../../../';</script>
 <script src="../../js/auth/navbarUsuario.js"></script>
+    <script src="../../js/auth/logout.js"></script>
 
   </body>
 </html>

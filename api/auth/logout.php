@@ -17,10 +17,14 @@ if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
 
 session_start();
 
-// Destruir sesión
-session_destroy();
+// Limpiar variables de sesión y marcar como deslogueado
+$_SESSION = [];
+$_SESSION["logged_out"] = true;
 
-// Limpiar cookie de sesión
+// Regenerar para que la nueva sesión persista el flag
+session_regenerate_id(true);
+
+// Limpiar cookie de sesión anterior
 if (isset($_COOKIE[session_name()])) {
     setcookie(session_name(), '', time() - 3600, '/');
 }

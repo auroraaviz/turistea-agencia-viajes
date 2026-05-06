@@ -1,0 +1,334 @@
+/* ======================================================
+   PASARELA DE PAGO - CSS
+   ====================================================== */
+
+:root {
+  --primary: #0077B6;
+  --primary-dark: #003566;
+  --secondary: #00B4D8;
+  --accent-red: #FF6B6B;
+  --accent-yellow: #FFD166;
+  --text-dark: #1a2d45;
+  --text-light: #777;
+  --bg-light: #f8f9fa;
+  --border-light: #e9ecef;
+}
+
+body {
+  font-family: 'Raleway', sans-serif;
+  background-color: #f5f6f7;
+  color: var(--text-dark);
+}
+
+/* ===== CONTENEDOR PRINCIPAL ===== */
+.pasarela-container {
+  max-width: 820px;
+  margin: 2.5rem auto;
+  padding: 0 1rem;
+}
+
+/* ===== RESUMEN DEL PAQUETE ===== */
+.resumen-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.07);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-top: 3px solid var(--secondary);
+}
+
+.resumen-titulo {
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: .3rem;
+  font-size: 1.1rem;
+}
+
+.resumen-destino {
+  color: var(--text-light);
+  font-size: .88rem;
+  margin-bottom: 0;
+}
+
+.resumen-destino i {
+  color: var(--accent-yellow);
+}
+
+.resumen-card hr {
+  border-color: var(--border-light);
+  margin: .8rem 0;
+}
+
+.resumen-linea {
+  display: flex;
+  justify-content: space-between;
+  font-size: .88rem;
+  padding: .25rem 0;
+  color: var(--text-light);
+}
+
+.resumen-linea .valor {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.resumen-linea.total {
+  font-size: 1rem;
+  font-weight: 700;
+  border-top: 2px solid var(--primary);
+  margin-top: .5rem;
+  padding-top: .6rem;
+}
+
+.resumen-linea.total,
+.resumen-linea.total .valor {
+  color: var(--primary);
+}
+
+/* ===== BADGE MODO ===== */
+.badge-modo {
+  display: inline-block;
+  font-size: .78rem;
+  font-weight: 600;
+  padding: .35rem .8rem;
+  border-radius: 20px;
+  margin-bottom: .8rem;
+}
+
+.badge-modo.pago {
+  background: rgba(255,107,107,.12);
+  color: var(--accent-red);
+  border: 1px solid rgba(255,107,107,.3);
+}
+
+.badge-modo.reserva {
+  background: rgba(0,180,216,.1);
+  color: var(--secondary);
+  border: 1px solid rgba(0,180,216,.3);
+}
+
+/* ===== TÍTULO ===== */
+.pasarela-titulo {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ===== TARJETA MÉTODO DE PAGO ===== */
+.metodo-pago-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.07);
+  overflow: hidden;
+}
+
+.metodo-pago-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: var(--bg-light);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.metodo-pago-header span {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text-dark);
+}
+
+.metodo-pago-icons {
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+}
+
+.metodo-pago-icons img {
+  height: 28px;
+  object-fit: contain;
+}
+
+/* ===== CUERPO: INFO DE TARJETA Y PAGO ===== */
+.metodo-pago-body {
+  padding: 1.5rem;
+}
+
+.pago-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.pago-seccion h6 {
+  font-weight: 700;
+  font-size: .9rem;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: .4rem;
+}
+
+.pago-dato {
+  display: flex;
+  justify-content: space-between;
+  padding: .35rem 0;
+  font-size: .88rem;
+}
+
+.pago-dato .label {
+  color: var(--text-light);
+}
+
+.pago-dato .valor {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.pago-dato.total {
+  border-top: 1px solid var(--border-light);
+  margin-top: .5rem;
+  padding-top: .6rem;
+  font-weight: 700;
+}
+
+.pago-dato.total .label,
+.pago-dato.total .valor {
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+/* ===== ESTADO VACÍO (SIN TARJETA) ===== */
+.sin-tarjeta {
+  padding: 3rem 1.5rem;
+  text-align: center;
+  color: var(--text-light);
+  min-height: 120px;
+}
+
+/* ===== ENLACE AGREGAR TARJETA ===== */
+.agregar-tarjeta {
+  display: block;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--border-light);
+  color: var(--text-light);
+  font-size: .88rem;
+  text-decoration: none;
+  transition: background .2s, color .2s;
+  cursor: pointer;
+}
+
+.agregar-tarjeta:hover {
+  background: var(--bg-light);
+  color: var(--primary);
+}
+
+/* ===== BOTÓN PAGAR ===== */
+.btn-pagar {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  margin-top: 2rem;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .2s;
+}
+
+.btn-pagar:hover {
+  background: var(--primary-dark);
+}
+
+.btn-pagar:disabled {
+  background: #a0c4d8;
+  cursor: not-allowed;
+}
+
+/* ===== MODAL AGREGAR TARJETA ===== */
+.modal-tarjeta .modal-content {
+  border-radius: 12px;
+  border: none;
+}
+
+.modal-tarjeta .modal-header {
+  background: var(--primary);
+  color: #fff;
+  border-radius: 12px 12px 0 0;
+}
+
+.modal-tarjeta .btn-close {
+  filter: brightness(0) invert(1);
+}
+
+.modal-tarjeta .form-label {
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.modal-tarjeta .form-control {
+  border-radius: 8px;
+  border: 1px solid var(--border-light);
+  padding: .6rem .9rem;
+  font-family: 'Raleway', sans-serif;
+}
+
+.modal-tarjeta .form-control:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 .2rem rgba(0,119,182,.15);
+}
+
+.btn-guardar-tarjeta {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  padding: .6rem 2rem;
+  font-family: 'Raleway', sans-serif;
+  transition: background .2s;
+}
+
+.btn-guardar-tarjeta:hover {
+  background: var(--primary-dark);
+  color: #fff;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .pasarela-container {
+    margin: 1.5rem auto;
+  }
+
+  .pasarela-titulo {
+    font-size: 1.2rem;
+  }
+
+  .pago-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .metodo-pago-header {
+    padding: 1rem;
+  }
+
+  .metodo-pago-header span {
+    font-size: .9rem;
+  }
+
+  .metodo-pago-icons img {
+    height: 22px;
+  }
+
+  .metodo-pago-body {
+    padding: 1rem;
+  }
+}

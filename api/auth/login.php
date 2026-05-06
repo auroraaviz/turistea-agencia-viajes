@@ -21,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($usuario && password_verify($password, $usuario['password_hash'])) {
 
+        unset($_SESSION['logged_out']);
         $_SESSION['usuario_id'] = $usuario['id'];
         $_SESSION['email'] = $usuario['email'];
         $_SESSION['nombre'] = $usuario['nombre'];

@@ -257,32 +257,37 @@ btnFav.addEventListener("click", async () => {
   }
 });
 
-// -------- BOTÓN RESERVAR --------
+// -------- BOTÓN RESERVAR / PAGAR → PASARELA --------
 const btnReservar = document.getElementById("btn-reservar");
-if (btnReservar) {
-  btnReservar.addEventListener("click", async () => {
-    const numViajeros = parseInt(document.getElementById("sb-personas")?.value || "1");
+if (btnReservar && paquete.fecha_salida) {
+  // Comprobar si el usuario está logueado
+  let usuarioLogueado = false;
+  try {
+    const sesion = await obtener("/api/auth/session.php");
+    usuarioLogueado = sesion && sesion.ok;
+  } catch (_) {}
 
-    btnReservar.disabled = true;
-    btnReservar.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span>Procesando...`;
+  const fechaSalida = new Date(paquete.fecha_salida);
+  const hoy         = new Date();
+  const diasHasta   = Math.ceil((fechaSalida - hoy) / (1000 * 60 * 60 * 24));
 
-    const texto     = await crear("/api/reservas/crear.php", {
-      paquete_id:   parseInt(id),
-      num_viajeros: numViajeros
+  if (!usuarioLogueado) {
+    btnReservar.innerHTML = '<i class="bi bi-box-arrow-in-right me-2"></i>Iniciar sesión para reservar';
+    btnReservar.addEventListener("click", () => {
+      window.location.href = `login.html`;
     });
-    const respuesta = texto ? (() => { try { return JSON.parse(texto); } catch { return null; } })() : null;
-
-    if (respuesta && respuesta.ok) {
-      btnReservar.innerHTML = `<i class="bi bi-check-circle-fill me-2"></i>¡Reserva solicitada!`;
-      btnReservar.style.background = "#28a745";
-      btnReservar.disabled = true;
+  } else {
+    if (diasHasta < 30) {
+      btnReservar.innerHTML = '<i class="bi bi-credit-card me-2"></i>Pagar ahora';
     } else {
-      const msg = respuesta?.error || "Error al crear la reserva";
-      btnReservar.disabled = false;
-      btnReservar.innerHTML = `<i class="bi bi-send-fill me-2"></i>Solicitar reserva`;
-      alert(msg);
+      btnReservar.innerHTML = '<i class="bi bi-send-fill me-2"></i>Reservar';
     }
-  });
+
+    btnReservar.addEventListener("click", () => {
+      const numViajeros = parseInt(document.getElementById("sb-personas")?.value || "1");
+      window.location.href = `pasarela-pago.html?id=${id}&viajeros=${numViajeros}`;
+    });
+  }
 }
 
     // ── MOSTRAR ───────────────────────────────────────────────

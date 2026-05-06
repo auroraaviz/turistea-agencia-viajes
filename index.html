@@ -17,27 +17,58 @@
       <!-- NAVBAR PRINCIPAL -->
       <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-0">
         <div class="container">
+          <!-- BOTÓN MÓVIL -->
+          <button
+            class="btn btn-hamburger d-lg-none me-2"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#menuPrincipal"
+            aria-controls="menuPrincipal"
+            aria-label="Abrir menú">
+            <i class="bi bi-list"></i>
+          </button>
+
           <!-- LOGO -->
-          <a class="navbar-brand" href=#>
+          <a class="navbar-brand" href="#">
             <img src="./frontend/assets/img/Turistea_Logo/logo_turistea.png" width="90" />
           </a>
 
-          <!-- BOTÓN MÓVIL -->
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
+          <!-- ENLACES (desktop) -->
+          <ul class="navbar-nav d-none d-lg-flex flex-row gap-3 ms-4 me-auto">
+            <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalContacto">Contacto</a></li>
+          </ul>
 
-         <!-- MENÚ -->
+         <!-- MENÚ USUARIO -->
 <ul class="navbar-nav ms-auto">
   <li class="nav-item" id="nav-usuario"></li>
 </ul>
   </div>
 </nav>
+
+<!-- OFFCANVAS MÓVIL -->
+<div class="offcanvas offcanvas-start menu-offcanvas" tabindex="-1" id="menuPrincipal" aria-labelledby="menuPrincipalLabel">
+  <div class="offcanvas-header border-bottom">
+    <a class="navbar-brand m-0" href="#">
+      <img src="./frontend/assets/img/Turistea_Logo/logo_turistea.png" width="80" />
+    </a>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+  </div>
+  <div class="offcanvas-body p-0">
+    <ul class="list-unstyled menu-offcanvas-list mb-0">
+      <li><a href="#" data-bs-dismiss="offcanvas"><i class="bi bi-house-door me-2"></i>Inicio</a></li>
+      <li><a href="#" data-bs-dismiss="offcanvas" data-bs-toggle="modal" data-bs-target="#modalContacto"><i class="bi bi-envelope me-2"></i>Contacto</a></li>
+    </ul>
+    <hr class="my-2"/>
+    <p class="text-uppercase text-muted small fw-bold px-3 mb-2">Categorías</p>
+    <ul class="list-unstyled menu-offcanvas-list mb-0">
+      <li><a href="#" data-bs-dismiss="offcanvas" data-categoria-link="vuelo"><i class="bi bi-airplane me-2"></i>Vuelos</a></li>
+      <li><a href="#" data-bs-dismiss="offcanvas" data-categoria-link="vacaciones"><i class="bi bi-suitcase me-2"></i>Vacaciones</a></li>
+      <li><a href="#" data-bs-dismiss="offcanvas" data-categoria-link="fin_de_semana"><i class="bi bi-building me-2"></i>Fin de semana</a></li>
+      <li><a href="#" data-bs-dismiss="offcanvas" data-categoria-link="verano"><i class="bi bi-fire me-2"></i>Verano</a></li>
+    </ul>
+  </div>
+</div>
 
       <!-- BARRA DE HEADER -->
       <!-- Slider -->
@@ -436,6 +467,14 @@
     <script type="module" src="./frontend/js/filtros/filtros.js"></script>
     <script>
         document.getElementById('footer-year').textContent = new Date().getFullYear();
+        document.querySelectorAll('[data-categoria-link]').forEach(function (link) {
+          link.addEventListener('click', function (e) {
+            e.preventDefault();
+            const cat = link.dataset.categoriaLink;
+            const target = document.querySelector('.categoria[data-categoria="' + cat + '"]');
+            if (target) target.click();
+          });
+        });
     </script>
     <!-- Al final del body -->
 <script>window.BASE_PATH = '';</script>

@@ -146,3 +146,79 @@ body {
   background-color: #0077B6;
   color: white;
 }
+
+/* ===== BOTÓN HAMBURGUESA ===== */
+.btn-hamburger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: none;
+  border-radius: 10px;
+  background-color: rgba(0, 119, 182, 0.08);
+  color: #0077B6;
+  font-size: 1.5rem;
+  line-height: 1;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.btn-hamburger:hover,
+.btn-hamburger:focus {
+  background-color: #0077B6;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 119, 182, 0.25);
+}
+
+.btn-hamburger:active {
+  transform: scale(0.95);
+}
+
+.btn-hamburger i {
+  pointer-events: none;
+}
+
+/* ===== OFFCANVAS MENÚ MÓVIL ===== */
+.menu-offcanvas {
+  width: 280px;
+  border-right: none;
+}
+
+.menu-offcanvas .offcanvas-header {
+  padding: 1rem 1.25rem;
+  background-color: #ffffff;
+}
+
+.menu-offcanvas .offcanvas-body {
+  background-color: #ffffff;
+}
+
+.menu-offcanvas-list li a {
+  display: flex;
+  align-items: center;
+  padding: 0.85rem 1.25rem;
+  color: #1a2d45;
+  text-decoration: none;
+  font-weight: 500;
+  border-left: 3px solid transparent;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.menu-offcanvas-list li a:hover,
+.menu-offcanvas-list li a:focus {
+  background-color: rgba(0, 119, 182, 0.08);
+  color: #0077B6;
+  border-left-color: #0077B6;
+}
+
+.menu-offcanvas-list li a i {
+  font-size: 1.1rem;
+  color: #0077B6;
+}
+
+/* Texto pequeño de sección dentro del offcanvas */
+.menu-offcanvas .offcanvas-body > p {
+  margin-top: 0.5rem;
+  letter-spacing: 0.05em;
+}
