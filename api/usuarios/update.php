@@ -11,6 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 require_once("../config/bd.php");
+require_once("../config/auth.php");
+
+verificarAdmin();
 
 $datos = json_decode(file_get_contents("php://input"), true);
 
@@ -27,29 +30,52 @@ if (empty($datos['id'])) {
 }
 
 $id = (int) $datos['id'];
-$nombre = $conexion->real_escape_string($datos['nombre'] ?? '');
-$apellidos = $conexion->real_escape_string($datos['apellidos'] ?? '');
-$email = $conexion->real_escape_string($datos['email'] ?? '');
-$telefono = $conexion->real_escape_string($datos['telefono'] ?? '');
-$rol = $conexion->real_escape_string($datos['rol'] ?? '');
+$nombre = trim($datos['nombre'] ?? '');
+$apellidos = trim($datos['apellidos'] ?? '');
+$email = trim($datos['email'] ?? '');
+$telefono = trim($datos['telefono'] ?? '');
+$rol = trim($datos['rol'] ?? 'usuario');
 $activo = isset($datos['activo']) ? (int) $datos['activo'] : 1;
 
-$ok = $conexion->query("
+if ($nombre === '' || $email === '') {
+    http_response_code(400);
+    echo json_encode(["error" => "Nombre y email son obligatorios"]);
+    exit;
+}
+
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    http_response_code(400);
+    echo json_encode(["error" => "Email inválido"]);
+    exit;
+}
+
+if (!in_array($rol, ['usuario', 'admin'], true)) {
+    http_response_code(400);
+    echo json_encode(["error" => "Rol inválido"]);
+    exit;
+}
+
+$activo = $activo === 1 ? 1 : 0;
+
+$stmt = $conexion->prepare("
     UPDATE usuario
-    SET
-        nombre = '$nombre',
-        apellidos = '$apellidos',
-        email = '$email',
-        telefono = '$telefono',
-        rol = '$rol',
-        activo = $activo
-    WHERE id = $id
+    SET nombre = ?, apellidos = ?, email = ?, telefono = ?, rol = ?, activo = ?
+    WHERE id = ?
 ");
 
-if ($ok) {
+if (!$stmt) {
+    http_response_code(500);
+    echo json_encode(["error" => "Error al preparar consulta: " . $conexion->error]);
+    exit;
+}
+
+$stmt->bind_param("sssssii", $nombre, $apellidos, $email, $telefono, $rol, $activo, $id);
+$ok = $stmt->execute();
+
+if ($ok && $stmt->affected_rows >= 0) {
     echo json_encode(["ok" => true, "mensaje" => "Usuario actualizado"]);
 } else {
     http_response_code(500);
-    echo json_encode(["error" => "Error al actualizar: " . $conexion->error]);
+    echo json_encode(["error" => "Error al actualizar: " . $stmt->error]);
 }
 ?>

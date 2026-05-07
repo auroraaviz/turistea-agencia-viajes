@@ -6,6 +6,7 @@ console.log("modulo dashboard cargado");
 document.addEventListener("DOMContentLoaded", () => {
   const btnResumen = document.getElementById("btnResumenGeneral");
   const contenido = document.getElementById("contenido");
+  const params = new URLSearchParams(window.location.search);
 
   if (!btnResumen || !contenido) return;
 
@@ -15,9 +16,12 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Cargar dashboard por defecto al entrar al admin
-  cargarDashboard();
+  if (!params.has("finanzas")) {
+    cargarDashboard();
+  }
 
   async function cargarDashboard() {
+    contenido.dataset.vista = "dashboard";
     contenido.innerHTML = `
       <div class="text-center py-5">
         <div class="spinner-border text-primary" role="status">
@@ -39,9 +43,11 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
+      if (contenido.dataset.vista !== "dashboard") return;
       contenido.innerHTML = renderDashboard(data);
     } catch (error) {
       console.log(error);
+      if (contenido.dataset.vista !== "dashboard") return;
       contenido.innerHTML = `
         <div class="alert alert-danger text-center mt-4">
           Error al cargar los datos del dashboard.

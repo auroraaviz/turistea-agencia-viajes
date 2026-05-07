@@ -35,7 +35,6 @@ export function renderTabla(lista, paginaActual, porPagina) {
                         <select class="form-select" id="filtroRol">
                             <option value="">Todos</option>
                             <option value="usuario">Usuario</option>
-                            <option value="gestor">Gestor</option>
                             <option value="admin">Administrador</option>
                         </select>
                     </div>

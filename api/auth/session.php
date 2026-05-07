@@ -32,6 +32,7 @@ if (isset($_SESSION['usuario_id']) && isset($_SESSION['email']) && isset($_SESSI
         "id" => $_SESSION['usuario_id'],
         "email" => $_SESSION['email'],
         "nombre" => $_SESSION['nombre'],
+        "apellidos" => $_SESSION['apellidos'] ?? "",
         "rol" => $_SESSION['rol']
     ]);
 } else if (esModoDev()) {
@@ -41,6 +42,7 @@ if (isset($_SESSION['usuario_id']) && isset($_SESSION['email']) && isset($_SESSI
         "id" => 999,
         "email" => "dev@turistea.com",
         "nombre" => "Dev Admin",
+        "apellidos" => "",
         "rol" => "admin"
     ]);
 } else {
