@@ -48,6 +48,19 @@ export async function cargarPaquetes() {
       `;
     });
 
+    contenedor.querySelectorAll('.card').forEach((card) => {
+      card.addEventListener('click', (event) => {
+        event.preventDefault();
+        card.classList.remove('card-rebote');
+        void card.offsetWidth;
+        card.classList.add('card-rebote');
+
+        setTimeout(() => {
+          window.location.href = card.href;
+        }, 220);
+      });
+    });
+
   } catch (error) {
     contenedor.innerHTML = `
       <div class="col-12 text-danger">Error cargando paquetes</div>

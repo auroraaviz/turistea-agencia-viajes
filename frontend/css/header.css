@@ -148,7 +148,30 @@ body {
 }
 
 #contenedor-tarjetas .card {
-  border-bottom: 5px solid #00B4D8;
+  border-bottom: 1px solid #000;
+  box-shadow: 0 8px 14px -10px rgba(0, 0, 0, 0.75) !important;
+}
+
+#contenedor-tarjetas .card.card-rebote {
+  animation: reboteTarjeta 0.28s ease;
+}
+
+@keyframes reboteTarjeta {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+
+  35% {
+    transform: translateY(-10px) scale(1.03);
+  }
+
+  70% {
+    transform: translateY(2px) scale(0.99);
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+  }
 }
 
 .card:hover {
