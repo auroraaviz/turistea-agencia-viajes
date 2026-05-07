@@ -74,6 +74,24 @@ body {
     color: white;
 }
 
+.banner-color {
+  color: #01b4d8 !important;
+}
+
+.btn-banner {
+  background-color: #01b4d8;
+  border-color: #01b4d8;
+  color: white;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-banner:hover,
+.btn-banner:focus {
+  background-color: #01b4d8;
+  border-color: #01b4d8;
+  color: white;
+}
+
 .filtro-label {
     color: #0077B6;
     font-weight: 600;
@@ -127,6 +145,33 @@ body {
   border-radius: 15px;
   overflow: hidden;
   transition: all 0.3s ease;
+}
+
+#contenedor-tarjetas .card {
+  border-bottom: 1px solid #000;
+  box-shadow: 0 8px 14px -10px rgba(0, 0, 0, 0.75) !important;
+}
+
+#contenedor-tarjetas .card.card-rebote {
+  animation: reboteTarjeta 0.28s ease;
+}
+
+@keyframes reboteTarjeta {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+
+  35% {
+    transform: translateY(-10px) scale(1.03);
+  }
+
+  70% {
+    transform: translateY(2px) scale(0.99);
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+  }
 }
 
 .card:hover {

@@ -145,6 +145,21 @@ INSERT INTO `paquete` (`id`, `titulo`, `descripcion`, `destino`, `hotel_nombre`,
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tarjeta_credito`
+--
+
+CREATE TABLE `tarjeta_credito` (
+  `id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `titular` varchar(150) NOT NULL,
+  `ultimos_4` char(4) NOT NULL,
+  `vencimiento` varchar(5) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `reserva`
 --
 
@@ -256,6 +271,13 @@ ALTER TABLE `paquete`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `tarjeta_credito`
+--
+ALTER TABLE `tarjeta_credito`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_tarjeta_usuario` (`usuario_id`);
+
+--
 -- Indices de la tabla `reserva`
 --
 ALTER TABLE `reserva`
@@ -318,6 +340,12 @@ ALTER TABLE `paquete`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
+-- AUTO_INCREMENT de la tabla `tarjeta_credito`
+--
+ALTER TABLE `tarjeta_credito`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `reserva`
 --
 ALTER TABLE `reserva`
@@ -371,6 +399,12 @@ ALTER TABLE `pago`
 ALTER TABLE `reserva`
   ADD CONSTRAINT `reserva_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`),
   ADD CONSTRAINT `reserva_ibfk_2` FOREIGN KEY (`paquete_id`) REFERENCES `paquete` (`id`);
+
+--
+-- Filtros para la tabla `tarjeta_credito`
+--
+ALTER TABLE `tarjeta_credito`
+  ADD CONSTRAINT `fk_tarjeta_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `viajero`

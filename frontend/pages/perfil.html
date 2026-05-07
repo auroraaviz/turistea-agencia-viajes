@@ -144,7 +144,7 @@
         <div class="col-md-8">
           <div class="panel-card">
 
-            <!-- Tabs: solo Reservas y Favoritos -->
+            <!-- Tabs: Reservas, Confirmados y Favoritos -->
             <ul class="nav panel-tabs" id="perfilTabs" role="tablist">
               <li class="nav-item" role="presentation">
                 <button
@@ -154,6 +154,16 @@
                   type="button" role="tab"
                 >
                   <i class="bi bi-ticket-detailed me-1"></i>Mis Reservas
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  data-bs-toggle="tab"
+                  data-bs-target="#tab-confirmados"
+                  type="button" role="tab"
+                >
+                  <i class="bi bi-check-circle me-1"></i>Confirmados
                 </button>
               </li>
               <li class="nav-item" role="presentation">
@@ -184,6 +194,14 @@
                 <!-- Las tarjetas se insertan dinámicamente por JS -->
                 <div id="contenedor-reservas">
                   <p class="text-muted text-center py-4">Cargando reservas…</p>
+                </div>
+              </div>
+
+              <!-- TAB: Confirmados -->
+              <div class="tab-pane fade" id="tab-confirmados" role="tabpanel">
+                <h6 class="fw-bold mb-3" style="color:#1a2d45;">Paquetes confirmados</h6>
+                <div id="contenedor-confirmados">
+                  <p class="text-muted text-center py-4">Cargando confirmados…</p>
                 </div>
               </div>
 

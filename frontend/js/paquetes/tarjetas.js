@@ -17,8 +17,9 @@ export async function cargarPaquetes() {
     paquetes.forEach((paquete) => {
       contenedor.innerHTML += `
         <div class="col-12 col-md-6 col-lg-3">
-          <div 
-            class="card h-100 shadow-sm"
+          <a
+            href="${BASE}/frontend/pages/detalle.html?id=${paquete.id}"
+            class="card h-100 shadow-sm text-decoration-none text-dark"
             data-destino="${paquete.destino}"
             data-fecha-inicio="${paquete.fecha_salida}"
             data-fecha-fin="${paquete.fecha_regreso}"
@@ -42,17 +43,22 @@ export async function cargarPaquetes() {
                 ${paquete.fecha_salida} - ${paquete.fecha_regreso}
               </p>
             </div>
-            <div class="p-3 pt-0">
-              <a 
-                href="${BASE}/frontend/pages/detalle.html?id=${paquete.id}" 
-                class="btn btn-ver-viaje w-100 rounded-pill"
-              >
-                Ver viaje
-              </a>
-            </div>
-          </div>
+          </a>
         </div>
       `;
+    });
+
+    contenedor.querySelectorAll('.card').forEach((card) => {
+      card.addEventListener('click', (event) => {
+        event.preventDefault();
+        card.classList.remove('card-rebote');
+        void card.offsetWidth;
+        card.classList.add('card-rebote');
+
+        setTimeout(() => {
+          window.location.href = card.href;
+        }, 220);
+      });
     });
 
   } catch (error) {
