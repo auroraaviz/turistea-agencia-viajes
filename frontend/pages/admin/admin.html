@@ -132,8 +132,6 @@
             <div class="collapse show" id="dashboard-collapse">
               <ul class="list-unstyled small ps-4">
                 <li><a href="admin.html" class="link-dark d-block py-1" id="btnResumenGeneral">Resumen general</a></li>
-                <li><a href="estadisticas.html" class="link-dark d-block py-1">Estadísticas</a></li>
-                <li><a href="alertas.html" class="link-dark d-block py-1">Alertas</a></li>
               </ul>
             </div>
           </li>
@@ -179,8 +177,22 @@
               </ul>
             </div>
           </li>
-<!-- DESTINOS --> <li class="mb-1"> <button class="btn btn-toggle w-100 text-start fw-semibold collapsed" data-bs-toggle="collapse" data-bs-target="#destinos-collapse"> <i class="bi bi-geo-alt-fill me-2"></i>Destinos </button> <div class="collapse" id="destinos-collapse"> <ul class="btn-toggle-nav list-unstyled small ps-4"> <li><a href="#" class="link-dark d-block py-1">España</a></li> <li><a href="#" class="link-dark d-block py-1">Europa</a></li> <li><a href="#" class="link-dark d-block py-1">Caribe</a></li> <li><a href="#" class="link-dark d-block py-1">Asia</a></li> </ul> </div> </li>
-<!-- RESERVAS --> <li class="mb-1"> <button class="btn btn-toggle w-100 text-start fw-semibold collapsed" data-bs-toggle="collapse" data-bs-target="#reservas-collapse"> <i class="bi bi-journal-check me-2"></i>Reservas </button> <div class="collapse" id="reservas-collapse"> <ul class="btn-toggle-nav list-unstyled small ps-4"> <li><a href="#" class="link-dark d-block py-1" id="btnReservasTodas">Todas</a></li> <li><a href="#" class="link-dark d-block py-1" id="btnReservasPendientes">Pendientes</a></li> <li><a href="#" class="link-dark d-block py-1" id="btnReservasConfirmadas">Confirmadas</a></li> <li><a href="#" class="link-dark d-block py-1" id="btnReservasCanceladas">Canceladas</a></li> </ul> </div> </li> <!-- FINANZAS --> <li class="mb-1"> <button class="btn btn-toggle w-100 text-start fw-semibold collapsed" data-bs-toggle="collapse" data-bs-target="#finanzas-collapse"> <i class="bi bi-cash-stack me-2"></i>Finanzas </button> <div class="collapse" id="finanzas-collapse"> <ul class="btn-toggle-nav list-unstyled small ps-4"> <li><a href="#" class="link-dark d-block py-1">Ingresos</a></li> <li><a href="#" class="link-dark d-block py-1">Pagos</a></li> <li><a href="#" class="link-dark d-block py-1">Facturas</a></li> </ul> </div> </li>         
+<!-- RESERVAS -->
+<li class="mb-1">
+    <button class="btn btn-toggle w-100 text-start fw-semibold collapsed"
+        data-bs-toggle="collapse" data-bs-target="#reservas-collapse">
+        <i class="bi bi-journal-check me-2"></i>Reservas
+    </button>
+    <div class="collapse" id="reservas-collapse">
+        <ul class="btn-toggle-nav list-unstyled small ps-4">
+            <li><a href="#" class="link-dark d-block py-1" id="btnReservasPendientes">Pendientes</a></li>
+            <li><a href="#" class="link-dark d-block py-1" id="btnReservasConfirmadas">Confirmadas</a></li>
+            <li><a href="#" class="link-dark d-block py-1" id="btnReservasCanceladas">Canceladas</a></li>
+        </ul>
+    </div>
+</li>
+ <!-- FINANZAS --> 
+  <li class="mb-1"> <button class="btn btn-toggle w-100 text-start fw-semibold collapsed" data-bs-toggle="collapse" data-bs-target="#finanzas-collapse"> <i class="bi bi-cash-stack me-2"></i>Finanzas </button> <div class="collapse" id="finanzas-collapse"> <ul class="btn-toggle-nav list-unstyled small ps-4"> <li><a href="#" class="link-dark d-block py-1">Ingresos</a></li> <li><a href="#" class="link-dark d-block py-1">Pagos</a></li> <li><a href="#" class="link-dark d-block py-1">Facturas</a></li> </ul> </div> </li>         
 <!-- CUENTA -->
           <li class="border-top mt-3 pt-3">
             <a href="#" class="link-danger text-decoration-none" id="btnCerrarSesion">
@@ -295,8 +307,9 @@
     <script type="module" src="../../js/admin/clientes/clientes.js"></script>
     <script type="module" src="../../js/admin/reservas/reservas.js"></script>
     <script>window.BASE_PATH = '../../../';</script>
-<script src="../../js/auth/navbarUsuario.js"></script>
+    <script src="../../js/auth/navbarUsuario.js"></script>
     <script src="../../js/auth/logout.js"></script>
+    <script type="module" src="../../js/admin/reservas/reservas.js"></script>
 
   </body>
 </html>
