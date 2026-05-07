@@ -30,31 +30,37 @@ document.addEventListener("DOMContentLoaded", () => {
   async function cargarReservas(estado) {
     contenido.innerHTML = `
       <div class="text-center py-5">
-        <div class="spinner-border text-primary" role="status">
-          <span class="visually-hidden">Cargando...</span>
-        </div>
+        <div class="spinner-border text-primary" role="status"></div>
         <p class="text-muted mt-2">Cargando reservas...</p>
       </div>`;
 
-    const url = estado
-      ? "/api/reservas/listar.php?estado=" + estado
-      : "/api/reservas/listar.php";
+    const urlFiltrada = estado
+         ? "/api/reservas/listar.php?estado=" + estado
+         : "/api/reservas/listar.php";
 
     try {
-      const reservas = await obtener(url);
+        // Dos llamadas en paralelo: filtrada para tabla, todas para KPIs
+        const [reservasFiltradas, todasReservas] = await Promise.all([
+            obtener(urlFiltrada),
+            obtener("/api/reservas/listar.php")
+        ]);
 
-      if (!reservas || !Array.isArray(reservas)) {
-        contenido.innerHTML = '<div class="alert alert-danger text-center mt-4">Error al cargar las reservas.</div>';
-        return;
-      }
+        if (!reservasFiltradas || !Array.isArray(reservasFiltradas)) {
+            contenido.innerHTML = '<div class="alert alert-danger text-center mt-4">Error al cargar las reservas.</div>';
+            return;
+        }
 
-      const titulo = estado ? "Reservas " + estado.charAt(0) + estado.slice(1).toLowerCase() + "s" : "Todas las reservas";
-      contenido.innerHTML = renderReservas(reservas, titulo, estado);
+        const titulo = estado
+            ? "Reservas " + estado.charAt(0) + estado.slice(1).toLowerCase() + "s"
+            : "Todas las reservas";
+
+        contenido.innerHTML = renderReservas(reservasFiltradas, todasReservas, titulo, estado);
+
     } catch (err) {
-      console.error(err);
-      contenido.innerHTML = '<div class="alert alert-danger text-center mt-4">Error al cargar las reservas.</div>';
+        console.error(err);
+        contenido.innerHTML = '<div class="alert alert-danger text-center mt-4">Error al cargar las reservas.</div>';
     }
-  }
+}
 
   function badgeEstado(estado) {
     const map = {
@@ -74,17 +80,16 @@ document.addEventListener("DOMContentLoaded", () => {
     return estado ? `<span class="badge ${map[estado] || "bg-secondary"}">${estado}</span>` : '<span class="text-muted">—</span>';
   }
 
-  function renderReservas(reservas, titulo, estadoFiltro) {
+  function renderReservas(reservas, todasReservas, titulo, estadoFiltro) {
     const contadores = {
-      total: reservas.length,
-      pendientes: reservas.filter(r => r.estado === "PENDIENTE").length,
-      confirmadas: reservas.filter(r => r.estado === "CONFIRMADA").length,
-      canceladas: reservas.filter(r => r.estado === "CANCELADA").length
+        total: todasReservas.length,
+        pendientes: todasReservas.filter(r => r.estado === "PENDIENTE").length,
+        confirmadas: todasReservas.filter(r => r.estado === "CONFIRMADA").length,
+        canceladas: todasReservas.filter(r => r.estado === "CANCELADA").length
     };
-
-    const ingresos = reservas
-      .filter(r => r.pago_estado === "PAGADO")
-      .reduce((sum, r) => sum + parseFloat(r.pago_importe || 0), 0);
+    const ingresos = todasReservas
+        .filter(r => r.pago_estado === "PAGADO")
+        .reduce((sum, r) => sum + parseFloat(r.pago_importe || 0), 0);
 
     return `
       <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">

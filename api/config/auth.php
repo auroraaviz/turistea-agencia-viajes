@@ -26,7 +26,8 @@ function _cargarEnv()
         $lineas = file($envPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
         foreach ($lineas as $linea) {
             $linea = trim($linea);
-            if ($linea === '' || $linea[0] === '#') continue;
+            if ($linea === '' || $linea[0] === '#')
+                continue;
             if (strpos($linea, '=') !== false) {
                 list($clave, $valor) = explode('=', $linea, 2);
                 $_ENV[trim($clave)] = trim($valor);
@@ -44,7 +45,8 @@ function esModoDev()
 
 function verificarSesion()
 {
-    if (esModoDev()) return;
+    if (esModoDev())
+        return;
 
     if (!isset($_SESSION['email']) || !isset($_SESSION['rol'])) {
         http_response_code(401);
@@ -58,7 +60,8 @@ function verificarSesion()
 
 function verificarAdmin()
 {
-    if (esModoDev()) return;
+    if (esModoDev())
+        return;
 
     verificarSesion();
 
