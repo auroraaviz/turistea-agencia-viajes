@@ -13,7 +13,6 @@ export function textoActivo(activo) {
 export function badgeRol(rol) {
   switch (rol) {
     case 'admin':   return 'bg-primary';
-    case 'gestor':  return 'bg-warning text-dark';
     default:        return 'bg-secondary';      // usuario
   }
 }

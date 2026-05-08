@@ -224,6 +224,24 @@ body {
   pointer-events: none;
 }
 
+/* ===== AVATAR USUARIO NAVBAR ===== */
+.nav-user-avatar-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.nav-user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 119, 182, 0.24);
+}
+
 /* ===== OFFCANVAS MENÚ MÓVIL ===== */
 .menu-offcanvas {
   width: 280px;

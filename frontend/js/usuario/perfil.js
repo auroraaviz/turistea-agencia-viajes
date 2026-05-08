@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     cargarPerfil(),
     cargarReservas(),
     cargarFavoritos(),
+    cargarTarjeta(),
   ]);
 
   inicializarEventos();
@@ -442,6 +443,15 @@ async function guardarPerfil() {
   const respuesta = parsearTexto(texto);
 
   if (respuesta && respuesta.ok) {
+    // Intentar guardar tarjeta si se rellenaron los campos
+    const tarjetaOk = await guardarTarjetaModal();
+    if (tarjetaOk === false) {
+      mostrarFeedback(feedback, "Datos de perfil guardados, pero revisa los campos de la tarjeta.", "warning");
+      btn.disabled  = false;
+      btn.innerHTML = '<i class="bi bi-check-lg me-1"></i>Guardar cambios';
+      return;
+    }
+
     mostrarFeedback(feedback, "✓ Cambios guardados correctamente.", "success");
 
     const nombreCompleto = [datos.nombre, datos.apellidos].filter(Boolean).join(" ");
@@ -521,4 +531,87 @@ function inicializarEventos() {
       fb.classList.add("d-none");
       fb.textContent = "";
     });
+
+  // Formateo inputs tarjeta
+  document.getElementById("card-numero")?.addEventListener("input", function () {
+    let v = this.value.replace(/\D/g, "").substring(0, 16);
+    this.value = v.replace(/(.{4})/g, "$1 ").trim();
+  });
+
+  document.getElementById("card-vencimiento")?.addEventListener("input", function () {
+    let v = this.value.replace(/\D/g, "").substring(0, 4);
+    if (v.length >= 3) v = v.substring(0, 2) + "/" + v.substring(2);
+    this.value = v;
+  });
+
+  document.getElementById("card-cvv")?.addEventListener("input", function () {
+    this.value = this.value.replace(/\D/g, "").substring(0, 4);
+  });
 }
+
+/* ─────────────────────────────────────────
+   10. CARGAR TARJETA
+───────────────────────────────────────── */
+async function cargarTarjeta() {
+  const res = await obtener("/api/perfil/tarjeta.php");
+
+  const tarjetaWrap  = document.getElementById("tarjeta-wrap");
+  const sinTarjeta   = document.getElementById("sin-tarjeta-wrap");
+  const modalInfo    = document.getElementById("tarjeta-modal-info");
+  const modalResumen = document.getElementById("tarjeta-modal-resumen");
+
+  if (res && res.tarjeta) {
+    const t = res.tarjeta;
+
+    // Sidebar visual
+    document.getElementById("tarjeta-numero").textContent  = `**** **** **** ${t.ultimos_4}`;
+    document.getElementById("tarjeta-titular").textContent = t.titular;
+    document.getElementById("tarjeta-vence").textContent   = t.vencimiento;
+    tarjetaWrap.style.display  = "";
+    if (sinTarjeta) sinTarjeta.style.display = "none";
+
+    // Modal: mostrar aviso de tarjeta ya guardada
+    if (modalInfo && modalResumen) {
+      modalResumen.textContent = `**** **** **** ${t.ultimos_4} · ${t.titular}`;
+      modalInfo.classList.remove("d-none");
+    }
+  } else {
+    if (tarjetaWrap) tarjetaWrap.style.display = "none";
+    if (sinTarjeta) sinTarjeta.style.display   = "";
+  }
+}
+
+/* ─────────────────────────────────────────
+   11. GUARDAR TARJETA (desde modal perfil)
+───────────────────────────────────────── */
+async function guardarTarjetaModal() {
+  const titular     = document.getElementById("card-titular")?.value.trim();
+  const numero      = document.getElementById("card-numero")?.value.replace(/\s/g, "");
+  const vencimiento = document.getElementById("card-vencimiento")?.value.trim();
+  const cvv         = document.getElementById("card-cvv")?.value.trim();
+
+  // Si no rellenó la tarjeta la saltamos silenciosamente
+  if (!titular && !numero && !vencimiento && !cvv) return true;
+
+  // Validar si llenó algo
+  if (!titular || numero?.length < 16 || vencimiento?.length < 5 || cvv?.length < 3) {
+    return false; // indica error
+  }
+
+  const texto     = await crear("/api/tarjetas/guardar.php", {
+    titular,
+    ultimos_4:  numero.slice(-4),
+    vencimiento
+  });
+  const respuesta = parsearTexto(texto);
+
+  if (respuesta && respuesta.ok) {
+    await cargarTarjeta(); // refresca visual del sidebar
+    return true;
+  }
+  return false;
+}
+
+/* ─────────────────────────────────────────
+   12. FIN DEL ARCHIVO
+───────────────────────────────────────── */

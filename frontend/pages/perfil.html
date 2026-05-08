@@ -119,6 +119,31 @@
 
             <hr class="sidebar-divider" />
 
+            <!-- Tarjeta guardada -->
+            <div id="tarjeta-wrap" style="display:none;">
+              <div class="tarjeta-visual mb-3">
+                <div class="tarjeta-chip"><i class="bi bi-credit-card-2-front-fill"></i></div>
+                <div class="tarjeta-numero" id="tarjeta-numero">**** **** **** ----</div>
+                <div class="d-flex justify-content-between mt-2">
+                  <div>
+                    <div style="font-size:.6rem;opacity:.7;">TITULAR</div>
+                    <div class="tarjeta-titular" id="tarjeta-titular">—</div>
+                  </div>
+                  <div>
+                    <div style="font-size:.6rem;opacity:.7;">VENCE</div>
+                    <div class="tarjeta-vence" id="tarjeta-vence">--/--</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="sin-tarjeta-wrap" style="display:none;">
+              <p class="text-muted text-center" style="font-size:.8rem;">
+                <i class="bi bi-credit-card me-1"></i>Sin tarjeta guardada
+              </p>
+            </div>
+
+            <hr class="sidebar-divider" />
+
             <!-- Botón editar perfil → abre modal -->
             <button
               class="btn btn-editar"
@@ -250,6 +275,33 @@
               <input type="tel" id="edit-telefono" class="form-control" placeholder="+34 600 000 000" />
             </div>
           </div>
+
+          <!-- Sección tarjeta -->
+          <hr class="my-3" />
+          <p class="fw-bold mb-2" style="font-size:.9rem;">
+            <i class="bi bi-credit-card me-1 text-primary"></i>Tarjeta de crédito
+          </p>
+          <div id="tarjeta-modal-info" class="d-none mb-2">
+            <div class="alert alert-info py-2 px-3 mb-2" style="font-size:.82rem;">
+              <i class="bi bi-check-circle-fill me-1"></i>
+              Tarjeta guardada: <strong id="tarjeta-modal-resumen">**** ----</strong>
+            </div>
+          </div>
+          <div class="row g-2">
+            <div class="col-12">
+              <input type="text" id="card-titular" class="form-control form-control-sm" placeholder="Titular de la tarjeta" />
+            </div>
+            <div class="col-12">
+              <input type="text" id="card-numero" class="form-control form-control-sm" placeholder="Número de tarjeta (16 dígitos)" maxlength="19" />
+            </div>
+            <div class="col-6">
+              <input type="text" id="card-vencimiento" class="form-control form-control-sm" placeholder="MM/AA" maxlength="5" />
+            </div>
+            <div class="col-6">
+              <input type="text" id="card-cvv" class="form-control form-control-sm" placeholder="CVV" maxlength="4" />
+            </div>
+          </div>
+
         </div>
 
         <div class="modal-footer border-0">

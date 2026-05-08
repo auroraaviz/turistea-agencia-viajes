@@ -1,4 +1,5 @@
 import { state } from './clientesState.js';
+import { crear } from '../../utils/fetch.js';
  
 // ID del modal en el DOM — lo inyectamos si no existe
 const MODAL_ID = 'modalEditarUsuario';
@@ -55,25 +56,23 @@ function activarEventosModal(bsModal) {
     };
  
     try {
-        const res = await fetch('/turistea/turistea/api/usuarios/update.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(datos),
-      });
+      const texto = await crear('/api/usuarios/update.php', datos);
+      const json = texto ? JSON.parse(texto) : null;
  
-      const json = await res.json();
- 
-      if (json.ok) {
+      if (json?.ok) {
         // Actualizar el state local sin recargar la página
         const idx = state.usuarios.findIndex((u) => u.id === usuario.id);
-        if (idx !== -1) Object.assign(state.usuarios[idx], datos);
+        if (idx !== -1) {
+          Object.assign(state.usuarios[idx], datos);
+          state.usuarioEnEdicion = state.usuarios[idx];
+        }
  
         bsModal.hide();
  
         // Disparar evento para que clientes.js refresque la tabla
         document.dispatchEvent(new CustomEvent('clientes:actualizar'));
       } else {
-        alert('Error al guardar: ' + (json.error ?? 'desconocido'));
+        alert('Error al guardar: ' + (json?.error ?? 'desconocido'));
       }
     } catch (err) {
       console.error(err);
@@ -90,15 +89,10 @@ function activarEventosModal(bsModal) {
     if (!confirm(`¿Seguro que quieres ${accion} a este usuario?`)) return;
  
     try {
-      const res = await fetch('/turistea/turistea/api/usuarios/delete.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: usuario.id }),
-      });
+      const texto = await crear('/api/usuarios/delete.php', { id: usuario.id });
+      const json = texto ? JSON.parse(texto) : null;
  
-      const json = await res.json();
- 
-      if (json.ok) {
+      if (json?.ok) {
         // Actualizar activo en el state
         const idx = state.usuarios.findIndex((u) => u.id === usuario.id);
         if (idx !== -1) state.usuarios[idx].activo = usuario.activo == 1 ? 0 : 1;
@@ -106,7 +100,7 @@ function activarEventosModal(bsModal) {
         bsModal.hide();
         document.dispatchEvent(new CustomEvent('clientes:actualizar'));
       } else {
-        alert('Error: ' + (json.error ?? 'desconocido'));
+        alert('Error: ' + (json?.error ?? 'desconocido'));
       }
     } catch (err) {
       console.error(err);
@@ -156,7 +150,6 @@ function plantillaModal() {
                 <label class="form-label fw-semibold">Rol</label>
                 <select class="form-select" id="muRol">
                   <option value="usuario">Usuario</option>
-                  <option value="gestor">Gestor</option>
                   <option value="admin">Admin</option>
                 </select>
               </div>

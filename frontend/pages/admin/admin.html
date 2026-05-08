@@ -191,8 +191,23 @@
         </ul>
     </div>
 </li>
- <!-- FINANZAS --> 
-  <li class="mb-1"> <button class="btn btn-toggle w-100 text-start fw-semibold collapsed" data-bs-toggle="collapse" data-bs-target="#finanzas-collapse"> <i class="bi bi-cash-stack me-2"></i>Finanzas </button> <div class="collapse" id="finanzas-collapse"> <ul class="btn-toggle-nav list-unstyled small ps-4"> <li><a href="#" class="link-dark d-block py-1">Ingresos</a></li> <li><a href="#" class="link-dark d-block py-1">Pagos</a></li> <li><a href="#" class="link-dark d-block py-1">Facturas</a></li> </ul> </div> </li>         
+ <!-- FINANZAS -->
+          <li class="mb-1">
+            <button
+              class="btn btn-toggle w-100 text-start fw-semibold collapsed"
+              data-bs-toggle="collapse"
+              data-bs-target="#finanzas-collapse"
+            >
+              <i class="bi bi-cash-stack me-2"></i>Finanzas
+            </button>
+            <div class="collapse" id="finanzas-collapse">
+              <ul class="btn-toggle-nav list-unstyled small ps-4">
+                <li><a href="admin.html?finanzas=ingresos" class="link-dark d-block py-1" id="btnFinanzasIngresos">Ingresos</a></li>
+                <li><a href="admin.html?finanzas=pagos" class="link-dark d-block py-1" id="btnFinanzasPagos">Pagos</a></li>
+                <li><a href="admin.html?finanzas=facturas" class="link-dark d-block py-1" id="btnFinanzasFacturas">Facturas</a></li>
+              </ul>
+            </div>
+          </li>
 <!-- CUENTA -->
           <li class="border-top mt-3 pt-3">
             <a href="#" class="link-danger text-decoration-none" id="btnCerrarSesion">
@@ -300,6 +315,7 @@
     <script type="module" src="../../js/admin/guardAdmin.js"></script>
     <script type="module" src="../../js/admin/viajes/viajes.js"></script>
     <script type="module" src="../../js/admin/dashboard/dashboard.js"></script>
+    <script type="module" src="../../js/admin/finanzas/finanzas.js"></script>
     <script type="module" src="../../js/admin/viajes/crearPaquete.js"></script>
     <script>
       document.getElementById("footer-year").textContent = new Date().getFullYear();
