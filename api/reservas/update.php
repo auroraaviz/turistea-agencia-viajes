@@ -1,6 +1,5 @@
 <?php
-header("Content-Type: application/json");
-header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 
@@ -9,8 +8,10 @@ if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
     exit;
 }
 
-require_once("../config/bd.php");
-require_once("../config/auth.php");
+require_once __DIR__ . "/../config/bd.php";
+require_once __DIR__ . "/../config/auth.php";
+
+verificarAdmin();
 
 $body = json_decode(file_get_contents("php://input"), true);
 $id = (int) ($body["id"] ?? 0);

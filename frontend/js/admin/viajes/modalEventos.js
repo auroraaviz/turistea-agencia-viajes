@@ -326,23 +326,21 @@ function guardarHotel(paquete) {
 // GUARDAR FECHAS
 // ===========================
 function guardarFechas(paquete) {
+  const salida       = document.getElementById("editFechaSalida");
+  const regreso      = document.getElementById("editFechaRegreso");
+  const vuelo        = document.getElementById("editVueloIncluido");
+  const salidaDesde  = document.getElementById("editSalidaDesde");
+  const transporte   = document.getElementById("editTransporte");      // ← nuevo
+  const horaSalida   = document.getElementById("editHoraSalida");      // ← nuevo
+  const horaLlegada  = document.getElementById("editHoraLlegada");     // ← nuevo
 
-  const salida =
-    document.getElementById("editFechaSalida");
-
-  const regreso =
-    document.getElementById("editFechaRegreso");
-
-  const vuelo =
-    document.getElementById("editVueloIncluido");
-
-  const salidaDesde =
-    document.getElementById("editSalidaDesde");
-
-  if (salida) paquete.fecha_salida = salida.value;
-  if (regreso) paquete.fecha_regreso = regreso.value;
-  if (vuelo) paquete.vuelo_incluido = vuelo.value;
-  if (salidaDesde) paquete.salida_desde = salidaDesde.value;
+  if (salida)      paquete.fecha_salida     = salida.value;
+  if (regreso)     paquete.fecha_regreso    = regreso.value;
+  if (vuelo)       paquete.vuelo_incluido   = vuelo.value;
+  if (salidaDesde) paquete.salida_desde     = salidaDesde.value;
+  if (transporte)  paquete.transporte       = transporte.value;                          // ← nuevo
+  if (horaSalida)  paquete.hora_salida_avion  = horaSalida.value  || null;               // ← nuevo
+  if (horaLlegada) paquete.hora_llegada_avion = horaLlegada.value || null;               // ← nuevo
 }
 
 

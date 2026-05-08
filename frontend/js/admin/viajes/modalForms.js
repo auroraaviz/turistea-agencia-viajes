@@ -199,63 +199,85 @@ export function mostrarFormularioHotel(paquete) {
 // FORMULARIO FECHAS
 // ===========================
 export function mostrarFormularioFechas(paquete) {
-
   const cont = document.getElementById("contenidoModal");
 
   cont.innerHTML = `
     <div class="row g-4">
       <div class="col-md-12">
 
-        <h3 class="fw-bold mb-4">
-          Editar fechas
-        </h3>
+        <h3 class="fw-bold mb-4">Editar fechas y transporte</h3>
 
         <div class="mb-3">
           <label class="form-label fw-semibold">Fecha salida</label>
-          <input
-            type="date"
-            id="editFechaSalida"
-            class="form-control"
-            value="${paquete.fecha_salida || ""}"
-          >
+          <input type="date" id="editFechaSalida" class="form-control"
+            value="${paquete.fecha_salida || ""}">
         </div>
 
         <div class="mb-3">
           <label class="form-label fw-semibold">Fecha regreso</label>
-          <input
-            type="date"
-            id="editFechaRegreso"
-            class="form-control"
-            value="${paquete.fecha_regreso || ""}"
-          >
+          <input type="date" id="editFechaRegreso" class="form-control"
+            value="${paquete.fecha_regreso || ""}">
         </div>
+
+        <hr class="my-3">
+        <h6 class="fw-bold text-muted text-uppercase mb-3" style="font-size:.78rem;letter-spacing:.1em">
+          <i class="bi bi-airplane me-1"></i>Transporte
+        </h6>
+
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Tipo de transporte</label>
+          <select id="editTransporte" class="form-select">
+            <option value="avion"          ${(paquete.transporte ?? 'avion') === 'avion'          ? 'selected' : ''}>✈️ Avión</option>
+            <option value="sin_transporte" ${paquete.transporte === 'sin_transporte' ? 'selected' : ''}>🚫 Sin transporte incluido</option>
+          </select>
+        </div>
+
+        <div id="bloqueHorarios" ${paquete.transporte === 'sin_transporte' ? 'class="d-none"' : ''}>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Hora salida avión</label>
+              <input type="time" id="editHoraSalida" class="form-control"
+                value="${paquete.hora_salida_avion || ''}">
+              <small class="text-muted">Hora de salida desde origen</small>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Hora llegada avión</label>
+              <input type="time" id="editHoraLlegada" class="form-control"
+                value="${paquete.hora_llegada_avion || ''}">
+              <small class="text-muted">Hora de llegada al destino</small>
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-3">
 
         <div class="mb-3">
           <label class="form-label fw-semibold">Vuelo incluido</label>
-
           <select id="editVueloIncluido" class="form-select">
-            <option value="1" ${paquete.vuelo_incluido == 1 ? "selected" : ""}>
-              Sí
-            </option>
-            <option value="0" ${paquete.vuelo_incluido == 0 ? "selected" : ""}>
-              No
-            </option>
+            <option value="1" ${paquete.vuelo_incluido == 1 ? 'selected' : ''}>Sí</option>
+            <option value="0" ${paquete.vuelo_incluido == 0 ? 'selected' : ''}>No</option>
           </select>
         </div>
 
         <div class="mb-3">
           <label class="form-label fw-semibold">Salida desde</label>
-          <input
-            type="text"
-            id="editSalidaDesde"
-            class="form-control"
-            value="${paquete.salida_desde || ""}"
-          >
+          <input type="text" id="editSalidaDesde" class="form-control"
+            value="${paquete.salida_desde || ''}">
         </div>
 
       </div>
     </div>
   `;
+
+  // Mostrar/ocultar horarios según transporte
+  document.getElementById("editTransporte")?.addEventListener("change", (e) => {
+    const bloque = document.getElementById("bloqueHorarios");
+    if (e.target.value === "sin_transporte") {
+      bloque.classList.add("d-none");
+    } else {
+      bloque.classList.remove("d-none");
+    }
+  });
 }
 
 
