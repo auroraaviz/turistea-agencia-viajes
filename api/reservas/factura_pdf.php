@@ -8,7 +8,7 @@
  *   GET /api/reservas/factura_pdf.php?reserva_id=123
  *
  * RESPUESTA:
- *   - 200: descarga directa del PDF (Content-Type: application/pdf)
+ *   - 200: PDF inline o descarga directa (Content-Type: application/pdf)
  *   - 401/404/500: JSON con error
  *
  * TODO (siguiente dev):
@@ -98,8 +98,8 @@ if (!$datos) {
 }
 
 // Verificar que la reserva pertenece al usuario (salvo admin o modo dev)
-if (!esModoDev() && $datos['usuario_id'] !== $usuarioId) {
-    // TODO: permitir también si el usuario es admin
+$esAdmin = ($_SESSION['rol'] ?? '') === 'admin';
+if (!esModoDev() && !$esAdmin && (int) $datos['usuario_id'] !== $usuarioId) {
     header('Content-Type: application/json');
     http_response_code(403);
     echo json_encode(['error' => 'No tienes permiso para ver esta factura']);
@@ -393,4 +393,5 @@ $pdf->Cell(0, 7, 'El equipo de Turistea', 0, 1, 'L');
 // ── Enviar PDF al navegador ───────────────────────────────────────────────
 
 $nombreArchivo = 'Turistea_Factura_' . $reservaId . '.pdf';
-$pdf->Output('D', $nombreArchivo); // D = descarga directa
+$modoSalida = ($_GET['vista'] ?? '') === 'inline' ? 'I' : 'D';
+$pdf->Output($modoSalida, $nombreArchivo); // I = ver en navegador, D = descarga directa

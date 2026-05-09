@@ -1,4 +1,5 @@
 import { obtener } from "../../utils/fetch.js";
+import { BASE } from "../../config.js";
 import { renderFinanzas } from "./finanzasRender.js";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -23,9 +24,25 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   contenido.addEventListener("click", (event) => {
+    const filaFactura = event.target.closest(".fila-factura");
+    if (filaFactura) {
+      abrirModalFactura(filaFactura.dataset.reservaId, filaFactura.dataset.facturaNumero);
+      return;
+    }
+
     const tab = event.target.closest("[data-finanzas-tab]");
     if (!tab) return;
     cargarFinanzas(tab.dataset.finanzasTab);
+  });
+
+  contenido.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+
+    const filaFactura = event.target.closest(".fila-factura");
+    if (!filaFactura) return;
+
+    event.preventDefault();
+    abrirModalFactura(filaFactura.dataset.reservaId, filaFactura.dataset.facturaNumero);
   });
 
   if (params.has("finanzas")) {
@@ -67,5 +84,51 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       `;
     }
+  }
+
+  function abrirModalFactura(reservaId, facturaNumero) {
+    if (!reservaId) return;
+
+    document.getElementById("modalFacturaWrap")?.remove();
+
+    const urlInline = `${BASE}/api/reservas/factura_pdf.php?reserva_id=${encodeURIComponent(reservaId)}&vista=inline`;
+    const urlDescarga = `${BASE}/api/reservas/factura_pdf.php?reserva_id=${encodeURIComponent(reservaId)}`;
+    const wrap = document.createElement("div");
+    wrap.id = "modalFacturaWrap";
+    wrap.innerHTML = `
+      <div class="modal fade" id="modalFactura" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content border-0 shadow">
+            <div class="modal-header">
+              <h5 class="modal-title fw-bold">
+                <i class="bi bi-receipt-cutoff me-2 text-primary"></i>${facturaNumero || `Factura reserva #${reservaId}`}
+              </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body p-0 bg-light">
+              <iframe
+                class="factura-pdf-frame"
+                src="${urlInline}"
+                title="Vista previa de la factura ${facturaNumero || reservaId}">
+              </iframe>
+            </div>
+            <div class="modal-footer">
+              <a class="btn btn-primary" href="${urlDescarga}">
+                <i class="bi bi-download me-1"></i>Descargar
+              </a>
+              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                <i class="bi bi-x-lg me-1"></i>Salir
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>`;
+
+    document.body.appendChild(wrap);
+
+    const modalEl = document.getElementById("modalFactura");
+    const bsModal = new bootstrap.Modal(modalEl);
+    modalEl.addEventListener("hidden.bs.modal", () => wrap.remove());
+    bsModal.show();
   }
 });

@@ -273,13 +273,14 @@ function renderTablaFacturas(data) {
                 <th>Fecha</th>
                 <th>Método</th>
                 <th class="text-end">Total</th>
+                <th class="text-end">Acción</th>
               </tr>
             </thead>
             <tbody>
               ${facturas.length === 0
-                ? `<tr><td colspan="6" class="text-center text-muted py-4">No hay facturas emitidas</td></tr>`
+                ? `<tr><td colspan="7" class="text-center text-muted py-4">No hay facturas emitidas</td></tr>`
                 : facturas.map((f) => `
-                  <tr>
+                  <tr class="fila-factura" role="button" tabindex="0" data-reserva-id="${f.reserva_id || ""}" data-factura-numero="${facturaNumero(f)}">
                     <td class="fw-semibold">${facturaNumero(f)}</td>
                     <td>
                       <span class="fw-semibold d-block">${nombreCliente(f)}</span>
@@ -289,6 +290,7 @@ function renderTablaFacturas(data) {
                     <td>${fecha(f.fecha_pago)}</td>
                     <td>${f.metodo || "-"}</td>
                     <td class="text-end fw-bold">${dinero(f.importe)}</td>
+                    <td class="text-end text-primary"><i class="bi bi-eye"></i></td>
                   </tr>
                 `).join("")
               }
