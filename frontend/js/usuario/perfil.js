@@ -190,9 +190,18 @@ function renderizarReservas(lista, contenedor, opciones = {}) {
                 <i class="bi bi-currency-euro me-1"></i>${Number(r.precio_total).toLocaleString("es-ES")}
               </span>
               ${puedeConfirmar ? `
-                <button type="button" class="btn-confirmar-reserva" data-id="${r.id}">
-                  <i class="bi bi-check-lg me-1"></i>Confirmar
+                <button type="button" class="btn-confirmar-reserva"
+                  data-id="${r.id}" data-viajeros="${r.num_viajeros}">
+                  <i class="bi bi-people-fill me-1"></i>Añadir viajeros y confirmar
                 </button>
+              ` : ""}
+              ${r.estado === "CONFIRMADA" ? `
+                <a href="${BASE}/api/reservas/factura_pdf.php?reserva_id=${r.id}"
+                  target="_blank"
+                  class="btn-ver-reserva ms-auto"
+                  style="background:#0077B6;color:white;border-color:#0077B6;">
+                  <i class="bi bi-file-earmark-pdf me-1"></i>Factura
+                </a>
               ` : ""}
               ${puedeCancelar ? `
                 <button type="button" class="btn-cancelar-reserva" data-id="${r.id}">
@@ -211,7 +220,7 @@ function renderizarReservas(lista, contenedor, opciones = {}) {
   }).join("");
 
   contenedor.querySelectorAll(".btn-confirmar-reserva").forEach(btn => {
-    btn.addEventListener("click", confirmarReserva);
+    btn.addEventListener("click", abrirModalViajeros);
   });
 
   contenedor.querySelectorAll(".btn-cancelar-reserva").forEach(btn => {
@@ -615,3 +624,130 @@ async function guardarTarjetaModal() {
 /* ─────────────────────────────────────────
    12. FIN DEL ARCHIVO
 ───────────────────────────────────────── */
+
+/* ─────────────────────────────────────────
+   13. MODAL VIAJEROS
+───────────────────────────────────────── */
+
+let _reservaIdPendiente   = null;
+let _numViajerosPendiente = 0;
+
+function abrirModalViajeros(e) {
+  const btn       = e.currentTarget;
+  _reservaIdPendiente   = btn.dataset.id;
+  _numViajerosPendiente = parseInt(btn.dataset.viajeros) || 1;
+
+  const campos = document.getElementById("viajeros-campos");
+  const fb     = document.getElementById("viajeros-feedback");
+  if (fb) { fb.classList.add("d-none"); fb.textContent = ""; }
+
+  // Generar un formulario por viajero
+  campos.innerHTML = Array.from({ length: _numViajerosPendiente }, (_, i) => `
+    <div class="border rounded p-3 mb-3">
+      <p class="fw-bold mb-2" style="color:#1a2d45;">
+        <i class="bi bi-person-fill me-1 text-primary"></i>Viajero ${i + 1}
+      </p>
+      <div class="row g-2">
+        <div class="col-6">
+          <input type="text" class="form-control form-control-sm v-nombre"
+            placeholder="Nombre *" data-idx="${i}" required />
+        </div>
+        <div class="col-6">
+          <input type="text" class="form-control form-control-sm v-apellidos"
+            placeholder="Apellidos *" data-idx="${i}" required />
+        </div>
+        <div class="col-6">
+          <input type="text" class="form-control form-control-sm v-dni"
+            placeholder="DNI *" data-idx="${i}" required />
+        </div>
+        <div class="col-6">
+          <input type="date" class="form-control form-control-sm v-nacimiento"
+            placeholder="Fecha de nacimiento *" data-idx="${i}" required />
+        </div>
+      </div>
+    </div>
+  `).join("");
+
+  bootstrap.Modal.getOrCreate(
+    document.getElementById("modalViajeros")
+  ).show();
+}
+
+// Listener del botón confirmar dentro del modal
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("btn-confirmar-viajeros")
+    ?.addEventListener("click", confirmarConViajeros);
+});
+
+async function confirmarConViajeros() {
+  const fb  = document.getElementById("viajeros-feedback");
+  const btn = document.getElementById("btn-confirmar-viajeros");
+
+  // Recoger datos de cada viajero
+  const viajeros = [];
+  let valido = true;
+
+  for (let i = 0; i < _numViajerosPendiente; i++) {
+    const nombre      = document.querySelector(`.v-nombre[data-idx="${i}"]`)?.value.trim();
+    const apellidos   = document.querySelector(`.v-apellidos[data-idx="${i}"]`)?.value.trim();
+    const dni         = document.querySelector(`.v-dni[data-idx="${i}"]`)?.value.trim();
+    const nacimiento  = document.querySelector(`.v-nacimiento[data-idx="${i}"]`)?.value.trim();
+
+    if (!nombre || !apellidos || !dni || !nacimiento) {
+      valido = false;
+      break;
+    }
+    viajeros.push({ nombre, apellidos, dni, fecha_nacimiento: nacimiento });
+  }
+
+  if (!valido) {
+    fb.className   = "alert alert-danger";
+    fb.textContent = "Rellena todos los campos de cada viajero.";
+    fb.classList.remove("d-none");
+    return;
+  }
+
+  btn.disabled    = true;
+  btn.textContent = "Confirmando…";
+
+  // 1. Guardar viajeros en BD
+  const textoV     = await crear("/api/perfil/viajeros-guardar.php", {
+    reserva_id: _reservaIdPendiente,
+    viajeros
+  });
+  const respV = parsearTexto(textoV);
+
+  if (!respV || !respV.ok) {
+    fb.className   = "alert alert-danger";
+    fb.textContent = respV?.error || "Error al guardar los viajeros.";
+    fb.classList.remove("d-none");
+    btn.disabled    = false;
+    btn.innerHTML   = '<i class="bi bi-check-lg me-1"></i>Confirmar reserva';
+    return;
+  }
+
+  // 2. Confirmar la reserva (endpoint existente de tus compañeros)
+  const textoC     = await crear("/api/perfil/reserva-confirmar.php", {
+    reserva_id: parseInt(_reservaIdPendiente)
+  });
+  const respC = parsearTexto(textoC);
+
+  if (!respC || !respC.ok) {
+    fb.className   = "alert alert-danger";
+    fb.textContent = respC?.error || "Error al confirmar la reserva.";
+    fb.classList.remove("d-none");
+    btn.disabled    = false;
+    btn.innerHTML   = '<i class="bi bi-check-lg me-1"></i>Confirmar reserva';
+    return;
+  }
+
+  // 3. Éxito — cerrar modal y recargar reservas
+  bootstrap.Modal.getInstance(
+    document.getElementById("modalViajeros")
+  ).hide();
+
+  await cargarReservas();
+
+  btn.disabled  = false;
+  btn.innerHTML = '<i class="bi bi-check-lg me-1"></i>Confirmar reserva';
+}

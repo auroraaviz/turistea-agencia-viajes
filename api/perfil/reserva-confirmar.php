@@ -78,12 +78,22 @@ try {
     $stmtPago->bind_param("i", $reservaId);
     $stmtPago->execute();
 
+    // Generar y guardar referencia de factura en formato TUR-AÑO-ID_RESERVA
+    $referencia = 'TUR-' . date('Y') . '-' . $reservaId;
+    $stmtRef = $conexion->prepare(
+        "UPDATE pago SET referencia_externa = ?
+         WHERE reserva_id = ? AND (referencia_externa IS NULL OR referencia_externa = '')"
+    );
+    $stmtRef->bind_param("si", $referencia, $reservaId);
+    $stmtRef->execute();
+
     $conexion->commit();
 
     echo json_encode([
-        "ok" => true,
-        "mensaje" => "Reserva confirmada correctamente",
-        "estado" => "CONFIRMADA"
+        "ok"         => true,
+        "mensaje"    => "Reserva confirmada correctamente",
+        "estado"     => "CONFIRMADA",
+        "referencia" => $referencia
     ]);
 } catch (Throwable $e) {
     $conexion->rollback();
