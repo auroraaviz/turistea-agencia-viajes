@@ -43,6 +43,8 @@ if ($reservaId <= 0) {
     exit;
 }
 
+$pagoId = (int) ($_GET['pago_id'] ?? 0);
+
 // ── Consultar datos de la reserva + usuario + paquete + pago ──────────────
 
 $stmt = $conexion->prepare("
@@ -76,6 +78,7 @@ $stmt = $conexion->prepare("
         DATEDIFF(p.fecha_regreso, p.fecha_salida) AS noches,
 
         pg.metodo      AS pago_metodo,
+        pg.id          AS pago_id,
         pg.estado      AS pago_estado,
         pg.referencia_externa,
         pg.fecha_pago
@@ -84,9 +87,14 @@ $stmt = $conexion->prepare("
     LEFT JOIN paquete p  ON p.id  = r.paquete_id
     LEFT JOIN pago    pg ON pg.reserva_id = r.id
     WHERE r.id = ?
+      AND (? = 0 OR pg.id = ?)
+    ORDER BY
+        CASE WHEN pg.estado = 'PAGADO' THEN 0 ELSE 1 END,
+        pg.fecha_pago DESC,
+        pg.id DESC
     LIMIT 1
 ");
-$stmt->bind_param('i', $reservaId);
+$stmt->bind_param('iii', $reservaId, $pagoId, $pagoId);
 $stmt->execute();
 $datos = $stmt->get_result()->fetch_assoc();
 
@@ -144,6 +152,11 @@ foreach ($excursiones as $exc) {
 $precioTotal = $subtotalPaquete + $totalExcursiones;
 $noches      = (int) $datos['noches'];
 $referencia  = $datos['referencia_externa'] ?? ('TUR-' . date('Y') . '-' . $reservaId);
+$fechaFactura = $datos['fecha_pago'] ?? $datos['fecha_reserva'];
+$yearFactura = $fechaFactura ? date('Y', strtotime($fechaFactura)) : date('Y');
+$numeroFactura = !empty($datos['pago_id'])
+    ? 'FAC-' . $yearFactura . '-' . str_pad((string) $datos['pago_id'], 6, '0', STR_PAD_LEFT)
+    : 'RES-' . $yearFactura . '-' . str_pad((string) $reservaId, 6, '0', STR_PAD_LEFT);
 
 // ── Helpers ───────────────────────────────────────────────────────────────
 
@@ -168,7 +181,7 @@ class FacturaPDF extends FPDF
         $this->SetFont('Helvetica', 'B', 10);
         $this->SetTextColor(120, 120, 120);
         $this->SetXY(140, 10);
-        $this->Cell(60, 6, 'Factura #' . $this->refFactura, 0, 1, 'R');
+        $this->Cell(60, 6, 'Factura ' . $this->refFactura, 0, 1, 'R');
         $this->SetXY(140, 16);
         $this->SetFont('Helvetica', '', 9);
         $this->Cell(60, 6, 'Fecha: ' . substr($this->fechaPago, 0, 10), 0, 1, 'R');
@@ -214,8 +227,8 @@ class FacturaPDF extends FPDF
 // ── Generar el PDF ────────────────────────────────────────────────────────
 
 $pdf = new FacturaPDF();
-$pdf->refFactura = $reservaId;
-$pdf->fechaPago  = $datos['fecha_pago'] ?? $datos['fecha_reserva'];
+$pdf->refFactura = $numeroFactura;
+$pdf->fechaPago  = $fechaFactura;
 $pdf->AddPage();
 $pdf->SetAutoPageBreak(true, 30);
 
@@ -392,6 +405,6 @@ $pdf->Cell(0, 7, 'El equipo de Turistea', 0, 1, 'L');
 
 // ── Enviar PDF al navegador ───────────────────────────────────────────────
 
-$nombreArchivo = 'Turistea_Factura_' . $reservaId . '.pdf';
+$nombreArchivo = 'Turistea_Factura_' . $numeroFactura . '.pdf';
 $modoSalida = ($_GET['vista'] ?? '') === 'inline' ? 'I' : 'D';
 $pdf->Output($modoSalida, $nombreArchivo); // I = ver en navegador, D = descarga directa

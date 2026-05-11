@@ -16,6 +16,8 @@ function nombreCliente(item) {
 }
 
 function facturaNumero(item) {
+  if (item.numero_factura) return item.numero_factura;
+
   const year = item.fecha_pago ? new Date(item.fecha_pago.replace(" ", "T")).getFullYear() : new Date().getFullYear();
   return `FAC-${year}-${String(item.id).padStart(6, "0")}`;
 }
@@ -280,7 +282,7 @@ function renderTablaFacturas(data) {
               ${facturas.length === 0
                 ? `<tr><td colspan="7" class="text-center text-muted py-4">No hay facturas emitidas</td></tr>`
                 : facturas.map((f) => `
-                  <tr class="fila-factura" role="button" tabindex="0" data-reserva-id="${f.reserva_id || ""}" data-factura-numero="${facturaNumero(f)}">
+                  <tr class="fila-factura" role="button" tabindex="0" data-reserva-id="${f.reserva_id || ""}" data-pago-id="${f.id || ""}" data-factura-numero="${facturaNumero(f)}">
                     <td class="fw-semibold">${facturaNumero(f)}</td>
                     <td>
                       <span class="fw-semibold d-block">${nombreCliente(f)}</span>

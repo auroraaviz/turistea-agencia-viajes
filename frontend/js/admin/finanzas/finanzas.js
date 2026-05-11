@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
   contenido.addEventListener("click", (event) => {
     const filaFactura = event.target.closest(".fila-factura");
     if (filaFactura) {
-      abrirModalFactura(filaFactura.dataset.reservaId, filaFactura.dataset.facturaNumero);
+      abrirModalFactura(filaFactura.dataset.reservaId, filaFactura.dataset.facturaNumero, filaFactura.dataset.pagoId);
       return;
     }
 
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!filaFactura) return;
 
     event.preventDefault();
-    abrirModalFactura(filaFactura.dataset.reservaId, filaFactura.dataset.facturaNumero);
+    abrirModalFactura(filaFactura.dataset.reservaId, filaFactura.dataset.facturaNumero, filaFactura.dataset.pagoId);
   });
 
   if (params.has("finanzas")) {
@@ -86,13 +86,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function abrirModalFactura(reservaId, facturaNumero) {
+  function abrirModalFactura(reservaId, facturaNumero, pagoId) {
     if (!reservaId) return;
 
     document.getElementById("modalFacturaWrap")?.remove();
 
-    const urlInline = `${BASE}/api/reservas/factura_pdf.php?reserva_id=${encodeURIComponent(reservaId)}&vista=inline`;
-    const urlDescarga = `${BASE}/api/reservas/factura_pdf.php?reserva_id=${encodeURIComponent(reservaId)}`;
+    const pagoParam = pagoId ? `&pago_id=${encodeURIComponent(pagoId)}` : "";
+    const urlInline = `${BASE}/api/reservas/factura_pdf.php?reserva_id=${encodeURIComponent(reservaId)}${pagoParam}&vista=inline`;
+    const urlDescarga = `${BASE}/api/reservas/factura_pdf.php?reserva_id=${encodeURIComponent(reservaId)}${pagoParam}`;
     const wrap = document.createElement("div");
     wrap.id = "modalFacturaWrap";
     wrap.innerHTML = `

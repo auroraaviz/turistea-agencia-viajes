@@ -17,6 +17,11 @@ function filas($conexion, $sql) {
     return $resultado ? $resultado->fetch_all(MYSQLI_ASSOC) : [];
 }
 
+function numeroFactura($pagoId, $fechaPago) {
+    $year = $fechaPago ? date('Y', strtotime($fechaPago)) : date('Y');
+    return 'FAC-' . $year . '-' . str_pad((string) $pagoId, 6, '0', STR_PAD_LEFT);
+}
+
 $resumen = fila($conexion, "
     SELECT
         COALESCE(SUM(CASE WHEN estado = 'PAGADO' THEN importe ELSE 0 END), 0) AS ingresos_totales,
@@ -86,6 +91,11 @@ $facturas = filas($conexion, "
     ORDER BY pg.fecha_pago DESC, pg.id DESC
     LIMIT 12
 ");
+
+foreach ($facturas as &$factura) {
+    $factura["numero_factura"] = numeroFactura($factura["id"], $factura["fecha_pago"]);
+}
+unset($factura);
 
 echo json_encode([
     "resumen" => [
