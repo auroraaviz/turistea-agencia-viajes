@@ -16,7 +16,7 @@ $estado = isset($_GET["estado"]) ? strtoupper(trim($_GET["estado"])) : null;
 
 $sql = "SELECT r.id, r.num_viajeros, r.precio_total, r.estado, r.fecha_reserva,
                u.nombre AS usuario_nombre, u.apellidos AS usuario_apellidos, u.email AS usuario_email,
-               p.titulo AS paquete_titulo, p.destino AS paquete_destino, p.fecha_salida,
+               p.titulo AS paquete_titulo, p.destino AS paquete_destino, p.fecha_salida, p.fecha_regreso,
                pg.estado AS pago_estado, pg.importe AS pago_importe, pg.metodo AS pago_metodo
         FROM reserva r
         LEFT JOIN usuario u ON r.usuario_id = u.id

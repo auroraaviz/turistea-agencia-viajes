@@ -78,6 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function abrirModal(id, datos) {
     document.getElementById("modalReservaWrap")?.remove();
 
+    const timeline = renderTimelineReserva(datos);
     const wrap = document.createElement("div");
     wrap.id = "modalReservaWrap";
     wrap.innerHTML = `
@@ -116,6 +117,10 @@ document.addEventListener("DOMContentLoaded", () => {
                   <p class="fw-semibold mb-0">${datos.fecha}</p>
                 </div>
               </div>
+
+              <hr>
+
+              ${timeline}
 
               <hr>
 
@@ -203,6 +208,87 @@ document.addEventListener("DOMContentLoaded", () => {
       : '<span class="text-muted">—</span>';
   }
 
+  function fechaCorta(valor) {
+    if (!valor) return "";
+    const fecha = new Date(valor.replace(" ", "T"));
+    if (Number.isNaN(fecha.getTime())) return "";
+    return fecha.toLocaleDateString("es-ES", { day: "2-digit", month: "short" });
+  }
+
+  function fechaSinHora(valor) {
+    if (!valor) return null;
+    const fecha = new Date(valor.replace(" ", "T"));
+    if (Number.isNaN(fecha.getTime())) return null;
+    fecha.setHours(0, 0, 0, 0);
+    return fecha;
+  }
+
+  function renderTimelineReserva(datos) {
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
+
+    const estado = datos.estado || "";
+    const pagoEstado = datos.pagoEstado || "";
+    const fechaSalida = fechaSinHora(datos.fechaSalida);
+    const fechaRegreso = fechaSinHora(datos.fechaRegreso);
+    const cancelada = estado === "CANCELADA";
+    const pagoCompletado = pagoEstado === "PAGADO";
+    const confirmada = estado === "CONFIRMADA";
+    const salidaPasada = fechaSalida && fechaSalida <= hoy;
+    const viajeFinalizado = fechaRegreso && fechaRegreso < hoy;
+
+    const pasos = [
+      {
+        icono: "bi-journal-check",
+        titulo: "Creada",
+        detalle: fechaCorta(datos.fecha) || "Registrada",
+        estado: "completed"
+      },
+      {
+        icono: "bi-credit-card",
+        titulo: "Pago",
+        detalle: pagoCompletado ? "Recibido" : "Pendiente",
+        estado: pagoCompletado ? "completed" : (cancelada ? "pending" : "current")
+      },
+      {
+        icono: cancelada ? "bi-x-circle" : "bi-patch-check",
+        titulo: cancelada ? "Cancelada" : "Confirmada",
+        detalle: cancelada ? "Reserva anulada" : (confirmada ? "Lista" : "Por confirmar"),
+        estado: cancelada ? "cancelled" : (confirmada ? "completed" : (pagoCompletado ? "current" : "pending"))
+      },
+      {
+        icono: "bi-airplane",
+        titulo: "Salida",
+        detalle: fechaCorta(datos.fechaSalida) || "Sin fecha",
+        estado: !cancelada && salidaPasada ? "completed" : (!cancelada && confirmada ? "current" : "pending")
+      },
+      {
+        icono: "bi-flag",
+        titulo: "Finalizada",
+        detalle: fechaCorta(datos.fechaRegreso) || "Pendiente",
+        estado: !cancelada && viajeFinalizado ? "completed" : "pending"
+      }
+    ];
+
+    return `
+      <section class="reserva-timeline-wrap" aria-label="Seguimiento de la reserva">
+        <div class="d-flex justify-content-between align-items-center gap-2 mb-3">
+          <p class="text-uppercase fw-bold text-muted mb-0" style="font-size:.75rem">Seguimiento</p>
+          <span class="reserva-timeline-pill">${pagoCompletado ? "Pago verificado" : "Pago pendiente"}</span>
+        </div>
+        <div class="reserva-timeline">
+          ${pasos.map((paso) => `
+            <div class="reserva-timeline-step ${paso.estado}">
+              <span class="reserva-timeline-dot"><i class="bi ${paso.icono}"></i></span>
+              <span class="reserva-timeline-title">${paso.titulo}</span>
+              <small>${paso.detalle}</small>
+            </div>
+          `).join("")}
+        </div>
+      </section>
+    `;
+  }
+
   function renderReservas(reservas, todasReservas, titulo) {
     const contadores = {
       total:      todasReservas.length,
@@ -283,7 +369,10 @@ document.addEventListener("DOMContentLoaded", () => {
                       data-destino="${r.paquete_destino || ""}"
                       data-viajeros="${r.num_viajeros}"
                       data-precio="${r.precio_total}"
-                      data-fecha="${r.fecha_reserva || ""}">
+                      data-fecha="${r.fecha_reserva || ""}"
+                      data-pago-estado="${r.pago_estado || ""}"
+                      data-fecha-salida="${r.fecha_salida || ""}"
+                      data-fecha-regreso="${r.fecha_regreso || ""}">
                       <td class="text-muted">#${r.id}</td>
                       <td>
                         <div class="fw-semibold">${r.usuario_nombre || ""} ${r.usuario_apellidos || ""}</div>

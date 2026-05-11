@@ -214,6 +214,124 @@
   background: #fff;
 }
 
+/* ========== TIMELINE RESERVAS ========== */
+.reserva-timeline-wrap {
+  background: #f8fafc;
+  border: 1px solid #e5edf3;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.reserva-timeline-pill {
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid #dce7ef;
+  color: #40515f;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 5px 10px;
+}
+
+.reserva-timeline {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0;
+}
+
+.reserva-timeline-step {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  text-align: center;
+  color: #82909c;
+}
+
+.reserva-timeline-step::before,
+.reserva-timeline-step::after {
+  content: "";
+  position: absolute;
+  top: 19px;
+  width: 50%;
+  height: 3px;
+  background: #dce7ef;
+}
+
+.reserva-timeline-step::before {
+  left: 0;
+}
+
+.reserva-timeline-step::after {
+  right: 0;
+}
+
+.reserva-timeline-step:first-child::before,
+.reserva-timeline-step:last-child::after {
+  display: none;
+}
+
+.reserva-timeline-dot {
+  position: relative;
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #dce7ef;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.reserva-timeline-title {
+  color: #4b5b68;
+  font-weight: 800;
+  font-size: 0.82rem;
+}
+
+.reserva-timeline-step small {
+  max-width: 96px;
+  color: #7a8792;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.reserva-timeline-step.completed::before,
+.reserva-timeline-step.completed::after,
+.reserva-timeline-step.completed .reserva-timeline-dot {
+  background: #198754;
+  border-color: #198754;
+  color: #fff;
+}
+
+.reserva-timeline-step.completed .reserva-timeline-title {
+  color: #198754;
+}
+
+.reserva-timeline-step.current .reserva-timeline-dot {
+  background: #fff;
+  border-color: #0077b6;
+  color: #0077b6;
+  box-shadow: 0 0 0 5px rgba(0, 119, 182, 0.12);
+}
+
+.reserva-timeline-step.current .reserva-timeline-title {
+  color: #0077b6;
+}
+
+.reserva-timeline-step.cancelled .reserva-timeline-dot {
+  background: #dc3545;
+  border-color: #dc3545;
+  color: #fff;
+}
+
+.reserva-timeline-step.cancelled .reserva-timeline-title {
+  color: #dc3545;
+}
+
 /* ========== RESPONSIVE ========== */
 
 /* Tablets y pantallas medianas */
@@ -329,6 +447,45 @@
 
   .finanzas-bar {
     width: 34px;
+  }
+
+  .reserva-timeline {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .reserva-timeline-step {
+    min-height: 44px;
+    align-items: flex-start;
+    padding-left: 56px;
+    text-align: left;
+  }
+
+  .reserva-timeline-step::before,
+  .reserva-timeline-step::after {
+    left: 19px;
+    right: auto;
+    top: 0;
+    width: 3px;
+    height: 50%;
+  }
+
+  .reserva-timeline-step::before {
+    top: -14px;
+  }
+
+  .reserva-timeline-step::after {
+    top: 25px;
+  }
+
+  .reserva-timeline-dot {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  .reserva-timeline-step small {
+    max-width: none;
   }
 }
 
