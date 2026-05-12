@@ -40,7 +40,7 @@ if ($reservaId <= 0) {
 }
 
 $stmt = $conexion->prepare(
-    "SELECT id FROM reserva WHERE id = ? AND usuario_id = ? LIMIT 1"
+    "SELECT id, estado FROM reserva WHERE id = ? AND usuario_id = ? LIMIT 1"
 );
 $stmt->bind_param("ii", $reservaId, $usuarioId);
 $stmt->execute();
@@ -49,6 +49,12 @@ $reserva = $stmt->get_result()->fetch_assoc();
 if (!$reserva) {
     http_response_code(404);
     echo json_encode(["error" => "Reserva no encontrada"]);
+    exit;
+}
+
+if (in_array($reserva["estado"], ["CONFIRMADA", "PENDIENTE", "RESERVADA"], true)) {
+    http_response_code(403);
+    echo json_encode(["error" => "No se pueden eliminar reservas confirmadas o reservadas"]);
     exit;
 }
 

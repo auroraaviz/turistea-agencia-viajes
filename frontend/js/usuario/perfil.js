@@ -137,14 +137,14 @@ async function cargarReservas() {
 
   reservasPerfil = reservas;
   document.getElementById("stat-reservas").textContent = reservas.length;
-  renderizarReservas(reservasPerfil, contenedor, { mostrarConfirmar: true, mostrarEliminar: true });
+  renderizarReservas(reservasPerfil, contenedor, { mostrarConfirmar: true, mostrarCancelar: true, mostrarEliminar: true });
   renderizarConfirmados();
 
   // Filtro por estado (sin nueva petición al servidor)
   document.getElementById("filtro-reservas").addEventListener("change", (e) => {
     const val      = e.target.value;
     const filtradas = val ? reservasPerfil.filter(r => r.estado === val) : reservasPerfil;
-    renderizarReservas(filtradas, contenedor, { mostrarConfirmar: true, mostrarEliminar: true });
+    renderizarReservas(filtradas, contenedor, { mostrarConfirmar: true, mostrarCancelar: true, mostrarEliminar: true });
   });
 }
 
@@ -162,22 +162,28 @@ function renderizarReservas(lista, contenedor, opciones = {}) {
     const fecha  = new Date(r.fecha_reserva).toLocaleDateString("es-ES",
       { day: "2-digit", month: "short", year: "numeric" });
     const puedeConfirmar = opciones.mostrarConfirmar && r.estado === "PENDIENTE";
-    const puedeCancelar = opciones.mostrarCancelar && r.estado !== "CANCELADA";
-    const puedeEliminar = opciones.mostrarEliminar;
+    const puedeCancelar = opciones.mostrarCancelar && r.estado === "PENDIENTE";
+    const puedeEliminar = opciones.mostrarEliminar && reservaPuedeEliminarse(r.estado);
 
     return `
       <div class="reserva-card" data-reserva-id="${r.id}">
         <div class="row g-0">
           <div class="col-4 col-md-3">
-            <img src="${imagen}" alt="${r.nombre_paquete || 'Destino'}"
-              style="min-height:130px;width:100%;height:100%;object-fit:cover;" />
+            <img class="reserva-img" src="${imagen}" alt="${r.nombre_paquete || 'Destino'}" />
           </div>
           <div class="col-8 col-md-9 p-3">
             <div class="d-flex align-items-start justify-content-between flex-wrap gap-1 mb-1">
               <span class="reserva-titulo">${r.nombre_paquete || "Paquete de viaje"}</span>
-              <span class="reserva-badge ${badge.clase}">
-                <i class="bi ${badge.icono}"></i> ${r.estado}
-              </span>
+              <div class="reserva-estado-acciones">
+                ${puedeCancelar ? `
+                  <button type="button" class="btn-cancelar-reserva" data-id="${r.id}">
+                    <i class="bi bi-x-lg me-1"></i>Cancelar
+                  </button>
+                ` : ""}
+                <span class="reserva-badge ${badge.clase}">
+                  <i class="bi ${badge.icono}"></i> ${r.estado}
+                </span>
+              </div>
             </div>
             <div class="reserva-fecha mb-2">
               <i class="bi bi-calendar3"></i> Reservado el ${fecha}
@@ -189,29 +195,30 @@ function renderizarReservas(lista, contenedor, opciones = {}) {
               <span style="font-size:.8rem;color:#777;">
                 <i class="bi bi-currency-euro me-1"></i>${Number(r.precio_total).toLocaleString("es-ES")}
               </span>
-              ${puedeConfirmar ? `
-                <button type="button" class="btn-confirmar-reserva"
-                  data-id="${r.id}" data-viajeros="${r.num_viajeros}">
-                  <i class="bi bi-people-fill me-1"></i>Añadir viajeros y confirmar
-                </button>
+              ${(puedeCancelar || puedeConfirmar) ? `
+                <div class="reserva-acciones-pendiente">
+                  ${puedeConfirmar ? `
+                    <button type="button" class="btn-confirmar-reserva"
+                      data-id="${r.id}" data-viajeros="${r.num_viajeros}">
+                      <i class="bi bi-people-fill me-1"></i>Añadir viajeros y confirmar
+                    </button>
+                  ` : ""}
+                </div>
               ` : ""}
               ${r.estado === "CONFIRMADA" ? `
                 <a href="${BASE}/api/reservas/factura_pdf.php?reserva_id=${r.id}"
-                  target="_blank"
+                  data-id="${r.id}"
                   class="btn-ver-reserva ms-auto"
                   style="background:#0077B6;color:white;border-color:#0077B6;">
                   <i class="bi bi-file-earmark-pdf me-1"></i>Factura
                 </a>
               ` : ""}
-              ${puedeCancelar ? `
-                <button type="button" class="btn-cancelar-reserva" data-id="${r.id}">
-                  <i class="bi bi-x-lg me-1"></i>Cancelar
-                </button>
-              ` : ""}
               ${puedeEliminar ? `
-                <button type="button" class="btn-eliminar-reserva" data-id="${r.id}">
-                  <i class="bi bi-trash me-1"></i>Eliminar
-                </button>
+                <div class="reserva-acciones-eliminar">
+                  <button type="button" class="btn-eliminar-reserva" data-id="${r.id}">
+                    <i class="bi bi-trash me-1"></i>Eliminar
+                  </button>
+                </div>
               ` : ""}
             </div>
           </div>
@@ -230,6 +237,60 @@ function renderizarReservas(lista, contenedor, opciones = {}) {
   contenedor.querySelectorAll(".btn-eliminar-reserva").forEach(btn => {
     btn.addEventListener("click", eliminarReserva);
   });
+
+  contenedor.querySelectorAll(".btn-ver-reserva").forEach(btn => {
+    btn.addEventListener("click", abrirModalFactura);
+  });
+}
+
+function abrirModalFactura(e) {
+  e.preventDefault();
+
+  const btn = e.currentTarget;
+  const reservaId = btn.dataset.id;
+  if (!reservaId) return;
+
+  document.getElementById("modalFacturaPerfilWrap")?.remove();
+
+  const urlDescarga = `${BASE}/api/reservas/factura_pdf.php?reserva_id=${encodeURIComponent(reservaId)}`;
+  const urlInline = `${urlDescarga}&vista=inline`;
+  const wrap = document.createElement("div");
+  wrap.id = "modalFacturaPerfilWrap";
+  wrap.innerHTML = `
+    <div class="modal fade" id="modalFacturaPerfil" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content border-0 shadow">
+          <div class="modal-header">
+            <h5 class="modal-title fw-bold">
+              <i class="bi bi-file-earmark-pdf me-2 text-primary"></i>Factura reserva #${reservaId}
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body p-0 bg-light">
+            <iframe
+              class="factura-pdf-frame"
+              src="${urlInline}"
+              title="Vista previa de la factura de la reserva ${reservaId}">
+            </iframe>
+          </div>
+          <div class="modal-footer">
+            <a class="btn btn-primary rounded-pill px-4" href="${urlDescarga}">
+              <i class="bi bi-download me-1"></i>Descargar
+            </a>
+            <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">
+              <i class="bi bi-x-lg me-1"></i>Salir
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+  document.body.appendChild(wrap);
+
+  const modalEl = document.getElementById("modalFacturaPerfil");
+  const bsModal = new bootstrap.Modal(modalEl);
+  modalEl.addEventListener("hidden.bs.modal", () => wrap.remove());
+  bsModal.show();
 }
 
 function renderizarConfirmados() {
@@ -243,7 +304,7 @@ function renderizarConfirmados() {
     return;
   }
 
-  renderizarReservas(confirmadas, contenedor, { mostrarCancelar: true });
+  renderizarReservas(confirmadas, contenedor);
 }
 
 async function confirmarReserva(e) {
@@ -269,7 +330,7 @@ async function confirmarReserva(e) {
   const filtro = document.getElementById("filtro-reservas")?.value || "";
   const lista = filtro ? reservasPerfil.filter(r => r.estado === filtro) : reservasPerfil;
 
-  renderizarReservas(lista, document.getElementById("contenedor-reservas"), { mostrarConfirmar: true, mostrarEliminar: true });
+  renderizarReservas(lista, document.getElementById("contenedor-reservas"), { mostrarConfirmar: true, mostrarCancelar: true, mostrarEliminar: true });
   renderizarConfirmados();
 }
 
@@ -296,7 +357,7 @@ async function cancelarReserva(e) {
   const filtro = document.getElementById("filtro-reservas")?.value || "";
   const lista = filtro ? reservasPerfil.filter(r => r.estado === filtro) : reservasPerfil;
 
-  renderizarReservas(lista, document.getElementById("contenedor-reservas"), { mostrarConfirmar: true, mostrarEliminar: true });
+  renderizarReservas(lista, document.getElementById("contenedor-reservas"), { mostrarConfirmar: true, mostrarCancelar: true, mostrarEliminar: true });
   renderizarConfirmados();
 }
 
@@ -327,7 +388,7 @@ async function eliminarReserva(e) {
   if (reservasPerfil.length === 0) {
     contenedor.innerHTML = mensajeVacio("bi-ticket-detailed", "Aún no tienes reservas.");
   } else {
-    renderizarReservas(lista, contenedor, { mostrarConfirmar: true, mostrarEliminar: true });
+    renderizarReservas(lista, contenedor, { mostrarConfirmar: true, mostrarCancelar: true, mostrarEliminar: true });
   }
 
   renderizarConfirmados();
@@ -339,6 +400,10 @@ function badgeEstado(estado) {
     PENDIENTE:  { clase: "badge-pendiente",  icono: "bi-clock-fill" },
     CANCELADA:  { clase: "badge-cancelada",  icono: "bi-x-circle-fill" },
   }[estado] || { clase: "badge-pendiente", icono: "bi-circle" };
+}
+
+function reservaPuedeEliminarse(estado) {
+  return !["CONFIRMADA", "PENDIENTE", "RESERVADA"].includes(estado);
 }
 
 /* ─────────────────────────────────────────
@@ -556,6 +621,8 @@ function inicializarEventos() {
   document.getElementById("card-cvv")?.addEventListener("input", function () {
     this.value = this.value.replace(/\D/g, "").substring(0, 4);
   });
+
+  inicializarModalViajeros();
 }
 
 /* ─────────────────────────────────────────
@@ -633,6 +700,9 @@ let _reservaIdPendiente   = null;
 let _numViajerosPendiente = 0;
 
 function abrirModalViajeros(e) {
+  e.preventDefault?.();
+  e.stopPropagation?.();
+
   const btn       = e.currentTarget;
   _reservaIdPendiente   = btn.dataset.id;
   _numViajerosPendiente = parseInt(btn.dataset.viajeros) || 1;
@@ -668,16 +738,18 @@ function abrirModalViajeros(e) {
     </div>
   `).join("");
 
-  bootstrap.Modal.getOrCreate(
+  bootstrap.Modal.getOrCreateInstance(
     document.getElementById("modalViajeros")
   ).show();
 }
 
-// Listener del botón confirmar dentro del modal
-document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("btn-confirmar-viajeros")
-    ?.addEventListener("click", confirmarConViajeros);
-});
+function inicializarModalViajeros() {
+  const btn = document.getElementById("btn-confirmar-viajeros");
+  if (!btn || btn.dataset.listenerConfirmarViajeros) return;
+
+  btn.addEventListener("click", confirmarConViajeros);
+  btn.dataset.listenerConfirmarViajeros = "true";
+}
 
 async function confirmarConViajeros() {
   const fb  = document.getElementById("viajeros-feedback");

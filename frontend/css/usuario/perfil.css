@@ -268,21 +268,57 @@ body {
 .reserva-card {
   background: white;
   border: 1px solid var(--border-light);
+  border-right: 1px solid rgba(0, 0, 0, 0.78);
   border-radius: 8px;
   overflow: hidden;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.75rem;
+  position: relative;
+  box-shadow: 10px 0 16px -13px rgba(0, 53, 102, 0.65);
   transition: all 0.3s ease;
 }
 
-.reserva-card:hover {
-  box-shadow: 0 4px 16px rgba(0, 119, 182, 0.12);
-  border-color: var(--secondary);
+.reserva-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 72%;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 0 8px 8px 0;
+  background: linear-gradient(270deg, rgba(0, 180, 216, 0.18) 0, rgba(0, 180, 216, 0.16) 34%, rgba(0, 119, 182, 0.07) 56%, rgba(0, 180, 216, 0) 100%);
 }
 
-.reserva-card img {
+.reserva-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 25%;
+  width: 45%;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(0, 180, 216, 0.12) 0, rgba(0, 119, 182, 0.05) 60%, rgba(0, 180, 216, 0) 100%);
+}
+
+.reserva-card > .row {
+  position: relative;
+  z-index: 1;
+}
+
+.reserva-card:hover {
+  box-shadow: 12px 0 18px -13px rgba(0, 53, 102, 0.75), 0 4px 16px rgba(0, 119, 182, 0.12);
+  border-color: var(--secondary);
+  border-right-color: rgba(0, 0, 0, 0.78);
+}
+
+.reserva-img {
   width: 100%;
   height: 100%;
+  min-height: 118px;
   object-fit: cover;
+  display: block;
 }
 
 .reserva-titulo {
@@ -310,6 +346,13 @@ body {
   gap: 0.3rem;
 }
 
+.reserva-estado-acciones {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.35rem;
+}
+
 .badge-confirmada {
   background: #d4edda;
   color: #155724;
@@ -326,19 +369,105 @@ body {
 }
 
 .btn-ver-reserva {
-  color: var(--primary);
-  font-size: 0.8rem;
+  color: white;
+  background: var(--primary);
+  font-size: 0.7rem;
   font-weight: 600;
   text-decoration: none;
   border: 1px solid var(--primary);
   border-radius: 20px;
-  padding: 0.4rem 0.8rem;
+  padding: 0.35rem 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
   transition: all 0.3s ease;
 }
 
 .btn-ver-reserva:hover {
-  background: var(--primary);
+  background: #005f92;
+  border-color: #005f92;
   color: white;
+}
+
+.btn-confirmar-reserva,
+.btn-cancelar-reserva,
+.btn-eliminar-reserva {
+  border-radius: 20px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border: 1px solid transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  line-height: 1.2;
+  transition: all 0.25s ease;
+}
+
+.reserva-acciones-pendiente {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  align-self: flex-start;
+  gap: 0.25rem;
+  margin-top: -0.1rem;
+}
+
+.reserva-acciones-eliminar {
+  margin-left: auto;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-confirmar-reserva {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 119, 182, 0.18);
+}
+
+.btn-confirmar-reserva:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 7px 16px rgba(0, 119, 182, 0.24);
+}
+
+.btn-cancelar-reserva {
+  background: #fff7e1;
+  border-color: #ffe1a1;
+  color: #9a6400;
+}
+
+.btn-cancelar-reserva:hover {
+  background: var(--accent-yellow);
+  border-color: var(--accent-yellow);
+  color: var(--text-dark);
+}
+
+.btn-eliminar-reserva {
+  background: #fff1f1;
+  border-color: #ffd1d1;
+  color: var(--accent-red);
+}
+
+.btn-eliminar-reserva:hover {
+  background: var(--accent-red);
+  border-color: var(--accent-red);
+  color: white;
+}
+
+.btn-confirmar-reserva:focus-visible,
+.btn-cancelar-reserva:focus-visible,
+.btn-eliminar-reserva:focus-visible {
+  outline: 3px solid rgba(0, 180, 216, 0.28);
+  outline-offset: 2px;
+}
+
+.factura-pdf-frame {
+  width: 100%;
+  min-height: 70vh;
+  border: 0;
+  display: block;
 }
 
 /* ===== FAVORITOS ===== */
@@ -575,7 +704,27 @@ body {
   }
 
   .reserva-card .col-4 {
-    min-height: 100px;
+    min-height: 96px;
+  }
+
+  .reserva-img {
+    height: 100%;
+    min-height: 96px;
+  }
+
+  .reserva-acciones-pendiente {
+    flex: 1 1 100%;
+    align-items: stretch;
+    margin-left: 0;
+    margin-top: 0;
+  }
+
+  .reserva-estado-acciones {
+    align-items: flex-start;
+  }
+
+  .reserva-acciones-eliminar {
+    flex: 1 1 100%;
   }
 
   .fav-card {

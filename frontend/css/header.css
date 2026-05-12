@@ -150,10 +150,25 @@ body {
 #contenedor-tarjetas .card {
   border-bottom: 1px solid #000;
   box-shadow: 0 8px 14px -10px rgba(0, 0, 0, 0.75) !important;
+  position: relative;
+}
+
+#contenedor-tarjetas .card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(0deg, rgba(0, 180, 216, 0.14) 0, rgba(0, 119, 182, 0.06) 38%, rgba(0, 180, 216, 0) 72%);
+}
+
+#contenedor-tarjetas .card > * {
+  position: relative;
+  z-index: 1;
 }
 
 #contenedor-tarjetas .card.card-rebote {
-  animation: reboteTarjeta 0.28s ease;
+  animation: reboteTarjeta 1.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @keyframes reboteTarjeta {
@@ -162,11 +177,11 @@ body {
   }
 
   35% {
-    transform: translateY(-10px) scale(1.03);
+    transform: translateY(-9px) scale(1.028);
   }
 
   70% {
-    transform: translateY(2px) scale(0.99);
+    transform: translateY(2px) scale(0.992);
   }
 
   100% {
