@@ -70,87 +70,109 @@
   </div>
 </div>
 
-      <!-- BARRA DE HEADER -->
-      <!-- Slider -->
-      <div class="container-fluid px-0">
-        <div id="sliderOfertas" class="carousel slide shadow" data-bs-ride="carousel">
-          <div class="carousel-indicators">
-              <button type="button" data-bs-target="#sliderOfertas" data-bs-slide-to="0" class="active"></button>
-              <button type="button" data-bs-target="#sliderOfertas" data-bs-slide-to="1"></button>
-              <button type="button" data-bs-target="#sliderOfertas" data-bs-slide-to="2"></button>
-          </div>
+     <!-- Slider -->
+<div class="container-fluid px-0">
+  <div id="sliderOfertas" class="carousel slide shadow" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#sliderOfertas" data-bs-slide-to="0" class="active"></button>
+      <button type="button" data-bs-target="#sliderOfertas" data-bs-slide-to="1"></button>
+      <button type="button" data-bs-target="#sliderOfertas" data-bs-slide-to="2"></button>
+    </div>
 
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <div
-                class="slider-placeholder bg-azul-marino d-flex align-items-center justify-content-center"
-              >
-                <div class="text-center text-white p-5">
-                  <h2 class="font-weight-bold">Escapada a Canarias</h2>
-                  <p class="lead">Vuelo + 7 noches de Hotel desde 529&euro;</p>
-                  <a
-                    href="#"
-                    class="btn btn-light btn-lg rounded-pill px-5 font-weight-bold text-primario"
-                  >
-                    Ver oferta
-                  </a>
-                </div>
-              </div>
-            </div>
+    <div class="carousel-inner">
 
-            <div class="carousel-item">
-              <div
-                class="slider-placeholder bg-yellow d-flex align-items-center justify-content-center"
-              >
-                <div class="text-center text-white p-5">
-                  <h2 class="font-weight-bold">Semana en Mallorca</h2>
-                  <p class="lead">Todo incluido desde 399&euro; por persona</p>
-                  <a
-                    href="#"
-                    class="btn btn-light btn-lg rounded-pill px-5 font-weight-bold text-primario"
-                  >
-                    Ver oferta
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <div class="carousel-item">
-              <div
-                class="slider-placeholder bg-coral d-flex align-items-center justify-content-center"
-              >
-                <div class="text-center text-white p-5">
-                  <h2 class="font-weight-bold">Fin de semana en Roma</h2>
-                  <p class="lead">Vuelos + 3 noches de hotel desde 199&euro;</p>
-                  <a
-                    href="#"
-                    class="btn btn-light btn-lg rounded-pill px-5 font-weight-bold text-primario"
-                  >
-                    Ver oferta
-                  </a>
-                </div>
-              </div>
+      <!-- Slide 1 — Canarias -->
+      <div class="carousel-item active">
+        <div class="slider-placeholder position-relative overflow-hidden"
+             style="background: linear-gradient(135deg, #0077B6 0%, #00B4D8 100%); min-height: 420px;">
+          <!-- Imagen de fondo con overlay -->
+          <img
+            src="https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?w=1400&q=80"
+            alt="Canarias"
+            class="position-absolute w-100 h-100 object-fit-cover top-0 start-0"
+            style="opacity: 0.35;"
+          />
+          <div class="position-relative d-flex align-items-center justify-content-center h-100 p-5" style="min-height: 420px;">
+            <div class="text-center text-white">
+              <span class="badge rounded-pill mb-3 px-3 py-2" style="background: rgba(255,255,255,0.2); font-size: 0.85rem; letter-spacing: 1px;">
+                ✈️ VUELO + HOTEL
+              </span>
+              <h2 class="fw-bold display-5 mb-2">Escapada a Canarias</h2>
+              <p class="lead mb-4" style="opacity: 0.9;">7 noches todo incluido desde <strong style="color: #FFD166;">529€</strong></p>
+              <a href="frontend/pages/detalle.html?id=3"
+                 class="btn btn-light btn-lg rounded-pill px-5 fw-bold"
+                 style="color: #0077B6;">
+                Ver paquetes →
+              </a>
             </div>
           </div>
-
-          <button
-            class="carousel-control-prev"
-            type="button"
-            data-bs-target="#sliderOfertas"
-            data-bs-slide="prev"
-          >
-            <span class="carousel-control-prev-icon"></span>
-          </button>
-          <button
-            class="carousel-control-next"
-            type="button"
-            data-bs-target="#sliderOfertas"
-            data-bs-slide="next"
-          >
-            <span class="carousel-control-next-icon"></span>
-          </button>
         </div>
       </div>
+
+      <!-- Slide 2 — Mallorca -->
+      <div class="carousel-item">
+        <div class="slider-placeholder position-relative overflow-hidden"
+             style="background: linear-gradient(135deg, #00B4D8 0%, #0077B6 100%); min-height: 420px;">
+          <img
+            src="https://images.unsplash.com/photo-1570197788417-0e82375c9371?w=1400&q=80"
+            alt="Mallorca"
+            class="position-absolute w-100 h-100 object-fit-cover top-0 start-0"
+            style="opacity: 0.35;"
+          />
+          <div class="position-relative d-flex align-items-center justify-content-center h-100 p-5" style="min-height: 420px;">
+            <div class="text-center text-white">
+              <span class="badge rounded-pill mb-3 px-3 py-2" style="background: rgba(255,255,255,0.2); font-size: 0.85rem; letter-spacing: 1px;">
+                🌴 TODO INCLUIDO
+              </span>
+              <h2 class="fw-bold display-5 mb-2">Semana en Mallorca</h2>
+              <p class="lead mb-4" style="opacity: 0.9;">7 noches desde <strong style="color: #FFD166;">399€</strong> por persona</p>
+              <a href="frontend/pages/detalle.html?id=4"
+                 class="btn btn-light btn-lg rounded-pill px-5 fw-bold"
+                 style="color: #0077B6;">
+                Ver paquetes →
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3 — Roma -->
+      <div class="carousel-item">
+        <div class="slider-placeholder position-relative overflow-hidden"
+             style="background: linear-gradient(135deg, #FF6B6B 0%, #0077B6 100%); min-height: 420px;">
+          <img
+            src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=1400&q=80"
+            alt="Roma"
+            class="position-absolute w-100 h-100 object-fit-cover top-0 start-0"
+            style="opacity: 0.35;"
+          />
+          <div class="position-relative d-flex align-items-center justify-content-center h-100 p-5" style="min-height: 420px;">
+            <div class="text-center text-white">
+              <span class="badge rounded-pill mb-3 px-3 py-2" style="background: rgba(255,255,255,0.2); font-size: 0.85rem; letter-spacing: 1px;">
+                🏛️ FIN DE SEMANA
+              </span>
+              <h2 class="fw-bold display-5 mb-2">Fin de semana en Roma</h2>
+              <p class="lead mb-4" style="opacity: 0.9;">Vuelo + 3 noches desde <strong style="color: #FFD166;">199€</strong></p>
+              <a href="frontend/pages/detalle.html?id=5"
+                 class="btn btn-light btn-lg rounded-pill px-5 fw-bold"
+                 style="color: #0077B6;">
+                Ver paquetes →
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#sliderOfertas" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#sliderOfertas" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+</div>
 
       <!-- CATEGORÍAS -->
       <nav class="bg-light border-bottom">
@@ -462,9 +484,9 @@
 
     <script src="./frontend/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="./frontend/js/filtros/destinos.js"></script>
-    <script src="./frontend/js/filtros/filtros.js"></script>
     <script type="module" src="./frontend/js/contacto/gestion.js"></script>
     <script type="module" src="./frontend/js/filtros/filtros.js"></script>
+
     <script>
         document.getElementById('footer-year').textContent = new Date().getFullYear();
         document.querySelectorAll('[data-categoria-link]').forEach(function (link) {

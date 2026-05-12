@@ -22,6 +22,21 @@ document.addEventListener("DOMContentLoaded", async function () {
   if (btnBuscar) {
     btnBuscar.addEventListener("click", aplicarFiltros);
   }
+
+// Leer parámetro destino de la URL y aplicarlo al filtro
+const params = new URLSearchParams(window.location.search);
+const destinoParam = params.get('destino');
+if (destinoParam) {
+  // Esperar a que destinos.js rellene el select
+  setTimeout(() => {
+    const selectDestino = document.getElementById('select-destino');
+    if (selectDestino) {
+      selectDestino.value = destinoParam;
+      aplicarFiltros();
+    }
+  }, 300);
+}
+
 });
 
 function aplicarFiltros() {
