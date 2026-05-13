@@ -602,11 +602,7 @@ function activarGuardar(modal) {
         ).value,
 
       imagen:
-        obtenerRutaImagen(
-          "crearImagen",
-          "assets/img/default.jpg",
-          "assets/img/"
-        ),
+        "assets/img/default.jpg",
 
       hotel_nombre:
         document.getElementById(
@@ -629,11 +625,7 @@ function activarGuardar(modal) {
         ).value,
 
       hotel_imagen:
-        obtenerRutaImagen(
-          "crearHotelImagen",
-          "assets/img/hoteles/default.jpg",
-          "assets/img/hoteles/"
-        ),
+        "assets/img/hoteles/default.jpg",
 
       fecha_salida:
         document.getElementById(
@@ -692,14 +684,30 @@ function activarGuardar(modal) {
 
     };
 
+    const formData = convertirEnFormData(datos);
+    agregarArchivo(formData, "imagen_archivo", "crearImagen");
+    agregarArchivo(formData, "hotel_imagen_archivo", "crearHotelImagen");
+
 // Enviar datos al backend
     const respuesta =
       await crear(
         "/api/paquetes/create.php",
-        datos
+        formData
       );
 
     console.log(respuesta);
+
+    let resultado = null;
+    try {
+      resultado = JSON.parse(respuesta);
+    } catch (error) {
+      console.log("Respuesta no JSON:", error);
+    }
+
+    if (!resultado?.ok) {
+      alert(resultado?.mensaje || "No se pudo crear el paquete");
+      return;
+    }
 
     modal.hide();
 
@@ -714,30 +722,22 @@ function activarGuardar(modal) {
 }
 
 // =========================================
-// OBTENER RUTA IMAGEN
+// HELPERS FORMULARIO
 // =========================================
-// Si usuario selecciona archivo,
-// devuelve ruta para guardar en BD
-function obtenerRutaImagen(
-  idInput,
-  defecto,
-  carpeta
-) {
+function convertirEnFormData(datos) {
+  const formData = new FormData();
 
-  const input =
-    document.getElementById(
-      idInput
-    );
+  Object.entries(datos).forEach(([clave, valor]) => {
+    formData.append(clave, valor ?? "");
+  });
 
-  if (
-    input &&
-    input.files.length > 0
-  ) {
-    return (
-      carpeta +
-      input.files[0].name
-    );
+  return formData;
+}
+
+function agregarArchivo(formData, nombreCampo, idInput) {
+  const input = document.getElementById(idInput);
+
+  if (input && input.files.length > 0) {
+    formData.append(nombreCampo, input.files[0]);
   }
-
-  return defecto;
 }

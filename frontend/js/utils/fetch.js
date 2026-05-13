@@ -34,11 +34,18 @@ export async function obtener(url) {
 
 export async function crear(url, datos) {
   try {
-    const respuesta = await fetch(BASE + url, {
+    const opciones = {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(datos),
+      body: datos instanceof FormData ? datos : JSON.stringify(datos),
       credentials: "include",
+    };
+
+    if (!(datos instanceof FormData)) {
+      opciones.headers = { "Content-Type": "application/json" };
+    }
+
+    const respuesta = await fetch(BASE + url, {
+      ...opciones,
     });
 
     if (!respuesta.ok) {

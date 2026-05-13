@@ -243,14 +243,46 @@ async function guardarCambios(paquete, seccion) {
   const respuesta =
     await crear(
       "/api/paquetes/update.php",
-      paquete
+      crearFormDataPaquete(paquete)
     );
+
+  try {
+    const json = JSON.parse(respuesta);
+    if (json?.paquete) {
+      Object.assign(paquete, json.paquete);
+    }
+  } catch (error) {
+    console.log("No se pudo parsear la respuesta:", error);
+  }
 
 
   console.log(
     "Respuesta servidor:",
     respuesta
   );
+}
+
+function crearFormDataPaquete(paquete) {
+  const formData = new FormData();
+
+  Object.entries(paquete).forEach(([clave, valor]) => {
+    if (valor !== undefined && valor !== null) {
+      formData.append(clave, valor);
+    }
+  });
+
+  agregarArchivoSiExiste(formData, "imagen_archivo", "editImagen");
+  agregarArchivoSiExiste(formData, "hotel_imagen_archivo", "editHotelImagen");
+
+  return formData;
+}
+
+function agregarArchivoSiExiste(formData, nombreCampo, idInput) {
+  const input = document.getElementById(idInput);
+
+  if (input && input.files.length > 0) {
+    formData.append(nombreCampo, input.files[0]);
+  }
 }
 
 

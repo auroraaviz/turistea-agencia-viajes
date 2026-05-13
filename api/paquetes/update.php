@@ -11,7 +11,77 @@ require_once("../config/auth.php");
 verificarAdmin();
 require_once("../config/bd.php");
 
-$data = json_decode(file_get_contents("php://input"), true);
+function guardarImagenSubida($campo, $subcarpeta, $rutaActual)
+{
+    if (
+        !isset($_FILES[$campo]) ||
+        $_FILES[$campo]["error"] === UPLOAD_ERR_NO_FILE
+    ) {
+        return $rutaActual;
+    }
+
+    if ($_FILES[$campo]["error"] !== UPLOAD_ERR_OK) {
+        echo json_encode(["ok" => false, "mensaje" => mensajeErrorSubida($_FILES[$campo]["error"])]);
+        exit;
+    }
+
+    $permitidos = [
+        "image/jpeg" => "jpg",
+        "image/png" => "png",
+        "image/webp" => "webp",
+        "image/gif" => "gif"
+    ];
+
+    $mime = mime_content_type($_FILES[$campo]["tmp_name"]);
+    if (!isset($permitidos[$mime])) {
+        echo json_encode(["ok" => false, "mensaje" => "Formato de imagen no permitido"]);
+        exit;
+    }
+
+    if ($_FILES[$campo]["size"] > 2 * 1024 * 1024) {
+        echo json_encode(["ok" => false, "mensaje" => "La imagen supera el tamaño máximo de 2MB"]);
+        exit;
+    }
+
+    $directorio = __DIR__ . "/../../frontend/assets/img/" . $subcarpeta;
+    if (!is_dir($directorio)) {
+        mkdir($directorio, 0775, true);
+    }
+
+    if (!is_writable($directorio)) {
+        echo json_encode(["ok" => false, "mensaje" => "La carpeta de imágenes no tiene permisos de escritura"]);
+        exit;
+    }
+
+    $nombre = uniqid($campo . "_", true) . "." . $permitidos[$mime];
+    $destino = $directorio . $nombre;
+
+    if (!move_uploaded_file($_FILES[$campo]["tmp_name"], $destino)) {
+        echo json_encode(["ok" => false, "mensaje" => "No se pudo guardar la imagen en el servidor"]);
+        exit;
+    }
+
+    return "assets/img/" . $subcarpeta . $nombre;
+}
+
+function mensajeErrorSubida($codigo)
+{
+    $mensajes = [
+        UPLOAD_ERR_INI_SIZE => "La imagen supera el tamaño permitido por PHP",
+        UPLOAD_ERR_FORM_SIZE => "La imagen supera el tamaño permitido por el formulario",
+        UPLOAD_ERR_PARTIAL => "La imagen se subió solo parcialmente",
+        UPLOAD_ERR_NO_TMP_DIR => "Falta la carpeta temporal de subida",
+        UPLOAD_ERR_CANT_WRITE => "No se pudo escribir la imagen en disco",
+        UPLOAD_ERR_EXTENSION => "Una extensión de PHP bloqueó la subida"
+    ];
+
+    return $mensajes[$codigo] ?? "Error al subir la imagen";
+}
+
+$contentType = $_SERVER["CONTENT_TYPE"] ?? "";
+$data = strpos($contentType, "multipart/form-data") !== false
+    ? $_POST
+    : json_decode(file_get_contents("php://input"), true);
 
 if (!$data || !isset($data["id"])) {
     echo json_encode(["ok" => false, "mensaje" => "Falta el id del paquete"]);
@@ -23,13 +93,13 @@ $id = (int) $data["id"];
 $titulo = $data["titulo"] ?? "";
 $destino = $data["destino"] ?? "";
 $descripcion = $data["descripcion"] ?? "";
-$imagen = $data["imagen"] ?? "";
+$imagen = guardarImagenSubida("imagen_archivo", "", $data["imagen"] ?? "");
 
 $hotel_nombre = $data["hotel_nombre"] ?? "";
 $hotel_estrellas = (int) ($data["hotel_estrellas"] ?? 0);
 $hotel_regimen = $data["hotel_regimen"] ?? "";
 $hotel_detalles = $data["hotel_detalles"] ?? "";
-$hotel_imagen = $data["hotel_imagen"] ?? "";
+$hotel_imagen = guardarImagenSubida("hotel_imagen_archivo", "hoteles/", $data["hotel_imagen"] ?? "");
 
 $fecha_salida = $data["fecha_salida"] ?? null;
 $fecha_regreso = $data["fecha_regreso"] ?? null;
@@ -49,14 +119,6 @@ $categoria = $data["categoria"] ?? "vacaciones";
 if (!in_array($categoria, ["vuelo", "vacaciones", "fin_de_semana", "verano"])) {
     $categoria = "vacaciones";
 }
-
-// ── Campos nuevos ─────────────────────────────────────────────────────
-$transporte = $data["transporte"] ?? "avion";
-if (!in_array($transporte, ["avion", "sin_transporte"])) {
-    $transporte = "avion";
-}
-$hora_salida_avion = !empty($data["hora_salida_avion"]) ? $data["hora_salida_avion"] : null;
-$hora_llegada_avion = !empty($data["hora_llegada_avion"]) ? $data["hora_llegada_avion"] : null;
 
 // ── UPDATE ────────────────────────────────────────────────────────────
 $stmt = $conexion->prepare("
@@ -80,10 +142,7 @@ $stmt = $conexion->prepare("
         vuelo_incluido      = ?,
         salida_desde        = ?,
         cerca_playa         = ?,
-        categoria           = ?,
-        transporte          = ?,
-        hora_salida_avion   = ?,
-        hora_llegada_avion  = ?
+        categoria           = ?
     WHERE id = ?
 ");
 
@@ -92,10 +151,8 @@ if (!$stmt) {
     exit;
 }
 
-// 24 variables: 23 campos + id
-// s=string, i=int, d=decimal
 $stmt->bind_param(
-    "sssssisssssddiiiisissssi",
+    "sssssisssssddiiiisisi",
     $titulo,            // s
     $destino,           // s
     $descripcion,       // s
@@ -116,14 +173,18 @@ $stmt->bind_param(
     $salida_desde,      // s
     $cerca_playa,       // i
     $categoria,         // s
-    $transporte,        // s
-    $hora_salida_avion, // s
-    $hora_llegada_avion,// s
     $id                 // i
 );
 
 if ($stmt->execute()) {
-    echo json_encode(["ok" => true, "mensaje" => "Paquete actualizado correctamente"]);
+    echo json_encode([
+        "ok" => true,
+        "mensaje" => "Paquete actualizado correctamente",
+        "paquete" => [
+            "imagen" => $imagen,
+            "hotel_imagen" => $hotel_imagen
+        ]
+    ]);
 } else {
     echo json_encode(["ok" => false, "mensaje" => "Error al actualizar", "error" => $stmt->error]);
 }
