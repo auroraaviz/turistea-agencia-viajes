@@ -67,7 +67,6 @@ $stmt = $conexion->prepare("
         p.hotel_nombre,
         p.hotel_estrellas,
         p.hotel_regimen,
-        p.hotel_detalles,
         p.fecha_salida,
         p.fecha_regreso,
         p.precio       AS precio_por_persona,
