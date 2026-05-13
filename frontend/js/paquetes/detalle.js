@@ -260,33 +260,48 @@ btnFav.addEventListener("click", async () => {
 // -------- BOTÓN RESERVAR / PAGAR → PASARELA --------
 const btnReservar = document.getElementById("btn-reservar");
 if (btnReservar && paquete.fecha_salida) {
-  // Comprobar si el usuario está logueado
-  let usuarioLogueado = false;
-  try {
-    const sesion = await obtener("/api/auth/session.php");
-    usuarioLogueado = sesion && sesion.ok;
-  } catch (_) {}
+  const plazasDisponibles = parseInt(paquete.plazas_disponibles) || 0;
+  const avisoPlazas = document.getElementById("aviso-plazas");
 
-  const fechaSalida = new Date(paquete.fecha_salida);
-  const hoy         = new Date();
-  const diasHasta   = Math.ceil((fechaSalida - hoy) / (1000 * 60 * 60 * 24));
-
-  if (!usuarioLogueado) {
-    btnReservar.innerHTML = '<i class="bi bi-box-arrow-in-right me-2"></i>Iniciar sesión para reservar';
-    btnReservar.addEventListener("click", () => {
-      window.location.href = `login.html`;
-    });
-  } else {
-    if (diasHasta < 30) {
-      btnReservar.innerHTML = '<i class="bi bi-credit-card me-2"></i>Pagar ahora';
-    } else {
-      btnReservar.innerHTML = '<i class="bi bi-send-fill me-2"></i>Reservar';
+  if (plazasDisponibles <= 0) {
+    if (avisoPlazas) {
+      avisoPlazas.textContent = "No hay plazas disponibles para este paquete.";
+      avisoPlazas.classList.remove("d-none");
     }
 
-    btnReservar.addEventListener("click", () => {
-      const numViajeros = parseInt(document.getElementById("sb-personas")?.value || "1");
-      window.location.href = `pasarela-pago.html?id=${id}&viajeros=${numViajeros}`;
-    });
+    btnReservar.disabled = true;
+    btnReservar.classList.add("disabled");
+    btnReservar.innerHTML = '<i class="bi bi-x-circle me-2"></i>Plazas agotadas';
+    btnReservar.setAttribute("aria-disabled", "true");
+  } else {
+    // Comprobar si el usuario está logueado
+    let usuarioLogueado = false;
+    try {
+      const sesion = await obtener("/api/auth/session.php");
+      usuarioLogueado = sesion && sesion.ok;
+    } catch (_) {}
+
+    const fechaSalida = new Date(paquete.fecha_salida);
+    const hoy         = new Date();
+    const diasHasta   = Math.ceil((fechaSalida - hoy) / (1000 * 60 * 60 * 24));
+
+    if (!usuarioLogueado) {
+      btnReservar.innerHTML = '<i class="bi bi-box-arrow-in-right me-2"></i>Iniciar sesión para reservar';
+      btnReservar.addEventListener("click", () => {
+        window.location.href = `login.html`;
+      });
+    } else {
+      if (diasHasta < 30) {
+        btnReservar.innerHTML = '<i class="bi bi-credit-card me-2"></i>Pagar ahora';
+      } else {
+        btnReservar.innerHTML = '<i class="bi bi-send-fill me-2"></i>Reservar';
+      }
+
+      btnReservar.addEventListener("click", () => {
+        const numViajeros = parseInt(document.getElementById("sb-personas")?.value || "1");
+        window.location.href = `pasarela-pago.html?id=${id}&viajeros=${numViajeros}`;
+      });
+    }
   }
 }
 

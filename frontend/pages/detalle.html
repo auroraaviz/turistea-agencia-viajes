@@ -168,11 +168,6 @@
             </div>
 
             <div class="bg-white p-4">
-              <label class="text-uppercase fw-bold text-secondary d-block mb-1" style="font-size:.72rem;letter-spacing:.1em" for="sb-fecha">
-                <i class="bi bi-calendar-event me-1"></i>Fecha de salida
-              </label>
-              <input type="date" id="sb-fecha" class="form-control input-underline mb-3" />
-
               <label class="text-uppercase fw-bold text-secondary d-block mb-1" style="font-size:.72rem;letter-spacing:.1em" for="sb-personas">
                 <i class="bi bi-people me-1"></i>Viajeros
               </label>
@@ -183,6 +178,8 @@
                 <option value="4">4 personas</option>
                 <option value="5">5 personas</option>
               </select>
+
+              <div id="aviso-plazas" class="alert alert-warning d-none py-2 px-3 mb-3 small fw-semibold" role="alert"></div>
 
               <button class="btn-reservar btn w-100 rounded-pill py-3 mt-2" id="btn-reservar" type="button">
                 <i class="bi bi-send-fill me-2"></i>Solicitar reserva
