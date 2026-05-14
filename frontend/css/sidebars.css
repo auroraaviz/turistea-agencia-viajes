@@ -187,6 +187,26 @@ main {
   color: #0077B6 !important;
 }
 
+@media (max-width: 991.98px) {
+  .layout-admin.d-flex {
+    display: block !important;
+  }
+
+  .contenido-admin {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .contenido-admin > #contenido {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .sidebar-admin.offcanvas-lg {
+    width: min(85vw, 320px);
+  }
+}
+
 @media (max-width: 768px) {
   .panel-hero {
     padding: 1.5rem 1rem;
