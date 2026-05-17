@@ -127,7 +127,7 @@ async function cargarReservas() {
   const reservas   = await obtener("/api/perfil/reservas.php");
 
   if (!reservas || reservas.error || reservas.length === 0) {
-    contenedor.innerHTML = mensajeVacio("bi-ticket-detailed", "Aún no tienes reservas.");
+    contenedor.innerHTML = mensajeVacio("bi-ticket-detailed", "Aún no tienes reservas.", true);
     if (contenedorConfirmados) {
       contenedorConfirmados.innerHTML = mensajeVacio("bi-check-circle", "Aún no tienes paquetes confirmados.");
     }
@@ -156,9 +156,11 @@ function renderizarReservas(lista, contenedor, opciones = {}) {
 
   contenedor.innerHTML = lista.map(r => {
     const badge  = badgeEstado(r.estado);
+    
     const imagen = r.imagen
-    ? `${BASE}/frontend/${r.imagen}`
-    : "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&q=80";
+  ? `${BASE}/frontend/assets/img/${r.imagen.split('/').pop()}`
+  : "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&q=80";
+    
     const fecha  = new Date(r.fecha_reserva).toLocaleDateString("es-ES",
       { day: "2-digit", month: "short", year: "numeric" });
     const puedeConfirmar = opciones.mostrarConfirmar && r.estado === "PENDIENTE";
@@ -386,7 +388,7 @@ async function eliminarReserva(e) {
   const contenedor = document.getElementById("contenedor-reservas");
 
   if (reservasPerfil.length === 0) {
-    contenedor.innerHTML = mensajeVacio("bi-ticket-detailed", "Aún no tienes reservas.");
+    contenedor.innerHTML = mensajeVacio("bi-ticket-detailed", "Aún no tienes reservas.", true);
   } else {
     renderizarReservas(lista, contenedor, { mostrarConfirmar: true, mostrarCancelar: true, mostrarEliminar: true });
   }
@@ -414,7 +416,7 @@ async function cargarFavoritos() {
   const favoritos  = await obtener("/api/perfil/favoritos.php");
 
   if (!favoritos || favoritos.error || favoritos.length === 0) {
-    contenedor.innerHTML = mensajeVacio("bi-heart", "Aún no tienes destinos guardados.");
+    contenedor.innerHTML = mensajeVacio("bi-heart", "Aún no tienes destinos guardados.", true);
     document.getElementById("stat-favoritos").textContent = 0;
     return;
   }
@@ -426,8 +428,8 @@ async function cargarFavoritos() {
 function renderizarFavoritos(lista, contenedor) {
   contenedor.innerHTML = lista.map(f => {
     const imagen = f.imagen
-    ? `${BASE}/frontend/${f.imagen}`
-    : "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&q=80";
+  ? `${BASE}/frontend/assets/img/${f.imagen.split('/').pop()}`
+  : "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&q=80";
 
     return `
       <div class="col-6 col-md-4" data-paquete-id="${f.paquete_id}">
@@ -578,11 +580,23 @@ function mostrarFeedback(el, mensaje, tipo) {
   el.classList.remove("d-none");
 }
 
-function mensajeVacio(icono, texto) {
+function mensajeVacio(icono, texto, mostrarBoton = false) {
   return `
-    <div class="col-12 text-center py-5 text-muted">
-      <i class="bi ${icono} fs-1 d-block mb-2"></i>
-      ${texto}
+    <div class="col-12 text-center py-5">
+      <div class="empty-state mx-auto" style="max-width: 320px;">
+        <div class="empty-state-icon mb-3">
+          <i class="bi ${icono}" style="font-size: 3rem; color: #00B4D8; opacity: 0.7;"></i>
+        </div>
+        <h6 class="fw-bold mb-2" style="color: #1a2d45;">${texto}</h6>
+        <p class="text-muted small mb-4">Descubre nuestros paquetes y encuentra tu próxima aventura.</p>
+        ${mostrarBoton ? `
+          <a href="../../index.html"
+             class="btn rounded-pill px-4 py-2 fw-semibold"
+             style="background: #00B4D8; color: white; border: none;">
+            <i class="bi bi-compass me-2"></i>Explorar paquetes
+          </a>
+        ` : ""}
+      </div>
     </div>`;
 }
 
