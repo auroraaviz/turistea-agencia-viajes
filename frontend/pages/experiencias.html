@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Experiencias — Turistea</title>
+
+    <link rel="stylesheet" href="../../frontend/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../frontend/css/bootstrap-icons.css" />
+    <link rel="stylesheet" href="../../frontend/css/bootstrap-grid.min.css" />
+    <link rel="stylesheet" href="../../frontend/css/header.css" />
+    <link rel="stylesheet" href="../../frontend/css/footer.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../frontend/css/experiencias.css" />
+  </head>
+
+  <body>
+
+    <!-- ══════════════ NAVBAR ══════════════ -->
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-0">
+        <div class="container">
+          <button class="btn btn-hamburger d-lg-none me-2" type="button"
+            data-bs-toggle="offcanvas" data-bs-target="#menuPrincipal"
+            aria-controls="menuPrincipal" aria-label="Abrir menú">
+            <i class="bi bi-list"></i>
+          </button>
+          <a class="navbar-brand" href="../../index.html">
+            <img src="../../frontend/assets/img/Turistea_Logo/logo_turistea.png" width="90" alt="Turistea" />
+          </a>
+          <ul class="navbar-nav d-none d-lg-flex flex-row gap-3 ms-4 me-auto">
+            <li class="nav-item"><a class="nav-link" href="../../index.html">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link active fw-bold" href="experiencias.html" style="color:var(--cyan)!important">Experiencias</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalContacto">Contacto</a></li>
+          </ul>
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item" id="nav-usuario"></li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="offcanvas offcanvas-start menu-offcanvas" tabindex="-1" id="menuPrincipal">
+        <div class="offcanvas-header border-bottom">
+          <a class="navbar-brand m-0" href="../../index.html">
+            <img src="../../frontend/assets/img/Turistea_Logo/logo_turistea.png" width="80" alt="Turistea" />
+          </a>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+        </div>
+        <div class="offcanvas-body p-0">
+          <ul class="list-unstyled menu-offcanvas-list mb-0">
+            <li><a href="../../index.html" data-bs-dismiss="offcanvas"><i class="bi bi-house-door me-2"></i>Inicio</a></li>
+            <li><a href="experiencias.html" data-bs-dismiss="offcanvas"><i class="bi bi-camera me-2"></i>Experiencias</a></li>
+            <li><a href="#" data-bs-dismiss="offcanvas" data-bs-toggle="modal" data-bs-target="#modalContacto"><i class="bi bi-envelope me-2"></i>Contacto</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <!-- ══════════════ HERO ══════════════ -->
+    <section class="hero-experiencias py-5">
+      <div class="container py-3">
+        <div class="row align-items-center">
+          <div class="col-lg-7">
+            <div class="hero-chip">
+              <i class="bi bi-people-fill"></i> Comunidad Turistea
+            </div>
+            <h1 class="mb-3">Experiencias de<br>nuestros viajeros</h1>
+            <p class="mb-4">
+              Descubre los viajes contados por quienes ya los vivieron.<br>
+              Inspírate o comparte el tuyo.
+            </p>
+            <button class="btn-hero-primary" data-bs-toggle="modal" data-bs-target="#modalPublicar">
+              <i class="bi bi-pencil-square me-2"></i>Compartir mi experiencia
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ KPIs ══════════════ -->
+    <div class="kpi-bar">
+      <div class="container">
+        <div class="row">
+          <div class="col-4 kpi-item kpi-divider">
+            <div class="kpi-val">247</div>
+            <div class="kpi-label">Experiencias</div>
+          </div>
+          <div class="col-4 kpi-item kpi-divider">
+            <div class="kpi-val">4.8 <span style="color:var(--yellow);font-size:1.3rem">★</span></div>
+            <div class="kpi-label">Valoración media</div>
+          </div>
+          <div class="col-4 kpi-item">
+            <div class="kpi-val">38</div>
+            <div class="kpi-label">Destinos</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ CONTENIDO PRINCIPAL ══════════════ -->
+    <div class="container my-5">
+
+      <!-- TARJETA DESTACADA — ancho completo -->
+      <div class="text-center mb-4">
+        <h4 class="seccion-titulo mb-1"><i class="bi bi-star-fill me-2" style="color:var(--yellow)"></i>Experiencia destacada</h4>
+        <p class="seccion-subtitulo mb-0">La mejor valorada por nuestra comunidad</p>
+      </div>
+
+      <div class="card-featured mb-5">
+        <div class="row g-0">
+          <div class="col-md-5">
+            <div class="card-featured-img h-100">
+              <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80" alt="París" />
+              <div class="overlay"></div>
+              <span class="badge-destacada"><i class="bi bi-star-fill me-1"></i>Destacada</span>
+              <div class="img-content">
+                <div class="dest-tag"><i class="bi bi-geo-alt-fill"></i> París, Francia</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-7">
+            <div class="card-featured-body d-flex flex-column justify-content-between h-100">
+              <div>
+                <div class="d-flex align-items-center gap-3 mb-4">
+                  <div class="avatar-circle" style="width:48px;height:48px;font-size:.85rem">LG</div>
+                  <div>
+                    <p class="user-name" style="font-size:1rem">Lola Gómez</p>
+                    <p class="user-pkg">Pack "París Romántico"</p>
+                  </div>
+                  <div class="stars-yellow ms-auto" style="font-size:1.1rem">★★★★★</div>
+                </div>
+                <p class="review-text">
+                  "Una experiencia inolvidable. El hotel era precioso y la organización del tour fue impecable desde el primer momento. Repetiremos sin duda el año que viene con toda la familia. Cada detalle estaba cuidado al máximo y el guía fue realmente excepcional. No podría recomendar más este viaje a cualquiera que quiera descubrir París de verdad."
+                </p>
+              </div>
+              <div class="d-flex justify-content-end mt-3">
+                <span class="date-muted"><i class="bi bi-calendar3 me-1"></i>Marzo 2025</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GRID DE 4 TARJETAS -->
+      <div class="text-center mb-4">
+        <h4 class="seccion-titulo mb-1">Todas las experiencias</h4>
+        <p class="seccion-subtitulo mb-0">Lo que dicen quienes ya viajaron con nosotros</p>
+      </div>
+
+      <div class="row g-4" id="gridExperiencias">
+
+        <!-- Tarjeta 1 — Canarias -->
+        <div class="col-6 col-md-3">
+          <div class="card-exp">
+            <div class="card-exp-img">
+              <img src="https://plus.unsplash.com/premium_photo-1688141871918-57250bdf595e?w=600&q=80" alt="Canarias" />
+              <div class="overlay"></div>
+              <div class="dest-tag"><i class="bi bi-geo-alt-fill"></i> Canarias</div>
+            </div>
+            <div class="card-exp-body">
+              <div class="d-flex align-items-center gap-2 mb-2">
+                <div class="avatar-circle">MR</div>
+                <div>
+                  <p class="user-name">Marcos Ruiz</p>
+                  <p class="user-pkg">Pack "Islas Canarias"</p>
+                </div>
+              </div>
+              <div class="stars-yellow mb-2">★★★★★</div>
+              <p class="card-review">"Las playas son increíbles y el hotel superó todas nuestras expectativas. El traslado incluido fue muy cómodo."</p>
+              <div class="d-flex justify-content-end mt-2">
+                <span class="date-muted">Feb 2025</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta 2 — Roma -->
+        <div class="col-6 col-md-3">
+          <div class="card-exp">
+            <div class="card-exp-img">
+              <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=600&q=80" alt="Roma" />
+              <div class="overlay"></div>
+              <div class="dest-tag"><i class="bi bi-geo-alt-fill"></i> Roma</div>
+            </div>
+            <div class="card-exp-body">
+              <div class="d-flex align-items-center gap-2 mb-2">
+                <div class="avatar-circle" style="background:#fff0e0;color:#c47400">AS</div>
+                <div>
+                  <p class="user-name">Ana Serrano</p>
+                  <p class="user-pkg">Pack "Roma Eterna"</p>
+                </div>
+              </div>
+              <div class="stars-yellow mb-2">★★★★☆</div>
+              <p class="card-review">"Visitar el Coliseo y la Fontana di Trevi fue un sueño hecho realidad. La guía fue muy amena y profesional."</p>
+              <div class="d-flex justify-content-end mt-2">
+                <span class="date-muted">Ene 2025</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta 3 — Pirineos -->
+        <div class="col-6 col-md-3">
+          <div class="card-exp">
+            <div class="card-exp-img">
+              <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80" alt="Pirineos" />
+              <div class="overlay"></div>
+              <div class="dest-tag"><i class="bi bi-geo-alt-fill"></i> Pirineos</div>
+            </div>
+            <div class="card-exp-body">
+              <div class="d-flex align-items-center gap-2 mb-2">
+                <div class="avatar-circle" style="background:#e8f5e9;color:#2e7d32">JL</div>
+                <div>
+                  <p class="user-name">Jorge López</p>
+                  <p class="user-pkg">Pack "Pirineos Activo"</p>
+                </div>
+              </div>
+              <div class="stars-yellow mb-2">★★★★★</div>
+              <p class="card-review">"Rutas de senderismo espectaculares. El alojamiento era acogedor y la comida típica de la zona, una pasada."</p>
+              <div class="d-flex justify-content-end mt-2">
+                <span class="date-muted">Dic 2024</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta 4 — Praga -->
+        <div class="col-6 col-md-3">
+          <div class="card-exp">
+            <div class="card-exp-img">
+              <img src="https://images.unsplash.com/photo-1519677100203-a0e668c92439?w=600&q=80" alt="Praga" />
+              <div class="overlay"></div>
+              <div class="dest-tag"><i class="bi bi-geo-alt-fill"></i> Praga</div>
+            </div>
+            <div class="card-exp-body">
+              <div class="d-flex align-items-center gap-2 mb-2">
+                <div class="avatar-circle" style="background:#f0e8ff;color:#6a34b5">CM</div>
+                <div>
+                  <p class="user-name">Clara Molina</p>
+                  <p class="user-pkg">Pack "Europa Cultural"</p>
+                </div>
+              </div>
+              <div class="stars-yellow mb-2">★★★★★</div>
+              <p class="card-review">"Praga es una ciudad de cuento. Los museos, la arquitectura y la gastronomía local hicieron el viaje perfecto."</p>
+              <div class="d-flex justify-content-end mt-2">
+                <span class="date-muted">Nov 2024</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /row grid -->
+
+    </div><!-- /container -->
+
+    <!-- ══════════════ MODAL PUBLICAR ══════════════ -->
+    <div class="modal fade" id="modalPublicar" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow" style="border-radius:14px;overflow:hidden">
+          <div class="modal-header modal-header-brand border-0">
+            <h5 class="modal-title">
+              <i class="bi bi-pencil-square me-2"></i>Comparte tu experiencia
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body p-4">
+            <div class="mb-3">
+              <label class="form-label fw-bold" style="font-size:.9rem;color:#555">
+                <i class="bi bi-suitcase me-1"></i>Paquete visitado
+              </label>
+              <select class="form-select" style="font-family:'Raleway',sans-serif;font-size:.9rem">
+                <option value="">Selecciona el paquete...</option>
+                <option>Pack "París Romántico"</option>
+                <option>Pack "Islas Canarias"</option>
+                <option>Pack "Roma Eterna"</option>
+                <option>Pack "Europa Cultural"</option>
+                <option>Pack "Pirineos Activo"</option>
+                <option>Pack "Semana en Mallorca"</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-bold" style="font-size:.9rem;color:#555">
+                <i class="bi bi-star me-1"></i>Tu valoración
+              </label>
+              <div class="d-flex gap-1" id="starRating">
+                <button class="star-btn" data-val="1" type="button">★</button>
+                <button class="star-btn" data-val="2" type="button">★</button>
+                <button class="star-btn" data-val="3" type="button">★</button>
+                <button class="star-btn" data-val="4" type="button">★</button>
+                <button class="star-btn" data-val="5" type="button">★</button>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-bold" style="font-size:.9rem;color:#555">
+                <i class="bi bi-chat-left-text me-1"></i>Tu experiencia
+              </label>
+              <textarea class="form-control" rows="4"
+                placeholder="Cuéntanos cómo fue tu viaje..."
+                style="font-family:'Raleway',sans-serif;font-size:.9rem;resize:none"></textarea>
+            </div>
+            <div class="mb-1">
+              <label class="form-label fw-bold" style="font-size:.9rem;color:#555">
+                <i class="bi bi-image me-1"></i>Foto del viaje
+                <span class="text-muted fw-normal">(opcional)</span>
+              </label>
+              <div class="dropzone-pub" id="dropzonePub">
+                <i class="bi bi-cloud-arrow-up"></i>
+                <p>Arrastra tu foto aquí o <span>selecciona un archivo</span></p>
+              </div>
+              <input type="file" id="fileInputPub" accept="image/*" class="d-none" />
+            </div>
+          </div>
+          <div class="modal-footer border-top px-4">
+            <button type="button" class="btn btn-outline-secondary rounded-pill"
+              style="font-family:'Raleway',sans-serif"
+              data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary rounded-pill fw-bold px-4"
+              style="font-family:'Raleway',sans-serif">
+              <i class="bi bi-send me-1"></i>Publicar experiencia
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ MODAL CONTACTO ══════════════ -->
+    <div class="modal fade" id="modalContacto" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title">Contacto Turistea</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body p-4">
+            <form>
+              <input type="text"  class="form-control mb-3" placeholder="Nombre completo" />
+              <input type="email" class="form-control mb-3" placeholder="Correo electrónico" />
+              <input type="text"  class="form-control mb-3" placeholder="Asunto" />
+              <textarea class="form-control mb-3" rows="5" placeholder="Mensaje"></textarea>
+              <button class="btn btn-primary w-100 rounded-pill">Enviar mensaje</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ FOOTER ══════════════ -->
+    <footer class="mt-5">
+      <div class="footer-body">
+        <div class="container py-5">
+          <div class="row">
+            <div class="col-12 col-md-10 offset-md-1">
+              <div class="row g-4 mb-5">
+                <div class="col-12 col-md-4 text-center text-md-start">
+                  <img src="../../frontend/assets/img/Turistea_Logo/logo_sinfondo.png" alt="Turistea"
+                    class="footer-logo d-block mx-auto mx-md-0 mb-2" />
+                  <p class="footer-desc mb-0">Elige destino y disfruta.<br>Nosotros nos encargamos del resto.</p>
+                </div>
+                <div class="col-12 col-md-4 text-center text-md-start">
+                  <p class="footer-heading">Datos de Contacto</p>
+                  <ul class="footer-list">
+                    <li><i class="bi bi-geo-alt-fill footer-icon"></i> Calle Viajeros s/n, 28001 Madrid</li>
+                    <li><i class="bi bi-telephone-fill footer-icon"></i> <a href="tel:+34900000000">+34 900 000 000</a></li>
+                    <li><i class="bi bi-envelope-fill footer-icon"></i> <a href="mailto:turistea@test.com">turistea@test.com</a></li>
+                    <li><i class="bi bi-clock-fill footer-icon"></i> Lun – Vie: 09:00 – 20:00</li>
+                  </ul>
+                </div>
+                <div class="col-12 col-md-4 text-center text-md-start">
+                  <p class="footer-heading">Información Legal</p>
+                  <ul class="footer-list">
+                    <li><a href="aviso-legal.html">Aviso legal</a></li>
+                    <li><a href="politica.html">Política de privacidad</a></li>
+                    <li><a href="condiciones.html">Términos y condiciones</a></li>
+                  </ul>
+                </div>
+              </div>
+              <hr class="footer-hr mb-4" />
+              <div class="d-flex justify-content-center gap-3 mb-4">
+                <a href="https://www.instagram.com/_turistea_/" class="social-icon" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                <a href="https://x.com/turistea_" class="social-icon" aria-label="X"><i class="bi bi-twitter-x"></i></a>
+              </div>
+              <p class="footer-copy mb-0">
+                &copy; <span id="footer-year"></span> Turistea · Todos los derechos reservados
+                &nbsp;·&nbsp; Hecho con <i class="bi bi-heart-fill" style="color:#FF6B6B"></i> para viajeros
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <button id="btn-volver-arriba-exp" class="d-none rounded-pill"
+      onclick="window.scrollTo({top:0,behavior:'smooth'})">
+      Volver arriba
+    </button>
+
+    <!-- ══════════════ SCRIPTS ══════════════ -->
+    <script src="../../frontend/js/bootstrap.bundle.min.js"></script>
+    <script>window.BASE_PATH = '../../';</script>
+    <script src="../../frontend/js/auth/navbarUsuario.js"></script>
+    <script src="../../frontend/js/experiencias.js"></script>
+
+  </body>
+</html>
