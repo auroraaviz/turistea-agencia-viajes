@@ -201,6 +201,16 @@
                   <i class="bi bi-heart me-1"></i>Favoritos
                 </button>
               </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  data-bs-toggle="tab"
+                  data-bs-target="#tab-resenas"
+                  type="button" role="tab"
+                >
+                  <i class="bi bi-pencil-square me-1"></i>Añadir reseña
+                </button>
+              </li>
             </ul>
 
             <div class="tab-content panel-body" id="perfilTabsContent">
@@ -236,6 +246,15 @@
                 <!-- Las tarjetas se insertan dinámicamente por JS -->
                 <div class="row g-3" id="contenedor-favoritos">
                   <p class="text-muted text-center py-4">Cargando favoritos…</p>
+                </div>
+              </div>
+
+              <!-- TAB: Añadir reseña -->
+              <div class="tab-pane fade" id="tab-resenas" role="tabpanel">
+                <h6 class="fw-bold mb-3" style="color:#1a2d45;">Viajes disponibles para reseñar</h6>
+                <div id="resena-feedback" class="d-none mb-3"></div>
+                <div id="contenedor-resenas">
+                  <p class="text-muted text-center py-4">Cargando viajes completados…</p>
                 </div>
               </div>
 
