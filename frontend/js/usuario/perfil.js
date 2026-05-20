@@ -131,6 +131,10 @@ async function cargarReservas() {
     if (contenedorConfirmados) {
       contenedorConfirmados.innerHTML = mensajeVacio("bi-check-circle", "Aún no tienes paquetes confirmados.");
     }
+    const contenedorResenas = document.getElementById("contenedor-resenas");
+    if (contenedorResenas) {
+      contenedorResenas.innerHTML = mensajeVacio("bi-pencil-square", "No tienes viajes disponibles para reseñar.");
+    }
     document.getElementById("stat-reservas").textContent = 0;
     return;
   }
@@ -139,6 +143,7 @@ async function cargarReservas() {
   document.getElementById("stat-reservas").textContent = reservas.length;
   renderizarReservas(reservasPerfil, contenedor, { mostrarConfirmar: true, mostrarCancelar: true, mostrarEliminar: true });
   renderizarConfirmados();
+  renderizarResenas();
 
   // Filtro por estado (sin nueva petición al servidor)
   document.getElementById("filtro-reservas").addEventListener("change", (e) => {
@@ -309,6 +314,215 @@ function renderizarConfirmados() {
   renderizarReservas(confirmadas, contenedor);
 }
 
+function renderizarResenas() {
+  const contenedor = document.getElementById("contenedor-resenas");
+  if (!contenedor) return;
+
+  const resenables = reservasPerfil.filter(reservaPuedeResenarse);
+
+  if (resenables.length === 0) {
+    contenedor.innerHTML = mensajeVacio("bi-pencil-square", "No tienes viajes disponibles para reseñar.");
+    return;
+  }
+
+  contenedor.innerHTML = resenables.map(r => {
+    const imagen = r.imagen
+      ? `${BASE}/frontend/assets/img/${r.imagen.split('/').pop()}`
+      : "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&q=80";
+    const fechaRegreso = formatearFecha(r.fecha_regreso);
+
+    return `
+      <div class="resena-card" data-reserva-id="${r.id}">
+        <div class="resena-card-main">
+          <img class="resena-img" src="${imagen}" alt="${escaparHtml(r.nombre_paquete || 'Destino')}" />
+          <div class="resena-info">
+            <span class="resena-titulo">${escaparHtml(r.nombre_paquete || "Paquete de viaje")}</span>
+            <span class="resena-meta">
+              <i class="bi bi-geo-alt-fill me-1"></i>${escaparHtml(r.destino || "Destino")}
+            </span>
+            <span class="resena-meta">
+              <i class="bi bi-calendar-check me-1"></i>Finalizado el ${fechaRegreso}
+            </span>
+          </div>
+          <button type="button" class="btn-resena-toggle" data-id="${r.id}">
+            <i class="bi bi-pencil-square me-1"></i>Añadir reseña
+          </button>
+        </div>
+        <form class="resena-form d-none" data-id="${r.id}" data-paquete-id="${r.paquete_id}">
+          <div class="row g-3">
+            <div class="col-12">
+              <label class="form-label fw-bold">Título del viaje</label>
+              <input type="text" class="form-control resena-titulo-input" maxlength="150"
+                placeholder="Ej. Una escapada inolvidable" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Valoración del viaje</label>
+              ${crearRatingEstrellas("resena-valoracion-viaje")}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Valoración de la compañía</label>
+              ${crearRatingEstrellas("resena-valoracion-compania")}
+            </div>
+            <div class="col-12">
+              <label class="form-label fw-bold">Reseña</label>
+              <textarea class="form-control resena-comentario" rows="4"
+                placeholder="Cuéntanos cómo fue tu experiencia"></textarea>
+            </div>
+            <div class="col-12">
+              <label class="form-label fw-bold">Imagen del viaje <span class="text-muted fw-normal">(opcional)</span></label>
+              <input type="file" class="form-control resena-foto" accept="image/jpeg,image/png,image/webp,image/gif" />
+              <div class="form-text">Formatos permitidos: JPG, PNG, WebP o GIF. Máximo 2 MB.</div>
+            </div>
+            <div class="col-12 d-flex justify-content-end gap-2">
+              <button type="button" class="btn btn-outline-secondary rounded-pill btn-resena-cancelar">
+                Cancelar
+              </button>
+              <button type="submit" class="btn btn-primary rounded-pill px-4 btn-resena-enviar">
+                <i class="bi bi-send me-1"></i>Publicar
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>`;
+  }).join("");
+
+  contenedor.querySelectorAll(".btn-resena-toggle").forEach(btn => {
+    btn.addEventListener("click", abrirFormularioResena);
+  });
+
+  contenedor.querySelectorAll(".btn-resena-cancelar").forEach(btn => {
+    btn.addEventListener("click", cerrarFormularioResena);
+  });
+
+  contenedor.querySelectorAll(".resena-form").forEach(form => {
+    inicializarRatingEstrellas(form);
+    form.addEventListener("submit", enviarResena);
+  });
+}
+
+function crearRatingEstrellas(nombre) {
+  return `
+    <div class="resena-rating" data-rating-name="${nombre}" data-rating-value="0" role="radiogroup">
+      ${[1, 2, 3, 4, 5].map(valor => `
+        <button type="button" class="resena-star" data-value="${valor}" aria-label="${valor} estrella${valor > 1 ? "s" : ""}">
+          <i class="bi bi-star-fill"></i>
+        </button>
+      `).join("")}
+    </div>`;
+}
+
+function inicializarRatingEstrellas(form) {
+  form.querySelectorAll(".resena-rating").forEach(rating => {
+    const estrellas = [...rating.querySelectorAll(".resena-star")];
+
+    estrellas.forEach(estrella => {
+      estrella.addEventListener("mouseenter", () => {
+        actualizarRatingVisual(rating, Number(estrella.dataset.value));
+      });
+
+      estrella.addEventListener("mouseleave", () => {
+        actualizarRatingVisual(rating, Number(rating.dataset.ratingValue || 0));
+      });
+
+      estrella.addEventListener("click", () => {
+        rating.dataset.ratingValue = estrella.dataset.value;
+        actualizarRatingVisual(rating, Number(estrella.dataset.value));
+      });
+    });
+
+    actualizarRatingVisual(rating, 0);
+  });
+}
+
+function actualizarRatingVisual(rating, valor) {
+  rating.querySelectorAll(".resena-star").forEach(estrella => {
+    estrella.classList.toggle("activa", Number(estrella.dataset.value) <= valor);
+  });
+}
+
+function reservaPuedeResenarse(reserva) {
+  if (reserva.estado !== "CONFIRMADA" || !reserva.fecha_regreso) return false;
+
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0);
+
+  const regreso = new Date(`${reserva.fecha_regreso}T00:00:00`);
+  const diasDesdeRegreso = Math.floor((hoy - regreso) / (1000 * 60 * 60 * 24));
+
+  return diasDesdeRegreso > 5;
+}
+
+function abrirFormularioResena(e) {
+  const card = e.currentTarget.closest(".resena-card");
+  const form = card?.querySelector(".resena-form");
+  if (!form) return;
+
+  form.classList.toggle("d-none");
+}
+
+function cerrarFormularioResena(e) {
+  const form = e.currentTarget.closest(".resena-form");
+  form?.classList.add("d-none");
+}
+
+async function enviarResena(e) {
+  e.preventDefault();
+
+  const form = e.currentTarget;
+  const btn = form.querySelector(".btn-resena-enviar");
+  const feedback = document.getElementById("resena-feedback");
+
+  const datos = {
+    paquete_id: Number(form.dataset.paqueteId),
+    titulo_viaje: form.querySelector(".resena-titulo-input").value.trim(),
+    comentario: form.querySelector(".resena-comentario").value.trim(),
+    valoracion_viaje: obtenerValorRating(form, "resena-valoracion-viaje"),
+    valoracion_compania: obtenerValorRating(form, "resena-valoracion-compania"),
+  };
+  const foto = form.querySelector(".resena-foto")?.files[0];
+
+  if (!datos.titulo_viaje || !datos.comentario || !datos.valoracion_viaje || !datos.valoracion_compania) {
+    mostrarFeedback(feedback, "Rellena el título, las valoraciones y la reseña.", "danger");
+    return;
+  }
+
+  if (foto && foto.size > 2 * 1024 * 1024) {
+    mostrarFeedback(feedback, "La imagen no puede superar los 2 MB.", "danger");
+    return;
+  }
+
+  const formData = new FormData();
+  Object.entries(datos).forEach(([clave, valor]) => formData.append(clave, valor));
+  if (foto) formData.append("foto", foto);
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span>Publicando';
+
+  const texto = await crear("/api/comentarios/create.php", formData);
+  const respuesta = parsearTexto(texto);
+
+  if (!respuesta || !respuesta.ok) {
+    mostrarFeedback(feedback, respuesta?.mensaje || "No se pudo publicar la reseña.", "danger");
+    btn.disabled = false;
+    btn.innerHTML = '<i class="bi bi-send me-1"></i>Publicar';
+    return;
+  }
+
+  mostrarFeedback(feedback, "Reseña publicada correctamente.", "success");
+  form.reset();
+  form.querySelectorAll(".resena-rating").forEach(rating => {
+    rating.dataset.ratingValue = "0";
+    actualizarRatingVisual(rating, 0);
+  });
+  form.classList.add("d-none");
+  btn.disabled = false;
+  btn.innerHTML = '<i class="bi bi-send me-1"></i>Publicar';
+}
+
+function obtenerValorRating(form, nombre) {
+  return Number(form.querySelector(`[data-rating-name="${nombre}"]`)?.dataset.ratingValue || 0);
+}
+
 async function confirmarReserva(e) {
   const btn = e.currentTarget;
   const reservaId = btn.dataset.id;
@@ -334,6 +548,7 @@ async function confirmarReserva(e) {
 
   renderizarReservas(lista, document.getElementById("contenedor-reservas"), { mostrarConfirmar: true, mostrarCancelar: true, mostrarEliminar: true });
   renderizarConfirmados();
+  renderizarResenas();
 }
 
 async function cancelarReserva(e) {
@@ -361,6 +576,7 @@ async function cancelarReserva(e) {
 
   renderizarReservas(lista, document.getElementById("contenedor-reservas"), { mostrarConfirmar: true, mostrarCancelar: true, mostrarEliminar: true });
   renderizarConfirmados();
+  renderizarResenas();
 }
 
 async function eliminarReserva(e) {
@@ -394,6 +610,7 @@ async function eliminarReserva(e) {
   }
 
   renderizarConfirmados();
+  renderizarResenas();
 }
 
 function badgeEstado(estado) {
@@ -598,6 +815,25 @@ function mensajeVacio(icono, texto, mostrarBoton = false) {
         ` : ""}
       </div>
     </div>`;
+}
+
+function formatearFecha(fecha) {
+  if (!fecha) return "sin fecha";
+
+  return new Date(`${fecha}T00:00:00`).toLocaleDateString("es-ES", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
+}
+
+function escaparHtml(valor) {
+  return String(valor ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 }
 
 /* ─────────────────────────────────────────

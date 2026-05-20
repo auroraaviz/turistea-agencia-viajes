@@ -245,6 +245,16 @@ body {
   margin-right: 0.5rem;
 }
 
+@media (max-width: 767px) {
+  .panel-tabs {
+    flex-wrap: wrap;
+  }
+
+  .panel-tabs .nav-item {
+    flex: 0 0 50%;
+  }
+}
+
 .panel-tabs .badge {
   font-size: 0.6rem !important;
   margin-left: 0.5rem;
@@ -319,6 +329,114 @@ body {
   min-height: 118px;
   object-fit: cover;
   display: block;
+}
+
+/* ===== RESEÑAS ===== */
+.resena-card {
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 3px 12px rgba(0, 53, 102, 0.08);
+}
+
+.resena-card-main {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.resena-img {
+  width: 104px;
+  height: 86px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.resena-info {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.resena-titulo {
+  color: var(--text-dark);
+  font-weight: 800;
+}
+
+.resena-meta {
+  color: var(--text-light);
+  font-size: 0.82rem;
+}
+
+.btn-resena-toggle {
+  border: none;
+  border-radius: 25px;
+  padding: 0.65rem 1rem;
+  background: var(--primary);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.btn-resena-toggle:hover {
+  background: var(--primary-dark);
+}
+
+.resena-form {
+  border-top: 1px solid var(--border-light);
+  padding: 1rem;
+  background: #f8fbfd;
+}
+
+.resena-rating {
+  display: flex;
+  gap: 0.2rem;
+  min-height: 38px;
+  align-items: center;
+}
+
+.resena-star {
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: transparent;
+  color: #d4d9df;
+  font-size: 1.35rem;
+  line-height: 1;
+  padding: 0;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.resena-star:hover,
+.resena-star.activa {
+  color: var(--accent-yellow);
+}
+
+.resena-star:hover {
+  transform: translateY(-1px);
+}
+
+@media (max-width: 575px) {
+  .resena-card-main {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .resena-img {
+    width: 100%;
+    height: 150px;
+  }
+
+  .btn-resena-toggle {
+    width: 100%;
+  }
 }
 
 .reserva-titulo {

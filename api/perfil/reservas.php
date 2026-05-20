@@ -34,9 +34,12 @@ $stmt = $conexion->prepare(
         r.precio_total,
         r.estado,
         r.fecha_reserva,
+        r.paquete_id,
         p.titulo  AS nombre_paquete,
         p.imagen,
-        p.destino
+        p.destino,
+        p.fecha_salida,
+        p.fecha_regreso
      FROM reserva r
      JOIN paquete p ON p.id = r.paquete_id
      WHERE r.usuario_id = ?
