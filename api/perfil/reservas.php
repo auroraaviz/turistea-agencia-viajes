@@ -39,7 +39,13 @@ $stmt = $conexion->prepare(
         p.imagen,
         p.destino,
         p.fecha_salida,
-        p.fecha_regreso
+        p.fecha_regreso,
+        EXISTS (
+            SELECT 1
+            FROM comentario c
+            WHERE c.usuario_id = r.usuario_id
+              AND c.paquete_id = r.paquete_id
+        ) AS resena_publicada
      FROM reserva r
      JOIN paquete p ON p.id = r.paquete_id
      WHERE r.usuario_id = ?

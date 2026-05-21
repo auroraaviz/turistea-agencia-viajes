@@ -195,6 +195,30 @@ if (!$reserva) {
 
 
 // =========================================
+// VERIFICAR QUE NO HAYA RESEÑA PREVIA
+// =========================================
+$stmt = $conexion->prepare("
+    SELECT id
+    FROM comentario
+    WHERE usuario_id = ?
+      AND paquete_id = ?
+    LIMIT 1
+");
+$stmt->bind_param("ii", $usuario_id, $paquete_id);
+$stmt->execute();
+$comentario_existente = $stmt->get_result()->fetch_assoc();
+$stmt->close();
+
+if ($comentario_existente) {
+    echo json_encode([
+        "ok" => false,
+        "mensaje" => "Ya has publicado una reseña para este paquete"
+    ]);
+    exit;
+}
+
+
+// =========================================
 // SUBIDA DE FOTO
 // =========================================
 $foto_url = guardarImagenComentario("foto");
@@ -235,9 +259,13 @@ if ($stmt->execute()) {
         "id" => $stmt->insert_id
     ]);
 } else {
+    $mensaje = $stmt->errno === 1062
+        ? "Ya has publicado una reseña para este paquete"
+        : "Error al guardar la experiencia";
+
     echo json_encode([
         "ok" => false,
-        "mensaje" => "Error al guardar la experiencia",
+        "mensaje" => $mensaje,
         "error" => $stmt->error
     ]);
 }

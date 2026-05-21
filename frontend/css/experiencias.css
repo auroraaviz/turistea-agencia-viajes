@@ -59,7 +59,7 @@ body { font-family: 'Raleway', sans-serif; }
 }
 .card-featured-img .overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,.65) 0%, rgba(0,0,0,.15) 100%);
+  background: linear-gradient(to top, rgba(0,0,0,.38) 0%, rgba(0,0,0,.06) 72%);
 }
 .card-featured-img .img-content { position: relative; z-index: 1; }
 .badge-destacada {
@@ -69,7 +69,7 @@ body { font-family: 'Raleway', sans-serif; }
   border-radius: 50rem; font-family: 'Raleway', sans-serif;
 }
 .dest-tag {
-  color: rgba(255,255,255,.95); font-size: .15rem;
+  color: rgba(255,255,255,.95); font-size: .9rem;
   font-weight: 700; display: flex; align-items: center; gap: 5px;
 }
 .card-featured-body { padding: 28px; }
@@ -81,9 +81,19 @@ body { font-family: 'Raleway', sans-serif; }
   justify-content: center; font-size: .78rem;
   font-weight: 700; color: var(--navy); flex-shrink: 0;
 }
+.avatar-lg {
+  width: 48px;
+  height: 48px;
+  font-size: .85rem;
+}
+.avatar-img {
+  object-fit: cover;
+  border: 2px solid #e0f5fb;
+}
 .user-name  { font-size: .95rem; font-weight: 700; color: #222; margin: 0; }
 .user-pkg   { font-size: .82rem; color: #888; margin: 0; }
 .stars-yellow { color: var(--yellow); font-size: 1rem; letter-spacing: 1px; }
+.featured-title { color: #1a2d45; font-size: 1.1rem; font-weight: 800; margin-bottom: .7rem; }
 .review-text  { font-size: .95rem; color: #555; line-height: 1.7; }
 .date-muted { font-size: .82rem; color: #aaa; }
 
@@ -110,7 +120,7 @@ body { font-family: 'Raleway', sans-serif; }
 .card-exp:hover .card-exp-img img { transform: scale(1.04); }
 .card-exp-img .overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,.55) 0%, rgba(0,0,0,.05) 60%);
+  background: linear-gradient(to top, rgba(0,0,0,.32) 0%, rgba(0,0,0,.04) 58%);
 }
 .card-exp-img .dest-tag {
   position: absolute; bottom: 10px; left: 12px;
@@ -121,6 +131,26 @@ body { font-family: 'Raleway', sans-serif; }
   font-size: .88rem; color: #666; line-height: 1.55;
   display: -webkit-box; -webkit-line-clamp: 3;
   -webkit-box-orient: vertical; overflow: hidden;
+}
+.experiencias-empty {
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .65rem;
+  padding: 2rem;
+  text-align: center;
+  color: #789;
+  background: #f8fbfc;
+}
+.experiencias-empty i {
+  color: var(--cyan);
+  font-size: 2rem;
+}
+.experiencias-empty p {
+  margin: 0;
+  font-weight: 700;
 }
 
 /* ── MODAL ── */

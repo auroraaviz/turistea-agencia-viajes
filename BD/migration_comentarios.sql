@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS `comentario` (
   `valoracion_compania` tinyint(1) NOT NULL,
   `creado_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_comentario_usuario_paquete` (`usuario_id`, `paquete_id`),
   KEY `fk_comentario_usuario` (`usuario_id`),
   KEY `fk_comentario_paquete` (`paquete_id`),
   CONSTRAINT `fk_comentario_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE CASCADE,
