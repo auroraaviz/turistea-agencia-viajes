@@ -319,6 +319,7 @@ INSERT INTO `viajero` (`id`, `reserva_id`, `nombre`, `apellidos`, `dni`, `fecha_
 --
 ALTER TABLE `comentario`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `uq_comentario_usuario_paquete` (`usuario_id`,`paquete_id`),
   ADD KEY `fk_comentario_usuario` (`usuario_id`),
   ADD KEY `fk_comentario_paquete` (`paquete_id`);
 

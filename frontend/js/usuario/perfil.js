@@ -441,6 +441,7 @@ function actualizarRatingVisual(rating, valor) {
 }
 
 function reservaPuedeResenarse(reserva) {
+  if (Number(reserva.resena_publicada) === 1) return false;
   if (reserva.estado !== "CONFIRMADA" || !reserva.fecha_regreso) return false;
 
   const hoy = new Date();
@@ -509,6 +510,13 @@ async function enviarResena(e) {
   }
 
   mostrarFeedback(feedback, "Reseña publicada correctamente.", "success");
+
+  reservasPerfil.forEach(reserva => {
+    if (String(reserva.paquete_id) === String(datos.paquete_id)) {
+      reserva.resena_publicada = 1;
+    }
+  });
+
   form.reset();
   form.querySelectorAll(".resena-rating").forEach(rating => {
     rating.dataset.ratingValue = "0";
@@ -517,6 +525,7 @@ async function enviarResena(e) {
   form.classList.add("d-none");
   btn.disabled = false;
   btn.innerHTML = '<i class="bi bi-send me-1"></i>Publicar';
+  renderizarResenas();
 }
 
 function obtenerValorRating(form, nombre) {
