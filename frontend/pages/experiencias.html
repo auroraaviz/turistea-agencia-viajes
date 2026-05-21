@@ -82,15 +82,15 @@
       <div class="container">
         <div class="row">
           <div class="col-4 kpi-item kpi-divider">
-            <div class="kpi-val">247</div>
+            <div class="kpi-val" id="kpi-total">0</div>
             <div class="kpi-label">Experiencias</div>
           </div>
           <div class="col-4 kpi-item kpi-divider">
-            <div class="kpi-val">4.8 <span style="color:var(--yellow);font-size:1.3rem">★</span></div>
+            <div class="kpi-val" id="kpi-media">- <span style="color:var(--yellow);font-size:1.3rem">★</span></div>
             <div class="kpi-label">Valoración media</div>
           </div>
           <div class="col-4 kpi-item">
-            <div class="kpi-val">38</div>
+            <div class="kpi-val" id="kpi-destinos">0</div>
             <div class="kpi-label">Destinos</div>
           </div>
         </div>
@@ -101,20 +101,20 @@
     <div class="container my-5">
 
       <!-- TARJETA DESTACADA — ancho completo -->
-      <div class="text-center mb-4">
+      <div class="text-center mb-4" id="seccion-destacada">
         <h4 class="seccion-titulo mb-1"><i class="bi bi-star-fill me-2" style="color:var(--yellow)"></i>Experiencia destacada</h4>
         <p class="seccion-subtitulo mb-0">La mejor valorada por nuestra comunidad</p>
       </div>
 
-      <div class="card-featured mb-5">
+      <div class="card-featured mb-5" id="cardDestacada">
         <div class="row g-0">
           <div class="col-md-5">
-            <div class="card-featured-img h-100">
-              <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80" alt="París" />
+            <div class="card-featured-img h-100" id="destacada-img-wrap">
+              <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&q=80" alt="Destino" id="destacada-img" />
               <div class="overlay"></div>
               <span class="badge-destacada"><i class="bi bi-star-fill me-1"></i>Destacada</span>
               <div class="img-content">
-                <div class="dest-tag"><i class="bi bi-geo-alt-fill"></i> París, Francia</div>
+                <div class="dest-tag" id="destacada-destino"><i class="bi bi-geo-alt-fill"></i> Cargando...</div>
               </div>
             </div>
           </div>
@@ -122,19 +122,17 @@
             <div class="card-featured-body d-flex flex-column justify-content-between h-100">
               <div>
                 <div class="d-flex align-items-center gap-3 mb-4">
-                  <div class="avatar-circle" style="width:48px;height:48px;font-size:.85rem">LG</div>
+                  <div class="avatar-circle" style="width:48px;height:48px;font-size:.85rem" id="destacada-avatar"></div>
                   <div>
-                    <p class="user-name" style="font-size:1rem">Lola Gómez</p>
-                    <p class="user-pkg">Pack "París Romántico"</p>
+                    <p class="user-name" style="font-size:1rem" id="destacada-autor"></p>
+                    <p class="user-pkg" id="destacada-paquete"></p>
                   </div>
-                  <div class="stars-yellow ms-auto" style="font-size:1.1rem">★★★★★</div>
+                  <div class="stars-yellow ms-auto" style="font-size:1.1rem" id="destacada-estrellas"></div>
                 </div>
-                <p class="review-text">
-                  "Una experiencia inolvidable. El hotel era precioso y la organización del tour fue impecable desde el primer momento. Repetiremos sin duda el año que viene con toda la familia. Cada detalle estaba cuidado al máximo y el guía fue realmente excepcional. No podría recomendar más este viaje a cualquiera que quiera descubrir París de verdad."
-                </p>
+                <p class="review-text" id="destacada-texto"></p>
               </div>
               <div class="d-flex justify-content-end mt-3">
-                <span class="date-muted"><i class="bi bi-calendar3 me-1"></i>Marzo 2025</span>
+                <span class="date-muted" id="destacada-fecha"><i class="bi bi-calendar3 me-1"></i></span>
               </div>
             </div>
           </div>
@@ -148,107 +146,10 @@
       </div>
 
       <div class="row g-4" id="gridExperiencias">
-
-        <!-- Tarjeta 1 — Canarias -->
-        <div class="col-6 col-md-3">
-          <div class="card-exp">
-            <div class="card-exp-img">
-              <img src="https://plus.unsplash.com/premium_photo-1688141871918-57250bdf595e?w=600&q=80" alt="Canarias" />
-              <div class="overlay"></div>
-              <div class="dest-tag"><i class="bi bi-geo-alt-fill"></i> Canarias</div>
-            </div>
-            <div class="card-exp-body">
-              <div class="d-flex align-items-center gap-2 mb-2">
-                <div class="avatar-circle">MR</div>
-                <div>
-                  <p class="user-name">Marcos Ruiz</p>
-                  <p class="user-pkg">Pack "Islas Canarias"</p>
-                </div>
-              </div>
-              <div class="stars-yellow mb-2">★★★★★</div>
-              <p class="card-review">"Las playas son increíbles y el hotel superó todas nuestras expectativas. El traslado incluido fue muy cómodo."</p>
-              <div class="d-flex justify-content-end mt-2">
-                <span class="date-muted">Feb 2025</span>
-              </div>
-            </div>
-          </div>
+        <div class="col-12 text-center py-4">
+          <div class="spinner-border text-primary" role="status"></div>
+          <p class="mt-2 text-muted">Cargando experiencias...</p>
         </div>
-
-        <!-- Tarjeta 2 — Roma -->
-        <div class="col-6 col-md-3">
-          <div class="card-exp">
-            <div class="card-exp-img">
-              <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=600&q=80" alt="Roma" />
-              <div class="overlay"></div>
-              <div class="dest-tag"><i class="bi bi-geo-alt-fill"></i> Roma</div>
-            </div>
-            <div class="card-exp-body">
-              <div class="d-flex align-items-center gap-2 mb-2">
-                <div class="avatar-circle" style="background:#fff0e0;color:#c47400">AS</div>
-                <div>
-                  <p class="user-name">Ana Serrano</p>
-                  <p class="user-pkg">Pack "Roma Eterna"</p>
-                </div>
-              </div>
-              <div class="stars-yellow mb-2">★★★★☆</div>
-              <p class="card-review">"Visitar el Coliseo y la Fontana di Trevi fue un sueño hecho realidad. La guía fue muy amena y profesional."</p>
-              <div class="d-flex justify-content-end mt-2">
-                <span class="date-muted">Ene 2025</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tarjeta 3 — Pirineos -->
-        <div class="col-6 col-md-3">
-          <div class="card-exp">
-            <div class="card-exp-img">
-              <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80" alt="Pirineos" />
-              <div class="overlay"></div>
-              <div class="dest-tag"><i class="bi bi-geo-alt-fill"></i> Pirineos</div>
-            </div>
-            <div class="card-exp-body">
-              <div class="d-flex align-items-center gap-2 mb-2">
-                <div class="avatar-circle" style="background:#e8f5e9;color:#2e7d32">JL</div>
-                <div>
-                  <p class="user-name">Jorge López</p>
-                  <p class="user-pkg">Pack "Pirineos Activo"</p>
-                </div>
-              </div>
-              <div class="stars-yellow mb-2">★★★★★</div>
-              <p class="card-review">"Rutas de senderismo espectaculares. El alojamiento era acogedor y la comida típica de la zona, una pasada."</p>
-              <div class="d-flex justify-content-end mt-2">
-                <span class="date-muted">Dic 2024</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tarjeta 4 — Praga -->
-        <div class="col-6 col-md-3">
-          <div class="card-exp">
-            <div class="card-exp-img">
-              <img src="https://images.unsplash.com/photo-1519677100203-a0e668c92439?w=600&q=80" alt="Praga" />
-              <div class="overlay"></div>
-              <div class="dest-tag"><i class="bi bi-geo-alt-fill"></i> Praga</div>
-            </div>
-            <div class="card-exp-body">
-              <div class="d-flex align-items-center gap-2 mb-2">
-                <div class="avatar-circle" style="background:#f0e8ff;color:#6a34b5">CM</div>
-                <div>
-                  <p class="user-name">Clara Molina</p>
-                  <p class="user-pkg">Pack "Europa Cultural"</p>
-                </div>
-              </div>
-              <div class="stars-yellow mb-2">★★★★★</div>
-              <p class="card-review">"Praga es una ciudad de cuento. Los museos, la arquitectura y la gastronomía local hicieron el viaje perfecto."</p>
-              <div class="d-flex justify-content-end mt-2">
-                <span class="date-muted">Nov 2024</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
       </div><!-- /row grid -->
 
     </div><!-- /container -->
@@ -264,25 +165,40 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
           </div>
           <div class="modal-body p-4">
+            <div id="modal-feedback" class="alert d-none"></div>
             <div class="mb-3">
               <label class="form-label fw-bold" style="font-size:.9rem;color:#555">
                 <i class="bi bi-suitcase me-1"></i>Paquete visitado
               </label>
-              <select class="form-select" style="font-family:'Raleway',sans-serif;font-size:.9rem">
-                <option value="">Selecciona el paquete...</option>
-                <option>Pack "París Romántico"</option>
-                <option>Pack "Islas Canarias"</option>
-                <option>Pack "Roma Eterna"</option>
-                <option>Pack "Europa Cultural"</option>
-                <option>Pack "Pirineos Activo"</option>
-                <option>Pack "Semana en Mallorca"</option>
+              <select id="selectPaquete" class="form-select" style="font-family:'Raleway',sans-serif;font-size:.9rem">
+                <option value="">Cargando paquetes...</option>
               </select>
             </div>
             <div class="mb-3">
               <label class="form-label fw-bold" style="font-size:.9rem;color:#555">
-                <i class="bi bi-star me-1"></i>Tu valoración
+                <i class="bi bi-type me-1"></i>Título del viaje
               </label>
-              <div class="d-flex gap-1" id="starRating">
+              <input type="text" id="inputTitulo" class="form-control" maxlength="150"
+                placeholder="Ej. Una escapada inolvidable"
+                style="font-family:'Raleway',sans-serif;font-size:.9rem" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-bold" style="font-size:.9rem;color:#555">
+                <i class="bi bi-star me-1"></i>Valoración del viaje
+              </label>
+              <div class="d-flex gap-1" id="starRatingViaje">
+                <button class="star-btn" data-val="1" type="button">★</button>
+                <button class="star-btn" data-val="2" type="button">★</button>
+                <button class="star-btn" data-val="3" type="button">★</button>
+                <button class="star-btn" data-val="4" type="button">★</button>
+                <button class="star-btn" data-val="5" type="button">★</button>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-bold" style="font-size:.9rem;color:#555">
+                <i class="bi bi-people me-1"></i>Valoración de la compañía
+              </label>
+              <div class="d-flex gap-1" id="starRatingCompania">
                 <button class="star-btn" data-val="1" type="button">★</button>
                 <button class="star-btn" data-val="2" type="button">★</button>
                 <button class="star-btn" data-val="3" type="button">★</button>
@@ -294,7 +210,7 @@
               <label class="form-label fw-bold" style="font-size:.9rem;color:#555">
                 <i class="bi bi-chat-left-text me-1"></i>Tu experiencia
               </label>
-              <textarea class="form-control" rows="4"
+              <textarea id="textComentario" class="form-control" rows="4"
                 placeholder="Cuéntanos cómo fue tu viaje..."
                 style="font-family:'Raleway',sans-serif;font-size:.9rem;resize:none"></textarea>
             </div>
@@ -314,7 +230,7 @@
             <button type="button" class="btn btn-outline-secondary rounded-pill"
               style="font-family:'Raleway',sans-serif"
               data-bs-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary rounded-pill fw-bold px-4"
+            <button type="button" id="btnPublicar" class="btn btn-primary rounded-pill fw-bold px-4"
               style="font-family:'Raleway',sans-serif">
               <i class="bi bi-send me-1"></i>Publicar experiencia
             </button>
@@ -398,7 +314,7 @@
     <script src="../../frontend/js/bootstrap.bundle.min.js"></script>
     <script>window.BASE_PATH = '../../';</script>
     <script src="../../frontend/js/auth/navbarUsuario.js"></script>
-    <script src="../../frontend/js/experiencias.js"></script>
+    <script type="module" src="../../frontend/js/experiencias.js"></script>
 
   </body>
 </html>
