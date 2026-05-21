@@ -110,7 +110,7 @@ function guardarImagenComentario($campo)
         exit;
     }
 
-    return "assets/img/experiencias/" . $nombre;
+    return "../assets/img/experiencias/" . $nombre;
 }
 
 // =========================================

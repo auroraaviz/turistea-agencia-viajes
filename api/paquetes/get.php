@@ -29,6 +29,8 @@ if (isset($_GET['id'])) {
         SELECT *,
         DATEDIFF(fecha_regreso, fecha_salida) AS noches
         FROM paquete
+        WHERE fecha_regreso >= CURDATE()
+        AND activo = 1
     ");
 
     echo json_encode($resultado->fetch_all(MYSQLI_ASSOC));

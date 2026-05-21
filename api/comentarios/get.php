@@ -25,8 +25,8 @@ if (isset($_GET['paquete_id'])) {
     $paquete_id = (int) $_GET['paquete_id'];
 
     $stmt = $conexion->prepare("
-        SELECT c.*, u.nombre AS autor_nombre, u.foto_perfil AS autor_foto,
-               p.titulo AS nombre_paquete, p.destino
+         SELECT c.*, u.nombre AS autor_nombre, u.foto_perfil AS autor_foto,
+               p.titulo AS nombre_paquete, p.destino, p.imagen AS imagen_paquete
         FROM comentario c
         JOIN usuario u ON c.usuario_id = u.id
         LEFT JOIN paquete p ON c.paquete_id = p.id
@@ -45,7 +45,7 @@ if (isset($_GET['paquete_id'])) {
     // Devolver todos los comentarios
     $resultado = $conexion->query("
         SELECT c.*, u.nombre AS autor_nombre, u.foto_perfil AS autor_foto,
-               p.titulo AS nombre_paquete, p.destino
+               p.titulo AS nombre_paquete, p.destino, p.imagen AS imagen_paquete
         FROM comentario c
         JOIN usuario u ON c.usuario_id = u.id
         LEFT JOIN paquete p ON c.paquete_id = p.id
