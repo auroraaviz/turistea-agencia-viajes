@@ -254,6 +254,7 @@ CREATE TABLE `tarjeta_credito` (
   `titular` varchar(150) NOT NULL,
   `ultimos_4` char(4) NOT NULL,
   `vencimiento` varchar(5) NOT NULL,
+  `tarjeta_hash` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

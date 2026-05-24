@@ -48,10 +48,6 @@ export async function crear(url, datos) {
       ...opciones,
     });
 
-    if (!respuesta.ok) {
-      throw new Error("Error HTTP: " + respuesta.status);
-    }
-
     const texto = await respuesta.text();
     return texto;
   } catch (error) {

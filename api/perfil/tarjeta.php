@@ -10,15 +10,13 @@ header("Content-Type: application/json; charset=UTF-8");
 require_once __DIR__ . "/../config/bd.php";
 require_once __DIR__ . "/../config/auth.php";
 
-if (esModoDev()) {
-    echo json_encode(["tarjeta" => null]);
-    exit;
-}
-
 if (empty($_SESSION["usuario_id"])) {
-    http_response_code(401);
-    echo json_encode(["error" => "No autenticado"]);
-    exit;
+    if (!esModoDev()) {
+        http_response_code(401);
+        echo json_encode(["error" => "No autenticado"]);
+        exit;
+    }
+    $_SESSION["usuario_id"] = 1;
 }
 
 $id = (int) $_SESSION["usuario_id"];

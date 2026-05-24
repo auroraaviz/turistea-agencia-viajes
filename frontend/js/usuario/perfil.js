@@ -935,8 +935,9 @@ async function guardarTarjetaModal() {
 
   const texto     = await crear("/api/tarjetas/guardar.php", {
     titular,
-    ultimos_4:  numero.slice(-4),
-    vencimiento
+    numero,
+    vencimiento,
+    cvv
   });
   const respuesta = parsearTexto(texto);
 

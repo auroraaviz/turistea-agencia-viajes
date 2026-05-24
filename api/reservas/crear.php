@@ -6,6 +6,7 @@
  *   "paquete_id": 1,
  *   "num_viajeros": 2,
  *   "tarjeta_id": 5,
+ *   "tarjeta_temporal": false,
  *   "modo": "pagar" | "reservar"
  * }
  *
@@ -39,6 +40,7 @@ $body        = json_decode(file_get_contents("php://input"), true);
 $paqueteId   = (int) ($body["paquete_id"]   ?? 0);
 $numViajeros = (int) ($body["num_viajeros"]  ?? 1);
 $tarjetaId   = (int) ($body["tarjeta_id"]    ?? 0);
+$tarjetaTemporal = !empty($body["tarjeta_temporal"]);
 $modo        = ($body["modo"] ?? "pagar");
 
 if ($paqueteId <= 0) {
@@ -48,13 +50,27 @@ if ($paqueteId <= 0) {
 }
 if ($numViajeros < 1) $numViajeros = 1;
 
-if ($tarjetaId <= 0) {
+$usuarioId = !empty($_SESSION["usuario_id"]) ? (int) $_SESSION["usuario_id"] : 1;
+
+if ($tarjetaId <= 0 && !$tarjetaTemporal) {
     http_response_code(422);
     echo json_encode(["error" => "Debes añadir una tarjeta de crédito"]);
     exit;
 }
 
-$usuarioId = !empty($_SESSION["usuario_id"]) ? (int) $_SESSION["usuario_id"] : 1;
+if ($tarjetaId > 0) {
+    $stmtTarjeta = $conexion->prepare(
+        "SELECT id FROM tarjeta_credito WHERE id = ? AND usuario_id = ? LIMIT 1"
+    );
+    $stmtTarjeta->bind_param("ii", $tarjetaId, $usuarioId);
+    $stmtTarjeta->execute();
+
+    if (!$stmtTarjeta->get_result()->fetch_assoc()) {
+        http_response_code(403);
+        echo json_encode(["error" => "La tarjeta seleccionada no es válida"]);
+        exit;
+    }
+}
 
 // Obtener paquete
 $stmtPaq = $conexion->prepare(

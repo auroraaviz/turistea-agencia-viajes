@@ -24,6 +24,7 @@ const inputTitular     = document.getElementById("input-titular");
 const inputNumero      = document.getElementById("input-numero");
 const inputVencimiento = document.getElementById("input-vencimiento");
 const inputCvv         = document.getElementById("input-cvv");
+const inputGuardar     = document.getElementById("input-guardar-tarjeta");
 
 // Campos de visualización
 const pagoTitular      = document.getElementById("pago-titular");
@@ -36,6 +37,7 @@ const pagoDesglose     = document.getElementById("pago-desglose");
 let paquete    = null;
 let totalPago  = 0;
 let tarjetaId  = null;
+let tarjetaTemporal = false;
 let modo       = "pagar"; // "pagar" o "reservar"
 
 // ── Cargar paquete desde la API ──
@@ -59,6 +61,7 @@ async function cargarPaquete() {
   btnPagar.textContent = modo === "pagar" ? "Pagar" : "Reservar";
 
   renderResumenPaquete(diasHasta);
+  await cargarTarjetaGuardada();
 
   loadingEl.classList.add("d-none");
   contenidoEl.classList.remove("d-none");
@@ -141,6 +144,36 @@ function datoPago(label, valor) {
           </div>`;
 }
 
+async function cargarTarjetaGuardada() {
+  const data = await obtener("/api/perfil/tarjeta.php");
+  if (!data || !data.tarjeta) return;
+
+  mostrarTarjeta({
+    id: data.tarjeta.id,
+    titular: data.tarjeta.titular,
+    ultimos4: data.tarjeta.ultimos_4,
+    vencimiento: data.tarjeta.vencimiento,
+    guardada: true
+  });
+}
+
+function mostrarTarjeta({ id = null, titular, ultimos4, vencimiento, guardada = false }) {
+  tarjetaId = id ? parseInt(id) : null;
+  tarjetaTemporal = !guardada;
+
+  pagoTitular.textContent      = titular;
+  pagoNumero.textContent       = "**** " + ultimos4;
+  pagoVencimiento.textContent  = vencimiento;
+  pagoTotalTarjeta.textContent = totalPago.toFixed(2) + "\u20AC";
+
+  renderDesglose();
+
+  sinTarjeta.classList.add("d-none");
+  datosTarjeta.classList.remove("d-none");
+  btnPagar.disabled = false;
+  btnAgregar.textContent = guardada ? "Cambiar tarjeta de crédito" : "Usar otra tarjeta de crédito";
+}
+
 // ── Formatear número de tarjeta ──
 inputNumero.addEventListener("input", function () {
   let v = this.value.replace(/\D/g, "").substring(0, 16);
@@ -159,7 +192,7 @@ inputCvv.addEventListener("input", function () {
   this.value = this.value.replace(/\D/g, "").substring(0, 4);
 });
 
-// ── Guardar tarjeta (en BD) ──
+// ── Confirmar tarjeta: guardada si se marca el check, temporal si no ──
 btnGuardar.addEventListener("click", async function () {
   const titular     = inputTitular.value.trim();
   const numero      = inputNumero.value.trim();
@@ -178,32 +211,29 @@ btnGuardar.addEventListener("click", async function () {
   }
 
   btnGuardar.disabled = true;
-  btnGuardar.textContent = "Guardando...";
+  btnGuardar.textContent = inputGuardar.checked ? "Guardando..." : "Validando...";
 
-  // Guardar en BD
-  const texto = await crear("/api/tarjetas/guardar.php", {
-    titular:    titular,
-    ultimos_4:  numLimpio.slice(-4),
-    vencimiento: vencimiento
-  });
+  let resp = { ok: true, id: null };
 
-  const resp = texto ? (() => { try { return JSON.parse(texto); } catch { return null; } })() : null;
+  if (inputGuardar.checked) {
+    const texto = await crear("/api/tarjetas/guardar.php", {
+      titular: titular,
+      numero: numLimpio,
+      vencimiento: vencimiento,
+      cvv: cvv
+    });
+
+    resp = texto ? (() => { try { return JSON.parse(texto); } catch { return null; } })() : null;
+  }
 
   if (resp && resp.ok) {
-    tarjetaId = resp.id;
-
-    // Mostrar datos enmascarados
-    pagoTitular.textContent      = titular;
-    pagoNumero.textContent       = "**** " + numLimpio.slice(-4);
-    pagoVencimiento.textContent  = vencimiento;
-    pagoTotalTarjeta.textContent = totalPago.toFixed(2) + "\u20AC";
-
-    renderDesglose();
-
-    sinTarjeta.classList.add("d-none");
-    datosTarjeta.classList.remove("d-none");
-    btnPagar.disabled = false;
-    btnAgregar.textContent = "Cambiar tarjeta de crédito";
+    mostrarTarjeta({
+      id: resp.id,
+      titular: titular,
+      ultimos4: numLimpio.slice(-4),
+      vencimiento: vencimiento,
+      guardada: inputGuardar.checked
+    });
 
     const modal = bootstrap.Modal.getInstance(document.getElementById("modalTarjeta"));
     if (modal) modal.hide();
@@ -213,7 +243,7 @@ btnGuardar.addEventListener("click", async function () {
   }
 
   btnGuardar.disabled = false;
-  btnGuardar.textContent = "Guardar tarjeta";
+  btnGuardar.textContent = "Continuar";
 });
 
 // ── Pagar / Reservar ──
@@ -225,6 +255,7 @@ btnPagar.addEventListener("click", async function () {
     paquete_id:   parseInt(paqueteId),
     num_viajeros: viajeros,
     tarjeta_id:   tarjetaId,
+    tarjeta_temporal: tarjetaTemporal,
     modo:         modo
   });
 

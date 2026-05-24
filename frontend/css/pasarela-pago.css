@@ -285,6 +285,16 @@ body {
   box-shadow: 0 0 0 .2rem rgba(0,119,182,.15);
 }
 
+.guardar-tarjeta-check {
+  color: var(--text-dark);
+  font-size: .9rem;
+}
+
+.guardar-tarjeta-check .form-check-input:checked {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
 .btn-guardar-tarjeta {
   background: var(--primary);
   color: #fff;
