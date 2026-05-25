@@ -22,46 +22,54 @@
 <body>
 
   <!-- ===== NAVBAR ===== -->
+  <header>
   <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-0">
-  <div class="container">
-    <button
-      class="btn btn-hamburger d-lg-none me-2"
-      type="button"
-      data-bs-toggle="offcanvas"
-      data-bs-target="#menuPrincipal"
-      aria-controls="menuPrincipal"
-      aria-label="Abrir menú">
-      <i class="bi bi-list"></i>
-    </button>
-    <a class="navbar-brand" href="../../index.html">
-      <img src="../assets/img/Turistea_Logo/logo_turistea.png" width="90" />
-    </a>
-    <ul class="navbar-nav d-none d-lg-flex flex-row gap-3 ms-4 me-auto">
-      <li class="nav-item"><a class="nav-link" href="../../index.html">Inicio</a></li>
-      <li class="nav-item"><a class="nav-link" href="#reservas">Mis reservas</a></li>
-    </ul>
-    <ul class="navbar-nav ms-auto">
-      <li class="nav-item" id="nav-usuario"></li>
-    </ul>
-  </div>
-</nav>
+    <div class="container">
+      <button
+        class="btn btn-hamburger d-lg-none me-2"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#menuPrincipal"
+        aria-controls="menuPrincipal"
+        aria-label="Abrir menú">
+        <i class="bi bi-list"></i>
+      </button>
+      <a class="navbar-brand" href="../../index.html">
+        <img src="../assets/img/Turistea_Logo/logo_turistea.png" width="90" alt="Turistea" />
+      </a>
+      <ul class="navbar-nav d-none d-lg-flex flex-row gap-3 ms-4 me-auto">
+        <li class="nav-item"><a class="nav-link" href="../../index.html">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="experiencias.html">Experiencias</a></li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalContacto">Contacto</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item" id="nav-usuario"></li>
+      </ul>
+    </div>
+  </nav>
 
-<!-- OFFCANVAS MÓVIL -->
-<div class="offcanvas offcanvas-start menu-offcanvas" tabindex="-1" id="menuPrincipal" aria-labelledby="menuPrincipalLabel">
-  <div class="offcanvas-header border-bottom">
-    <a class="navbar-brand m-0" href="../../index.html">
-      <img src="../assets/img/Turistea_Logo/logo_turistea.png" width="80" />
-    </a>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+  <div class="offcanvas offcanvas-start menu-offcanvas" tabindex="-1" id="menuPrincipal">
+    <div class="offcanvas-header border-bottom">
+      <a class="navbar-brand m-0" href="../../index.html">
+        <img src="../assets/img/Turistea_Logo/logo_turistea.png" width="80" alt="Turistea" />
+      </a>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+    </div>
+    <div class="offcanvas-body p-0">
+      <ul class="list-unstyled menu-offcanvas-list mb-0">
+        <li><a href="../../index.html" data-bs-dismiss="offcanvas"><i class="bi bi-house-door me-2"></i>Inicio</a></li>
+        <li><a href="experiencias.html" data-bs-dismiss="offcanvas"><i class="bi bi-camera me-2"></i>Experiencias</a></li>
+        <li>
+          <a href="#" data-bs-dismiss="offcanvas" data-bs-toggle="modal" data-bs-target="#modalContacto">
+            <i class="bi bi-envelope me-2"></i>Contacto
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
-  <div class="offcanvas-body p-0">
-    <ul class="list-unstyled menu-offcanvas-list mb-0">
-      <li><a href="../../index.html"><i class="bi bi-house-door me-2"></i>Inicio</a></li>
-      <li><a href="#" data-bs-dismiss="offcanvas"><i class="bi bi-person me-2"></i>Mi perfil</a></li>
-      <li><a href="#reservas" data-bs-dismiss="offcanvas"><i class="bi bi-journal-check me-2"></i>Mis reservas</a></li>
-    </ul>
-  </div>
-</div>
+</header>
 
   <!-- ===== HERO ===== -->
   <div class="perfil-hero">
@@ -334,6 +342,25 @@
     </div>
   </div>
 
+  <div class="modal fade" id="modalContacto" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title">Contacto Turistea</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4">
+        <form>
+          <input type="text"  class="form-control mb-3" placeholder="Nombre completo" />
+          <input type="email" class="form-control mb-3" placeholder="Correo electrónico" />
+          <input type="text"  class="form-control mb-3" placeholder="Asunto" />
+          <textarea class="form-control mb-3" rows="5" placeholder="Mensaje"></textarea>
+          <button class="btn btn-primary w-100 rounded-pill">Enviar mensaje</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
   <!-- ===== FOOTER ===== -->
   <footer class="mt-5">

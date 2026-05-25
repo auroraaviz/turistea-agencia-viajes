@@ -35,9 +35,9 @@
 
           <!-- ENLACES (desktop) -->
           <ul class="navbar-nav d-none d-lg-flex flex-row gap-3 ms-4 me-auto">
-            <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalContacto">Contacto</a></li>
+            <li class="nav-item"><a class="nav-link active fw-bold" href="index.html" style="color:#00B4D8">Inicio</a></li>
             <li class="nav-item"><a class="nav-link" href="frontend/pages/experiencias.html">Experiencias</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalContacto">Contacto</a></li>
           </ul>
 
          <!-- MENÚ USUARIO -->
@@ -385,6 +385,26 @@
 
         <div id="respuestaContacto" class="mt-3 text-center"></div>
 
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalContacto" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title">Contacto Turistea</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4">
+        <form>
+          <input type="text"  class="form-control mb-3" placeholder="Nombre completo" />
+          <input type="email" class="form-control mb-3" placeholder="Correo electrónico" />
+          <input type="text"  class="form-control mb-3" placeholder="Asunto" />
+          <textarea class="form-control mb-3" rows="5" placeholder="Mensaje"></textarea>
+          <button class="btn btn-primary w-100 rounded-pill">Enviar mensaje</button>
+        </form>
       </div>
     </div>
   </div>

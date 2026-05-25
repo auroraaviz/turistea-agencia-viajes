@@ -300,3 +300,18 @@ body {
   margin-top: 0.5rem;
   letter-spacing: 0.05em;
 }
+
+/* ===== NAV LINKS DESKTOP ===== */
+.navbar-nav .nav-link {
+  transition: color 0.2s ease;
+  font-weight: 500;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #00B4D8;
+}
+
+.navbar-nav .nav-link.active {
+  color: #00B4D8 !important;
+  font-weight: 700;
+}
