@@ -84,7 +84,7 @@ function tarjetaHTML(c) {
 cargarExperiencias();
 
 /*ESTRELLAS INTERACTIVAS — VIAJE*/
-const starBtns = document.querySelectorAll('#starRating .star-btn');
+const starBtns = document.querySelectorAll('#starRatingViaje .star-btn');
 let valorSeleccionado = 0;
 
 starBtns.forEach(btn => {

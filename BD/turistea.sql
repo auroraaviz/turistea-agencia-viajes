@@ -3,7 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
+<<<<<<< Updated upstream
 -- Tiempo de generación: 24-05-2026 a las 20:11:30
+=======
+-- Tiempo de generación: 19-05-2026 a las 19:32:15
+>>>>>>> Stashed changes
 -- Versión del servidor: 10.11.14-MariaDB-0ubuntu0.24.04.1
 -- Versión de PHP: 8.2.12
 
@@ -136,11 +140,15 @@ INSERT INTO `pago` (`id`, `reserva_id`, `importe`, `metodo`, `estado`, `referenc
 (9, 10, 200.00, 'TARJETA', 'PAGADO', 'PAG-000010', '2026-05-12 18:36:43'),
 (10, 11, 597.00, 'TARJETA', 'PENDIENTE', 'PAG-000011', '2026-05-12 18:42:41'),
 (11, 12, 500.00, 'TARJETA', 'FALLIDO', 'PAG-000012', '2026-05-13 16:46:48'),
+<<<<<<< Updated upstream
 (12, 13, 300.00, 'TARJETA', 'FALLIDO', 'PAG-000013', '2026-05-13 16:52:39'),
 (13, 14, 1500.00, 'TARJETA', 'PAGADO', 'PAG-000014', '2026-05-21 09:08:58'),
 (14, 15, 300.00, 'TARJETA', 'PAGADO', 'PAG-000015', '2026-05-21 09:09:54'),
 (15, 16, 2000.00, 'TARJETA', 'PAGADO', 'PAG-000016', '2026-05-21 20:38:57'),
 (16, 17, 658.00, 'TARJETA', 'PENDIENTE', 'PAG-000017', '2026-05-24 18:09:19');
+=======
+(12, 13, 300.00, 'TARJETA', 'FALLIDO', 'PAG-000013', '2026-05-13 16:52:39');
+>>>>>>> Stashed changes
 
 -- --------------------------------------------------------
 
@@ -177,20 +185,33 @@ CREATE TABLE `paquete` (
 --
 
 INSERT INTO `paquete` (`id`, `titulo`, `descripcion`, `destino`, `hotel_nombre`, `hotel_estrellas`, `hotel_regimen`, `hotel_imagen`, `fecha_salida`, `fecha_regreso`, `plazas_totales`, `plazas_disponibles`, `precio`, `descuento`, `activo`, `imagen`, `categoria`, `vuelo_incluido`, `salida_desde`, `cerca_playa`, `hotel_detalles`) VALUES
+<<<<<<< Updated upstream
 (2, 'Relax en la Costa Brava', 'Disfruta del Mediterráneo con playas de aguas cristalinas, calas escondidas y una oferta cultural única. Incluye excursión en barco y visita a Tossa de Mar.', 'Girona, Cataluña', 'Hotel Mar i Cel', 3, 'Todo incluido', 'assets/img/hoteles/hotelmaricel.jpeg', '2026-03-03', '2026-03-12', 15, 5, 789.50, 0.00, 1, 'assets/img/mallorca.jpg', 'vacaciones', 0, 'Málaga', 1, 'Ubicación céntrica, habitaciones modernas y desayuno incluido.'),
 (3, 'Escapada a Canarias 2', 'Vuelo + 7 noches de hotel en primera línea de playa. Sol, arena y aguas cristalinas todo el año en el paraíso canario.', 'Las Palmas, Gran Canaria', 'Hotel Playa Dorada', 5, 'Media pensión', 'assets/img/hoteles/5.jpeg', '2026-03-01', '2026-03-06', 30, 0, 100.00, 5.00, 1, 'assets/img/canarias.jpg', 'vacaciones', 1, 'Madrid', 1, 'Resort todo incluido, acceso directo a la playa y animación diaria.'),
 (4, 'Semana en Mallorca', 'Todo incluido desde 399€ por persona. Una semana en la joya del Mediterráneo con playas, cultura y fiesta.', 'Palma de Mallorca, Baleares', 'Hotel Mar i Cel', 3, 'Todo incluido', 'assets/img/hoteles/hotelmaricel.jpeg', '2026-08-10', '2026-08-17', 25, 8, 399.00, 15.00, 1, 'assets/img/mallorca.jpg', 'vacaciones', 1, 'Valencia', 1, 'Hotel elegante, cerca del metro y recepción 24 horas.'),
 (5, 'Fin de semana en Roma', 'Vuelos + 3 noches de hotel desde 199€. Visita el Coliseo, la Fontana di Trevi y disfruta de la mejor pasta italiana.', 'Roma, Italia', 'Hotel Colosseo', 3, 'Solo alojamiento', 'assets/img/hoteles/6.jpeg', '2026-11-20', '2026-11-23', 20, 1, 199.00, 0.00, 1, 'assets/img/roma.jpg', 'vacaciones', 1, 'Barcelona', 0, 'Alojamiento acogedor, vistas panorámicas y terraza chill out.'),
 (6, 'Mallorca rural', 'Escapada de fin de semana a Mallorca. Combina naturaleza, cultura y relax en pocos días por el interior de la isla.', 'Serra de Tramuntana, Mallorca', 'Agroturismo Tramuntana', 4, 'Alojamiento y desayuno', 'assets/img/hoteles/1.jpeg', '2026-09-11', '2026-09-13', 12, 6, 249.00, 0.00, 1, 'assets/img/1.jpg', NULL, 0, 'Palma de Mallorca', 0, 'Spa completo, gimnasio equipado y restaurante gourmet.'),
 (7, 'Sevilla que maravilla', 'Recorre Sevilla y sus principales monumentos. Disfruta de su cultura, gastronomía y del clima suave del otoño andaluz.', 'Sevilla, Andalucía', 'Hotel Giralda', 4, 'Alojamiento y desayuno', 'assets/img/hoteles/2.jpeg', '2026-11-04', '2026-11-08', 20, 12, 329.00, 5.00, 1, 'assets/img/2.jpg', NULL, 0, 'Madrid', 0, 'Ideal para familias, zona infantil y piscina climatizada.'),
+=======
+(2, 'Relax en la Costa Brava', 'Disfruta del Mediterráneo con playas de aguas cristalinas, calas escondidas y una oferta cultural única. Incluye excursión en barco y visita a Tossa de Mar.', 'Girona, Cataluña', 'Hotel Mar i Cel', 3, 'Todo incluido', 'assets/img/hoteles/hotelmaricel.jpeg', '2026-07-01', '2026-07-08', 15, 5, 789.50, 0.00, 1, 'assets/img/mallorca.jpg', 'vacaciones', 0, 'Málaga', 1, 'Ubicación céntrica, habitaciones modernas y desayuno incluido.'),
+(3, 'Escapada a Canarias 2', 'Vuelo + 7 noches de hotel en primera línea de playa. Sol, arena y aguas cristalinas todo el año en el paraíso canario.', 'Las Palmas, Gran Canaria', 'Hotel Playa Dorada', 5, 'Media pensión', 'assets/img/hoteles/5.jpeg', '2026-10-05', '2026-10-12', 30, 0, 100.00, 5.00, 1, 'assets/img/canarias.jpg', 'vacaciones', 1, 'Madrid', 1, 'Resort todo incluido, acceso directo a la playa y animación diaria.'),
+(4, 'Semana en Mallorca', 'Todo incluido desde 399€ por persona. Una semana en la joya del Mediterráneo con playas, cultura y fiesta.', 'Palma de Mallorca, Baleares', 'Hotel Mar i Cel', 3, 'Todo incluido', 'assets/img/hoteles/hotelmaricel.jpeg', '2026-08-10', '2026-08-17', 25, 8, 399.00, 15.00, 1, 'assets/img/mallorca.jpg', 'vacaciones', 1, 'Valencia', 1, 'Hotel elegante, cerca del metro y recepción 24 horas.'),
+(5, 'Fin de semana en Roma', 'Vuelos + 3 noches de hotel desde 199€. Visita el Coliseo, la Fontana di Trevi y disfruta de la mejor pasta italiana.', 'Roma, Italia', 'Hotel Colosseo', 3, 'Solo alojamiento', 'assets/img/hoteles/6.jpeg', '2026-11-20', '2026-11-23', 20, 1, 199.00, 0.00, 1, 'assets/img/roma.jpg', 'vacaciones', 1, 'Barcelona', 0, 'Alojamiento acogedor, vistas panorámicas y terraza chill out.'),
+(6, 'Mallorca rural', 'Escapada de fin de semana a Mallorca. Combina naturaleza, cultura y relax en pocos días por el interior de la isla.', 'Serra de Tramuntana, Mallorca', 'Agroturismo Tramuntana', 4, 'Alojamiento y desayuno', 'assets/img/hoteles/1.jpeg', '2026-09-11', '2026-09-13', 12, 6, 249.00, 0.00, 1, 'assets/img/1.jpg', NULL, 0, 'Palma de Mallorca', 0, 'Spa completo, gimnasio equipado y restaurante gourmet.'),
+(7, 'Sevilla que maravilla', 'Recorre Sevilla y sus principales monumentos. Disfruta de su cultura, gastronomía y del clima suave del otoño andaluz.', 'Sevilla, Andalucía', 'Hotel Giralda', 4, 'Alojamiento y desayuno', 'assets/img/hoteles/2.jpeg', '2026-11-04', '2026-11-08', 20, 14, 329.00, 5.00, 1, 'assets/img/2.jpg', NULL, 0, 'Madrid', 0, 'Ideal para familias, zona infantil y piscina climatizada.'),
+>>>>>>> Stashed changes
 (8, 'Asturias', 'Viaja a la costa de Asturias, descubre su encanto marinero, sus playas salvajes y su gastronomía tradicional.', 'Costa de Asturias', 'Hotel Mirador del Cantábrico', 3, 'Media pensión', 'assets/img/hoteles/3.jpeg', '2026-08-18', '2026-08-23', 18, 5, 459.00, 0.00, 1, 'assets/img/3.jpg', NULL, 0, 'Madrid', 1, 'Solo adultos, ambiente tranquilo y vistas al mar.'),
 (9, 'Cáceres', 'Cáceres en Diciembre. Disfruta de sus calles empedradas, su gastronomía y el encanto invernal de la ciudad medieval.', 'Cáceres, Extremadura', 'Hotel Plaza Mayor', 3, 'Alojamiento y desayuno', 'assets/img/hoteles/4.jpeg', '2026-12-18', '2026-12-20', 16, 11, 179.00, 10.00, 0, 'assets/img/4.jpg', 'vacaciones', 0, 'Madrid', 0, 'Hotel boutique, decoración exclusiva y excelente valoración.'),
 (11, 'Viajes a Cancún todo incluido', '', 'Cancún', '', 3, '', 'assets/img/hoteles/default.jpg', '2026-07-01', '2026-07-12', 10, 10, 1200.00, 0.00, 1, 'assets/img/default.jpg', 'vacaciones', 0, '', 0, ''),
 (12, 'Viaje Los Angeles de Charlie', 'Buen sitio', 'Los Angeles / Estados Unidos', '', 3, '', 'assets/img/hoteles/losangeles.jpeg', '2026-08-01', '2026-08-16', 10, 10, 2200.00, 0.00, 1, 'assets/img/losangeles.jpeg', 'verano', 0, '', 0, ''),
+<<<<<<< Updated upstream
 (13, 'Viaje especial Turistea, solo ida', 'Pásatelo en grande esquivando misiles y proyectiles', 'Palestina', 'Hotel Trump', 4, 'Sólo cama', 'assets/img/hoteles/hotelmaricel.jpeg', '2026-05-01', '2026-05-08', 10, 10, 300.00, 50.00, 1, 'assets/img/palestina.jpeg', 'vacaciones', 1, 'Madrid', 0, 'Habitaciones sin paredes, recepción en escombros'),
 (15, 'Estrella de la muerte en 2 días', 'Fin de semana en la Estrella de la muerte y disfruta de la destrucción del planeta Tattoine', 'Planeta Dagoba', 'Hotel Gookie', 3, 'Pensión completa', 'assets/img/hoteles/hotel_imagen_archivo_6a0ec89f2ef443.51618424.jpg', '2026-01-01', '2026-01-03', 10, 9, 1500.00, 10.00, 1, 'assets/img/imagen_archivo_6a0ec8c60ad805.75952351.webp', 'fin_de_semana', 1, 'Coruscant', 0, 'Bienvenida del director General Dark Vader'),
 (16, 'Semana en perrera municpal', 'Disfruta de un fin de semana en compañía, no te faltará ni agua ni pienso', 'Albolote (Granada)', 'Hotel La Perrera', 2, 'Pensión completa', 'assets/img/hoteles/hotel_imagen_archivo_6a0ec95d5daa73.69230573.jpg', '2026-01-11', '2026-01-17', 10, 8, 150.00, 0.00, 1, 'assets/img/imagen_archivo_6a0ec95d5da199.14996780.jpg', 'vacaciones', 0, 'Albolote', 0, 'Medio limpio, buen ambiente'),
 (17, 'Estrella de la muerte en 2 días', 'Estrella de la muerte en planeta Dagoba', 'Planeta Dagoba', 'Hotel Gookie', 3, 'Pensión completa', 'assets/img/hoteles/hotel_imagen_archivo_6a0f6b36b56cb6.02055168.jpg', '2026-04-01', '2026-04-04', 10, 8, 1000.00, 10.00, 1, 'assets/img/imagen_archivo_6a0f6b36b54929.24090268.webp', 'vacaciones', 0, 'Coruscant', 0, 'El director muy apañao');
+=======
+(13, 'Viaje especial Turistea, solo ida', 'Pásatelo en grande esquivando misiles y proyectiles', 'Palestina', 'Hotel Trump', 4, 'Sólo cama', 'assets/img/hoteles/hotelmaricel.jpeg', '2026-05-01', '2026-05-08', 10, 10, 300.00, 50.00, 1, 'assets/img/palestina.jpeg', 'vacaciones', 1, 'Madrid', 0, 'Habitaciones sin paredes, recepción en escombros');
+>>>>>>> Stashed changes
 
 -- --------------------------------------------------------
 
@@ -221,11 +242,15 @@ INSERT INTO `reserva` (`id`, `usuario_id`, `paquete_id`, `num_viajeros`, `precio
 (10, 11, 3, 2, 200.00, 'CONFIRMADA', '2026-05-12 17:58:18'),
 (11, 11, 5, 3, 597.00, 'PENDIENTE', '2026-05-12 18:42:41'),
 (12, 11, 3, 5, 500.00, 'CANCELADA', '2026-05-13 16:46:48'),
+<<<<<<< Updated upstream
 (13, 11, 3, 3, 300.00, 'CANCELADA', '2026-05-13 16:52:39'),
 (14, 11, 15, 1, 1500.00, 'CONFIRMADA', '2026-05-21 09:08:38'),
 (15, 11, 16, 2, 300.00, 'CONFIRMADA', '2026-05-21 09:09:22'),
 (16, 11, 17, 2, 2000.00, 'CONFIRMADA', '2026-05-21 20:38:27'),
 (17, 11, 7, 2, 658.00, 'PENDIENTE', '2026-05-24 18:09:19');
+=======
+(13, 11, 3, 3, 300.00, 'CANCELADA', '2026-05-13 16:52:39');
+>>>>>>> Stashed changes
 
 -- --------------------------------------------------------
 
@@ -247,6 +272,7 @@ CREATE TABLE `tarjeta_credito` (
 -- Volcado de datos para la tabla `tarjeta_credito`
 --
 
+<<<<<<< Updated upstream
 INSERT INTO `tarjeta_credito` (`id`, `usuario_id`, `titular`, `ultimos_4`, `vencimiento`, `tarjeta_hash`, `created_at`) VALUES
 (1, 11, 'Yolanda Saez', '6666', '18/05', NULL, '2026-05-06 20:23:21'),
 (2, 11, 'Yolanda Saez', '6666', '18/05', NULL, '2026-05-06 20:28:10'),
@@ -267,6 +293,23 @@ INSERT INTO `tarjeta_credito` (`id`, `usuario_id`, `titular`, `ultimos_4`, `venc
 (17, 11, 'Yolanda Saez', '6666', '18/05', NULL, '2026-05-21 09:09:20'),
 (18, 11, 'Yolanda Saez', '6666', '18/05', NULL, '2026-05-21 20:38:25'),
 (19, 11, 'Yolanda Saez', '4455', '18/05', '$2y$10$M.Twsyf.IznqbWME04yIKe4f9QaP2ZZElnVZKgeEw.WOHvvlkw6Cy', '2026-05-24 18:09:17');
+=======
+INSERT INTO `tarjeta_credito` (`id`, `usuario_id`, `titular`, `ultimos_4`, `vencimiento`, `created_at`) VALUES
+(1, 11, 'Yolanda Saez', '6666', '18/05', '2026-05-06 20:23:21'),
+(2, 11, 'Yolanda Saez', '6666', '18/05', '2026-05-06 20:28:10'),
+(3, 11, 'Yolanda Saez', '6666', '18/05', '2026-05-06 20:53:58'),
+(4, 11, 'Yolanda Saez', '6666', '18/05', '2026-05-06 21:01:19'),
+(5, 11, 'Yolanda Saez', '6666', '18/05', '2026-05-06 21:11:35'),
+(6, 11, 'Yolanda Saez', '6666', '18/05', '2026-05-07 17:30:17'),
+(7, 11, 'Yolanda Saez', '6666', '18/05', '2026-05-09 16:46:52'),
+(8, 11, 'Yolanda Saez', '6666', '18/05', '2026-05-09 16:47:50'),
+(9, 11, 'Yolanda Saez', '6666', '18/05', '2026-05-12 17:58:16'),
+(10, 11, 'Yolanda Saez', '6666', '18/05', '2026-05-12 18:42:17'),
+(11, 11, 'Yolanda Saez', '6666', '18/05', '2026-05-12 18:42:39'),
+(12, 11, 'Yolanda Saez', '6666', '18/05', '2026-05-13 16:46:46'),
+(13, 11, 'Yolanda Saez', '6666', '18/05', '2026-05-13 16:52:37'),
+(14, 11, 'Yolanda Saez', '6666', '18/05', '2026-05-13 16:52:59');
+>>>>>>> Stashed changes
 
 -- --------------------------------------------------------
 
@@ -325,12 +368,16 @@ CREATE TABLE `viajero` (
 
 INSERT INTO `viajero` (`id`, `reserva_id`, `nombre`, `apellidos`, `dni`, `fecha_nacimiento`) VALUES
 (1, 10, 'Juan', 'Luis', '442696621', '2015-01-13'),
+<<<<<<< Updated upstream
 (2, 10, 'Nola', 'Luis', 'asdfasdfasdf', '2026-05-15'),
 (6, 15, 'Juan', 'Luis', '123123123', '1888-12-18'),
 (7, 15, 'maria', 'unpa', '44555666611155', '2026-05-07'),
 (8, 14, 'Juan', 'Luis', '12312313f', '2026-05-26'),
 (9, 16, 'Juan', 'Luis', '123123123d', '2026-05-05'),
 (10, 16, 'Juan', 'Luis', '1321321f', '2026-05-04');
+=======
+(2, 10, 'Nola', 'Luis', 'asdfasdfasdf', '2026-05-15');
+>>>>>>> Stashed changes
 
 --
 -- Índices para tablas volcadas
@@ -341,6 +388,7 @@ INSERT INTO `viajero` (`id`, `reserva_id`, `nombre`, `apellidos`, `dni`, `fecha_
 --
 ALTER TABLE `comentario`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `uq_comentario_usuario_paquete` (`usuario_id`,`paquete_id`),
   ADD KEY `fk_comentario_usuario` (`usuario_id`),
   ADD KEY `fk_comentario_paquete` (`paquete_id`);
 
@@ -459,19 +507,31 @@ ALTER TABLE `pago`
 -- AUTO_INCREMENT de la tabla `paquete`
 --
 ALTER TABLE `paquete`
+<<<<<<< Updated upstream
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+=======
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+>>>>>>> Stashed changes
 
 --
 -- AUTO_INCREMENT de la tabla `reserva`
 --
 ALTER TABLE `reserva`
+<<<<<<< Updated upstream
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+=======
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+>>>>>>> Stashed changes
 
 --
 -- AUTO_INCREMENT de la tabla `tarjeta_credito`
 --
 ALTER TABLE `tarjeta_credito`
+<<<<<<< Updated upstream
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+=======
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+>>>>>>> Stashed changes
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
@@ -483,7 +543,11 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `viajero`
 --
 ALTER TABLE `viajero`
+<<<<<<< Updated upstream
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+=======
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+>>>>>>> Stashed changes
 
 --
 -- Restricciones para tablas volcadas
@@ -545,3 +609,5 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+

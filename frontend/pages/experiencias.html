@@ -18,43 +18,51 @@
 
     <!-- ══════════════ NAVBAR ══════════════ -->
     <header>
-      <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-0">
-        <div class="container">
-          <button class="btn btn-hamburger d-lg-none me-2" type="button"
-            data-bs-toggle="offcanvas" data-bs-target="#menuPrincipal"
-            aria-controls="menuPrincipal" aria-label="Abrir menú">
-            <i class="bi bi-list"></i>
-          </button>
-          <a class="navbar-brand" href="../../index.html">
-            <img src="../../frontend/assets/img/Turistea_Logo/logo_turistea.png" width="90" alt="Turistea" />
-          </a>
-          <ul class="navbar-nav d-none d-lg-flex flex-row gap-3 ms-4 me-auto">
-            <li class="nav-item"><a class="nav-link" href="../../index.html">Inicio</a></li>
-            <li class="nav-item"><a class="nav-link active fw-bold" href="experiencias.html" style="color:var(--cyan)!important">Experiencias</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalContacto">Contacto</a></li>
-          </ul>
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item" id="nav-usuario"></li>
-          </ul>
-        </div>
-      </nav>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-0">
+    <div class="container">
+      <button
+        class="btn btn-hamburger d-lg-none me-2"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#menuPrincipal"
+        aria-controls="menuPrincipal"
+        aria-label="Abrir menú">
+        <i class="bi bi-list"></i>
+      </button>
+      <a class="navbar-brand" href="../../index.html">
+        <img src="../../frontend/assets/img/Turistea_Logo/logo_turistea.png" width="90" alt="Turistea" />
+      </a>
+      <ul class="navbar-nav d-none d-lg-flex flex-row gap-3 ms-4 me-auto">
+        <li class="nav-item"><a class="nav-link" href="../../index.html">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active fw-bold" href="experiencias.html" style="color:#00B4D8">Experiencias</a></li>
+        <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalContacto">Contacto</a></li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item" id="nav-usuario"></li>
+      </ul>
+    </div>
+  </nav>
 
-      <div class="offcanvas offcanvas-start menu-offcanvas" tabindex="-1" id="menuPrincipal">
-        <div class="offcanvas-header border-bottom">
-          <a class="navbar-brand m-0" href="../../index.html">
-            <img src="../../frontend/assets/img/Turistea_Logo/logo_turistea.png" width="80" alt="Turistea" />
+  <div class="offcanvas offcanvas-start menu-offcanvas" tabindex="-1" id="menuPrincipal">
+    <div class="offcanvas-header border-bottom">
+      <a class="navbar-brand m-0" href="../../index.html">
+        <img src="../../frontend/assets/img/Turistea_Logo/logo_turistea.png" width="80" alt="Turistea" />
+      </a>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+    </div>
+    <div class="offcanvas-body p-0">
+      <ul class="list-unstyled menu-offcanvas-list mb-0">
+        <li><a href="../../index.html" data-bs-dismiss="offcanvas"><i class="bi bi-house-door me-2"></i>Inicio</a></li>
+        <li><a href="experiencias.html" data-bs-dismiss="offcanvas"><i class="bi bi-camera me-2"></i>Experiencias</a></li>
+        <li>
+          <a href="#" data-bs-dismiss="offcanvas" data-bs-toggle="modal" data-bs-target="#modalContacto">
+            <i class="bi bi-envelope me-2"></i>Contacto
           </a>
-          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
-        </div>
-        <div class="offcanvas-body p-0">
-          <ul class="list-unstyled menu-offcanvas-list mb-0">
-            <li><a href="../../index.html" data-bs-dismiss="offcanvas"><i class="bi bi-house-door me-2"></i>Inicio</a></li>
-            <li><a href="experiencias.html" data-bs-dismiss="offcanvas"><i class="bi bi-camera me-2"></i>Experiencias</a></li>
-            <li><a href="#" data-bs-dismiss="offcanvas" data-bs-toggle="modal" data-bs-target="#modalContacto"><i class="bi bi-envelope me-2"></i>Contacto</a></li>
-          </ul>
-        </div>
-      </div>
-    </header>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
 
     <!-- ══════════════ HERO ══════════════ -->
     <section class="hero-experiencias py-5">
@@ -77,25 +85,6 @@
       </div>
     </section>
 
-    <!-- ══════════════ KPIs ══════════════ -->
-    <div class="kpi-bar">
-      <div class="container">
-        <div class="row">
-          <div class="col-4 kpi-item kpi-divider">
-            <div class="kpi-val" id="kpi-total">0</div>
-            <div class="kpi-label">Experiencias</div>
-          </div>
-          <div class="col-4 kpi-item kpi-divider">
-            <div class="kpi-val" id="kpi-media">- <span style="color:var(--yellow);font-size:1.3rem">★</span></div>
-            <div class="kpi-label">Valoración media</div>
-          </div>
-          <div class="col-4 kpi-item">
-            <div class="kpi-val" id="kpi-destinos">0</div>
-            <div class="kpi-label">Destinos</div>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- ══════════════ CONTENIDO PRINCIPAL ══════════════ -->
     <div class="container my-5">
