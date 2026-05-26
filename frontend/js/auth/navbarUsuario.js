@@ -68,26 +68,25 @@ async function iniciarNavbar() {
           <i class="bi bi-person-fill-gear fs-3"></i>
         </a>`;
 
-    } else {
-      // Usuario normal: perfil y reservas
-      const nombreAvatar = await obtenerNombreAvatar(session);
+  } else {
+    // Usuario normal — avatar con dropdown mínimo
+    const nombreAvatar = await obtenerNombreAvatar(session);
 
-      contenedor.classList.add('dropdown');
-      contenedor.innerHTML = `
-        <a class="nav-link nav-user-avatar-link" href="#" data-bs-toggle="dropdown" aria-label="Abrir menú de usuario">
+    contenedor.classList.add('dropdown');
+    contenedor.innerHTML = `
+      <a class="nav-link nav-user-avatar-link" href="#" data-bs-toggle="dropdown" aria-label="Abrir menú de usuario">
           <img class="nav-user-avatar" src="${crearAvatarUrl(nombreAvatar)}" alt="${nombreAvatar}">
-        </a>
-        <ul class="dropdown-menu dropdown-menu-end">
-          <li><span class="dropdown-item-text text-muted small">Hola, ${session.nombre}</span></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href="${BASE}frontend/pages/perfil.html">Mi perfil</a></li>
-          <li><a class="dropdown-item" href="${BASE}frontend/pages/perfil.html#reservas">Mis reservas</a></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item text-danger" href="#" data-logout>Cerrar sesión</a></li>
-        </ul>`;
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end">
+        <li><span class="dropdown-item-text text-muted small">Hola, ${session.nombre}</span></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="${BASE}frontend/pages/perfil.html">Mi perfil</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item text-danger" href="#" data-logout>Cerrar sesión</a></li>
+      </ul>`;
 
-      contenedor.querySelector('[data-logout]')?.addEventListener('click', cerrarSesion);
-    }
+    contenedor.querySelector('[data-logout]')?.addEventListener('click', cerrarSesion);
+  }
 
   } catch (e) {
     // Si falla el fetch (red, servidor caído), mostrar login por defecto

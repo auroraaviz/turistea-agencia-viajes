@@ -52,30 +52,31 @@ function pintarDestacada(c) {
 }
 
 function tarjetaHTML(c) {
+  const imgSrc = c.foto_url || c.imagen_paquete || null;
+
   return `
-    <div class="col-6 col-md-3">
-      <div class="card-exp">
-        <div class="card-exp-img">
-           ${c.foto_url
-            ? `<img src="${c.foto_url}" alt="${c.titulo_viaje}" />`
-            : c.imagen_paquete
-              ? `<img src="${c.imagen_paquete}" alt="${c.titulo_viaje}" />`
-              : `<div style="background:linear-gradient(135deg,var(--navy),var(--cyan));width:100%;height:100%;position:absolute;inset:0"></div>`}
-          <div class="overlay"></div>
-          <div class="dest-tag"><i class="bi bi-geo-alt-fill"></i> ${c.titulo_viaje}</div>
+    <div class="col-12 col-md-6 col-lg-3">
+      <div class="card h-100 shadow-sm">
+        <div class="ratio ratio-16x9">
+          ${imgSrc
+            ? `<img src="${imgSrc}" class="card-img-top object-fit-cover" alt="${c.titulo_viaje}" />`
+            : `<div style="background:linear-gradient(135deg,#0077B6,#00B4D8);width:100%;height:100%;position:absolute;top:0;left:0"></div>`
+
+          }
         </div>
-        <div class="card-exp-body">
+        <div class="card-body d-flex flex-column">
           <div class="d-flex align-items-center gap-2 mb-2">
             <div class="avatar-circle">${iniciales(c.autor_nombre)}</div>
-            <div>
-              <p class="user-name">${c.autor_nombre}</p>
-            </div>
+            <p class="user-name mb-0 fw-bold small">${c.autor_nombre}</p>
           </div>
-          <div class="stars-yellow mb-2">${estrellas(c.valoracion_viaje)}</div>
-          <p class="card-review">"${c.comentario}"</p>
-          <div class="d-flex justify-content-end mt-2">
-            <span class="date-muted">${fechaFormateada(c.creado_at)}</span>
-          </div>
+          <p class="small text-muted mb-1">
+            <i class="bi bi-geo-alt"></i> ${c.titulo_viaje}
+          </p>
+          <div class="stars-yellow mb-2" style="font-size:.9rem">${estrellas(c.valoracion_viaje)}</div>
+          <p class="card-text small text-muted flex-grow-1">"${c.comentario}"</p>
+          <p class="small text-muted mb-0 mt-2 text-end">
+            <i class="bi bi-calendar3 me-1"></i>${fechaFormateada(c.creado_at)}
+          </p>
         </div>
       </div>
     </div>`;
