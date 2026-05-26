@@ -62,11 +62,22 @@ async function iniciarNavbar() {
         </ul>`;
 
     } else if (session.rol === 'admin') {
-      // Admin: icono directo al panel
+      // Admin: avatar con acceso rapido a inicio y cierre de sesion.
+      contenedor.classList.add('dropdown');
       contenedor.innerHTML = `
-        <a class="nav-link" href="${BASE}frontend/pages/admin/admin.html" title="Panel de administración">
+        <a class="nav-link" href="#" data-bs-toggle="dropdown" aria-label="Abrir menú de administrador">
           <i class="bi bi-person-fill-gear fs-3"></i>
-        </a>`;
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><span class="dropdown-item-text text-muted small">Administrador</span></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="${BASE}index.html"><i class="bi bi-house-door me-2"></i>Inicio</a></li>
+          <li><a class="dropdown-item" href="${BASE}frontend/pages/admin/admin.html"><i class="bi bi-speedometer2 me-2"></i>Menú administrador</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item text-danger" href="#" data-logout><i class="bi bi-box-arrow-right me-2"></i>Cerrar sesión</a></li>
+        </ul>`;
+
+      contenedor.querySelector('[data-logout]')?.addEventListener('click', cerrarSesion);
 
   } else {
     // Usuario normal — avatar con dropdown mínimo
@@ -103,4 +114,3 @@ async function iniciarNavbar() {
 }
 
 iniciarNavbar();
-
