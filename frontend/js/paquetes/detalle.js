@@ -61,7 +61,11 @@ document.addEventListener("DOMContentLoaded", async () => {
        &nbsp;<span class="opacity-50">·</span>&nbsp;
        <i class="bi bi-people me-1 opacity-75"></i>${paquete.plazas_disponibles} plazas disponibles`;
 
-    document.getElementById("paquete-precio").textContent = `${paquete.precio}€`;
+    const precioFinal = parseFloat(paquete.descuento) > 0
+    ? (paquete.precio - (paquete.precio * paquete.descuento / 100)).toFixed(0)
+    : parseFloat(paquete.precio).toFixed(0);
+
+    document.getElementById("paquete-precio").textContent = `${precioFinal}€`;
 
     document.getElementById("paquete-descripcion").textContent = paquete.descripcion;
 
@@ -127,9 +131,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         <div class="col-12 col-md-3 d-flex flex-column align-items-center justify-content-center p-4 text-center"
           style="background:linear-gradient(160deg,#f0faff,#e4f4fb);border-left:3px solid #00B4D8;">
           <div class="text-uppercase text-secondary fw-bold mb-1" style="font-size:.7rem;letter-spacing:.1em">
-            Precio total
+           Precio total
           </div>
-          <div class="fw-bold lh-1 mb-1" style="font-size:2rem;color:#0077B6">${paquete.precio}€</div>
+          ${parseFloat(paquete.descuento) > 0 ? `
+          <div class="text-muted text-decoration-line-through" style="font-size:1rem">${parseFloat(paquete.precio).toFixed(0)}€</div>
+          <span class="badge rounded-pill mb-1" style="background:#FF6B6B;color:#fff;font-size:.7rem">-${parseFloat(paquete.descuento).toFixed(0)}%</span>
+          ` : ''}
+          <div class="fw-bold lh-1 mb-1" style="font-size:2rem;color:#0077B6">${precioFinal}€</div>
           <div class="text-muted small">por persona</div>
         </div>
 
