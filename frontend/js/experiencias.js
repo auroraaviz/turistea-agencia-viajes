@@ -43,11 +43,14 @@ function pintarDestacada(c) {
   document.querySelector('.card-featured-body .date-muted').innerHTML     =
     `<i class="bi bi-calendar3 me-1"></i>${fechaFormateada(c.creado_at)}`;
   document.querySelector('.card-featured-body .avatar-circle').textContent = iniciales(c.autor_nombre);
+  document.getElementById('destacada-destino').innerHTML = `<i class="bi bi-geo-alt-fill"></i> ${c.titulo_viaje}`;
+
 
  const imgDestacada = document.getElementById('destacada-img');
   if (imgDestacada && (c.foto_url || c.imagen_paquete)) {
     imgDestacada.src = c.foto_url || c.imagen_paquete;
   }
+
 
 }
 

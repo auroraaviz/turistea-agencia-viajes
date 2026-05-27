@@ -507,31 +507,19 @@ ALTER TABLE `pago`
 -- AUTO_INCREMENT de la tabla `paquete`
 --
 ALTER TABLE `paquete`
-<<<<<<< Updated upstream
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-=======
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
->>>>>>> Stashed changes
 
 --
 -- AUTO_INCREMENT de la tabla `reserva`
 --
 ALTER TABLE `reserva`
-<<<<<<< Updated upstream
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-=======
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
->>>>>>> Stashed changes
 
 --
 -- AUTO_INCREMENT de la tabla `tarjeta_credito`
 --
 ALTER TABLE `tarjeta_credito`
-<<<<<<< Updated upstream
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
-=======
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
->>>>>>> Stashed changes
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
@@ -543,11 +531,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `viajero`
 --
 ALTER TABLE `viajero`
-<<<<<<< Updated upstream
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-=======
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
->>>>>>> Stashed changes
 
 --
 -- Restricciones para tablas volcadas
