@@ -33,16 +33,26 @@ export async function cargarPaquetes() {
               >
             </div>
             <div class="card-body">
-              <h5 class="card-title fw-bold mb-1">${paquete.titulo}</h5>
-              <p class="card-text text-muted small mb-2">${paquete.descripcion}</p>
-              <p class="small mb-2">
-                <i class="bi bi-geo-alt"></i> ${paquete.destino}
-              </p>
-              <p class="card-fecha small mb-0">
-                <i class="bi bi-calendar3"></i>
-                ${paquete.fecha_salida} - ${paquete.fecha_regreso}
-              </p>
-            </div>
+            <h5 class="card-title fw-bold mb-1">${paquete.titulo}</h5>
+                <p class="card-text text-muted small mb-2">${paquete.descripcion}</p>
+                <p class="small mb-2">
+              <i class="bi bi-geo-alt"></i> ${paquete.destino}
+                </p>
+            ${parseFloat(paquete.descuento) > 0
+  ? `<p class="mb-1">
+       <span class="text-muted text-decoration-line-through me-1" style="font-size:.85rem">${parseFloat(paquete.precio).toFixed(0)}€</span>
+       <span class="badge rounded-pill me-1" style="background:#FF6B6B;color:#fff;font-size:.7rem">-${parseFloat(paquete.descuento).toFixed(0)}%</span>
+       <br>
+       <span style="color:#0077B6;font-size:1.7rem;font-weight:800">Desde ${(paquete.precio - (paquete.precio * paquete.descuento / 100)).toFixed(0)}€</span>
+     </p>`
+  : `<p class="mb-2 fw-bold" style="color:#0077B6;font-size:1.7rem">${parseFloat(paquete.precio).toFixed(0)}€</p>`
+
+}
+       <p class="card-fecha small mb-0">
+       <i class="bi bi-calendar3"></i>
+        ${paquete.fecha_salida} - ${paquete.fecha_regreso}
+       </p>
+        </div>
           </a>
         </div>
       `;
