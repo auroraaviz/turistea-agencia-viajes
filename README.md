@@ -34,3 +34,56 @@ Aplicación web para una agencia de viajes desarrollada durante las prácticas e
 ---
 
 ## Arquitectura
+---
+
+## Tecnologías utilizadas
+
+| Área | Tecnologías |
+|------|-------------|
+| Frontend | HTML5, CSS3, JavaScript, Bootstrap 5 |
+| Backend | PHP (API REST con endpoints JSON) |
+| Base de datos | MySQL |
+| Diseño | Figma |
+| Control de versiones | Git, GitHub (ramas por funcionalidad) |
+| Entorno local | XAMPP (Apache + MySQL) |
+
+---
+
+## Instalación en local
+
+```bash
+git clone https://github.com/auroraaviz/turistea-agencia-viajes.git
+cd turistea-agencia-viajes
+```
+
+1. Instalar **XAMPP** y arrancar los servicios Apache y MySQL
+2. Copiar la carpeta en `htdocs/turistea/`
+3. Importar `turistea.sql` en phpMyAdmin con base de datos llamada `turistea`
+4. Abrir en el navegador: `http://localhost/turistea/turistea/`
+
+---
+
+## Retos técnicos resueltos
+
+- **Conflictos de Git en equipo:** nomenclatura por funcionalidad y rama `dev` centralizada
+- **CORS y rutas PHP:** depuración con consola del navegador y mensajes en endpoints
+- **Subida de imágenes:** unificación de rutas y estructura de carpetas
+- **Seguridad:** datos de tarjeta almacenados con hash tras detectar la vulnerabilidad
+- **Responsive:** pruebas continuas en distintos tamaños de pantalla
+
+---
+
+## Equipo
+
+| Nombre | Contribución principal |
+|--------|----------------------|
+| Aurora Ávila Izquierdo | UI/UX, filtros, detalle de paquetes, menú dinámico, experiencias, navbar unificado |
+| Juan Luis Ramos Soria | Panel admin, CRUD paquetes, pasarela de pago, reservas |
+| Jorge García Millán | Login/registro, PDF, admin backend, página de experiencias |
+| Máximo Casado Giner | Diseño Figma, frontend, testing, despliegue |
+
+---
+
+## Autora (desde este perfil)
+
+**Aurora Ávila Izquierdo** · [GitHub](https://github.com/auroraaviz) · [LinkedIn](https://www.linkedin.com/in/aurora-avila-dev/)
