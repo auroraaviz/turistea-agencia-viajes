@@ -77,13 +77,10 @@ cd turistea-agencia-viajes
 
 | Nombre | Contribución principal |
 |--------|----------------------|
-| Aurora Ávila Izquierdo | UI/UX, filtros, detalle de paquetes, menú dinámico, experiencias, navbar unificado |
-| Juan Luis Ramos Soria | Panel admin, CRUD paquetes, pasarela de pago, reservas |
-| Jorge García Millán | Login/registro, PDF, admin backend, página de experiencias |
-| Máximo Casado Giner | Diseño Figma, frontend, testing, despliegue |
-
----
-
+| Aurora Ávila Izquierdo | Diseño UI/UX y logotipo, login y registro, filtros dinámicos, página de detalle, menú dinámico por rol, panel de reservas, slider, página de experiencias, navbar unificado, modal de contacto |
+| Juan Luis Ramos Soria | Página de inicio, CRUD paquetes, panel admin, pasarela de pago, reseñas, seguridad (hash tarjetas) |
+| Jorge García Millán | Diagrama ER, página de detalles, URLs dinámicas, generación de PDF, panel admin backend, pasarela de pago |
+| Máximo Casado Giner | Diseño Figma, desarrollo frontend, testing, despliegue en servidor
 ## Autora (desde este perfil)
 
 **Aurora Ávila Izquierdo** · [GitHub](https://github.com/auroraaviz) · [LinkedIn](https://www.linkedin.com/in/aurora-avila-dev/)
