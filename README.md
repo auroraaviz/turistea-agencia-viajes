@@ -13,6 +13,16 @@ Aplicación web para una agencia de viajes desarrollada durante las prácticas e
 
 ---
 
+## Vista previa del proyecto
+
+### Página principal
+
+![Página principal](screenshots/turistea.infinityfreeapp.com_index.html.png)
+
+### Detalle de paquete turístico
+
+![Detalle del paquete](screenshots/turistea.infinityfreeapp.com_frontend_pages_detalle.html_id=5dd.png)
+
 ## Funcionalidades principales
 
 **Para el usuario:**
@@ -46,6 +56,7 @@ Aplicación web para una agencia de viajes desarrollada durante las prácticas e
 | Diseño | Figma |
 | Control de versiones | Git, GitHub (ramas por funcionalidad) |
 | Entorno local | XAMPP (Apache + MySQL) |
+| Despliegue | InfinityFree (hosting web PHP + MySQL)
 
 ---
 
@@ -82,5 +93,10 @@ cd turistea-agencia-viajes
 | Jorge García Millán | Diagrama ER, página de detalles, URLs dinámicas, generación de PDF, panel admin backend, pasarela de pago |
 | Máximo Casado Giner | Diseño Figma, desarrollo frontend, testing, despliegue en servidor
 ## Autora (desde este perfil)
+
+🌐 Demo online:
+https://turistea.infinityfreeapp.com/index.html
+
+⚠️ Nota: Al estar alojada en un servidor gratuito, la primera carga puede tardar unos segundos.
 
 **Aurora Ávila Izquierdo** · [GitHub](https://github.com/auroraaviz) · [LinkedIn](https://www.linkedin.com/in/aurora-avila-dev/)
